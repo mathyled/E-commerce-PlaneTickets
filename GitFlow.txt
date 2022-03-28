@@ -1,0 +1,40 @@
+REGLAS
+
+Consola Git:
+
+9 am :  
+
+  - Ir a Trello y elegir una tarea
+
+ Git console:
+
+  - Asegurarse de estar sobre una rama local/propia
+  - Sino crear rama con nombre descriptivo de la tarea a realizar
+        en la rama main hacer git checkout -b <nombre de la rama>
+   - trabajar sobre esa rama
+
+  - git pull origin main (desde la rama propia que vamos a desarrollar)
+        -> trae todos los cambios hechos por los compañeros el dia anterior
+
+    - usar buenas practicas 
+    - git add . o <file name>
+    - git commit -m"<ser bien descriptivo>"
+    - git push (pueden suceder 2 cosas):
+
+     -> o se pushea directamente
+     -> o copiar y pegar lo que aparece en consola 
+
+     git push
+    fatal: The current branch <miRama> has no upstream branch.
+    To push the current branch and set the remote as upstream,
+
+    git push --set-upstream origin <miRama>   (copiamos y pegamos este codigo)
+
+
+GitHub:
+
+ Al final del dia ir al repo y solicitar un nuevo Pull Request
+ 9 pm 
+
+ - Leer codigo del compañero y autorizar Merge (pasar los cambios de su rama de trabajo a la rama main)
+ - Si tu aprovacion es la ultima necesaria .. (Mergearla si o si )
