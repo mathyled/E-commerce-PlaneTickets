@@ -1,3 +1,4 @@
 export const TYPES = {
     GET_TICKETS: "GET_TICKETS",
+    CHANGE_PAGE: "CHANGE_PAGE",
 }
