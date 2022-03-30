@@ -16,7 +16,18 @@ function RegisterModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-            <Button onClick={onOpen}>Register</Button>
+            <Button
+             onClick={onOpen}
+             display={{ base: "none", md: "inline-flex" }}
+             fontSize={"sm"}
+             fontWeight={600}
+             color={"white"}
+             bg={"teal.400"}
+             href={"#"}
+             _hover={{
+               bg: "teal.800",
+             }}
+             >Sign Up</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
