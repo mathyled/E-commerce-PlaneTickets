@@ -1,7 +1,9 @@
+
 import React,{useState} from "react";
 // import {useSelector,useDispatch} from "react-redux";
 // import {Link} from "react-router-dom";
 // import Paged from "../../Features/Paged/Paged";
+import NavBar from "../../Features/NavBar/NavBar";
 
 function Home() {
     // const tickets = useSelector((state) => state.tickets);
@@ -19,7 +21,11 @@ function Home() {
 
     return (
         <div >
-            <h1>Home Page</h1>
+         
+           <h1>
+             <NavBar /> Home Page
+           </h1>
+      
             {/* <Paged
               TicketsPerPage={TicketsPerPage}
               total={tickets}
