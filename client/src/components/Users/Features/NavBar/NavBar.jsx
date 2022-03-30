@@ -18,8 +18,8 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import LoginModal from "../UserModal/components/LoginModal";
-import RegisterModal from "../UserModal/components/RegisterModal";
+import LoginModal from "../SignIn/LoginModal";
+import RegisterModal from "../SignUp/RegisterModal";
 import { FaMoon, FaSun } from 'react-icons/fa'
 import Navlink from '../UserModal/components/Navlink'
 

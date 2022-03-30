@@ -4,7 +4,6 @@ import {Routes, Route} from 'react-router-dom'
 import{ 
   Homepage,
   Loginpage,
-  NotfoundPage,
   Profilepage,
   ProtectedPage,
   Registerpage,
@@ -24,7 +23,7 @@ export default function AppRouter(props) {
           <Route exact path='/protected-page' element={<ProtectedPage />} />
           <Route exact path='/forgot-password' element={<ForgotPasswordPage />} />
           <Route exact path='/reset-password' element={<ResetPasswordPage />} />
-          <Route exact path='*' element={<NotfoundPage />} />
+        
 
       
       </Routes>

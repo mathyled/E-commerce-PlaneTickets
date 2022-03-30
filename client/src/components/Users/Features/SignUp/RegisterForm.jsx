@@ -13,7 +13,7 @@ import React from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 // import { Card } from '../components/Card'
-import DividerWithText from '../components/DividerWithText'
+import DividerWithText from '../UserModal/components/DividerWithText'
 // import { Layout } from '../components/Layout'
 
 export  function RegisterForm() {
