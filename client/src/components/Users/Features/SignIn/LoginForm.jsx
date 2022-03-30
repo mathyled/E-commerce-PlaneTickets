@@ -11,12 +11,12 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { FaGoogle } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 // import { Card } from '../components/Card'
-import DividerWithText from '../components/DividerWithText'
-// import { Layout } from '../components/Layout'
+import DividerWithText from '../UserModal/components/DividerWithText'
 
-export  function Loginpage() {
+
+export  function LoginForm() {
 
 
   return (

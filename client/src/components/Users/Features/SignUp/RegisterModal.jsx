@@ -10,7 +10,7 @@ import {
     useDisclosure,
 
 } from '@chakra-ui/react';
-import { RegisterForm } from "../pages/RegisterForm"
+import { RegisterForm } from "./RegisterForm"
 
 function RegisterModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()

@@ -10,7 +10,7 @@ import {
   useDisclosure,
 
 } from '@chakra-ui/react';
-import { Loginpage } from "../pages/Loginpage"
+import { LoginForm } from "./LoginForm"
 
 function LoginModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,7 +31,7 @@ function LoginModal() {
           <ModalHeader>Login</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Loginpage />
+            <LoginForm />
           </ModalBody>
 
           <ModalFooter>
