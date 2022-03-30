@@ -16,7 +16,14 @@ function LoginModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen}>Login</Button>
+      <Button 
+      onClick={onOpen}
+      as={"a"}
+      fontSize={"sm"}
+      fontWeight={400}
+      variant={"link"}
+      href={"#"}
+      >Sign In</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
