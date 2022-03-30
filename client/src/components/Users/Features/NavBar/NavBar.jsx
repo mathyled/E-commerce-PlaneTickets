@@ -1,29 +1,30 @@
 import {
   Box,
   Flex,
-  Avatar,
+  // Avatar,
   HStack,
   Link,
-  IconButton,
+  // IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
+  // Menu,
+  // MenuButton,
+  // MenuList,
+  // MenuItem,
+  // MenuDivider,
+  // useDisclosure,
   useColorModeValue,
   Stack,
 } from "@chakra-ui/react";
+import SearchBar from "../SearchBar/SearchBar";
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 function NavBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
+          <HStack spacing={12} alignItems={"center"}>
             <Box>Heading North</Box>
             <HStack
               as={"nav"}
@@ -50,6 +51,7 @@ function NavBar() {
             direction={"row"}
             spacing={6}
           >
+            <SearchBar />
             <Button
               as={"a"}
               fontSize={"sm"}
