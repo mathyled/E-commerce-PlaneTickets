@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+
+
+  import CallToAction from "../../Features/CallToAction/CallToAction";
+
+import React,{useState} from "react";
+
 // import {useSelector,useDispatch} from "react-redux";
 // import {Link} from "react-router-dom";
 // import Paged from "../../Features/Paged/Paged";
@@ -21,12 +26,13 @@ function Home() {
 
   return (
     <div>
-      <h1>
-        <NavBar /> Home Page
+      
+        <NavBar /> 
+           <CallToAction/>      
         <Filters />
-      </h1>
+          
+            {/* <Paged
 
-      {/* <Paged
               TicketsPerPage={TicketsPerPage}
               total={tickets}
               paginate={paginate}
