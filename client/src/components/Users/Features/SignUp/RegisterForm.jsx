@@ -4,22 +4,27 @@ import {
   chakra,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Stack,
+  useToast,
 
 } from '@chakra-ui/react'
 import React,{useState} from 'react'
 import { FaGoogle } from 'react-icons/fa'
+import { useAuth } from '../../../../context/AuthContext';
 // import { Card } from '../components/Card'
 import DividerWithText from '../UserModal/components/DividerWithText'
-// import { Layout } from '../components/Layout'
+import useMounted from "../../../../hooks/useMounted";
 
 export  function RegisterForm() {
   const [inputs, setInputs] = useState({
-    password: "",
     email: "",
+    password: "",
   });
+  const [submit, setSubmit] = useState(false)
+  const toast = useToast()
+  const {register} = useAuth()
+  const mounted = useMounted()
 
   function handlerOnChange(e){
     setInputs({
@@ -35,7 +40,30 @@ export  function RegisterForm() {
         <chakra.form
           onSubmit={async e => {
             e.preventDefault()
-            // your register logic here
+            // register logic here
+            // console.log(inputs)
+            if (!inputs.email || !inputs.password) {
+              toast({
+                description: 'Credentials not valid.',
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+              })
+            }
+            setSubmit(true)
+            register(inputs.email, inputs.password)
+            .then(res => console.log(res))
+            .catch(error => {
+              console.log(error.message)
+              toast({
+                description: error.message,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+              })
+            })
+            .finally(() =>{
+              mounted.current && setSubmit(false)})
           }}
         >
           <Stack spacing='6'>
@@ -62,7 +90,7 @@ export  function RegisterForm() {
               />
             </FormControl>
      
-            <Button type='submit' colorScheme='primary' size='lg' fontSize='md'>
+            <Button isLoading={submit} type='submit' colorScheme='primary' size='lg' fontSize='md'>
               Sign up
             </Button>
           </Stack>

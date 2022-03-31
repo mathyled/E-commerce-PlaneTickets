@@ -6,7 +6,7 @@ import React,{useState} from "react";
 // import Paged from "../../Features/Paged/Paged";
 import NavBar from "../../Features/NavBar/NavBar";
 import Filters from "../../Features/Filters/Filters";
-
+import { useAuth } from '../../../../context/AuthContext';
 function Home() {
   // const tickets = useSelector((state) => state.tickets);
   // const page = useSelector((state) => state.actualPage);
@@ -20,14 +20,14 @@ function Home() {
   // function paginate( numberPage) {
   //     dispatch(changePage(numberPage));
   //   }
-
+const {currentUser} = useAuth()
   return (
     <div>
       
         <NavBar /> 
            <CallToAction/>      
         <Filters />
-          
+          <h1>{` USER : ${currentUser}`}</h1>
             {/* <Paged
 
               TicketsPerPage={TicketsPerPage}
