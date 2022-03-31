@@ -17,7 +17,7 @@ import {useAuth} from "../../../../context/AuthContext"
 
 function NavBar() {
   const { toggleColorMode } = useColorMode()
-  const {logout } = useAuth()
+  const {currentUser,logout } = useAuth()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -51,9 +51,10 @@ function NavBar() {
             spacing={6}
           >
             <SearchBar />
-            <LoginModal />
-            <RegisterModal />
-            <Navlink
+            {!currentUser && <LoginModal />}
+            {!currentUser && <RegisterModal />}
+            { currentUser && <Navlink to="/profile" name="Profile" /> }
+            { currentUser && < Navlink
               to="/logout"
               name="Logout"
               onClick={async (e) => {
@@ -61,7 +62,7 @@ function NavBar() {
                 // handle logout
                 logout()
               }}
-            />
+            />}
 
             <IconButton
               variant='outline'
