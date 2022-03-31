@@ -1,22 +1,23 @@
 import {
   Box,
   Flex,
-  Avatar,
+  // Avatar,
   HStack,
   Link,
-  IconButton,
+  // IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
+  // Menu,
+  // MenuButton,
+  // MenuList,
+  // MenuItem,
+  // MenuDivider,
+  // useDisclosure,
   useColorModeValue,
   Stack,
   Spacer,
   useColorMode,
 } from "@chakra-ui/react";
+import SearchBar from "../SearchBar/SearchBar";
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
@@ -24,13 +25,15 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import Navlink from '../UserModal/components/Navlink'
 
 function NavBar() {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toggleColorMode } = useColorMode()
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
+          <HStack spacing={12} alignItems={"center"}>
             <Box>Heading North</Box>
             <HStack
               as={"nav"}
@@ -65,6 +68,7 @@ function NavBar() {
                 e.preventDefault()
                 // handle logout
                 alert('logout user')
+
               }}
             />
             <IconButton
