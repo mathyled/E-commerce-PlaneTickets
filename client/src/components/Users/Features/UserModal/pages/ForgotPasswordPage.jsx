@@ -5,6 +5,7 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Spacer,
   Input,
   Stack,
   useToast,
@@ -15,7 +16,7 @@ import { Card } from '../components/Card'
 import DividerWithText from '../components/DividerWithText'
 import { Layout } from '../components/Layout'
 
-export  function ForgotPasswordPage() {
+export function ForgotPasswordPage() {
   const navigate = useNavigate()
 
   return (
@@ -35,17 +36,18 @@ export  function ForgotPasswordPage() {
               <FormLabel>Email address</FormLabel>
               <Input name='email' type='email' autoComplete='email' required />
             </FormControl>
+            <Spacer />
             <Button type='submit' colorScheme='primary' size='lg' fontSize='md'>
               Submit
             </Button>
           </Stack>
         </chakra.form>
-        <DividerWithText my={6}>OR</DividerWithText>
-        <Center>
-          <Button variant='link' onClick={() => navigate('/login')}>
+        {/* <DividerWithText my={6}>OR</DividerWithText> */}
+        {/* <Center> */}
+        {/* <Button variant='link' onClick={() => navigate('/login')}>
             Login
-          </Button>
-        </Center>
+          </Button> */}
+        {/* </Center> */}
       </Card>
     </Layout>
   )
