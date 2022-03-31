@@ -9,16 +9,24 @@ import {
   Stack,
 
 } from '@chakra-ui/react'
-import React from 'react'
+import React,{useState} from 'react'
 import { FaGoogle } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
 // import { Card } from '../components/Card'
 import DividerWithText from '../UserModal/components/DividerWithText'
 // import { Layout } from '../components/Layout'
 
 export  function RegisterForm() {
-  const navigate = useNavigate()
+  const [inputs, setInputs] = useState({
+    password: "",
+    email: "",
+  });
 
+  function handlerOnChange(e){
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     // <Layout>
     <>
@@ -31,10 +39,18 @@ export  function RegisterForm() {
           }}
         >
           <Stack spacing='6'>
+
             <FormControl id='email'>
               <FormLabel>Email address</FormLabel>
-              <Input name='email' type='email' autoComplete='email' required />
+              <Input 
+              name='email'
+               type='email' 
+               autoComplete='email' 
+               required 
+               onChange={handlerOnChange}
+               />
             </FormControl>
+
             <FormControl id='password'>
               <FormLabel>Password</FormLabel>
               <Input
@@ -42,17 +58,10 @@ export  function RegisterForm() {
                 type='password'
                 autoComplete='password'
                 required
+                onChange={handlerOnChange}
               />
             </FormControl>
-            <FormControl id='password'>
-              <FormLabel>Password</FormLabel>
-              <Input
-                name='password'
-                type='password'
-                autoComplete='password'
-                required
-              />
-            </FormControl>
+     
             <Button type='submit' colorScheme='primary' size='lg' fontSize='md'>
               Sign up
             </Button>

@@ -4,7 +4,7 @@ import React,{useState} from "react";
 // import {Link} from "react-router-dom";
 // import Paged from "../../Features/Paged/Paged";
 import NavBar from "../../Features/NavBar/NavBar";
-
+import { useAuth } from '../../../../context/AuthContext'
 function Home() {
     // const tickets = useSelector((state) => state.tickets);
     // const page = useSelector((state) => state.actualPage);
@@ -18,14 +18,14 @@ function Home() {
     // function paginate( numberPage) {
     //     dispatch(changePage(numberPage));
     //   }
-
+const {currentUser} = useAuth()
     return (
         <div >
          
            <h1>
              <NavBar /> Home Page
            </h1>
-      
+           <h1>{` my user is ${currentUser}`}</h1> 
             {/* <Paged
               TicketsPerPage={TicketsPerPage}
               total={tickets}
