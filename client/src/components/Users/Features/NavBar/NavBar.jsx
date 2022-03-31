@@ -13,9 +13,11 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
+import {useAuth} from "../../../../context/AuthContext"
 
 function NavBar() {
   const { toggleColorMode } = useColorMode()
+  const {logout } = useAuth()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -57,7 +59,7 @@ function NavBar() {
               onClick={async (e) => {
                 e.preventDefault();
                 // handle logout
-                alert("logout user");
+                logout()
               }}
             />
 
