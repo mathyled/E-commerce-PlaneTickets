@@ -1,34 +1,18 @@
 import {
   Box,
   Flex,
-  // Avatar,
   HStack,
   Link,
-  // IconButton,
-  Button,
-  // Menu,
-  // MenuButton,
-  // MenuList,
-  // MenuItem,
-  // MenuDivider,
-  // useDisclosure,
   useColorModeValue,
   Stack,
-  Spacer,
-  useColorMode,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
-// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
-import { FaMoon, FaSun } from 'react-icons/fa'
-import Navlink from '../UserModal/components/Navlink'
+import Navlink from "../UserModal/components/Navlink";
 
 function NavBar() {
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { toggleColorMode } = useColorMode()
-
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -49,8 +33,10 @@ function NavBar() {
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
                 href={"#"}
-              > About</Link>
-
+              >
+                {" "}
+                About
+              </Link>
             </HStack>
           </HStack>
           <Stack
@@ -59,23 +45,17 @@ function NavBar() {
             direction={"row"}
             spacing={6}
           >
+            <SearchBar />
             <LoginModal />
             <RegisterModal />
             <Navlink
-              to='/logout'
-              name='Logout'
-              onClick={async e => {
-                e.preventDefault()
+              to="/logout"
+              name="Logout"
+              onClick={async (e) => {
+                e.preventDefault();
                 // handle logout
-                alert('logout user')
-
+                alert("logout user");
               }}
-            />
-            <IconButton
-              variant='outline'
-              icon={useColorModeValue(<FaSun />, <FaMoon />)}
-              onClick={toggleColorMode}
-              aria-label='toggle-dark-mode'
             />
           </Stack>
         </Flex>
