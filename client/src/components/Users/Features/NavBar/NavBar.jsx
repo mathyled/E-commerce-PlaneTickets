@@ -14,14 +14,21 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Spacer,
+  useColorMode,
 } from "@chakra-ui/react";
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import LoginModal from "../SignIn/LoginModal";
+import RegisterModal from "../SignUp/RegisterModal";
+import { FaMoon, FaSun } from 'react-icons/fa'
+import Navlink from '../UserModal/components/Navlink'
 
 function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toggleColorMode } = useColorMode()
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <Box>Heading North</Box>
@@ -39,9 +46,8 @@ function NavBar() {
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
                 href={"#"}
-              >
-                About
-              </Link>
+              > About</Link>
+
             </HStack>
           </HStack>
           <Stack
@@ -50,28 +56,23 @@ function NavBar() {
             direction={"row"}
             spacing={6}
           >
-            <Button
-              as={"a"}
-              fontSize={"sm"}
-              fontWeight={400}
-              variant={"link"}
-              href={"#"}
-            >
-              Sign In
-            </Button>
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"teal.400"}
-              href={"#"}
-              _hover={{
-                bg: "teal.800",
+            <LoginModal />
+            <RegisterModal />
+            <Navlink
+              to='/logout'
+              name='Logout'
+              onClick={async e => {
+                e.preventDefault()
+                // handle logout
+                alert('logout user')
               }}
-            >
-              Sign Up
-            </Button>
+            />
+            <IconButton
+              variant='outline'
+              icon={useColorModeValue(<FaSun />, <FaMoon />)}
+              onClick={toggleColorMode}
+              aria-label='toggle-dark-mode'
+            />
           </Stack>
         </Flex>
       </Box>
