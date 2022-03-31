@@ -1,4 +1,6 @@
 
+  import CallToAction from "../../Features/CallToAction/CallToAction";
+
 import React,{useState} from "react";
 // import {useSelector,useDispatch} from "react-redux";
 // import {Link} from "react-router-dom";
@@ -23,7 +25,9 @@ function Home() {
         <div >
          
            <h1>
-             <NavBar /> Home Page
+             <NavBar />
+      <CallToAction />
+      Home Page
            </h1>
       
             {/* <Paged
