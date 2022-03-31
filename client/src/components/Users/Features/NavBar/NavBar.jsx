@@ -3,16 +3,19 @@ import {
   Flex,
   HStack,
   Link,
+  IconButton,
   useColorModeValue,
+  useColorMode,
   Stack,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
-
+import { FaMoon, FaSun } from 'react-icons/fa'
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
 
 function NavBar() {
+  const { toggleColorMode } = useColorMode()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -56,6 +59,13 @@ function NavBar() {
                 // handle logout
                 alert("logout user");
               }}
+            />
+
+            <IconButton
+              variant='outline'
+              icon={useColorModeValue(<FaSun />, <FaMoon />)}
+              onClick={toggleColorMode}
+              aria-label='toggle-dark-mode'
             />
           </Stack>
         </Flex>
