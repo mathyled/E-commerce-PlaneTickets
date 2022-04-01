@@ -1,12 +1,13 @@
 import React from 'react'
-import { Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
+import NavBar  from '../../NavBar/NavBar'
 
 
-export function Layout(props) {
+export function Layout({ children }) {
   return (
-    <>
-
-      <Container maxW='container.lg'>{props.children}</Container>
-    </>
+    <Box mb={16}>
+      <NavBar />
+      <Container maxW='container.lg'>{children}</Container>
+    </Box>
   )
 }
