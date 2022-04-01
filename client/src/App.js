@@ -4,7 +4,8 @@ import Home from "./components/Users/Pages/Home/Home";
 import{NotfoundPage} from "./components/Users/Pages/NotfoundPage/NotfoundPage"
 import {ForgotPasswordPage} from "./components/Users/Features/UserModal/pages/ForgotPasswordPage"
 import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage";
-import ProtectedRoute from "./ProtectedRoutes"
+import ProtectedRoute from "./ProtectedRoutes";
+import {ResetPasswordPage} from "./components/Users/Features/UserModal/pages/ResetPasswordPage"
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,8 @@ function App() {
         <Route element={<ProtectedRoute />}> 
         <Route exact path='/profile' element={<Profilepage />} />
         </Route>
+
+        <Route exact path='/reset-password' element={<ResetPasswordPage />} />
 
         <Route exact path='*' element={<NotfoundPage />} />
       </Routes>
