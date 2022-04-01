@@ -1,12 +1,11 @@
-
 import CallToAction from "../../Features/CallToAction/CallToAction";
-import React,{useState} from "react";
+import React, { useState } from "react";
 // import {useSelector,useDispatch} from "react-redux";
 // import {Link} from "react-router-dom";
 // import Paged from "../../Features/Paged/Paged";
 import NavBar from "../../Features/NavBar/NavBar";
 import Filters from "../../Features/Filters/Filters";
-
+import Card from "../../Features/Card/Card";
 function Home() {
   // const tickets = useSelector((state) => state.tickets);
   // const page = useSelector((state) => state.actualPage);
@@ -23,12 +22,12 @@ function Home() {
 
   return (
     <div>
-      
-        <NavBar /> 
-           <CallToAction/>      
-        <Filters />
-          
-            {/* <Paged
+      <NavBar />
+      <CallToAction />
+      <Card />
+      <Filters />
+
+      {/* <Paged
 
               TicketsPerPage={TicketsPerPage}
               total={tickets}

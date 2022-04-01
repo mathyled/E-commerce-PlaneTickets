@@ -5,13 +5,13 @@ import {
   Box,
   Heading,
   Text,
-//   Button,
+  //   Button,
   Image,
   //   Icon,
-//   IconButton,
+  //   IconButton,
   //   createIcon,
   //   IconProps,
-//   useColorModeValue,
+  //   useColorModeValue,
 } from "@chakra-ui/react";
 
 function CallToAction() {
@@ -79,7 +79,7 @@ function CallToAction() {
               w={"100%"}
               h={"100%"}
               src={
-                "https://images.pexels.com/photos/104826/aircraft-holiday-sun-tourism-104826.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  "https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/Bonaire-Sint-Eustatiusen-Saba-2.jpg"
               }
             />
           </Box>
