@@ -1,23 +1,35 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+
+import './App.css';
+import { Routes, Route} from "react-router-dom";
+
 import Home from "./components/Users/Pages/Home/Home";
 import { NotfoundPage } from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
 import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage";
 import ProtectedRoute from "./ProtectedRoutes";
 import Details from "./components/Users/Pages/Details/Details";
+import {ResetPasswordPage} from "./components/Users/Features/UserModal/pages/ResetPasswordPage"
+import LandingPage from "./components/Users/Features/Landing/LandingPage";
+
+
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
         <Route exact path="/productdetails" element={<Details />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route element={<ProtectedRoute />}>
-          <Route exact path="/profile" element={<Profilepage />} />
+        
+        <Route element={<ProtectedRoute />}> 
+        <Route exact path='/profile' element={<Profilepage />} />
         </Route>
 
-        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path='/reset-password' element={<ResetPasswordPage />} />
+
+        <Route exact path='*' element={<NotfoundPage />} />
+
       </Routes>
     </div>
   );
