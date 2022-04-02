@@ -1,40 +1,34 @@
 const axios = require("axios");
-// const {citiesDbModel} = require("../models")
+const { citiesDbModel } = require("../models");
 const { AVIATION_API_KEY } = process.env;
 
-// get flights from api
+// get cities from aviation api
 
 const getApiAllCities = async (req, res) => {
-    try{
-        const cities = await axios.get(`https://aviation-edge.com/v2/public/cityDatabase?key=${AVIATION_API_KEY}`);
-        // cities.forEach(citi => {
-        //   citiesDbModel.findOrCreate({
-        //     where: {
-        //       nameCity: citi.nameCity,
-        //       codeIataCity: citi.codeIataCity,
-        //     }
-        //   });
-        //   const citiesDb = citiesDbModel.findAll();
-        // cities.data.forEach((e) => {
-        //   citiesDbModel.findByIdAndUpdate({
-        //     cityId: e.cityId,
-        //     codeIataCity: e.codeIataCity,
-        //     nameCity: e.nameCity,
-        //   });
-        // });
-        // const citiesDb = citiesDbModel.find();
-        const citiesDb = cities.data.map((e) => {
-          return {
-            codeIataCity: e.codeIataCity,
-            nameCity: e.nameCity,
-          };
-        });
-        res.send(citiesDb);
+  try {
+    const cities = await axios.get(
+      `https://aviation-edge.com/v2/public/cityDatabase?key=${AVIATION_API_KEY}`
+    );
+    const citiesDb = cities.data;
+    // console.log(citiesDb.length);
+    const citiesDbData = citiesDb.map((city) => {
+      return {
+        nameCity: city.nameCity,
+        codeIataCity: city.codeIataCity,
+      };
+    });
+    if (citiesDbModel.length > 0) {
+      await citiesDbModel.deleteMany({});
+      await citiesDbModel.insertMany(citiesDbData);
     }
-    catch(err) {
-      console.log(err)
-      res.status(404).send("Error")
-    }
+    const dataDb = await citiesDbModel.find();
+    res.status(200).send({ message: "success", data: dataDb });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "error",
+    });
+  }
 };
 
 module.exports = {
