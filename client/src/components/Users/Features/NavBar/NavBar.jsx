@@ -23,7 +23,15 @@ function NavBar() {
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={12} alignItems={"center"}>
-            <Box>Heading North</Box>
+            <Box>
+            { currentUser && < Navlink
+              to="/home"
+              name="Heading North"
+  
+            />}
+             
+              
+              </Box>
             <HStack
               as={"nav"}
               spacing={4}
