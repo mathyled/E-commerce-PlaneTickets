@@ -1,6 +1,6 @@
 import {
   Button,
-  Center,
+  // Center,
   chakra,
   FormControl,
   FormLabel,
@@ -10,17 +10,22 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React,{useState} from 'react'
+// import { useNavigate } from 'react-router-dom'
 import { Card } from '../components/Card'
-import DividerWithText from '../components/DividerWithText'
+// import DividerWithText from '../components/DividerWithText'
 import { Layout } from '../components/Layout'
+import {useAuth} from "../../../../../context/AuthContext"
 
 export function ForgotPasswordPage() {
-  const navigate = useNavigate()
-
+  // const navigate = useNavigate()
+const [email,setEmail] = useState("")
+const {forgotPassword} = useAuth()
+const toast = useToast()
   return (
     <Layout>
+       <Card maxW='md' mx='auto' mt={4}>
+
       <Heading textAlign='center' my={12}>
         Forgot password
       </Heading>
@@ -28,13 +33,31 @@ export function ForgotPasswordPage() {
         <chakra.form
           onSubmit={async e => {
             e.preventDefault()
-            // your forgot password logic here
+            forgotPassword(email)
+            .then(res=>{
+              console.log(res)
+              toast({
+                description: 'Email Send, check your email!',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              })
+            })
+            .catch(e=>{ 
+              console.log(e.message)
+              toast({
+                description: e.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+              })
+            })
           }}
         >
           <Stack spacing='6'>
             <FormControl id='email'>
               <FormLabel>Email address</FormLabel>
-              <Input name='email' type='email' autoComplete='email' required />
+              <Input onChange={e=> setEmail(e.target.value)} name='email' type='email' autoComplete='email' required />
             </FormControl>
             <Spacer />
             <Button type='submit' colorScheme='primary' size='lg' fontSize='md'>
@@ -49,6 +72,7 @@ export function ForgotPasswordPage() {
           </Button> */}
         {/* </Center> */}
       </Card>
+       </Card>
     </Layout>
   )
 }
