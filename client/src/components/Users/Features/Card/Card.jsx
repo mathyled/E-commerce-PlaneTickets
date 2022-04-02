@@ -15,7 +15,7 @@ import {
 
 //const Icon = useColorModeValue(MoonIcon, SunIcon);
 
-export default function socialProfileWithImageHorizontal() {
+export default function Card() {
   return (
     <Center py={6}>
       <Stack
