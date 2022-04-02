@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
+        <Route exact path="/productdetails" element={<Details />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route exact path="/detailspage" element={<Details />}></Route>
         <Route element={<ProtectedRoute />}>
