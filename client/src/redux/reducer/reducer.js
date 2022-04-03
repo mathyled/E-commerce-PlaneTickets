@@ -8,29 +8,18 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case TYPES.GET_TICKETS:
-      return {
-        ...state,
-        tickets: action.payload,
-        ticketsBackUp: action.payload,
-      };
-    case TYPES.CHANGE_PAGE:
-      return {
-        ...state,
-        actualPage: action.payload,
-      };
-
-    case TYPES.SORT_TICKETS:
+    case TYPES.SORT_CITIES:
       if (action.payload.category != "") {
         action.payload.ascending
-          ? state.tickets.sort((a, b) => {
+          ? state.city.sort((a, b) => {
+              console.log(a);
               if (a > b) {
                 return 1;
               } else if (a < b) {
                 return -1;
               }
             })
-          : state.tickets.sort((a, b) => {
+          : state.city.sort((a, b) => {
               if (a < b) {
                 return 1;
               } else if (a > b) {
@@ -40,14 +29,14 @@ function rootReducer(state = initialState, action) {
       }
       if (action.payload.price != "") {
         action.payload.ascending
-          ? state.tickets.sort((a, b) => {
+          ? state.city.sort((a, b) => {
               if (a > b) {
                 return 1;
               } else if (a < b) {
                 return -1;
               }
             })
-          : state.tickets.sort((a, b) => {
+          : state.city.sort((a, b) => {
               if (a < b) {
                 return 1;
               } else if (a > b) {
@@ -57,14 +46,14 @@ function rootReducer(state = initialState, action) {
       }
       if (action.payload.time != "") {
         action.payload.ascending
-          ? state.tickets.sort((a, b) => {
+          ? state.city.sort((a, b) => {
               if (a > b) {
                 return 1;
               } else if (a < b) {
                 return -1;
               }
             })
-          : state.tickets.sort((a, b) => {
+          : state.city.sort((a, b) => {
               if (a < b) {
                 return 1;
               } else if (a > b) {
@@ -73,35 +62,39 @@ function rootReducer(state = initialState, action) {
             });
       }
       return { ...state };
-    case TYPES.FILTER_TICKETS:
-      if (action.payload.dep !== "") {
-        state.tickets = state.tickets.filter(
-          (fly) => fly.property === action.payload.dep
+    case TYPES.FILTER_CITIES:
+      if (action.payload.departure !== "") {
+        // EL PROBLEMA ESTA ACA
+
+        state.city = state.city.filter(
+          (fly) => fly.departureDate === action.payload.departure
         );
       }
       if (action.payload.ret !== "") {
-        state.tickets = state.tickets.filter(
-          (fly) => fly.property === action.payload.ret
+        state.city = state.city.filter(
+          (fly) => fly.returnDate === action.payload.ret
         );
       }
-      if (action.payload.price !== "0" || action.payload.price !== "") {
-        state.tickets = state.tickets.filter(
-          (fly) => fly.property === action.payload.price
-        );
+      if (action.payload.price !== "") {
+        state.city = state.city.filter((fly) => {
+          return fly.price.total === action.payload.price;
+        });
       }
+      /*
       if (action.payload.time !== "") {
-        state.tickets = state.tickets.filter(
+        state.city = state.city.filter(
           (fly) => fly.property === action.payload.time
         );
-      }
+      }*/
       return { ...state };
-      
-      case TYPES.GET_CITY:
-        return {
-            ...state,
-            city: action.payload.data.offer,
-            cityBackUp: action.payload.data.offer,
-        };
+
+    case TYPES.GET_CITY:
+      return {
+        ...state,
+        city: action.payload.data.offer,
+        cityBackUp: action.payload.data.offer,
+      };
+
     default:
       return { ...state };
   }

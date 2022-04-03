@@ -11,15 +11,17 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { filterTickets } from "../../../../redux/actions/actions";
 
 function Filters() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     departure: "",
     return: "",
     price: "",
     time: "",
   });
-  const [flies, setFlies] = useState([]);
   const parse = (val) => val.replace(/^\$/, "");
 
   function handleInput(e) {
@@ -103,7 +105,20 @@ function Filters() {
         />
       </Container>
       <Container>
-        <Button colorScheme="teal" size="xs" onClick={() => {}}>
+        <Button
+          colorScheme="teal"
+          size="xs"
+          onClick={() => {
+            dispatch(
+              filterTickets(
+                inputs.departure,
+                inputs.return,
+                inputs.price,
+                inputs.time
+              )
+            );
+          }}
+        >
           Filter
         </Button>
       </Container>

@@ -12,8 +12,7 @@ import { Link } from "react-router-dom";
 
 function Card({ origin, destination, price, image }) {
   return (
-    <div >
-
+    <div>
       <Flex
         bg={useColorModeValue("#F9FAFB", "gray.600")}
         p={5}
@@ -40,7 +39,6 @@ function Card({ origin, destination, price, image }) {
             />
           </Link>
 
-
           <Flex alignItems="center" px={6} py={3} bg="gray.900">
             <Icon as={BsFillBriefcaseFill} h={6} w={6} color="white" />
 
@@ -55,10 +53,7 @@ function Card({ origin, destination, price, image }) {
               fontWeight="bold"
               color={useColorModeValue("gray.800", "white")}
             >
-              {
-
-
-              }
+              {}
             </chakra.h1>
 
             {/* <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>

@@ -17,10 +17,13 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import NavBar from "../../Features/NavBar/NavBar";
 import { MdLocalShipping } from "react-icons/md";
 
-export default function Simple() {
+export default function Details(Card) {
+  const { id } = useParams();
+  console.log(id);
   return (
     <div>
       <NavBar />
