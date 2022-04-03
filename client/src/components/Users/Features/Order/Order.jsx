@@ -13,6 +13,8 @@ import {
   Radio,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
+import { sortTickets } from "../../../../redux/actions/actions";
+import { MdOutlineAirplanemodeActive } from "react-icons/md";
 
 import { useState, useEffect } from "react";
 
@@ -23,6 +25,8 @@ function Order() {
     price: false,
     time: false,
   });
+
+  const dispatch = useDispatch();
 
   function handleRadio(e) {
     e.target.checked = !inputs[e.target.name];
@@ -39,7 +43,7 @@ function Order() {
           isChecked={inputs.category ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          Category
+          Departure
         </Radio>
       </Container>
 
@@ -62,7 +66,7 @@ function Order() {
           isChecked={inputs.time ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          Time
+          Return
         </Radio>
       </Container>
       <Container>
@@ -89,7 +93,20 @@ function Order() {
             </Radio>
           </Stack>
         </Container>
-        <Button colorScheme="teal" size="xs" onClick={() => {}}>
+        <Button
+          colorScheme="teal"
+          size="xs"
+          onClick={() => {
+            dispatch(
+              sortTickets(
+                inputs.category,
+                inputs.price,
+                inputs.price,
+                inputs.ascending
+              )
+            );
+          }}
+        >
           Order
         </Button>
       </Container>

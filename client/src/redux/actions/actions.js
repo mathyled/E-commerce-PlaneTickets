@@ -10,7 +10,7 @@ export const changePage = (number) => {
 
 export const sortTickets = (category, price, time, ascending) => {
   return {
-    type: TYPES.SORT_TICKETS,
+    type: TYPES.SORT_CITIES,
     payload: { category, price, time, ascending },
   };
 };
