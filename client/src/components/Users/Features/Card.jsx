@@ -14,7 +14,7 @@ function Card({ origin, destination, price, image }) {
   return (
     <div>
       <Flex
-        bg={useColorModeValue("#F9FAFB", "gray.600")}
+        bg={useColorModeValue("#FFFF", "gray.900")}
         p={5}
         w="full"
         alignItems="center"
@@ -27,6 +27,15 @@ function Card({ origin, destination, price, image }) {
           shadow="lg"
           rounded="lg"
           overflow="hidden"
+          boxShadow={
+            "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+          }
+          _hover={{
+            bg: "teal.50",
+          }}
+          _focus={{
+            bg: "teal.50",
+          }}
         >
           <Link to="/detailspage">
             <Image
