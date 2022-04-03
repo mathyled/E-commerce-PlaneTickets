@@ -13,17 +13,24 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import {useAuth} from "../../../../context/AuthContext"
+import { useAuth } from "../../../../context/AuthContext"
+import FilterModal from "../FilterModal";
 
 function NavBar() {
   const { toggleColorMode } = useColorMode()
-  const {currentUser,logout } = useAuth()
+  const { currentUser, logout } = useAuth()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={12} alignItems={"center"}>
-            <Box>Heading North</Box>
+            <Box>
+              < Navlink
+                to="/home"
+                name="Heading North"
+              />
+
+            </Box>
             <HStack
               as={"nav"}
               spacing={4}
@@ -42,6 +49,7 @@ function NavBar() {
                 {" "}
                 About
               </Link>
+              <FilterModal />
             </HStack>
           </HStack>
           <Stack
@@ -53,8 +61,8 @@ function NavBar() {
             <SearchBar />
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
-            { currentUser && <Navlink to="/profile" name="Profile" /> }
-            { currentUser && < Navlink
+            {currentUser && <Navlink to="/profile" name="Profile" />}
+            {currentUser && < Navlink
               to="/logout"
               name="Logout"
               onClick={async (e) => {

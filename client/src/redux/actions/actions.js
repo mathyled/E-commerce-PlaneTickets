@@ -8,10 +8,17 @@ export const changePage = (number) => {
   };
 };
 
-export const searchLanding = (searchCity) => {
+export const sortTickets = (category, price, time, ascending) => {
   return {
-    type: TYPES.SEARCH_CITY,
-    payload: searchCity,
+    type: TYPES.SORT_TICKETS,
+    payload: { category, price, time, ascending },
+  };
+};
+
+export const filterTickets = (departure, ret, price, time) => {
+  return {
+    type: TYPES.FILTER_TICKETS,
+    payload: { departure, ret, price, time },
   };
 };
 

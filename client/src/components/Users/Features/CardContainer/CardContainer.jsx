@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCity } from "../../redux/actions/actions";
-import Card from "../Features/Card";
+import { getCity } from "../../../redux/actions/actions";
+import Card from "./Features/Card/Card";
 import imagenes from "./imagenes.json";
-function Cards() {
+function CardContainer() {
   const city = useSelector((state) => state.city);
   const dispatch = useDispatch();
-  console.log("CITY", city);
+  console.log("CITY", city.offer);
 
   useEffect(() => {
     dispatch(getCity("MAD"));
@@ -37,4 +37,4 @@ function Cards() {
   );
 }
 
-export default Cards;
+export default CardContainer;
