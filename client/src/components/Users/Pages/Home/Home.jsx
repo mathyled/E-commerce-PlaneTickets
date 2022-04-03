@@ -25,7 +25,7 @@ function Home() {
     <div>
       <NavBar />
       <CallToAction />
-      <Card/>
+      <Card />
       <Filters />
       <h1>{` USER : ${currentUser}`}</h1>
       {/* <Paged
