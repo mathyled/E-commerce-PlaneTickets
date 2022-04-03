@@ -1,8 +1,8 @@
 import { TYPES } from "../actions/types";
 
 const initialState = {
-  tickets: [],
-  ticketsBackUp: [],
+  city: [],
+  cityBackUp: [],
   actualPage: 1,
 };
 
@@ -95,6 +95,13 @@ function rootReducer(state = initialState, action) {
         );
       }
       return { ...state };
+      
+      case TYPES.GET_CITY:
+        return {
+            ...state,
+            city: action.payload.data.offer,
+            cityBackUp: action.payload.data.offer,
+        };
     default:
       return { ...state };
   }

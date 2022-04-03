@@ -21,3 +21,15 @@ export const filterTickets = (departure, ret, price, time) => {
     payload: { departure, ret, price, time },
   };
 };
+
+
+export const getCity = (city) => {
+  return async (dispatch) => {
+    var json = await axios.get(`http://localhost:3001/api/flights/inspiration?origin=${city}`);
+    // console.log("JSON",json)
+    return dispatch({
+      type: TYPES.GET_CITY,
+      payload: json.data,
+    });
+  };
+};

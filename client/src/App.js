@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Users/Pages/Home/Home";
+import Home from "./components/Users/Features/Home";
 import { NotfoundPage } from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
 import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage";
