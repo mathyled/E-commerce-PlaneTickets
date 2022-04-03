@@ -15,10 +15,13 @@ import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
 import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
+import { getCity } from "../../../../redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 function NavBar() {
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
+  const dispatch = useDispatch()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -28,6 +31,7 @@ function NavBar() {
               < Navlink
                 to="/home"
                 name="Heading North"
+                onClick={()=> dispatch(getCity("MAD"))}
               />
 
             </Box>
