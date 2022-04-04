@@ -17,11 +17,17 @@ import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
 import { getCity } from "../../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
+import UserMenu from "../UserMenu";
 
 function NavBar() {
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
+  async function handlerLogOut(e){
+      e.preventDefault();
+      // handle logout
+      logout()
+  };
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -65,8 +71,9 @@ function NavBar() {
             <SearchBar />
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
-            {currentUser && <Navlink to="/profile" name="Profile" />}
-            {currentUser && < Navlink
+            {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
+            {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName}  />}
+            {/* {currentUser && < Navlink
               to="/logout"
               name="Logout"
               onClick={async (e) => {
@@ -74,7 +81,7 @@ function NavBar() {
                 // handle logout
                 logout()
               }}
-            />}
+            />} */}
 
             <IconButton
               variant='outline'
