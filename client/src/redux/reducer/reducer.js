@@ -98,11 +98,11 @@ function rootReducer(state = initialState, action) {
       }*/
       return { ...state };
 
-    case TYPES.GET_CITY:
+    case TYPES.GET_CITIES:
       return {
         ...state,
-        city: action.payload.data.offer,
-        cityBackUp: action.payload.data.offer,
+        city: action.payload.data,
+        cityBackUp: action.payload.data,
       };
 
     default:
