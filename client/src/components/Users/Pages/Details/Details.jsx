@@ -32,9 +32,8 @@ import pictures from "../../Features/pictures.json";
 export default function Details() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  let cityDetails = [];
-  let cityDetailsTwo = useSelector((state) => state.city_details);
-  cityDetails.push(cityDetailsTwo);
+  let cityDetails = useSelector((state) => state.city_details);
+
   console.log(id);
 
   useEffect(() => {
@@ -42,11 +41,11 @@ export default function Details() {
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
-  console.log(cityDetails[0]);
   // console.log(cityDetails[0].itineraries[0].segments[0].departure.iataCode);
 
   function getImages(localLettersId) {
     let imagen;
+
     for (let i = 0; i < pictures.length; i++) {
       if (pictures[i].hasOwnProperty(`image${localLettersId}`)) {
         imagen = pictures[i][`image${localLettersId}`];
@@ -55,12 +54,9 @@ export default function Details() {
     return imagen;
   }
 
-  const imageUrl = "";
-  //cityDetails[0]?.itineraries[0]?.segments[0]?.departure?.iataCode;
-  console.log(imageUrl);
   return (
     <div>
-      {cityDetails.length > 0 ? (
+      {Object.keys(cityDetails).length > 0 ? (
         <div>
           <NavBar />
           <Container maxW={"7xl"}>
@@ -74,8 +70,10 @@ export default function Details() {
                   rounded={"md"}
                   alt={"product image"}
                   src={
-                    "a"
-                    // getImages(imageUrl)
+                    getImages(
+                      cityDetails.itineraries[0]?.segments[0]?.departure
+                        ?.iataCode
+                    )
                     //cityDetails[0].itineraries[0].segments[0].departure.iataCode
                   }
                   fit={"cover"}
@@ -91,7 +89,7 @@ export default function Details() {
                     fontWeight={600}
                     fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   >
-                    {cityDetails[0]["nameCity"]}
+                    {cityDetails["nameCity"]}
                   </Heading>
                   <Text
                     color={
@@ -100,7 +98,7 @@ export default function Details() {
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
-                    {cityDetails[0]["price"] + "EUR"}
+                    {`${cityDetails["price"].total} EUR`}
                   </Text>
                 </Box>
 
@@ -125,52 +123,33 @@ export default function Details() {
                       textTransform={"uppercase"}
                       mb={"4"}
                     >
-                      Product Details
+                      Details
                     </Text>
 
-                    <List spacing={2}>
+                    <List spacing={6}>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Between lugs:
+                          Departure:
                         </Text>{" "}
-                        20 mm
+                        {cityDetails.itineraries[0].segments[0].departure.at}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Bracelet:
+                          Arrival:
                         </Text>{" "}
-                        leather strap
+                        {cityDetails.itineraries[0].segments[0].arrival.at}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Case:
+                          Duration
                         </Text>{" "}
-                        Steel
+                        {cityDetails.itineraries[0].segments[0].duration}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Case diameter:
+                          Number of stops:
                         </Text>{" "}
-                        42 mm
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Dial color:
-                        </Text>{" "}
-                        Black
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Crystal:
-                        </Text>{" "}
-                        Domed, scratch‑resistant sapphire crystal with
-                        anti‑reflective treatment inside
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Water resistance:
-                        </Text>{" "}
-                        5 bar (50 metres / 167 feet){" "}
+                        {cityDetails.itineraries[0].segments[0].numberOfStops}
                       </ListItem>
                     </List>
                   </Box>
