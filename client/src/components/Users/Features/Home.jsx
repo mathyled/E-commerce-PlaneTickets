@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import Paged from "./Paged/Paged";
-import { getCity } from "../../../redux/actions/actions";
+import { getOffers } from "../../../redux/actions/actions";
 import pictures from "./pictures.json";
 import {
   chakra,
@@ -35,8 +35,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getCity("MAD"));
-    console.log(" CITIES", cities);
+    dispatch(getOffers("MAD", "PMI", "2022-04-04", "1"));
+    //console.log(" CITIES", cities);
   }, [dispatch]);
 
   return (
@@ -54,13 +54,21 @@ export default function Home() {
           currentTickets.map((o) => {
             let imagen;
             for (let i = 0; i < pictures.length; i++) {
-              if (pictures[i].hasOwnProperty(`image${o.destination}`)) {
-                imagen = pictures[i][`image${o.destination}`];
+              if (
+                pictures[i].hasOwnProperty(
+                  `image${o.itineraries[0].segments[0].arrival.iataCode}`
+                )
+              ) {
+                imagen =
+                  pictures[i][
+                    `image${o.itineraries[0].segments[0].arrival.iataCode}`
+                  ];
               }
             }
             return (
-              <div>
+              <div key={o.id}>
                 <Card
+                  id={o.id}
                   origin={o.origin}
                   destination={o.destination}
                   price={o.price.total}

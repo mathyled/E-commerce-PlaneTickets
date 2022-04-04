@@ -104,14 +104,12 @@ const flightOffers = async (req, res) => {
   }
 };
 
-const flightInspiration = async (req, res) => {
+const getOfferDetail = async (req, res) => {
   try {
-    const { origin } = req.query;
+    const { id } = req.params;
 
-    const flight = await amadeus.shopping.flightDestinations.get({
-      origin: origin,
-    });
-    res.status(200).send({ status: "success", data: { offer: flight.data } });
+    const flight = await flightOffer.find({"id": id});
+    res.status(200).send({ status: "success", data: { offer: flight } });
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: "error getting flights" });
@@ -120,5 +118,5 @@ const flightInspiration = async (req, res) => {
 
 module.exports = {
   flightOffers,
-  flightInspiration,
+  getOfferDetail,
 };

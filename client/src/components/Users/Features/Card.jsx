@@ -10,7 +10,7 @@ import { MdHeadset, MdEmail, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function Card({ origin, destination, price, image }) {
+function Card({ id, origin, destination, price, image }) {
   return (
     <div>
       <Flex
@@ -37,7 +37,7 @@ function Card({ origin, destination, price, image }) {
             bg: "teal.50",
           }}
         >
-          <Link to="/detailspage">
+          <Link to={`/detailspage${id}`}>
             <Image
               w="full"
               h={56}

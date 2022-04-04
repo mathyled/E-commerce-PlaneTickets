@@ -17,11 +17,12 @@ import Navlink from "../UserModal/components/Navlink";
 import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
-import { getCity } from "../../../../redux/actions/actions";
+import { getOffers } from "../../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import UserMenu from "../UserMenu";
 
 function NavBar() {
+
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
@@ -38,12 +39,11 @@ function NavBar() {
 
           <HStack spacing={12} alignItems={"center"}>
             <Box>
-              < Navlink
+              <Navlink
                 to="/home"
                 name="Heading North"
-                onClick={()=> dispatch(getCity("MAD"))}
+                onClick={() => dispatch(getOffers("MAD"))}
               />
-
             </Box>
 
             <HStack
@@ -83,6 +83,7 @@ function NavBar() {
 
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
+
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
             {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName}  />}
