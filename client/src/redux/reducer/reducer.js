@@ -23,6 +23,8 @@ function rootReducer(state = initialState, action) {
       };
 
     case TYPES.GET_OFFER_DETAILS:
+      console.log("AA");
+      console.log(action.payload.data.offer[0]);
       return {
         ...state,
         city_details: action.payload.data.offer[0],
