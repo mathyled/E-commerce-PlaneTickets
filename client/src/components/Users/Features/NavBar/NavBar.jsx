@@ -7,26 +7,27 @@ import {
   useColorModeValue,
   useColorMode,
   Stack,
+  Button,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
-import { FaMoon, FaSun } from 'react-icons/fa'
+import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import {useAuth} from "../../../../context/AuthContext"
-
+import { useAuth } from "../../../../context/AuthContext";
+import { MdTravelExplore } from "react-icons/md";
 function NavBar() {
-  const { toggleColorMode } = useColorMode()
-  const {currentUser,logout } = useAuth()
+  const { toggleColorMode } = useColorMode();
+  const { currentUser, logout } = useAuth();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={12} alignItems={"center"}>
+          <HStack spacing={10} alignItems={"center"}>
             <Box>Heading North</Box>
             <HStack
               as={"nav"}
-              spacing={4}
+              spacing={6}
               display={{ base: "none", md: "flex" }}
             >
               <Link
@@ -42,6 +43,9 @@ function NavBar() {
                 {" "}
                 About
               </Link>
+              <Link href="/new-flight" rounded={"md"}>
+                New flight plan
+              </Link>
             </HStack>
           </HStack>
           <Stack
@@ -51,24 +55,27 @@ function NavBar() {
             spacing={6}
           >
             <SearchBar />
+
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
-            { currentUser && <Navlink to="/profile" name="Profile" /> }
-            { currentUser && < Navlink
-              to="/logout"
-              name="Logout"
-              onClick={async (e) => {
-                e.preventDefault();
-                // handle logout
-                logout()
-              }}
-            />}
+            {currentUser && <Navlink to="/profile" name="Profile" />}
+            {currentUser && (
+              <Navlink
+                to="/logout"
+                name="Logout"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  // handle logout
+                  logout();
+                }}
+              />
+            )}
 
             <IconButton
-              variant='outline'
+              variant="outline"
               icon={useColorModeValue(<FaSun />, <FaMoon />)}
               onClick={toggleColorMode}
-              aria-label='toggle-dark-mode'
+              aria-label="toggle-dark-mode"
             />
           </Stack>
         </Flex>
