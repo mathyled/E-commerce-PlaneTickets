@@ -68,8 +68,9 @@ function CreateForm() {
     }),
   });
   return (
-    <Box>
+    <div> 
       <NavBar />
+    <Box>
 
       <Flex
         minH={"100vh"}
@@ -194,6 +195,7 @@ function CreateForm() {
         />
       </Flex>
     </Box>
+    </div>
   );
 }
 
