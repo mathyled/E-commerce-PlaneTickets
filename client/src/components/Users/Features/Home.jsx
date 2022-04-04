@@ -35,8 +35,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getOffers("MAD", "PMI", "2022-04-04", "1"));
-    //console.log(" CITIES", cities);
+    dispatch(getOffers("MAD", "HAV", "2022-04-04", "1"));
+   console.log(" CITIES", cities);
   }, [dispatch]);
 
   return (
@@ -69,8 +69,8 @@ export default function Home() {
               <div key={o.id}>
                 <Card
                   id={o.id}
-                  origin={o.origin}
-                  destination={o.destination}
+                  origin={o.nameCity}
+                  destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
                   price={o.price.total}
                   image={imagen}
                 />
