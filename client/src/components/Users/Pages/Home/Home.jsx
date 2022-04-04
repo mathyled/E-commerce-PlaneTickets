@@ -1,12 +1,14 @@
-
 import CallToAction from "../../Features/CallToAction/CallToAction";
-import React,{useState} from "react";
+import React, { useState } from "react";
 // import {useSelector,useDispatch} from "react-redux";
 // import {Link} from "react-router-dom";
 // import Paged from "../../Features/Paged/Paged";
 import NavBar from "../../Features/NavBar/NavBar";
 import Filters from "../../Features/Filters/Filters";
-import { useAuth } from '../../../../context/AuthContext';
+import Sidebar from "../../Features/Sidebar/Sidebar";
+import Order from "../../Features/Order/Order";
+import { useAuth } from "../../../../context/AuthContext";
+import { Text, Flex } from "@chakra-ui/react";
 function Home() {
   // const tickets = useSelector((state) => state.tickets);
   // const page = useSelector((state) => state.actualPage);
@@ -20,15 +22,26 @@ function Home() {
   // function paginate( numberPage) {
   //     dispatch(changePage(numberPage));
   //   }
-const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
   return (
     <div>
-      
-        <NavBar /> 
-           <CallToAction/>      
-        <Filters />
-          <h1>{` USER : ${currentUser}`}</h1>
-            {/* <Paged
+      <NavBar />
+      <Flex display="flex" flexDirection="row-reverse">
+        <CallToAction />
+        <Sidebar>
+          <Text fontSize="md" fontWeight="medium" margin="1.5">
+            Filter
+          </Text>
+          <Filters />
+          <Text fontSize="md" fontWeight="medium" margin="1.5">
+            Order
+          </Text>
+          <Order />
+        </Sidebar>
+      </Flex>
+
+      <h1>{` USER : ${currentUser}`}</h1>
+      {/* <Paged
 
               TicketsPerPage={TicketsPerPage}
               total={tickets}

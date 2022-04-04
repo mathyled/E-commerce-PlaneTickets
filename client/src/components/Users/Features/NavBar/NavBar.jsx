@@ -14,17 +14,38 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import { useAuth } from "../../../../context/AuthContext";
 import { MdTravelExplore } from "react-icons/md";
+import { useAuth } from "../../../../context/AuthContext"
+import FilterModal from "../FilterModal";
+import { getCity } from "../../../../redux/actions/actions";
+import { useDispatch } from "react-redux";
+import UserMenu from "../UserMenu";
+
 function NavBar() {
-  const { toggleColorMode } = useColorMode();
-  const { currentUser, logout } = useAuth();
+  const { toggleColorMode } = useColorMode()
+  const { currentUser, logout } = useAuth()
+  const dispatch = useDispatch()
+  async function handlerLogOut(e){
+      e.preventDefault();
+      // handle logout
+      logout()
+  };
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={10} alignItems={"center"}>
-            <Box>Heading North</Box>
+
+          <HStack spacing={12} alignItems={"center"}>
+            <Box>
+              < Navlink
+                to="/home"
+                name="Heading North"
+                onClick={()=> dispatch(getCity("MAD"))}
+              />
+
+            </Box>
+
             <HStack
               as={"nav"}
               spacing={6}
@@ -43,9 +64,13 @@ function NavBar() {
                 {" "}
                 About
               </Link>
+
               <Link href="/new-flight" rounded={"md"}>
                 New flight plan
               </Link>
+
+              <FilterModal />
+
             </HStack>
           </HStack>
           <Stack
@@ -58,18 +83,18 @@ function NavBar() {
 
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
-            {currentUser && <Navlink to="/profile" name="Profile" />}
-            {currentUser && (
-              <Navlink
-                to="/logout"
-                name="Logout"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  // handle logout
-                  logout();
-                }}
-              />
-            )}
+
+            {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
+            {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName}  />}
+            {/* {currentUser && < Navlink
+              to="/logout"
+              name="Logout"
+              onClick={async (e) => {
+                e.preventDefault();
+                // handle logout
+                logout()
+              }}
+            />} */}
 
             <IconButton
               variant="outline"
