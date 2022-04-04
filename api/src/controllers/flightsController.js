@@ -76,12 +76,13 @@ const flightOffers = async (req, res) => {
     // const bue2 = citiesData.filter(e => e["airports"][0]["codeIataAirport"] === "BUE")
     // console.log(bue)
     // console.log(bue2)
-
     for(let i = 0; i < flights.length; i++) {
       for(let j = 0; j < citiesData.length; j++) {
         if(citiesData[j]["airports"].length > 0){
-          if(flights[i]["itineraries"][0]["segments"][0]["departure"]["iataCode"] === citiesData[j]["airports"][0]["codeIataAirport"]) {
-            flights[i].nameCity = citiesData[j]["nameCity"];
+          for(let k = 0; k < citiesData[j]["airports"].length; k++) {
+            if(flights[i]["itineraries"][0]["segments"][0]["departure"]["iataCode"] === citiesData[j]["airports"][k]["codeIataAirport"]) {
+              flights[i].nameCity = citiesData[j]["nameCity"];
+            };
           };
         };
       };

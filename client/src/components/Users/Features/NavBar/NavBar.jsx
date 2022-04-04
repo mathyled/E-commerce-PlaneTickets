@@ -64,10 +64,8 @@ function NavBar() {
                 {" "}
                 About
               </Link>
-
-              <Link href="/new-flight" rounded={"md"}>
-                New flight plan
-              </Link>
+        
+              {!currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
 
               <FilterModal />
 
