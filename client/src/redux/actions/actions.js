@@ -23,6 +23,7 @@ export const filterTickets = (departure, ret, price, time) => {
 };
 
 export const getCities = () => {
+  //LANDING
   return async (dispatch) => {
     var json = await axios.get(`http://localhost:3001/api/cities`);
     // console.log("JSON",json)
@@ -35,26 +36,38 @@ export const getCities = () => {
 
 // getCity debería cambiar de nombre a getOffer.
 // Y el type también debería cambiar a GET_OFFER.
-export const getCity = (origin, destination, departureDate, adults) => {
+export const getOffers = (origin, destination, departureDate, adults) => {
+  //HOME
   return async (dispatch) => {
     var json = await axios.get(
       `http://localhost:3001/api/flights?origin=${origin}&destination=${destination}&departureDate=${departureDate}&adults=${adults}`
     );
     // console.log("JSON",json)
     return dispatch({
-      type: TYPES.GET_CITY,
+      type: TYPES.GET_OFFERS,
       payload: json.data,
     });
   };
 };
 
-export const getCityDetails = (id) => {
+export const getOfferDetails = (id) => {
+  //DETAILS
   return async (dispatch) => {
-    var json = await axios.get(`http://localhost:3001/detailspage/${id}`);
+    var json = await axios.get(
+      `http://localhost:3001/api/flights/detailspage/${id}`
+    );
     // console.log("JSON",json)
     return dispatch({
-      type: TYPES.GET_CITY_DETAILS,
+      type: TYPES.GET_OFFER_DETAILS,
       payload: json.data,
     });
+  };
+};
+
+export const resetStates = () => {
+  //DETAILS
+  return {
+    type: TYPES.RESET_STATES,
+    payload: {},
   };
 };

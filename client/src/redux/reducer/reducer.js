@@ -2,12 +2,32 @@ import { TYPES } from "../actions/types";
 
 const initialState = {
   city: [],
+  city_details: {},
   cityBackUp: [],
   actualPage: 1,
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case TYPES.GET_OFFERS:
+      return {
+        ...state,
+        city: action.payload.data,
+        cityBackUp: action.payload.data,
+      };
+
+    case TYPES.RESET_STATES:
+      return {
+        ...state,
+        city_details: action.payload,
+      };
+
+    case TYPES.GET_OFFER_DETAILS:
+      return {
+        ...state,
+        city_details: action.payload.data.offer[0],
+      };
+
     case TYPES.SORT_CITIES:
       let sortedData = [];
       if (action.payload.category === true) {

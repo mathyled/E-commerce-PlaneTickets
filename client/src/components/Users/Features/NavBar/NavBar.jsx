@@ -9,31 +9,30 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
-import { FaMoon, FaSun } from 'react-icons/fa'
+import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import { useAuth } from "../../../../context/AuthContext"
+import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
-import { getCity } from "../../../../redux/actions/actions";
+import { getOffers } from "../../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 
 function NavBar() {
-  const { toggleColorMode } = useColorMode()
-  const { currentUser, logout } = useAuth()
-  const dispatch = useDispatch()
+  const { toggleColorMode } = useColorMode();
+  const { currentUser, logout } = useAuth();
+  const dispatch = useDispatch();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={12} alignItems={"center"}>
             <Box>
-              < Navlink
+              <Navlink
                 to="/home"
                 name="Heading North"
-                onClick={()=> dispatch(getCity("MAD"))}
+                onClick={() => dispatch(getOffers("MAD"))}
               />
-
             </Box>
             <HStack
               as={"nav"}
@@ -66,21 +65,23 @@ function NavBar() {
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
             {currentUser && <Navlink to="/profile" name="Profile" />}
-            {currentUser && < Navlink
-              to="/logout"
-              name="Logout"
-              onClick={async (e) => {
-                e.preventDefault();
-                // handle logout
-                logout()
-              }}
-            />}
+            {currentUser && (
+              <Navlink
+                to="/logout"
+                name="Logout"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  // handle logout
+                  logout();
+                }}
+              />
+            )}
 
             <IconButton
-              variant='outline'
+              variant="outline"
               icon={useColorModeValue(<FaSun />, <FaMoon />)}
               onClick={toggleColorMode}
-              aria-label='toggle-dark-mode'
+              aria-label="toggle-dark-mode"
             />
           </Stack>
         </Flex>
