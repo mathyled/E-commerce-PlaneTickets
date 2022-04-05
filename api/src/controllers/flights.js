@@ -1,10 +1,11 @@
 const axios = require("axios");
 const models = require("./models/index");
+const { flightsDb } = require("../models");
 
 const getFlights = async (req, res) => {
     try {
         const { city, date } = req.query;
-        let citiesData = models.getCities();
+        let citiesData = models.completeCities();
         let flightsApi = await axios.get(`https://aviation-edge.com/v2/public/flightsFuture?key=d92357-cb8e74&type=departure&iataCode=${city}&date=${date}`); // Cambiar a la variable
         let flights = flightsApi.data;
     
@@ -12,7 +13,6 @@ const getFlights = async (req, res) => {
             function random(min, max) {
                 return Math.floor((Math.random() * (max - min + 1)) + min);
             }
-            flights[i]["id"] = i + 1;
             flights[i]["price"] = random(200,400);
             for(let j = 0; j < citiesData.length; j++) {
                 for(let k = 0; k < citiesData[j]["airports"].length; k++) {
@@ -27,7 +27,24 @@ const getFlights = async (req, res) => {
                 };
             };
         };
-        res.status(200).send({ status: "success", data: flights });
+        if(flightsDb.length > 0) {
+            await flightsDb.deleteMany({});
+            await flightsDb.insertMany(flights);
+        };
+        const flightsInDb = await flightsDb.find();
+        res.status(200).send({ status: "success", data: flightsInDb });
+    }
+    catch(error) {
+        console.log(error);
+        res.status(400).send({ message: "error getting flights" });
+    };
+};
+
+const getFlightDetail = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const flightsInDb = await flightsDb.find({ "_id": id });
+        res.status(200).send({ status: "success", data: flightsInDb });
     }
     catch(error) {
         console.log(error);
@@ -37,4 +54,5 @@ const getFlights = async (req, res) => {
 
 module.exports = {
     getFlights,
+    getFlightDetail,
 };

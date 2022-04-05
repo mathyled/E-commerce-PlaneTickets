@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getApiAllCities } = require("../controllers/citiesDb");
+const { getAllCities } = require("../controllers/citiesDb");
 
-router.get("/", getApiAllCities);
+router.get("/", getAllCities);
 
 module.exports = router;
