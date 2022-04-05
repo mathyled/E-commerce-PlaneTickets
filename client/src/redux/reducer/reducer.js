@@ -4,7 +4,7 @@ const initialState = {
   city: [],
   city_details: {},
   cityBackUp: [],
-  actualPage: 1,
+  search:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -132,6 +132,12 @@ function rootReducer(state = initialState, action) {
          city: action.payload,
          cityBackUp: action.payload,
       }
+
+      case TYPES.GET_CITIES:
+        return{
+          ...state,
+          search:  action.payload,
+        }
 
     default:
       return { ...state };
