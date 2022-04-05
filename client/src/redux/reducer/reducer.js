@@ -9,12 +9,12 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case TYPES.GET_OFFERS:
-      return {
-        ...state,
-        city: action.payload.data,
-        cityBackUp: action.payload.data,
-      };
+    // case TYPES.GET_OFFERS:
+    //   return {
+    //     ...state,
+    //     city: action.payload.data,
+    //     cityBackUp: action.payload.data,
+    //   };
 
     case TYPES.RESET_STATES:
       return {
@@ -22,13 +22,13 @@ function rootReducer(state = initialState, action) {
         city_details: action.payload,
       };
 
-    case TYPES.GET_OFFER_DETAILS:
-      console.log("AA");
-      console.log(action.payload.data.offer[0]);
-      return {
-        ...state,
-        city_details: action.payload.data.offer[0],
-      };
+    // case TYPES.GET_OFFER_DETAILS:
+    //   console.log("AA");
+    //   console.log(action.payload.data.offer[0]);
+    //   return {
+    //     ...state,
+    //     city_details: action.payload.data.offer[0],
+    //   };
 
     case TYPES.SORT_CITIES:
       let sortedData = [];
@@ -120,12 +120,18 @@ function rootReducer(state = initialState, action) {
       }*/
       return { ...state };
 
-    case TYPES.GET_CITIES:
+    // case TYPES.GET_CITIES:
+    //   return {
+    //     ...state,
+    //     city: action.payload.data,
+    //     cityBackUp: action.payload.data,
+    //   };
+    case TYPES.GET_FLIGHTS:
       return {
         ...state,
-        city: action.payload.data,
-        cityBackUp: action.payload.data,
-      };
+         city: action.payload,
+         cityBackUp: action.payload,
+      }
 
     default:
       return { ...state };

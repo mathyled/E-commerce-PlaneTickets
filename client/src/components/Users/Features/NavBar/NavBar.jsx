@@ -17,7 +17,7 @@ import Navlink from "../UserModal/components/Navlink";
 import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
-import { getOffers } from "../../../../redux/actions/actions";
+// import { getOffers } from "../../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
@@ -43,7 +43,7 @@ function NavBar() {
               <Navlink
                 to="/home"
                 name="Heading North"
-                onClick={() => dispatch(getOffers("MAD"))}
+                // onClick={() => dispatch(getOffers("MAD"))}
               />
             </Box>
 

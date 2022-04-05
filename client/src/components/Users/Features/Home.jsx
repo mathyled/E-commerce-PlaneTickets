@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import Paged from "./Paged/Paged";
-import { getOffers } from "../../../redux/actions/actions";
+// import { getOffers } from "../../../redux/actions/actions";
 import pictures from "./pictures.json";
 import {
   chakra,
@@ -34,10 +34,10 @@ export default function Home() {
     console.log(cities);
   };
 
-  useEffect(() => {
-    dispatch(getOffers("MAD", "HAV", "2022-04-04", "1"));
-   console.log(" CITIES", cities);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // dispatch(getOffers("MAD", "HAV", "2022-04-04", "1"));
+  //  console.log(" CITIES", cities);
+  // }, [dispatch]);
 
   return (
     <div>
@@ -52,27 +52,28 @@ export default function Home() {
       <SimpleGrid columns={[2, null, 3]} spacing="40px">
         {currentTickets &&
           currentTickets.map((o) => {
-            let imagen;
-            for (let i = 0; i < pictures.length; i++) {
-              if (
-                pictures[i].hasOwnProperty(
-                  `image${o.itineraries[0].segments[0].arrival.iataCode}`
-                )
-              ) {
-                imagen =
-                  pictures[i][
-                    `image${o.itineraries[0].segments[0].arrival.iataCode}`
-                  ];
-              }
-            }
+            // let imagen;
+            // for (let i = 0; i < pictures.length; i++) {
+            //   if (
+            //     pictures[i].hasOwnProperty(
+            //       `image${o.itineraries[0].segments[0].arrival.iataCode}`
+            //     )
+            //   ) {
+            //     imagen =
+            //       pictures[i][
+            //         `image${o.itineraries[0].segments[0].arrival.iataCode}`
+            //       ];
+            //   }
+            // }
             return (
-              <div key={o.id}>
+              <div >
                 <Card
-                  id={o.id}
-                  origin={o.nameCity}
-                  destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
-                  price={o.price.total}
-                  image={imagen}
+                  // id={o.id}
+                  
+                  // origin={o.nameCity}
+                  // destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
+                  // price={o.price.total}
+                  // image={imagen}
                 />
               </div>
             );
