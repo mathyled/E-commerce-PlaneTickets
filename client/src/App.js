@@ -11,6 +11,7 @@ import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
 
+
 function App() {
   return (
     <div className="App">
@@ -28,7 +29,8 @@ function App() {
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
 
         <Route exact path="*" element={<NotfoundPage />} />
-        <Route exact path="/demo" element={< CartPage />} />
+        <Route exact path="/cart" element={< CartPage />} /> 
+      
       </Routes>
     </div>
   );

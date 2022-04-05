@@ -9,7 +9,7 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react'
-import * as React from 'react'
+
 
 import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
@@ -74,7 +74,7 @@ const CartPage = () => (
         <CartOrderSummary />
         <HStack mt="6" fontWeight="semibold">
           <p>or</p>
-          <Link color={useColorModeValue('blue.500', 'blue.200')}>Continue shopping</Link>
+          <Link color={useColorModeValue('blue.500', 'blue.200')}   href={"/home"} >Continue searching</Link>
         </HStack>
       </Flex>
     </Stack>
