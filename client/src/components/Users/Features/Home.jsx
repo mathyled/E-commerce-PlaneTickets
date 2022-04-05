@@ -16,12 +16,13 @@ import {
 } from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
+import { getCities } from "../../../redux/actions/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const cities = useSelector((state) => state.city);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [TicketsPerPage, setCharactersPerPage] = useState(6); // setea cuantos personajes quiero por pagina
+  const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
   const indexOfLastCharacter = currentPage * TicketsPerPage; // 6
   const indexOfFirstCharacter = indexOfLastCharacter - TicketsPerPage; // 0
   const currentTickets = cities.slice(
@@ -37,8 +38,11 @@ export default function Home() {
   // useEffect(() => {
   //   // dispatch(getOffers("MAD", "HAV", "2022-04-04", "1"));
   //  console.log(" CITIES", cities);
-  // }, [dispatch]);
+  // }, [dispatch]); 
 
+  useEffect(() => {
+    dispatch(getCities())
+  }, [dispatch]);
   return (
     <div>
       <NavBar />
@@ -68,12 +72,12 @@ export default function Home() {
             return (
               <div >
                 <Card
-                  // id={o.id}
-                  
-                  // origin={o.nameCity}
-                  // destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
-                  // price={o.price.total}
-                  // image={imagen}
+                // id={o.id}
+
+                // origin={o.nameCity}
+                // destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
+                // price={o.price.total}
+                // image={imagen}
                 />
               </div>
             );

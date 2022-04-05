@@ -75,7 +75,23 @@ export const getFlights = ({airline, date}) => {
       payload: data.data, // [{}]
     });
   };
-};
+}; 
+
+// http://localhost:3001/api/cities
+
+
+export const getCities = () => {
+
+  return async (dispatch) => {
+    var {data} = await axios.get(
+      `http://localhost:3001/api/cities`
+    );
+    return dispatch({
+      type: TYPES.GET_CITIES,
+      payload: data.data, // [{}]
+    });
+  };
+}; 
 
 export const resetStates = () => {
   //DETAILS
