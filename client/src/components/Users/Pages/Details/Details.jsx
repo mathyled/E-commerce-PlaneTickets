@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
-  getOfferDetails,
+  // getOfferDetails,
   resetStates,
 } from "../../../../redux/actions/actions";
 
@@ -37,7 +37,7 @@ export default function Details() {
   console.log(id);
 
   useEffect(() => {
-    dispatch(getOfferDetails(id));
+    // dispatch(getOfferDetails(id));
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 

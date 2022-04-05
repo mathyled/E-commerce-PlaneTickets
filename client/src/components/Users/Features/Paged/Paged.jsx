@@ -9,9 +9,7 @@ const Paged = ({ TicketsPerPage, total, paginate }) => {
     numberPage.push(i);
   }
 
-  const scroll = () => {
-    window.scrollTo(0, 0);
-  };
+
   console.log(total)
   return (
       <Flex 
@@ -26,7 +24,7 @@ const Paged = ({ TicketsPerPage, total, paginate }) => {
        <Button  colorScheme='teal' spacing='6' variant='outline'  boxShadow={'xl'}
             onClick={() => {
               paginate(num);
-              scroll();
+         
             }}>
 
             {num}
