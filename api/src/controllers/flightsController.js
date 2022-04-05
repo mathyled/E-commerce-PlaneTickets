@@ -2,7 +2,7 @@ const amadeus = require("../helpers/amadeus");
 const { flightOffer } = require("../models");
 // const axios = require('axios')
 // const { AVIATION_API_KEY } = process.env;
-const airportsByCities_Cities = require('../AirportsByCities_Cities.json')
+const airportsByCities_Cities = require('./AirportsByCities_Cities.json')
 
 const flightOffers = async (req, res) => {
   try {
