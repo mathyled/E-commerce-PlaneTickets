@@ -96,3 +96,13 @@ export const resetStates = () => {
     payload: {},
   };
 };
+
+export const postFlight = (payload) => {
+  return async (dispatch) => {
+    var res = await axios.post(
+      "http://localhost:3001/api/createFlight",
+      payload
+    );
+    return res;
+  };
+};

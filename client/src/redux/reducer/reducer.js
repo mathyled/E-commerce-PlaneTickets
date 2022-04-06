@@ -134,6 +134,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         search: action.payload,
       };
+    case TYPES.POST_FLIGHT:
+      return {
+        ...state,
+      };
 
     default:
       return { ...state };
