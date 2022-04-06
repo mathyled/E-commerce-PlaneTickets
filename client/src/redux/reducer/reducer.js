@@ -30,8 +30,7 @@ function rootReducer(state = initialState, action) {
 
     case TYPES.SORT_CITIES:
       let sortedData = [];
-      console.log("LE STATES");
-      //console.log(state.city[0].arrival.nameCity);
+
       if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {

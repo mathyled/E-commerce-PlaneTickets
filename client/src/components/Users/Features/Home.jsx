@@ -38,10 +38,10 @@ export default function Home() {
   // useEffect(() => {
   //   // dispatch(getOffers("MAD", "HAV", "2022-04-04", "1"));
   //  console.log(" CITIES", cities);
-  // }, [dispatch]); 
+  // }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getCities())
+    dispatch(getCities());
   }, [dispatch]);
   return (
     <div>
@@ -69,14 +69,15 @@ export default function Home() {
             //       ];
             //   }
             // }
+            console.log(o);
             return (
-              <div key={o._id} >
+              <div key={o._id}>
                 <Card
-                id={o._id}
-                origin={o.departure.nameCity}
-                destination={o.arrival.nameCity}
-                price={o.price}
-                image={o.arrival.image}
+                  id={o._id}
+                  origin={o.departure.nameCity}
+                  destination={o.arrival.nameCity}
+                  price={o.price}
+                  image={o.arrival.image}
                 />
               </div>
             );
