@@ -72,12 +72,11 @@ export default function Home() {
             return (
               <div >
                 <Card
-                // id={o.id}
-
-                // origin={o.nameCity}
-                // destination={o.itineraries[0].segments[0] ? o.itineraries[0].segments[1].arrival.iataCode : o.itineraries[0].segments[0].arrival.iataCode}
-                // price={o.price.total}
-                // image={imagen}
+                id={o._id}
+                origin={o.departure.nameCity}
+                destination={o.arrival.nameCity}
+                price={o.price}
+                image={o.arrival.image}
                 />
               </div>
             );

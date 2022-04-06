@@ -26,12 +26,15 @@ function SearchBar() {
    function handler(e){
 
 var relation = search.filter((city) => city.nameCity.toLowerCase() ===  e.target.value.toLowerCase()  ) 
-    //  return  relation.airport[0].iataCode
-    console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
-    setInput({
-      ...input,
-      airline:relation[0]["airports"][0]["codeIataAirport"]
-    })
+
+    // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
+    if(relation.length > 0){
+
+      setInput({
+        ...input,
+        airline:relation && relation[0]["airports"][0]["codeIataAirport"]
+      })
+    }
 
    }
 
