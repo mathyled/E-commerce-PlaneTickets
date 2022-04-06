@@ -83,7 +83,6 @@ export default function Details() {
                     {`${cityDetailsUsage["price"]} EUR`}
                   </Text>
                 </Box>
-
                 <Stack
                   spacing={{ base: 4, sm: 6 }}
                   direction={"column"}
