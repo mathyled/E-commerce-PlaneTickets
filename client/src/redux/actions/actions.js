@@ -8,17 +8,17 @@ export const changePage = (number) => {
   };
 };
 
-export const sortTickets = (category, price, time, ascending) => {
+export const sortTickets = (to, price, schedule, ascending) => {
   return {
     type: TYPES.SORT_CITIES,
-    payload: { category, price, time, ascending },
+    payload: { to, price, schedule, ascending },
   };
 };
 
-export const filterTickets = (departure, ret, price, time) => {
+export const filterTickets = (to, airline) => {
   return {
     type: TYPES.FILTER_CITIES,
-    payload: { departure, ret, price, time },
+    payload: { to, airline },
   };
 };
 
@@ -63,10 +63,10 @@ export const filterTickets = (departure, ret, price, time) => {
 //     });
 //   };
 // };
-export const getFlights = ({airline, date}) => {
-  console.log(airline,date)
+export const getFlights = ({ airline, date }) => {
+  console.log(airline, date);
   return async (dispatch) => {
-    var {data} = await axios.get(
+    var { data } = await axios.get(
       `http://localhost:3001/api/flights?city=${airline}&date=${date}`
     );
     // console.log("JSON",json)
@@ -75,23 +75,19 @@ export const getFlights = ({airline, date}) => {
       payload: data.data, // [{}]
     });
   };
-}; 
+};
 
 // http://localhost:3001/api/cities
 
-
 export const getCities = () => {
-
   return async (dispatch) => {
-    var {data} = await axios.get(
-      `http://localhost:3001/api/cities`
-    );
+    var { data } = await axios.get(`http://localhost:3001/api/cities`);
     return dispatch({
       type: TYPES.GET_CITIES,
       payload: data.data, // [{}]
     });
   };
-}; 
+};
 
 export const resetStates = () => {
   //DETAILS

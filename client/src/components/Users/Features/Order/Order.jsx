@@ -20,10 +20,10 @@ import { useState, useEffect } from "react";
 
 function Order() {
   const [inputs, setInputs] = useState({
-    category: false,
+    to: false,
     ascending: true,
     price: false,
-    time: false,
+    schedule: false,
   });
 
   const dispatch = useDispatch();
@@ -38,12 +38,12 @@ function Order() {
       <Container textAlign="left" padding="0 65px">
         <Radio
           size="sm"
-          name="category"
+          name="to"
           onChange={(e) => handleRadio(e)}
-          isChecked={inputs.category ? 1 : 0}
+          isChecked={inputs.to ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          Departure
+          To
         </Radio>
       </Container>
 
@@ -61,12 +61,12 @@ function Order() {
       <Container textAlign="left" padding="0 65px">
         <Radio
           size="sm"
-          name="time"
+          name="schedule"
           onChange={(e) => handleRadio(e)}
-          isChecked={inputs.time ? 1 : 0}
+          isChecked={inputs.schedule ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          Return
+          schedule
         </Radio>
       </Container>
       <Container>
@@ -99,9 +99,9 @@ function Order() {
           onClick={() => {
             dispatch(
               sortTickets(
-                inputs.category,
+                inputs.to,
                 inputs.price,
-                inputs.price,
+                inputs.schedule,
                 inputs.ascending
               )
             );
