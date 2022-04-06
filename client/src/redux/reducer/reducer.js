@@ -126,6 +126,10 @@ function rootReducer(state = initialState, action) {
         city: action.payload.data,
         cityBackUp: action.payload.data,
       };
+    case TYPES.POST_FLIGHT:
+      return {
+        ...state,
+      };
 
     default:
       return { ...state };
