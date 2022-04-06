@@ -50,14 +50,14 @@ function SearchBar() {
 
   function handler(e) {
     var relation = search.filter(
-      (city) => city.nameCity.toLowerCase() === e.target.value.toLowerCase()
+      (city) => city.nameCity.toLowerCase().includes( e.target.value.toLowerCase())
     );
 
     // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
     if (relation.length > 0) {
       setInput({
         ...input,
-        airline: relation && relation[0]["airports"][0]["codeIataAirport"],
+        airline: relation && relation[0]["airports"][relation[0]["airports"].length - 1]["codeIataAirport"]
       });
     }
   }
