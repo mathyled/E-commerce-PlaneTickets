@@ -30,13 +30,13 @@ function Filters() {
     <Stack w="100%" spacing="3px">
       <Container>
         <Text align="left" fontSize="sm">
-          destination
+          Destination
         </Text>
         <Input
           value={inputs.to}
           name="to"
           placeholder="to..."
-          type={isFocus ? "date" : "text"}
+          type="text"
           onFocus={(e) => {
             setIsFocus(true);
           }}

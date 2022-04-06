@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
-  // getOfferDetails,
+  getOfferDetails,
   resetStates,
 } from "../../../../redux/actions/actions";
 
@@ -33,15 +33,15 @@ export default function Details() {
   const dispatch = useDispatch();
   const { id } = useParams();
   let cityDetails = useSelector((state) => state.city_details);
-
+  let cityDetailsUsage = cityDetails[0];
   console.log(id);
 
   useEffect(() => {
-    // dispatch(getOfferDetails(id));
+    dispatch(getOfferDetails(id));
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
-
+  console.log(cityDetails);
   return (
     <div>
       {Object.keys(cityDetails).length > 0 ? (
@@ -57,7 +57,7 @@ export default function Details() {
                 <Image
                   rounded={"md"}
                   alt={"product image"}
-                  src={"#"}
+                  src={cityDetailsUsage["arrival"]["image"]}
                   fit={"cover"}
                   align={"center"}
                   w={"100%"}
@@ -71,7 +71,7 @@ export default function Details() {
                     fontWeight={600}
                     fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   >
-                    {cityDetails["nameCity"]}
+                    {cityDetailsUsage["departure"]["nameCity"]}
                   </Heading>
                   <Text
                     color={
@@ -80,7 +80,7 @@ export default function Details() {
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
-                    {`${cityDetails["price"].total} EUR`}
+                    {`${cityDetailsUsage["price"]} EUR`}
                   </Text>
                 </Box>
 
@@ -111,27 +111,21 @@ export default function Details() {
                     <List spacing={6}>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Departure:
+                          Scheduled departure time:
                         </Text>{" "}
-                        {cityDetails.itineraries[0].segments[0].departure.at}
+                        {cityDetailsUsage["departure"]["scheduledTime"]}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
                           Arrival:
                         </Text>{" "}
-                        {cityDetails.itineraries[0].segments[0].arrival.at}
+                        {cityDetailsUsage["arrival"]["nameCity"]}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Duration
+                          Scheduled arrival time
                         </Text>{" "}
-                        {cityDetails.itineraries[0].segments[0].duration}
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Number of stops:
-                        </Text>{" "}
-                        {cityDetails.itineraries[0].segments[0].numberOfStops}
+                        {cityDetailsUsage["departure"]["scheduledTime"]}
                       </ListItem>
                     </List>
                   </Box>

@@ -43,7 +43,7 @@ function Order() {
           isChecked={inputs.to ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          To
+          Destination
         </Radio>
       </Container>
 
@@ -66,7 +66,7 @@ function Order() {
           isChecked={inputs.schedule ? 1 : 0}
           borderColor="#A0AEC0 !important"
         >
-          schedule
+          Departure time
         </Radio>
       </Container>
       <Container>
