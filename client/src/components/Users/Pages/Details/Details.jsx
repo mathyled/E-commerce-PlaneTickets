@@ -41,18 +41,6 @@ export default function Details() {
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
-  // console.log(cityDetails[0].itineraries[0].segments[0].departure.iataCode);
-
-  function getImages(localLettersId) {
-    let imagen;
-
-    for (let i = 0; i < pictures.length; i++) {
-      if (pictures[i].hasOwnProperty(`image${localLettersId}`)) {
-        imagen = pictures[i][`image${localLettersId}`];
-      }
-    }
-    return imagen;
-  }
 
   return (
     <div>
@@ -69,13 +57,7 @@ export default function Details() {
                 <Image
                   rounded={"md"}
                   alt={"product image"}
-                  src={
-                    getImages(
-                      cityDetails.itineraries[0]?.segments[0]?.departure
-                        ?.iataCode
-                    )
-                    //cityDetails[0].itineraries[0].segments[0].departure.iataCode
-                  }
+                  src={"#"}
                   fit={"cover"}
                   align={"center"}
                   w={"100%"}
