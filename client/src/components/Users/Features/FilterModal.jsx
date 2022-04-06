@@ -39,11 +39,11 @@ export default function FilterModal() {
           <DrawerBody>
             <Sidebar>
               <Text fontSize="md" fontWeight="medium" margin="1.5">
-                Filter
+                Filter by
               </Text>
               <Filters />
               <Text fontSize="md" fontWeight="medium" margin="1.5">
-                Order
+                Order by
               </Text>
               <Order />
             </Sidebar>

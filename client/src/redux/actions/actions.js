@@ -50,19 +50,20 @@ export const filterTickets = (to, airline) => {
 //   };
 // };
 
-// export const getOfferDetails = (id) => {
-//   //DETAILS
-//   return async (dispatch) => {
-//     var json = await axios.get(
-//       `http://localhost:3001/api/flights/detailspage/${id}`
-//     );
-//     // console.log("JSON",json)
-//     return dispatch({
-//       type: TYPES.GET_OFFER_DETAILS,
-//       payload: json.data,
-//     });
-//   };
-// };
+export const getOfferDetails = (id) => {
+  //DETAILS
+  return async (dispatch) => {
+    var json = await axios.get(
+      `http://localhost:3001/api/flights/detail/${id}`
+    );
+    // console.log("JSON",json)
+    return dispatch({
+      type: TYPES.GET_OFFER_DETAILS,
+      payload: json.data,
+    });
+  };
+};
+
 export const getFlights = ({ airline, date }) => {
   console.log(airline, date);
   return async (dispatch) => {

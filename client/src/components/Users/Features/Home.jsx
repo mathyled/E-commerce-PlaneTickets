@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getCities())
+    dispatch(getCities());
   }, [dispatch]);
   return (
     <div>

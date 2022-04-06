@@ -22,75 +22,120 @@ function rootReducer(state = initialState, action) {
         city_details: action.payload,
       };
 
-    // case TYPES.GET_OFFER_DETAILS:
-    //   console.log("AA");
-    //   console.log(action.payload.data.offer[0]);
-    //   return {
-    //     ...state,
-    //     city_details: action.payload.data.offer[0],
-    //   };
+    case TYPES.GET_OFFER_DETAILS:
+      return {
+        ...state,
+        city_details: action.payload.data,
+      };
 
     case TYPES.SORT_CITIES:
       let sortedData = [];
+
       if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-              if (a > b) {
+              if (a.arrival.nameCity === undefined) {
                 return 1;
-              } else if (a < b) {
+              }
+              if (b.arrival.nameCity === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
             }))
           : (sortedData = state.city.sort((a, b) => {
-              if (a < b) {
+              if (a.arrival.nameCity === undefined) {
                 return 1;
-              } else if (a > b) {
+              }
+              if (b.arrival.nameCity === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
             }));
       }
       if (action.payload.price === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-              if (parseFloat(a.price.total) > parseFloat(b.price.total)) {
+              if (a.price === undefined) {
                 return 1;
-              } else if (
-                parseFloat(a.price.total) < parseFloat(b.price.total)
-              ) {
+              }
+              if (b.price === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
             }))
           : (sortedData = state.city.sort((a, b) => {
-              if (parseFloat(a.price.total) < parseFloat(b.price.total)) {
+              if (a.price === undefined) {
                 return 1;
-              } else if (
-                parseFloat(a.price.total) > parseFloat(b.price.total)
-              ) {
+              }
+              if (b.price === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
             }));
       }
       if (action.payload.schedule != "") {
         action.payload.ascending
           ? state.city.sort((a, b) => {
-              if (a > b) {
+              if (a.departure.scheduledTime === undefined) {
                 return 1;
-              } else if (a < b) {
+              }
+              if (b.departure.scheduledTime === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.departure.scheduledTimee === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              return a.departure.scheduledTime < b.price.departure.scheduledTime
+                ? -1
+                : 1;
             })
           : state.city.sort((a, b) => {
-              if (a < b) {
+              if (a.departure.scheduledTime === undefined) {
                 return 1;
-              } else if (a > b) {
+              }
+              if (b.departure.scheduledTime === undefined) {
                 return -1;
               }
-              return 0;
+              if (a.departure.scheduledTime === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              return a.departure.scheduledTime > b.price.departure.scheduledTime
+                ? -1
+                : 1;
             });
       }
       return { ...state, city: [...sortedData] };
