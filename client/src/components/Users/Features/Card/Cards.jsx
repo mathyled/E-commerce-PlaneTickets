@@ -15,6 +15,7 @@ export default function Card({ origin, destination, price, image }) {
             }
           />
           <div className={styles.info}>
+            <h1 className={styles.title}>CITY</h1>
             <p className={styles.origin}>Origin: {origin} </p>
             <p className={styles.destination}>Destinacion: {destination}</p>
             <p className={styles.price}>Price: {price}</p>

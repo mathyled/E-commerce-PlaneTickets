@@ -83,7 +83,7 @@
 .info {
   position: relative;
   z-index: 3;
-  color: #fff;
+  color: #ffffff;
   opacity: 0;
   border-radius: 20px;
   transform: translateY(30px);
@@ -95,7 +95,7 @@
   transform: translateY(30px);
 }
 .title {
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: 600;
   font-size: 1.4rem;
   margin-bottom: 0px;

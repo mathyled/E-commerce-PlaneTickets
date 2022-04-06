@@ -34,7 +34,14 @@ export default function Card({ origin, destination, price, image }) {
         padding={4}
       >
         <Flex flex={1} bg="blue.200">
-          <Image objectFit="cover" boxSize="100%" src={image} />
+          <Image
+            objectFit="cover"
+            boxSize="100%"
+            src={
+              "https://mlrhpz8jmuut.i.optimole.com/BDSiYJw-E9IGbX2x/w:710/h:473/q:85/https://www.egypttoursplus.com/wp-content/uploads/2019/04/Lugares-turisticos-de-Egipto.jpeg"
+            }
+          />
+          ()
         </Flex>
         <Stack
           flex={1}
@@ -47,32 +54,31 @@ export default function Card({ origin, destination, price, image }) {
           <Heading fontSize={"2xl"} fontFamily={"body"}>
             VENEZUELA
           </Heading>
+
           <Flex
             alignItems="center"
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
             <Icon as={BsFillBriefcaseFill} h={6} w={6} mr={2} />
-
             <chakra.h1 px={2} fontSize="sm">
               {origin}
             </chakra.h1>
           </Flex>
           <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
-            ORINGEN
+            ORINGEN:
           </Text>
           <Flex
             alignItems="center"
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
-
             <chakra.h1 px={2} fontSize="sm">
               {destination}
             </chakra.h1>
             <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
-              DESTINACION
+              <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+              DESTINACION:
             </Text>
           </Flex>
           <Flex

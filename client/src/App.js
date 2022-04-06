@@ -9,7 +9,7 @@ import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage
 import ProtectedRoute from "./ProtectedRoutes";
 import { ResetPasswordPage } from "./components/Users/Features/UserModal/pages/ResetPasswordPage";
 import LandingPage from "./components/Users/Features/Landing/LandingPage";
-import CardContainer from "./components/Users/Features/CardContainer/CardContainer";
+//import CardContainer from "./components/Users/Features/CardContainer/CardContainer";
 
 import Details from "./components/Users/Pages/Details/Details";
 
@@ -30,7 +30,7 @@ function App() {
 
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
 
-        <Route path="/card" element={<CardContainer />} />
+        {/* <Route path="/card" element={<CardContainer />} /> */}
 
         <Route exact path="*" element={<NotfoundPage />} />
       </Routes>

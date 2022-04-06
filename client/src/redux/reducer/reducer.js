@@ -8,12 +8,6 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case TYPES.GET_TICKETS:
-      return {
-        ...state,
-        tickets: action.payload,
-        ticketsBackUp: action.payload,
-      };
     case TYPES.CHANGE_PAGE:
       return {
         ...state,
@@ -21,6 +15,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case TYPES.GET_CITY:
+      console.log(action.payload.data.offer);
       return {
         ...state,
         city: action.payload.data.offer,

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "./Cardss";
+import Card from "../Card/Cards";
 import Paged from "./Paged/Paged";
 import { getCity } from "../../../redux/actions/actions";
 import pictures from "./pictures.json";
@@ -43,6 +43,7 @@ export default function Home() {
     <div>
       <NavBar />
       <CallToAction />
+      <Card />
       <Paged
         TicketsPerPage={TicketsPerPage}
         total={cities.length}

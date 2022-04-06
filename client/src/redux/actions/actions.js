@@ -27,7 +27,8 @@ export const getCity = (city) => {
     var json = await axios.get(
       `http://localhost:3001/api/flights/inspiration?origin=${city}`
     );
-    // console.log("JSON",json)
+    //console.log("JSON", json);
+
     return dispatch({
       type: TYPES.GET_CITY,
       payload: json.data,

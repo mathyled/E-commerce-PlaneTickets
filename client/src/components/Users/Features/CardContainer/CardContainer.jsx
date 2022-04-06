@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCity } from "../../../redux/actions/actions";
-import Card from "./Features/Card/Card";
+import { getCity } from "../../../../redux/actions/actions";
+import Card from "../Card/Cards";
 import imagenes from "./imagenes.json";
 function CardContainer() {
   const city = useSelector((state) => state.city);
   const dispatch = useDispatch();
-  console.log("CITY", city.offer);
+  //console.log("CITY", city);
 
   useEffect(() => {
     dispatch(getCity("MAD"));
