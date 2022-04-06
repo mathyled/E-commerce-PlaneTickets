@@ -31,7 +31,6 @@ function SearchBar() {
     const semanaDespues = sumarDias(f, 7);
 
     // console.log(semanaDespues);
-
     const fechaFinal =
       semanaDespues.getFullYear() +
       "-" +
