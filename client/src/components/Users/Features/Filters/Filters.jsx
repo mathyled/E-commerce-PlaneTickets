@@ -17,13 +17,11 @@ import { filterTickets } from "../../../../redux/actions/actions";
 function Filters() {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
-    departure: "",
-    return: "",
-    price: "",
-    time: "",
+    to: "",
+    airline: "",
   });
   const parse = (val) => val.replace(/^\$/, "");
-
+  const [isFocus, setIsFocus] = useState(false);
   function handleInput(e) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   }
@@ -32,91 +30,53 @@ function Filters() {
     <Stack w="100%" spacing="3px">
       <Container>
         <Text align="left" fontSize="sm">
-          Departure
+          destination
         </Text>
         <Input
-          value={inputs.from}
-          name="departure"
-          type="date"
+          value={inputs.to}
+          name="to"
+          placeholder="to..."
+          type={isFocus ? "date" : "text"}
+          onFocus={(e) => {
+            setIsFocus(true);
+          }}
+          onBlur={() => {
+            setIsFocus(false);
+          }}
           onChange={(e) => handleInput(e)}
           _hover={{ borderColor: "teal.400" }}
           size="sm"
           borderColor="teal.200"
           focusBorderColor="teal.600"
           variant="outline"
-          placeholder="From"
         />
       </Container>
 
       <Container>
         <Text align="left" fontSize="sm">
-          Return
+          Airline
         </Text>
         <Input
-          name="return"
-          value={inputs.to}
+          name="airline"
+          value={inputs.airline}
           onChange={(e) => {
             handleInput(e);
           }}
-          type="date"
+          type="text"
           _hover={{ borderColor: "teal.400" }}
           size="sm"
           borderColor="teal.200"
           focusBorderColor="teal.600"
-          placeholder="To"
+          placeholder="insert airline..."
         />
       </Container>
-      <Container display="inline-block" textAlign="left">
-        <Text align="left" fontSize="sm">
-          Price
-        </Text>
-        <InputGroup size="sm">
-          <InputLeftAddon children="$" textAlign="right" />
-          <NumberInput
-            onChange={(priceString) =>
-              setInputs({ ...inputs, price: parse(priceString) })
-            }
-            value={inputs.price}
-            min={0}
-            width="100%"
-            _hover={{ borderColor: "teal.400" }}
-            size="sm"
-            borderColor="teal.200"
-            focusBorderColor="teal.600"
-            placeholder="Price"
-          >
-            <NumberInputField />
-          </NumberInput>
-        </InputGroup>
-      </Container>
-      <Container>
-        <Text align="left" fontSize="sm">
-          Time
-        </Text>
-        <Input
-          type="time"
-          name="time"
-          onChange={(e) => handleInput(e)}
-          _hover={{ borderColor: "teal.400" }}
-          size="sm"
-          value={inputs.time}
-          borderColor="teal.200"
-          focusBorderColor="teal.600"
-        />
-      </Container>
+
       <Container>
         <Button
           colorScheme="teal"
           size="xs"
           onClick={() => {
-            dispatch(
-              filterTickets(
-                inputs.departure,
-                inputs.return,
-                inputs.price,
-                inputs.time
-              )
-            );
+            dispatch(filterTickets(inputs.to, inputs.airline));
           }}
         >
           Filter

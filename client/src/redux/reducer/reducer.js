@@ -4,7 +4,7 @@ const initialState = {
   city: [],
   city_details: {},
   cityBackUp: [],
-  search:[]
+  search: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -32,7 +32,7 @@ function rootReducer(state = initialState, action) {
 
     case TYPES.SORT_CITIES:
       let sortedData = [];
-      if (action.payload.category === true) {
+      if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
               if (a > b) {
@@ -74,7 +74,7 @@ function rootReducer(state = initialState, action) {
               return 0;
             }));
       }
-      if (action.payload.time != "") {
+      if (action.payload.schedule != "") {
         action.payload.ascending
           ? state.city.sort((a, b) => {
               if (a > b) {
@@ -99,19 +99,15 @@ function rootReducer(state = initialState, action) {
         // EL PROBLEMA ESTA ACA
 
         state.city = state.city.filter(
-          (fly) => fly.departureDate === action.payload.departure
+          (fly) => fly.departureDate === action.payload.to
         );
       }
       if (action.payload.ret !== "") {
         state.city = state.city.filter(
-          (fly) => fly.returnDate === action.payload.ret
+          (fly) => fly.returnDate === action.payload.airline
         );
       }
-      if (action.payload.price !== "") {
-        state.city = state.city.filter((fly) => {
-          return fly.price.total === action.payload.price;
-        });
-      }
+
       /*
       if (action.payload.time !== "") {
         state.city = state.city.filter(
@@ -129,15 +125,15 @@ function rootReducer(state = initialState, action) {
     case TYPES.GET_FLIGHTS:
       return {
         ...state,
-         city: action.payload,
-         cityBackUp: action.payload,
-      }
+        city: action.payload,
+        cityBackUp: action.payload,
+      };
 
-      case TYPES.GET_CITIES:
-        return{
-          ...state,
-          search:  action.payload,
-        }
+    case TYPES.GET_CITIES:
+      return {
+        ...state,
+        search: action.payload,
+      };
 
     default:
       return { ...state };
