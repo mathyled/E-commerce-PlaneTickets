@@ -33,7 +33,7 @@ const getCities = () => {
     return citiesData
 };
 
-    // Le agregamos las imagenes
+// Le agregamos las imagenes
 
 const completeCities = () => {
     let citiesData = getCities();
