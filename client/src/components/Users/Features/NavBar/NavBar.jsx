@@ -66,7 +66,7 @@ function NavBar() {
                 About
               </Link>
 
-              {!currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
+              {currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
 
               <FilterModal />
 
