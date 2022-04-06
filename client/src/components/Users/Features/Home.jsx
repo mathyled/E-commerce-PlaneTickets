@@ -70,7 +70,7 @@ export default function Home() {
             //   }
             // }
             return (
-              <div >
+              <div key={o._id} >
                 <Card
                 id={o._id}
                 origin={o.departure.nameCity}
