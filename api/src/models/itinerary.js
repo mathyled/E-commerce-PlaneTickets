@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CreateFlightScheme = new mongoose.Schema(
+const ItineraryScheme = new mongoose.Schema(
   {
     origin: {
       type: String,
@@ -23,4 +23,4 @@ const CreateFlightScheme = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("createFlight", CreateFlightScheme);
+module.exports = mongoose.model("itinerary", ItineraryScheme);
