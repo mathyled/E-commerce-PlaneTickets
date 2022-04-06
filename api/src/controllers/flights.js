@@ -1,12 +1,13 @@
 const axios = require("axios");
 const models = require("./models/index");
 const { flightsDb } = require("../models");
+const { AVIATION_API_KEY } = process.env;
 
 const getFlights = async (req, res) => {
     try {
         const { city, date } = req.query;
         let citiesData = models.completeCities();
-        let flightsApi = await axios.get(`https://aviation-edge.com/v2/public/flightsFuture?key=d92357-cb8e74&type=departure&iataCode=${city}&date=${date}`); // Cambiar a la variable
+        let flightsApi = await axios.get(`https://aviation-edge.com/v2/public/flightsFuture?key=${AVIATION_API_KEY}&type=departure&iataCode=${city}&date=${date}`); // Cambiar a la variable
         let flights = flightsApi.data;
     
         for(let i = 0; i < flights.length; i++) {
