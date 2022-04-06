@@ -9,6 +9,8 @@ import { ResetPasswordPage } from "./components/Users/Features/UserModal/pages/R
 import LandingPage from "./components/Users/Features/Landing/LandingPage";
 import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
+import CartPage from "./components/Users/Pages/CartPage/CartPage";
+
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
 
         <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="/cart" element={< CartPage />} /> 
+      
       </Routes>
     </div>
   );

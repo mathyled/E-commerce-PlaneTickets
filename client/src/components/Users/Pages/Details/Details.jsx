@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
-  getOfferDetails,
+  // getOfferDetails,
   resetStates,
 } from "../../../../redux/actions/actions";
 
@@ -37,22 +37,10 @@ export default function Details() {
   console.log(id);
 
   useEffect(() => {
-    dispatch(getOfferDetails(id));
+    // dispatch(getOfferDetails(id));
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
-  // console.log(cityDetails[0].itineraries[0].segments[0].departure.iataCode);
-
-  function getImages(localLettersId) {
-    let imagen;
-
-    for (let i = 0; i < pictures.length; i++) {
-      if (pictures[i].hasOwnProperty(`image${localLettersId}`)) {
-        imagen = pictures[i][`image${localLettersId}`];
-      }
-    }
-    return imagen;
-  }
 
   return (
     <div>
@@ -69,13 +57,7 @@ export default function Details() {
                 <Image
                   rounded={"md"}
                   alt={"product image"}
-                  src={
-                    getImages(
-                      cityDetails.itineraries[0]?.segments[0]?.departure
-                        ?.iataCode
-                    )
-                    //cityDetails[0].itineraries[0].segments[0].departure.iataCode
-                  }
+                  src={"#"}
                   fit={"cover"}
                   align={"center"}
                   w={"100%"}

@@ -1,26 +1,10 @@
 const amadeus = require("../helpers/amadeus");
 const { flightOffer } = require("../models");
-// const axios = require('axios')
-// const { AVIATION_API_KEY } = process.env;
-const airportsByCities_Cities = require('../AirportsByCities_Cities.json')
+const airportsByCities_Cities = require('./AirportsByCities_Cities.json')
 
 const flightOffers = async (req, res) => {
   try {
     const { origin, destination, departureDate, adults } = req.query;
-//cities Api
-//     const cities = await axios.get(
-//       `https://aviation-edge.com/v2/public/cityDatabase?key=${AVIATION_API_KEY}`
-//     );
-//     const citiesDb = cities.data;
-//     // console.log(citiesDb.length);
-//     const citiesDbData = citiesDb.map((city) => {
-//       return {
-//         nameCity: city.nameCity,
-//         codeIataCity: city.codeIataCity,
-//       };
-//     });
-// console.log(citiesDbData)
-
 
     //Airports
     
@@ -52,10 +36,6 @@ const flightOffers = async (req, res) => {
       };
     };
 
-    // console.log(citiesData)
-    // console.log(citiesData[0]["airports"][0]["codeIataAirport"])
-
-
     //offers
     const offer = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: origin,
@@ -72,10 +52,6 @@ const flightOffers = async (req, res) => {
       };
     });
 
-    // const bue = flights.filter(e => e["itineraries"][0]["segments"][0]["departure"]["iataCode"] === "BUE")
-    // const bue2 = citiesData.filter(e => e["airports"][0]["codeIataAirport"] === "BUE")
-    // console.log(bue)
-    // console.log(bue2)
     for(let i = 0; i < flights.length; i++) {
       for(let j = 0; j < citiesData.length; j++) {
         if(citiesData[j]["airports"].length > 0){
@@ -87,9 +63,6 @@ const flightOffers = async (req, res) => {
         };
       };
     };
-
-    // console.log(flights)
-
 
     if(flightOffer.length > 0) {
       await flightOffer.deleteMany({});

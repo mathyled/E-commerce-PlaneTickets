@@ -17,19 +17,20 @@ import Navlink from "../UserModal/components/Navlink";
 import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
-import { getOffers } from "../../../../redux/actions/actions";
+// import { getOffers } from "../../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import UserMenu from "../UserMenu";
+import Cart from "../Cart";
 
 function NavBar() {
 
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
-  async function handlerLogOut(e){
-      e.preventDefault();
-      // handle logout
-      logout()
+  async function handlerLogOut(e) {
+    e.preventDefault();
+    // handle logout
+    logout()
   };
 
   return (
@@ -42,7 +43,7 @@ function NavBar() {
               <Navlink
                 to="/home"
                 name="Heading North"
-                onClick={() => dispatch(getOffers("MAD"))}
+                // onClick={() => dispatch(getOffers("MAD"))}
               />
             </Box>
 
@@ -64,8 +65,8 @@ function NavBar() {
                 {" "}
                 About
               </Link>
-        
-              {!currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
+
+              {currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
 
               <FilterModal />
 
@@ -84,7 +85,7 @@ function NavBar() {
 
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName}  />}
+            {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName} />}
             {/* {currentUser && < Navlink
               to="/logout"
               name="Logout"
@@ -94,7 +95,18 @@ function NavBar() {
                 logout()
               }}
             />} */}
-
+            <Link
+              px={2}
+              py={1}
+              rounded={"md"}
+              _hover={{
+                textDecoration: "none",
+                bg: useColorModeValue("gray.200", "gray.700"),
+              }}
+              href={"/cart"}
+            >
+              <Cart />
+            </Link>
             <IconButton
               variant="outline"
               icon={useColorModeValue(<FaSun />, <FaMoon />)}

@@ -1,11 +1,8 @@
 const express = require("express");
+const { getFlights, getFlightDetail } = require("../controllers/flights");
 const router = express.Router();
-const {
-  flightOffers,
-  getOfferDetail,
-} = require("../controllers/flightsController");
 
-router.get("/", flightOffers); // test http://localhost:3001/api/flights?origin=SYD&destination=BKK&departureDate=2022-04-04&adults=2
-router.get("/detailspage/:id", getOfferDetail); // test localhost:3001/api/flights/inspiration?origin=MAD
+router.get("/", getFlights); // ej: http://localhost:3001/api/flights?city=AEP&date=2022-04-15
+router.get("/detail/:id", getFlightDetail);
 
 module.exports = router;

@@ -9,6 +9,7 @@ import {
   Input,
   Stack,
   useToast,
+  Container,
 } from '@chakra-ui/react'
 import React,{useState} from 'react'
 // import { useNavigate } from 'react-router-dom'
@@ -24,6 +25,8 @@ const {forgotPassword} = useAuth()
 const toast = useToast()
   return (
     <Layout>
+      <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
+
        <Card maxW='md' mx='auto' mt={4}>
 
       <Heading textAlign='center' my={12}>
@@ -53,7 +56,7 @@ const toast = useToast()
               })
             })
           }}
-        >
+          >
           <Stack spacing='6'>
             <FormControl id='email'>
               <FormLabel>Email address</FormLabel>
@@ -73,6 +76,7 @@ const toast = useToast()
         {/* </Center> */}
       </Card>
        </Card>
+          </Container>
     </Layout>
   )
 }

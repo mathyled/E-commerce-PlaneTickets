@@ -4,17 +4,17 @@ const initialState = {
   city: [],
   city_details: {},
   cityBackUp: [],
-  actualPage: 1,
+  search: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case TYPES.GET_OFFERS:
-      return {
-        ...state,
-        city: action.payload.data,
-        cityBackUp: action.payload.data,
-      };
+    // case TYPES.GET_OFFERS:
+    //   return {
+    //     ...state,
+    //     city: action.payload.data,
+    //     cityBackUp: action.payload.data,
+    //   };
 
     case TYPES.RESET_STATES:
       return {
@@ -22,17 +22,17 @@ function rootReducer(state = initialState, action) {
         city_details: action.payload,
       };
 
-    case TYPES.GET_OFFER_DETAILS:
-      console.log("AA");
-      console.log(action.payload.data.offer[0]);
-      return {
-        ...state,
-        city_details: action.payload.data.offer[0],
-      };
+    // case TYPES.GET_OFFER_DETAILS:
+    //   console.log("AA");
+    //   console.log(action.payload.data.offer[0]);
+    //   return {
+    //     ...state,
+    //     city_details: action.payload.data.offer[0],
+    //   };
 
     case TYPES.SORT_CITIES:
       let sortedData = [];
-      if (action.payload.category === true) {
+      if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
               if (a > b) {
@@ -74,7 +74,7 @@ function rootReducer(state = initialState, action) {
               return 0;
             }));
       }
-      if (action.payload.time != "") {
+      if (action.payload.schedule != "") {
         action.payload.ascending
           ? state.city.sort((a, b) => {
               if (a > b) {
@@ -99,19 +99,15 @@ function rootReducer(state = initialState, action) {
         // EL PROBLEMA ESTA ACA
 
         state.city = state.city.filter(
-          (fly) => fly.departureDate === action.payload.departure
+          (fly) => fly.departureDate === action.payload.to
         );
       }
       if (action.payload.ret !== "") {
         state.city = state.city.filter(
-          (fly) => fly.returnDate === action.payload.ret
+          (fly) => fly.returnDate === action.payload.airline
         );
       }
-      if (action.payload.price !== "") {
-        state.city = state.city.filter((fly) => {
-          return fly.price.total === action.payload.price;
-        });
-      }
+
       /*
       if (action.payload.time !== "") {
         state.city = state.city.filter(
@@ -120,11 +116,23 @@ function rootReducer(state = initialState, action) {
       }*/
       return { ...state };
 
+    // case TYPES.GET_CITIES:
+    //   return {
+    //     ...state,
+    //     city: action.payload.data,
+    //     cityBackUp: action.payload.data,
+    //   };
+    case TYPES.GET_FLIGHTS:
+      return {
+        ...state,
+        city: action.payload,
+        cityBackUp: action.payload,
+      };
+
     case TYPES.GET_CITIES:
       return {
         ...state,
-        city: action.payload.data,
-        cityBackUp: action.payload.data,
+        search: action.payload,
       };
     case TYPES.POST_FLIGHT:
       return {
