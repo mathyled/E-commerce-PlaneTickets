@@ -1,18 +1,15 @@
 import {
   Box,
-  HStack,
-  Icon,
   Image,
-  Link,
   Stack,
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react'
 import * as React from 'react'
-import { FiGift } from 'react-icons/fi'
+
 
 export const CartProductMeta = (props) => {
-  const { isGiftWrapping = true, image, name, description } = props
+  const {   origin, destination,image } = props
   return (
     <Stack direction="row" spacing="5" width="full">
       <Image
@@ -21,25 +18,25 @@ export const CartProductMeta = (props) => {
         height="120px"
         fit="cover"
         src={image}
-        alt={name}
+        alt={origin}
         draggable="false"
         loading="lazy"
       />
       <Box pt="4">
         <Stack spacing="0.5">
-          <Text fontWeight="medium">{name}</Text>
+          <Text fontWeight="medium">{origin}</Text>
           <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
-            {description}
+            {destination}
           </Text>
         </Stack>
-        {isGiftWrapping && (
+        {/* {isGiftWrapping && (
           <HStack spacing="1" mt="3" color={mode('gray.600', 'gray.400')}>
-            {/* <Icon as={FiGift} boxSize="4" /> */}
-            {/* <Link fontSize="sm" textDecoration="underline">
+            <Icon as={FiGift} boxSize="4" />
+            <Link fontSize="sm" textDecoration="underline">
               Add gift wrapping
-            </Link> */}
+            </Link>
           </HStack>
-        )}
+        )} */}
       </Box>
     </Stack>
   )
