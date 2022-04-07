@@ -11,15 +11,16 @@ import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
 import Demo from "./components/Users/Features/Autocomplete";
-
+import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/new-flight" element={<CreateForm />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/my-plans" element={<MyPlans />} />
+        <Route path="/new-flight" element={<CreateForm />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route exact path="/detailspage:id" element={<Details />}></Route>
 
@@ -29,10 +30,9 @@ function App() {
 
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
 
-        <Route exact path="*" element={<NotfoundPage />} /> 
-        <Route exact path="/cart" element={< CartPage />} /> 
-        <Route exact path="/demo" element={< Demo />} /> 
-      
+        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="/cart" element={<CartPage />} />
+        <Route exact path="/demo" element={<Demo />} />
       </Routes>
     </div>
   );
