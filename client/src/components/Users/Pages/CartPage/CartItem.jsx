@@ -21,15 +21,23 @@ const QuantitySelect = (props) => {
 
 export const CartItem = (props) => {
   const {
-    isGiftWrapping,
+    // isGiftWrapping,
     name,
     description,
     quantity,
-    imageUrl,
+  
     currency,
-    price,
+  
     onChangeQuantity,
     onClickDelete,
+    id,
+     origin,
+      destination,
+       price,
+       arrival,
+        image, 
+        departureTime,
+        departure
   } = props
   return (
     <Flex
@@ -41,10 +49,10 @@ export const CartItem = (props) => {
       align="center"
     >
       <CartProductMeta
-        name={name}
-        description={description}
-        image={imageUrl}
-        isGiftWrapping={isGiftWrapping}
+        origin={departure.nameCity}
+        destination={arrival.nameCity}
+        image={departure.image}
+        // isGiftWrapping={isGiftWrapping}
       />
 
       {/* Desktop */}
@@ -59,7 +67,7 @@ export const CartItem = (props) => {
         <QuantitySelect
           value={quantity}
           onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
+            onChangeQuantity?.(e.currentTarget.value)
           }}
         />
         <PriceTag price={price} currency={currency} />
@@ -83,7 +91,7 @@ export const CartItem = (props) => {
         <QuantitySelect
           value={quantity}
           onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
+            onChangeQuantity?.(e.currentTarget.value)
           }}
         />
         <PriceTag price={price} currency={currency} />

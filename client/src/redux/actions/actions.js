@@ -107,3 +107,41 @@ export const postFlight = (payload) => {
     return res;
   };
 };
+
+
+
+/////////////////ACTIONS CART ////////////////////////////////////
+
+
+export const addToCart = (id) => {
+  return {
+    type: TYPES.ADD_TO_CART,
+    payload: id
+  };
+};
+export const removeFromCart = (id) => {
+  return {
+    type: TYPES.REMOVE_FROM_CART,
+    payload: id
+  };
+};
+export const addQuatity = (id,value) => {
+  return {
+    type: TYPES.ADD_QUANTITY,
+    id: id,
+    quantity:value
+  };
+};
+export const addCart = () => {
+  return {
+    type: TYPES.RESET_STATES,
+    payload: {},
+  };
+};
+
+export const loadCurrentItem = (item) => {
+  return {
+    type: TYPES.LOAD_CURRENT_ITEM,
+    payload: item
+  };
+};

@@ -9,6 +9,7 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
 
 
 import { Layout } from '../../Features/UserModal/components/Layout'
@@ -16,10 +17,10 @@ import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
 import { cartData } from './_data'
 
-const CartPage = () => (
-<>
-
-
+const CartPage = ()=>{
+  const products = useSelector(state=> state.products)
+  return(
+  <>
   <Box
     bg={useColorModeValue("white", "gray.800")}
        shadow="xl"
@@ -64,7 +65,7 @@ const CartPage = () => (
         </Heading>
 
         <Stack spacing="6">
-          {cartData.map((item) => (
+          {products.map((item) => (
             <CartItem key={item.id} {...item} />
             ))}
         </Stack>
@@ -81,6 +82,7 @@ const CartPage = () => (
   </Box>
           
             </>
-)
+
+)}
 
 export default CartPage;
