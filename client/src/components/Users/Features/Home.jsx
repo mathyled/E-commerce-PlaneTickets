@@ -36,7 +36,7 @@ export default function Home() {
     <div>
       <NavBar />
       <CallToAction />
-      {cities.hasOwnProperty(cities.departure) ?
+      {/* {cities.hasOwnProperty(cities.departure) ? */}
         <div>
           <Paged
             TicketsPerPage={TicketsPerPage}
@@ -55,13 +55,14 @@ export default function Home() {
                       destination={o.arrival.nameCity}
                       price={o.price}
                       image={o.arrival.image}
+                      departureTime={o.departure.scheduledTime}
                     />
                   </div>
                 );
               })}
           </SimpleGrid>
         </div>
-        :
+        {/* :
         cities.departure && // fix it 
         toast({
           description: 'Do not Tickets for this Date',
@@ -69,7 +70,7 @@ export default function Home() {
           duration: 5000,
           isClosable: true,
         })
-      }
+      } */}
     </div>
   );
 }
