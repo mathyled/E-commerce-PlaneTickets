@@ -51,7 +51,7 @@ export const CartItem = (props) => {
       <CartProductMeta
         origin={departure.nameCity}
         destination={arrival.nameCity}
-        image={departure.image}
+        image={arrival.image}
         // isGiftWrapping={isGiftWrapping}
       />
 
@@ -71,7 +71,9 @@ export const CartItem = (props) => {
           }}
         />
         <PriceTag price={price} currency={currency} />
-        <CloseButton aria-label={`Delete ${name} from cart`} onClick={onClickDelete} />
+        <CloseButton
+        //  aria-label={`Delete ${name} from cart`}
+         onClick={onClickDelete} />
       </Flex>
 
       {/* Mobile */}

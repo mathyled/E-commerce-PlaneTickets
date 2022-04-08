@@ -36,6 +36,14 @@ export function LoginForm() {
     });
   };
 
+ async function hanldlerSignIn(){
+   try{
+     const user = await signInWithGoogle()
+        console.log(user)
+   }catch(error) {
+     console.log(error)
+   }
+  };
   return (
 
     <>
@@ -113,7 +121,7 @@ export function LoginForm() {
         isFullWidth
         colorScheme='red'
         leftIcon={<FaGoogle />}
-        onClick={() =>signInWithGoogle().then(user => console.log(user)).cath(error=> console.log(error))}
+        onClick={hanldlerSignIn}
       >
         Sign in with Google
       </Button>

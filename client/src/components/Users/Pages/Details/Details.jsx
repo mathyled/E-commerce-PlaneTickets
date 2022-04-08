@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  addToCart,
   getOfferDetails,
   resetStates,
 } from "../../../../redux/actions/actions";
@@ -32,6 +33,7 @@ import pictures from "../../Features/pictures.json";
 export default function Details() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  // const addCart = useSelector(state=> state.cart)
   let cityDetails = useSelector((state) => state.city_details);
   let cityDetailsUsage = cityDetails[0];
   console.log(id);
@@ -143,6 +145,7 @@ export default function Details() {
                     transform: "translateY(2px)",
                     boxShadow: "lg",
                   }}
+                  onClick={()=> dispatch(addToCart(id))}
                 >
                   Add to cart
                 </Button>

@@ -1,39 +1,15 @@
 import { TYPES } from "../actions/types";
-
+import data from "./data.json"
 const initialState = {
   city: [],
   city_details: {},
   cityBackUp: [],
   search: [],
-  products: [ {
-    "_id": "624e4eea4c930e75e9452693",
- 
-    "departure": {
-      "iataCode": "aep",
-      "icaoCode": "sabe",
-      "scheduledTime": "04:50",
-      "nameCity": "Buenos Aires",
-      "image": "https://www.lugaresturisticos.pro/wp-content/uploads/2019/06/image2-1024x790.png"
-    },
-    "arrival": {
-      "iataCode": "juj",
-      "scheduledTime": "07:05",
-      "nameCity": "Jujuy",
-      "image": "https://www.lugaresturisticos.pro/wp-content/uploads/2019/06/image2-1024x790.png"
-    },
-
-  
-    "codeshared": {
-      "airline": {
-        "name": "aerolineas argentinas (retro livery)",
-      },
-
-    },
-    "price": 372,
-  
-  }],
-  cart: [],
+  ///CART ///////////
+  products:[], // { id, origin, destination, price, image, departureTime }
+  cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
+ 
 };
 
 function rootReducer(state = initialState, action) {
@@ -204,13 +180,45 @@ function rootReducer(state = initialState, action) {
     //// CART ////////////
 
     case TYPES.ADD_TO_CART:
-      return {}
-      case TYPES.REMOVE_FROM_CART:
-        return {}
-    case TYPES.ADD_QUANTITY:
-      return {}
-    case TYPES.LOAD_CURRENT_ITEM:
-      return {}
+     
+      var newItem = state.city_details.find(prod =>
+         prod.id === action.payload.id)
+         console.log("ADD_TO_CART",newItem)
+         // Check if item is in the cart already
+      var inCart = false
+     if(state.cart.length > 0 ){
+
+        inCart = state.cart.some(item =>
+          item.id === newItem.id )
+          console.log( "INCART",inCart)
+     } 
+      return {
+        ...state,
+        cart: inCart
+         ? state.cart.map(item => item.id === action.payload.id
+         ?{ ...item, quantity: item.quantity + 1 } 
+         : item) 
+         
+         : [...state.cart, { ...newItem, quantity: 1 }] // [{manzana:3},{perro:1}]
+      }
+    // case TYPES.REMOVE_FROM_CART:
+    //   return {
+    //     ...state,
+    //     cart: state.cart.filter(item=> item.id !== action.payload.id)
+    //   }
+    // case TYPES.ADD_QUANTITY:
+    //   return {
+    //     ...state,
+    //     cart: state.cart.map(item.id === action.payload.id 
+    //       ? {...item, quantity: action.payload.id}
+    //       :item
+    //       )
+    //   }
+    // case TYPES.LOAD_CURRENT_ITEM:
+    //   return {
+    //     ...state,
+    //     currentItem: action.payload
+    //   }
     default:
       return { ...state };
   }
