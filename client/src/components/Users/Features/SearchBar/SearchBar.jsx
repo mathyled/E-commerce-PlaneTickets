@@ -49,10 +49,10 @@ function SearchBar() {
   }
 
   function handler(e) {
+    var arr = e.target.value.split(",");
     var relation = search.filter(
-      (city) => city.nameCity.toLowerCase().includes( e.target.value.toLowerCase())
+      (city) => city.nameCity.toLowerCase().includes(arr[0].toLowerCase()) && city.nameCountry.toLowerCase().includes(arr[1].replace(" ", "").toLowerCase())
     );
-
     // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
     if (relation.length > 0) {
       setInput({
@@ -75,8 +75,12 @@ function SearchBar() {
             name="airline"
             variant="flushed"
             placeholder="Search a origin..."
+            list="cities"
             onChange={(e) => handler(e)}
           />
+          <datalist id="cities">
+            {search.map(e => <option>{e.nameCity}, {e.nameCountry}</option>)}
+          </datalist>
           <Input
             width={200}
             bg="white"
