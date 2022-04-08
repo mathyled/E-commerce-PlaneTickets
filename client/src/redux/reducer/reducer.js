@@ -4,12 +4,11 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
-  
+
   ///CART ///////////
-  products:[], // { id, origin, destination, price, image, departureTime }
+  products: [], // { id, origin, destination, price, image, departureTime }
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
- 
 };
 
 function rootReducer(state = initialState, action) {
@@ -188,26 +187,28 @@ function rootReducer(state = initialState, action) {
     //// CART ////////////
 
     case TYPES.ADD_TO_CART:
-      var newItem = state.city_details.find(prod =>
-         prod.id === action.payload.id)
-         console.log("ADD_TO_CART",newItem)
-         // Check if item is in the cart already
-      var inCart = false
-     if(state.cart.length > 0 ){
-
-        inCart = state.cart.some(item =>
-          item.id === newItem.id )
-          console.log( "INCART",inCart)
-     } 
+      var newItem = state.city_details.find(
+        (prod) => prod.id === action.payload.id
+      );
+      console.log("ADD_TO_CART", newItem);
+      // Check if item is in the cart already
+      var inCart = false;
+      if (state.cart.length > 0) {
+        inCart = state.cart.some((item) => {
+          return item._id === newItem._id;
+        });
+      }
+      console.log("INCART", inCart);
       return {
         ...state,
         cart: inCart
-         ? state.cart.map(item => item.id === action.payload.id
-         ?{ ...item, quantity: item.quantity + 1 } 
-         : item) 
-         
-         : [...state.cart, { ...newItem, quantity: 1 }] // [{manzana:3},{perro:1}]
-      }
+          ? state.cart.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            )
+          : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
+      };
     // case TYPES.REMOVE_FROM_CART:
     //   return {
     //     ...state,
@@ -216,7 +217,7 @@ function rootReducer(state = initialState, action) {
     // case TYPES.ADD_QUANTITY:
     //   return {
     //     ...state,
-    //     cart: state.cart.map(item.id === action.payload.id 
+    //     cart: state.cart.map(item.id === action.payload.id
     //       ? {...item, quantity: action.payload.id}
     //       :item
     //       )
