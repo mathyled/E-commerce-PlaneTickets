@@ -28,7 +28,7 @@ function SearchBar() {
 
     // console.log(f);
 
-    const semanaDespues = sumarDias(f, 7);
+    const semanaDespues = sumarDias(f, 9);
 
     // console.log(semanaDespues);
     const fechaFinal =
