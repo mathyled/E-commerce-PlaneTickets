@@ -72,7 +72,7 @@ function Card({ id, origin, destination, price, image, departureTime,airline }) 
             <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-             {airline}
+             {airline || "Not airline information"}
             </chakra.h1>
           </Flex>
 
