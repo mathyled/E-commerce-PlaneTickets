@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import Paged from "./Paged/Paged";
-import { SimpleGrid, useToast } from "@chakra-ui/react";
+import { SimpleGrid} from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
 import { getCities } from "../../../redux/actions/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const cities = useSelector((state) => state.city);
-  const toast = useToast();
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
@@ -70,6 +70,7 @@ export default function Home() {
             })
           )}
         </SimpleGrid>
-
+</div>
+</div>
   );
 }

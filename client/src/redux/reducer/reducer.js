@@ -1,5 +1,4 @@
 import { TYPES } from "../actions/types";
-import data from "./data.json"
 const initialState = {
   city: [],
   city_details: {},
