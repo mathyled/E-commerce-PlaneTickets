@@ -60,6 +60,7 @@ export default function Home() {
                       price={o?.price}
                       image={o?.arrival?.image}
                       departureTime={o?.departure?.scheduledTime}
+                      airline={o?.airline?.name}
 
                     />
                   </div>

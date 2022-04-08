@@ -53,7 +53,7 @@ function NavBar() {
               <Navlink
                 to="/home"
                 name="Heading North"
-                // onClick={() => dispatch(getOffers("MAD"))}
+              //  onClick={() => dispatch()}
               />
             </Box>
 
