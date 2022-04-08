@@ -8,11 +8,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { MdHeadset, MdTimer, MdLocationOn } from "react-icons/md";
-import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
+import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs"; 
+import { GiCommercialAirplane } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { FavouriteButton } from "./FavouriteButton";
 
-function Card({ id, origin, destination, price, image, departureTime }) {
+function Card({ id, origin, destination, price, image, departureTime,airline }) {
   return (
     <div>
       <Flex
@@ -68,10 +69,10 @@ function Card({ id, origin, destination, price, image, departureTime }) {
         />
 
           <Flex alignItems="center" px={6} py={3} bg="gray.900">
-            <Icon as={BsFillBriefcaseFill} h={6} w={6} color="white" />
+            <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-              Heading North
+             {airline}
             </chakra.h1>
           </Flex>
 

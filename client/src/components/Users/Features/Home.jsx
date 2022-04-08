@@ -45,7 +45,7 @@ export default function Home() {
           currentTickets.length === 1 &&
           currentTickets[0]?.departure === undefined &&
           currentTickets[0]?.arrival === undefined ? (
-            <p>no hay vuelos disponibles</p>
+            <p>Not flight avaiable</p>
           ) : (
             currentTickets.map((o) => {
               {
@@ -53,12 +53,14 @@ export default function Home() {
                   o?.arrival?.nameCity !== undefined ? (
                   <div key={o?._id}>
                     <Card
+
                       id={o?._id}
                       origin={o?.departure?.nameCity}
                       destination={o?.arrival?.nameCity}
                       price={o?.price}
                       image={o?.arrival?.image}
                       departureTime={o?.departure?.scheduledTime}
+
                     />
                   </div>
                 ) : (
@@ -68,16 +70,6 @@ export default function Home() {
             })
           )}
         </SimpleGrid>
-      </div>
-      {/* :
-        cities.departure && // fix it 
-        toast({
-          description: 'Do not Tickets for this Date',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-        })
-      } */}
-    </div>
+
   );
 }
