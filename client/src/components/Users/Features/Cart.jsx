@@ -1,6 +1,6 @@
 import { chakra, IconButton } from "@chakra-ui/react";
 import {  AiOutlineShoppingCart } from "react-icons/ai";
-function Cart() {
+function Cart({quantity}) {
     return (
 
         <IconButton
@@ -23,7 +23,7 @@ function Cart() {
                         bg="red.600"
                         rounded="full"
                     >
-                        99
+                      {quantity}
                     </chakra.span>
                 </>
             }

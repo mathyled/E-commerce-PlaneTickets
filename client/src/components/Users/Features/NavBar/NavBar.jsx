@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   HStack,
-  Link,
   IconButton,
   useColorModeValue,
   useColorMode,
@@ -18,12 +17,15 @@ import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext"
 import FilterModal from "../FilterModal";
 // import { getOffers } from "../../../../redux/actions/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
+import { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 
 function NavBar() {
-
+  const[cartCount,setCartCount] = useState(0) 
+  const cart = useSelector(state=> state.cart)
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
@@ -32,6 +34,14 @@ function NavBar() {
     // handle logout
     logout()
   };
+
+  useEffect(()=>{
+    let count = 0;
+    cart.forEach(item=>{
+      count+= item.quantity
+    })
+    setCartCount(count)
+  },[cart,cartCount])
 
   return (
     <>
@@ -53,14 +63,15 @@ function NavBar() {
               display={{ base: "none", md: "flex" }}
             >
               <Link
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                href={"#"}
+                // px={2}
+                // py={1}
+                // rounded={"md"}
+                // _hover={{
+                //   textDecoration: "none",
+                //   bg: useColorModeValue("gray.200", "gray.700"),
+                // }}
+                // href={"#"}
+                to="/about"
               >
                 {" "}
                 About
@@ -95,7 +106,7 @@ function NavBar() {
                 logout()
               }}
             />} */}
-            <Link
+            {/* <Link
               px={2}
               py={1}
               rounded={"md"}
@@ -105,8 +116,12 @@ function NavBar() {
               }}
               href={"/cart"}
             >
-              <Cart />
-            </Link>
+              <Cart  quantity={cartCount}/>
+            </Link> */}
+             <Link to="/cart">
+             <Cart  quantity={cartCount}/>
+             </Link>
+
             <IconButton
               variant="outline"
               icon={useColorModeValue(<FaSun />, <FaMoon />)}

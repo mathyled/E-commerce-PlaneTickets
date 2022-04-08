@@ -132,12 +132,12 @@ export const addQuatity = (id,value) => {
     quantity:value
   };
 };
-export const addCart = () => {
-  return {
-    type: TYPES.RESET_STATES,
-    payload: {},
-  };
-};
+// export const addCart = () => {
+//   return {
+//     type: TYPES.RESET_STATES,
+//     payload: {},
+//   };
+// };
 
 export const loadCurrentItem = (item) => {
   return {

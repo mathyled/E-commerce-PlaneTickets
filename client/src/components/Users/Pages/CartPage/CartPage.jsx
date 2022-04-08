@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Link,
   Stack,
   SimpleGrid,
   useColorModeValue,
@@ -15,10 +14,11 @@ import { useSelector } from 'react-redux'
 import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
-import { cartData } from './_data'
+import { cartData } from './_data';
+import {Link} from "react-router-dom";
 
 const CartPage = ()=>{
-  const products = useSelector(state=> state.products)
+  const cart = useSelector(state=> state.cart)
   return(
   <>
   <Box
@@ -61,11 +61,11 @@ const CartPage = ()=>{
         flex="2"
         >
         <Heading fontSize="2xl" fontWeight="extrabold">
-          Shopping Cart (3 items)
+          Shopping cart (3 items)
         </Heading>
 
         <Stack spacing="6">
-          {products.map((item) => (
+          {cart.map((item) => (
             <CartItem key={item.id} {...item} />
             ))}
         </Stack>
@@ -75,7 +75,7 @@ const CartPage = ()=>{
         <CartOrderSummary />
         <HStack mt="6" fontWeight="semibold">
           <p>or</p>
-          <Link color={useColorModeValue('blue.500', 'blue.200')}   href={"/home"} >Continue searching</Link>
+          <Link  to="/home" >Continue searching</Link>
         </HStack>
       </Flex>
     </Stack>
