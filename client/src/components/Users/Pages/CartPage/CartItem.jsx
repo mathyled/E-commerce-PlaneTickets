@@ -1,8 +1,10 @@
 import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/react'
-import * as React from 'react'
+
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
-
+import { useState } from 'react'
+import {addQuatity, removeFromCart} from "../../../../redux/actions/actions"
+import { useDispatch, useSelector } from 'react-redux'
 const QuantitySelect = (props) => {
   return (
     <Select
@@ -15,30 +17,35 @@ const QuantitySelect = (props) => {
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
     </Select>
   )
 }
 
 export const CartItem = (props) => {
+  const [qtySelect,setQtySelect] =  useState(1)
+  const cart = useSelector(state=> state.cart)
+  const dispatch = useDispatch()
   const {
-    // isGiftWrapping,
-    name,
-    description,
-    quantity,
-  
-    currency,
-  
-    onChangeQuantity,
-    onClickDelete,
-    id,
-     origin,
-      destination,
+    _id,
        price,
        arrival,
-        image, 
-        departureTime,
         departure
   } = props
+
+  function onChangeQuantity(e) {
+    setQtySelect(
+      [e.target.name] = e.target.value
+    )
+    dispatch(addQuatity(price* e.target.value))
+  }
+  console.log("ID]",_id)
+
+  function onClickDelete(e) {
+    e.preventDefault()
+    dispatch(removeFromCart(_id))
+  }
   return (
     <Flex
       direction={{
@@ -52,7 +59,6 @@ export const CartItem = (props) => {
         origin={departure.nameCity}
         destination={arrival.nameCity}
         image={arrival.image}
-        // isGiftWrapping={isGiftWrapping}
       />
 
       {/* Desktop */}
@@ -65,15 +71,14 @@ export const CartItem = (props) => {
         }}
       >
         <QuantitySelect
-          value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(e.currentTarget.value)
-          }}
+          value={qtySelect}
+          name={arrival.nameCity}
+          onChange={onChangeQuantity}
         />
-        <PriceTag price={price} currency={currency} />
-        <CloseButton
-        //  aria-label={`Delete ${name} from cart`}
-         onClick={onClickDelete} />
+    
+        <PriceTag price={new Intl.NumberFormat().format(price*qtySelect)} />
+        <CloseButton onClick={onClickDelete} />
+
       </Flex>
 
       {/* Mobile */}
@@ -87,16 +92,13 @@ export const CartItem = (props) => {
           md: 'none',
         }}
       >
-        <Link fontSize="sm" textDecor="underline">
-          Delete
-        </Link>
+
         <QuantitySelect
-          value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(e.currentTarget.value)
-          }}
+          value={qtySelect}
+          onChange={onChangeQuantity}
         />
-        <PriceTag price={price} currency={currency} />
+        <PriceTag price={price} />
+        <CloseButton onClick={onClickDelete} />
       </Flex>
     </Flex>
   )

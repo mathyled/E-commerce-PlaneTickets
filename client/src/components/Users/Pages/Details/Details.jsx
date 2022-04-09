@@ -33,7 +33,7 @@ import pictures from "../../Features/pictures.json";
 export default function Details() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const addCart = useSelector(state=> state.cart)
+  const addCart = useSelector(state=> state.cart)
   let cityDetails = useSelector((state) => state.city_details);
   let cityDetailsUsage = cityDetails[0];
   console.log(id);
@@ -145,7 +145,13 @@ export default function Details() {
                     transform: "translateY(2px)",
                     boxShadow: "lg",
                   }}
-                  onClick={()=> dispatch(addToCart(id))}
+                  onClick={()=>{ 
+                    addCart.find(item => item._id=== id ) ? 
+                    alert("Already add ")
+                    :
+                    dispatch(addToCart(id))
+                  }
+                  }
                 >
                   Add to cart
                 </Button>

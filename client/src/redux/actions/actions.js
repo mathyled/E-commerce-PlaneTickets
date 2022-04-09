@@ -120,16 +120,17 @@ export const addToCart = (id) => {
   };
 };
 export const removeFromCart = (id) => {
+  // console.log("action id",id)
   return {
     type: TYPES.REMOVE_FROM_CART,
     payload: id
   };
 };
-export const addQuatity = (id,value) => {
+export const addQuatity = (total) => {
+  console.log("action total",total)
   return {
     type: TYPES.ADD_QUANTITY,
-    id: id,
-    quantity:value
+   payload:total
   };
 };
 // export const addCart = () => {
