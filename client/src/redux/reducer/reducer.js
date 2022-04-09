@@ -9,6 +9,7 @@ const initialState = {
   products: [], // { id, origin, destination, price, image, departureTime }
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
+  qtySelect: 0
 };
 
 function rootReducer(state = initialState, action) {
@@ -209,11 +210,17 @@ function rootReducer(state = initialState, action) {
             )
           : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
       };
-    // case TYPES.REMOVE_FROM_CART:
-    //   return {
-    //     ...state,
-    //     cart: state.cart.filter(item=> item.id !== action.payload.id)
-    //   }
+    case TYPES.REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter(item=> item._id !== action.payload)
+      }
+
+      case TYPES.ADD_QUANTITY:
+        return{
+          ...state,
+          qtySelect: state.qtySelect + action.payload
+        }
     // case TYPES.ADD_QUANTITY:
     //   return {
     //     ...state,

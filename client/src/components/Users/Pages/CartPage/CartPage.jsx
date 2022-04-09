@@ -61,7 +61,7 @@ const CartPage = ()=>{
         flex="2"
         >
         <Heading fontSize="2xl" fontWeight="extrabold">
-          Shopping cart (3 items)
+          Shopping cart {cart.length} items
         </Heading>
 
         <Stack spacing="6">
