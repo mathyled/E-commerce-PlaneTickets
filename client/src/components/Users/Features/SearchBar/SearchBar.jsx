@@ -51,13 +51,21 @@ function SearchBar() {
   function handler(e) {
     var arr = e.target.value.split(",");
     var relation = search.filter(
-      (city) => city.nameCity.toLowerCase().includes(arr[0].toLowerCase()) && city.nameCountry.toLowerCase().includes(arr[1].replace(" ", "").toLowerCase())
+      (city) =>
+        city.nameCity.toLowerCase().includes(arr[0].toLowerCase()) &&
+        city.nameCountry
+          ?.toLowerCase()
+          .includes(arr[1]?.replace(" ", "").toLowerCase())
     );
     // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
     if (relation.length > 0) {
       setInput({
         ...input,
-        airline: relation && relation[0]["airports"][relation[0]["airports"].length - 1]["codeIataAirport"]
+        airline:
+          relation &&
+          relation[0]["airports"][relation[0]["airports"].length - 1][
+            "codeIataAirport"
+          ],
       });
     }
   }
@@ -79,7 +87,11 @@ function SearchBar() {
             onChange={(e) => handler(e)}
           />
           <datalist id="cities">
-            {search.map(e => <option>{e.nameCity}, {e.nameCountry}</option>)}
+            {search.map((e) => (
+              <option key={e._id}>
+                {e.nameCity}, {e.nameCountry}
+              </option>
+            ))}
           </datalist>
           <Input
             width={200}
