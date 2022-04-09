@@ -33,17 +33,11 @@ const getFlights = async (req, res) => {
                 };
             };
         };
-
         if(flightsDb.length > 0) {
             await flightsDb.deleteMany({});
             await flightsDb.insertMany(flights);
         };
         const flightsInDb = await flightsDb.find();
-
-        // await flightsDb.insertMany(flights);
-        // const flightsInDb = await flightsDb.find();
-        // const flightsData = flightsInDb.filter(e => e.departure.iataCode.toLowerCase() === city.toLowerCase());
-        
         res.status(200).send({ status: "success", data: flightsInDb });
     }
     catch(error) {
@@ -64,20 +58,7 @@ const getFlightDetail = async (req, res) => {
     };
 };
 
-const deleteFlight = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await flightsDb.findByIdAndDelete(id);
-        res.status(200).send({ status: "success", data: "deleted flight" });
-    }
-    catch(error) {
-        console.log(error);
-        res.status(400).send({ message: "error deleting flight" });
-    };
-};
-
 module.exports = {
     getFlights,
     getFlightDetail,
-    deleteFlight,
 };
