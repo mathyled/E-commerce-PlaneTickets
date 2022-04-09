@@ -1,9 +1,8 @@
 const models = {
-  // usersModel: require("./users"),
-  // citiesDbModel: require("./city"),
-  itineraryModel: require("./itinerary"),
+  ItineraryModel: require("./Itinerary"),
   flightOffer: require("./flightOffer"),
   flightsDb: require("./flights"),
+  UserModel: require("./User"),
 };
 
 module.exports = models;
