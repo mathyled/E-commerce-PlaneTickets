@@ -4,6 +4,7 @@ const models = {
   itineraryModel: require("./itinerary"),
   flightOffer: require("./flightOffer"),
   flightsDb: require("./flights"),
+  OrderModel: require("./Order"),
 };
 
 module.exports = models;
