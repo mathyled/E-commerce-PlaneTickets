@@ -1,9 +1,9 @@
-const { itineraryModel } = require("../../models");
+const { ItineraryModel } = require("../../models");
 
 const createItinerary = async (req, res) => {
+  const { origin, destination, comment } = req.body;
   try {
-    const { origin, destination, comment } = req.body;
-    const data = await itineraryModel.create({
+    const data = await ItineraryModel.create({
       origin,
       destination,
       comment,
