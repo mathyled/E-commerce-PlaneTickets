@@ -13,6 +13,7 @@ import {
   StackDivider,
   useColorModeValue,
   VisuallyHidden,
+  useToast,
   List,
   ListItem,
 } from "@chakra-ui/react";
@@ -31,6 +32,7 @@ import { MdLocalShipping } from "react-icons/md";
 import pictures from "../../Features/pictures.json";
 
 export default function Details() {
+  const toast = useToast()
   const dispatch = useDispatch();
   const { id } = useParams();
   const addCart = useSelector(state=> state.cart)
@@ -147,7 +149,12 @@ export default function Details() {
                   }}
                   onClick={()=>{ 
                     addCart.find(item => item._id=== id ) ? 
-                    alert("Already add ")
+                    toast({
+                      description: "Already added to cart",
+                      status: 'error',
+                      duration: 9000,
+                      isClosable: true,
+                    })
                     :
                     dispatch(addToCart(id))
                   }
