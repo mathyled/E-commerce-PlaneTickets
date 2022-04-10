@@ -44,7 +44,8 @@ export default function Details() {
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
-  console.log(cityDetails);
+  console.log("Details 1", cityDetails);
+  console.log("Details 2", cityDetailsUsage);
   return (
     <div>
       {Object.keys(cityDetails).length > 0 ? (
@@ -74,7 +75,7 @@ export default function Details() {
                     fontWeight={600}
                     fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   >
-                    {cityDetailsUsage["departure"]["nameCity"]}
+                    {cityDetailsUsage["departure"]["nameCity"]}, {cityDetailsUsage["departure"]["nameCountry"]}
                   </Heading>
                   <Text
                     color={
@@ -84,6 +85,15 @@ export default function Details() {
                     fontSize={"2xl"}
                   >
                     {`${cityDetailsUsage["price"]} EUR`}
+                  </Text>
+                  <Text
+                    color={
+                      /*useColorModeValue("gray.900", "gray.400")*/ "gray.900"
+                    }
+                    fontWeight={300}
+                    fontSize={"2xl"}
+                  >
+                    {cityDetailsUsage["airline"]["name"] && "Airline: " + cityDetailsUsage["airline"]["name"]}
                   </Text>
                 </Box>
                 <Stack
@@ -113,21 +123,39 @@ export default function Details() {
                     <List spacing={6}>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
+                          Date:
+                        </Text>{" "}
+                        {cityDetailsUsage["date"]}
+                      </ListItem>
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
+                          Departure airport:
+                        </Text>{" "}
+                        {cityDetailsUsage["departure"]["nameAirport"]}
+                      </ListItem>
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
                           Scheduled departure time:
                         </Text>{" "}
-                        {cityDetailsUsage["departure"]["scheduledTime"]}
+                        {cityDetailsUsage["departure"]["scheduledTime"] + " hs"}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
                           Arrival:
                         </Text>{" "}
-                        {cityDetailsUsage["arrival"]["nameCity"]}
+                        {cityDetailsUsage["arrival"]["nameCity"]}, {cityDetailsUsage["arrival"]["nameCountry"]}
+                      </ListItem>
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
+                          Arrival airport:
+                        </Text>{" "}
+                        {cityDetailsUsage["arrival"]["nameAirport"]}
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
                           Scheduled arrival time
                         </Text>{" "}
-                        {cityDetailsUsage["departure"]["scheduledTime"]}
+                        {cityDetailsUsage["arrival"]["scheduledTime"] + " hs"}
                       </ListItem>
                     </List>
                   </Box>
