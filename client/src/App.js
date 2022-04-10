@@ -13,7 +13,7 @@ import CartPage from "./components/Users/Pages/CartPage/CartPage";
 
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
-
+import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
 
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
-        <Route exact path="/checkouttest" element={<Checkout />} /> 
+        <Route exact path="/loadingtest" element={<LoadingPage />} /> 
       
 
       

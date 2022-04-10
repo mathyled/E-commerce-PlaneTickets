@@ -7,11 +7,16 @@ import { SimpleGrid} from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
 import { getCities } from "../../../redux/actions/actions";
+import LoadingPage from "./Loading/LoadingPage";
+
 export default function Home() {
   const dispatch = useDispatch();
-  const cities = useSelector((state) => state.city);
+  let cities = [];
+  cities = useSelector((state) => state.city);
+  const search= useSelector((state)=> state.search);
 
-
+  const [isLoading, setIsLoading]= useState(true)
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
   const indexOfLastCharacter = currentPage * TicketsPerPage; // 6
@@ -25,12 +30,20 @@ export default function Home() {
     setCurrentPage(pageNumber);
     console.log(cities);
   };
+  console.log(cities)
+  useEffect(() => {
+    console.log("CARGANDO")
+    if (search.length>0){setIsLoading(false)} ;
+  }, [search]);
+ 
 
   useEffect(() => {
     dispatch(getCities());
   }, [dispatch]);
   return (
-    <div>
+    
+    <div> 
+      {isLoading? <LoadingPage></LoadingPage>:<></>}
       <NavBar />
       <CallToAction />
       {/* {cities.hasOwnProperty(cities.departure) ? */}
