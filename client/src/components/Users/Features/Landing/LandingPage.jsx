@@ -17,6 +17,8 @@ import React, { useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import Airport1 from "../../../../assets/Airport1.mp4"
+
 function LandingPage() {
   const [time, setTime] = useState(false);
   const [place, setPlace] = useState("");
@@ -48,48 +50,17 @@ function LandingPage() {
 //   }
 
   return (
-    <div className="landing">
-      <SlideFade in={time} offsetY="20px">
-        <Container maxW={"4xl"} py={{ base: 20 }}>
-          <Stack
-            borderRadius="20"
-            bg="white"
-            as={Box}
-            textAlign={"center"}
-            spacing={{ base: 8, md: 10 }}
-            py={{ base: 20, md: 30 }}
-            boxShadow="dark-lg"
-          >
-            <Heading
-              fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-              lineHeight={"110%"}
-            >
-              Heading North
-            </Heading>
-            <Text>
-              We're glad to see you, please tell us where you are to give you
-              the best experience in our website
-            </Text>
-            <InputGroup textAlign={"center"} justifyContent="center">
-              <InputLeftAddon children={<FaLocationArrow opacity="40%" />} />
-              <Input
-                onChange={(event) => handleInput(event)}
-                width={400}
-                bg="white"
-                type="text"
-                name="destination"
-                placeholder="Type here..."
-              />
-            </InputGroup>
-            <Stack
-              direction={"column"}
-              spacing={3}
-              align={"center"}
-              alignSelf={"center"}
-              position={"relative"}
-            >
-              <Button
+    <div className="showcase">
+      <video  style={{ width:"100vw", height:"100vh" }} loop autoPlay muted>
+    <source src= { Airport1 } type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+    <source src={ Airport1 } type="video/ogg" />Your browser does not support the video tag. I suggest you upgrade your browser.
+</video>
+<div class="overlay"></div>  
+<div class="text">
+<h2>Heading North</h2>
+<h3>Exploring The World</h3>
+</div>
+      <Button
                 as={Link}
                 colorScheme={"green"}
                 bg={"green.400"}
@@ -103,30 +74,8 @@ function LandingPage() {
               >
                 Get Started
               </Button>
-              <Box>
-                <Icon
-                  as={Arrow}
-                  color={useColorModeValue("gray.800", "gray.300")}
-                  w={71}
-                  position={"absolute"}
-                  right={-71}
-                  top={"10px"}
-                />
-                <Text
-                  fontSize={"lg"}
-                  fontFamily={"Caveat"}
-                  position={"absolute"}
-                  right={"-125px"}
-                  top={"-15px"}
-                  transform={"rotate(10deg)"}
-                >
-                  Don't think twice!
-                </Text>
-              </Box>
-            </Stack>
-          </Stack>
-        </Container>
-      </SlideFade>
+
+      
     </div>
   );
 }
