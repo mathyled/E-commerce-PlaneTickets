@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Center, Image, Box } from "@chakra-ui/react";
 import loading from "../../../../assets/loading.gif";
 
