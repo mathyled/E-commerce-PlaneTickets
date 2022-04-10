@@ -5,13 +5,14 @@ import {
   Box,
   Heading,
   Text,
-//   Button,
+  Center,
+  //   Button,
   Image,
   //   Icon,
-//   IconButton,
+  //   IconButton,
   //   createIcon,
   //   IconProps,
-//   useColorModeValue,
+  //   useColorModeValue,
 } from "@chakra-ui/react";
 
 function CallToAction() {
@@ -23,7 +24,7 @@ function CallToAction() {
         py={{ base: 20, md: 20 }}
         direction={{ base: "column", md: "row" }}
       >
-        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+        <Stack flex={1} spacing={{ base: 3, md: 7 }}>
           <Heading
             lineHeight={1.1}
             fontWeight={600}
@@ -34,7 +35,7 @@ function CallToAction() {
               position={"relative"}
               _after={{
                 content: "''",
-                width: "full",
+                width: "60%",
                 height: "30%",
                 position: "absolute",
                 bottom: 1,
@@ -50,40 +51,15 @@ function CallToAction() {
               Heading North!
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
-            A place where you can find your next destination with many prices
-            and places posibilities that adjust to your needs or money. You're
-            just a click away to live new adventures and memories with all your
-            loved ones
-          </Text>
+          <Center width="100%">
+            <Text color={"gray.500"} width="60%">
+              A place where you can find your next destination with many prices
+              and places posibilities that adjust to your needs or money. You're
+              just a click away to live new adventures and memories with all
+              your loved ones
+            </Text>
+          </Center>
         </Stack>
-        <Flex
-          flex={1}
-          justify={"center"}
-          align={"center"}
-          position={"relative"}
-          w={"full"}
-        >
-          <Box
-            position={"relative"}
-            height={"300px"}
-            rounded={"2xl"}
-            boxShadow={"2xl"}
-            width={"full"}
-            overflow={"hidden"}
-          >
-            <Image
-              alt={"Hero Image"}
-              fit={"cover"}
-              align={"center"}
-              w={"100%"}
-              h={"100%"}
-              src={
-                "https://images.pexels.com/photos/104826/aircraft-holiday-sun-tourism-104826.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              }
-            />
-          </Box>
-        </Flex>
       </Stack>
     </Container>
   );

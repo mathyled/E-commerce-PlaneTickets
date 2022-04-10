@@ -9,13 +9,15 @@ import {
 import { Search2Icon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getFlights } from "../../../../redux/actions/actions";
+import { getFlights, isOnSearch } from "../../../../redux/actions/actions";
 import { FaCity } from "react-icons/fa";
 import { useColorModeValue } from "@chakra-ui/react";
+
 function SearchBar() {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.search);
   const [input, setInput] = useState({ airline: "", date: "" });
+  const [tempInput, setTempInput] = useState({ tempAirline: "", tempDate: "" });
   const [isFocus, setIsFocus] = useState(false);
 
   function getAfterDate() {
@@ -46,6 +48,10 @@ function SearchBar() {
       [e.target.name]: e.target.value,
     });
     console.log(input);
+  }
+
+  function clearInputs() {
+    setInput({ ...input, airline: "", date: "" });
   }
 
   function handler(e) {
@@ -84,7 +90,10 @@ function SearchBar() {
             variant="flushed"
             placeholder="Search a origin..."
             list="cities"
-            onChange={(e) => handler(e)}
+            onChange={(e) => {
+              //setTempInput({...tempInput,tempAirline:e.target.value})
+              handler(e);
+            }}
           />
           <datalist id="cities">
             {search.map((e) => (
@@ -107,14 +116,21 @@ function SearchBar() {
               setIsFocus(false);
             }}
             min={getAfterDate()}
-            onChange={handlerOnChange}
+            onChange={
+              //setTempInput({...tempInput,tempAirline:e.target.value})
+              handlerOnChange
+            }
           />
         </InputGroup>
         <Button
           colorScheme="blue"
           _hover={{ bg: "blue.800", color: "white" }}
           variant="outline"
-          onClick={() => dispatch(getFlights(input))}
+          onClick={() => {
+            dispatch(isOnSearch(true));
+            dispatch(getFlights(input));
+            clearInputs();
+          }}
         >
           {/* <Search2Icon /> */}
           Search!

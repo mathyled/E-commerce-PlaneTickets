@@ -3,20 +3,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import Paged from "./Paged/Paged";
-import { SimpleGrid} from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
 import { getCities } from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
+import LoadingSection from "./Loading/LoadingSection";
 
 export default function Home() {
   const dispatch = useDispatch();
-  let cities = [];
-  cities = useSelector((state) => state.city);
-  const search= useSelector((state)=> state.search);
+  let cities = useSelector((state) => state.city);
+  const search = useSelector((state) => state.search);
+  const IsOnSearch = useSelector((state) => state.isSearching);
 
-  const [isLoading, setIsLoading]= useState(true)
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
   const indexOfLastCharacter = currentPage * TicketsPerPage; // 6
@@ -28,22 +29,20 @@ export default function Home() {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(cities);
   };
-  console.log(cities)
+  console.log(IsOnSearch);
   useEffect(() => {
-    console.log("CARGANDO")
-    if (search.length>0){setIsLoading(false)} ;
+    if (search.length > 0) {
+      setIsLoading(false);
+    }
   }, [search]);
- 
 
   useEffect(() => {
     dispatch(getCities());
   }, [dispatch]);
   return (
-    
-    <div> 
-      {isLoading? <LoadingPage></LoadingPage>:<></>}
+    <div>
+      {isLoading ? <LoadingPage></LoadingPage> : <></>}
       <NavBar />
       <CallToAction />
       {/* {cities.hasOwnProperty(cities.departure) ? */}
@@ -52,7 +51,9 @@ export default function Home() {
           TicketsPerPage={TicketsPerPage}
           total={cities.length}
           paginate={paginate}
+          currentPage={currentPage}
         />
+        {IsOnSearch ? <LoadingSection /> : <></>}
         <SimpleGrid columns={[2, null, 3]} spacing="40px">
           {currentTickets &&
           currentTickets.length === 1 &&
@@ -66,7 +67,6 @@ export default function Home() {
                   o?.arrival?.nameCity !== undefined ? (
                   <div key={o?._id}>
                     <Card
-
                       id={o?._id}
                       origin={o?.departure?.nameCity}
                       destination={o?.arrival?.nameCity}
@@ -74,7 +74,6 @@ export default function Home() {
                       image={o?.arrival?.image}
                       departureTime={o?.departure?.scheduledTime}
                       airline={o?.airline?.name}
-
                     />
                   </div>
                 ) : (
@@ -84,7 +83,7 @@ export default function Home() {
             })
           )}
         </SimpleGrid>
-</div>
-</div>
+      </div>
+    </div>
   );
 }
