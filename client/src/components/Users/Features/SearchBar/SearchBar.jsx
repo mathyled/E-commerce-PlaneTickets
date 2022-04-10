@@ -98,7 +98,7 @@ function SearchBar() {
             bg="white"
             name="date"
             variant="flushed"
-            placeholder="departure"
+            placeholder="Departure Date"
             type={isFocus ? "date" : "text"}
             onFocus={(e) => {
               setIsFocus(true);
