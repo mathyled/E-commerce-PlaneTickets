@@ -10,10 +10,10 @@ import LandingPage from "./components/Users/Features/Landing/LandingPage";
 import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
-import Demo from "./components/Users/Features/Autocomplete";
+
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
-import Pay from "./components/Users/Features/Stripe/Pay";
-import Success from "./components/Users/Features/Stripe/Success";
+import SuccessBuy from "./components/Users/Pages/SuccessBuy";
+
 
 function App() {
   return (
@@ -29,14 +29,17 @@ function App() {
           <Route exact path="/profile" element={<Profilepage />} />
         </Route>
 
-        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
+        <Route element={<ProtectedRoute />}>
+           <Route exact path="/success" element={<SuccessBuy />} />
+        </Route>
 
-        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
-        <Route exact path="/demo" element={<Demo />} />
-        <Route exact path="/checkouttest" element={<Checkout />} />
-        <Route exact path="/pay" element={<Pay />} />
-        <Route exact path="/success" element={<Success />} />
+        <Route exact path="/checkouttest" element={<Checkout />} /> 
+      
+
+      
+        <Route exact path="*" element={<NotfoundPage />} />
       </Routes>
     </div>
   );

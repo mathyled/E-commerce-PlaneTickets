@@ -8,7 +8,7 @@ import {
   useColorModeValue as mode,
   useToast,
 } from '@chakra-ui/react'
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { FaArrowRight } from 'react-icons/fa'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from "axios";
@@ -20,7 +20,7 @@ const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9Jxuy
 
 export const CartOrderSummary = () => {
   const toast = useToast()
-  const cart = useSelector(state=> state.cart)
+  const cart = useSelector(state => state.cart)
   const { currentUser } = useAuth()
   const navigate = useNavigate()
   const [stripeToken, setStripeToken] = useState()
@@ -55,47 +55,65 @@ export const CartOrderSummary = () => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-            {cart.length > 0 && cart.map(c=> 
+            {cart.length > 0 && cart.map(c =>
               c.price * c.quantity
-              )}
+            )}
           </Text>
         </Flex>
 
       </Stack>
-      {currentUser ?
-        <StripeCheckout
-          name="Heading North"
-          image="#"
-          billingAddress
-          shippingAddress
-          description=" Your total is $ 73"
-          amount={2000}
-          token={onToken}
-          stripeKey={STRIPE_KEY}
-        >
-          <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
-            Checkout
-          </Button>
-        </StripeCheckout>
-        : 
-        <>
-        <Button 
-        colorScheme="blue" 
-        size="lg" fontSize="md" 
-        rightIcon={<FaArrowRight />}
-        onClick={()=> 
-           toast({
-          description: "You must to be login",
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        }) }
-        >
-        Checkout
-      </Button>
-       
-        </>
-        }
+      <div>
+        {
+          stripeToken ? (
+            <Button
+              colorScheme="blue"
+              size="lg" fontSize="md"
+              rightIcon={<FaArrowRight
+              />}>
+              Processing. Please wait..
+            </Button>
+          ) : (
+            <div>
+
+              {currentUser ?
+                <StripeCheckout
+                  name="Heading North"
+                  image="#"
+                  billingAddress
+                  shippingAddress
+                  description=" Your total is $ 73"
+                  amount={2000}
+                  token={onToken}
+                  stripeKey={STRIPE_KEY}
+                >
+                  <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
+                    Checkout
+                  </Button>
+                </StripeCheckout>
+                :
+                <>
+                  <Button
+                    colorScheme="blue"
+                    size="lg" fontSize="md"
+                    rightIcon={<FaArrowRight />}
+                    onClick={() =>
+                      toast({
+                        description: "You must to be login",
+                        status: 'error',
+                        duration: 9000,
+                        isClosable: true,
+                      })}
+                  >
+                    Checkout
+                  </Button>
+
+                </>
+              }
+            </div>
+          )}
+      </div>
+
+
 
 
     </Stack>

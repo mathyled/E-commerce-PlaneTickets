@@ -14,7 +14,6 @@ import { useSelector } from 'react-redux'
 import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
-import { cartData } from './_data';
 import {Link} from "react-router-dom";
 
 const CartPage = ()=>{

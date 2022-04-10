@@ -28,8 +28,7 @@ import {
 } from "../../../../redux/actions/actions";
 
 import NavBar from "../../Features/NavBar/NavBar";
-import { MdLocalShipping } from "react-icons/md";
-import pictures from "../../Features/pictures.json";
+
 
 export default function Details() {
   const toast = useToast()
