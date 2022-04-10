@@ -55,6 +55,7 @@ export const CartItem = (props) => {
       justify="space-between"
       align="center"
     >
+
       <CartProductMeta
         origin={departure.nameCity}
         destination={arrival.nameCity}
@@ -70,6 +71,7 @@ export const CartItem = (props) => {
           md: 'flex',
         }}
       >
+
         <QuantitySelect
           value={qtySelect}
           name={arrival.nameCity}
@@ -97,9 +99,13 @@ export const CartItem = (props) => {
           value={qtySelect}
           onChange={onChangeQuantity}
         />
+
         <PriceTag price={price} />
+
         <CloseButton onClick={onClickDelete} />
+
       </Flex>
+
     </Flex>
   )
 }

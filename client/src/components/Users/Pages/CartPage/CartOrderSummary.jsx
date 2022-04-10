@@ -44,6 +44,11 @@ export const CartOrderSummary = () => {
     }
     stripeToken && makeRequest()
   }, [stripeToken, navigate])
+  const total = cart.reduce((prev, next) => prev + next.price,
+  0
+)
+console.log(cart[0].price)
+console.log(total)
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
       <Heading size="md">Order Summary</Heading>
@@ -51,20 +56,23 @@ export const CartOrderSummary = () => {
       <Stack spacing="6">
 
         <Flex justify="space-between">
+
           <Text fontSize="lg" fontWeight="semibold">
             Total
           </Text>
+
           <Text fontSize="xl" fontWeight="extrabold">
-            {cart.length > 0 && cart.map(c =>
-              c.price * c.quantity
-            )}
+            {cart.length > 0 ? total : 0}
           </Text>
+
         </Flex>
 
       </Stack>
+
       <div>
         {
           stripeToken ? (
+
             <Button
               colorScheme="blue"
               size="lg" fontSize="md"
@@ -72,6 +80,7 @@ export const CartOrderSummary = () => {
               />}>
               Processing. Please wait..
             </Button>
+
           ) : (
             <div>
 
@@ -86,9 +95,11 @@ export const CartOrderSummary = () => {
                   token={onToken}
                   stripeKey={STRIPE_KEY}
                 >
+
                   <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
                     Checkout
                   </Button>
+
                 </StripeCheckout>
                 :
                 <>
