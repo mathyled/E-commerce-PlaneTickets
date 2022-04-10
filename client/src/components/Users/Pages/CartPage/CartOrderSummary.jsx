@@ -6,6 +6,7 @@ import {
   Stack,
   Text,
   useColorModeValue as mode,
+  useToast,
 } from '@chakra-ui/react'
 import {useSelector} from "react-redux";
 import { FaArrowRight } from 'react-icons/fa'
@@ -17,23 +18,8 @@ import { useAuth } from '../../../../context/AuthContext';
 
 const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9JxuyO4pQQBz70izz0LQeKE29rVsQNZZ5YtjcOT0zc00jGxHBB6r"
 
-
-const OrderSummaryItem = (props) => {
-  const { label, value, children } = props
-  return (
-    <>
-      <Flex justify="space-between" fontSize="sm">
-        <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
-          {label}
-        </Text>
-        {value ? <Text fontWeight="medium">{value}</Text> : children}
-      </Flex>
-    </>
-  )
-};
-
-
 export const CartOrderSummary = () => {
+  const toast = useToast()
   const cart = useSelector(state=> state.cart)
   const { currentUser } = useAuth()
   const navigate = useNavigate()
@@ -63,19 +49,6 @@ export const CartOrderSummary = () => {
       <Heading size="md">Order Summary</Heading>
 
       <Stack spacing="6">
-
-        {/* <OrderSummaryItem label="Subtotal" value={597} />
-        <OrderSummaryItem label="Shipping + Tax">
-          <Link href="#" textDecor="underline">
-            Calculate shipping
-          </Link>
-        </OrderSummaryItem>
-        <OrderSummaryItem label="Coupon Code">
-          <Link href="#" textDecor="underline">
-            Add coupon code
-          </Link>
-        </OrderSummaryItem> */}
-
 
         <Flex justify="space-between">
           <Text fontSize="lg" fontWeight="semibold">
@@ -110,7 +83,13 @@ export const CartOrderSummary = () => {
         colorScheme="blue" 
         size="lg" fontSize="md" 
         rightIcon={<FaArrowRight />}
-        onClick={()=>  alert("you must to be login")}
+        onClick={()=> 
+           toast({
+          description: "You must to be login",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        }) }
         >
         Checkout
       </Button>
