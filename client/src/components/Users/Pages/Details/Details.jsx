@@ -28,7 +28,7 @@ import {
 } from "../../../../redux/actions/actions";
 
 import NavBar from "../../Features/NavBar/NavBar";
-
+import LoadingPage from "../../Features/Loading/LoadingPage";
 
 export default function Details() {
   const toast = useToast()
@@ -48,7 +48,9 @@ export default function Details() {
   console.log("Details 2", cityDetailsUsage);
   return (
     <div>
+      
       {Object.keys(cityDetails).length > 0 ? (
+
         <div>
           <NavBar />
           <Container maxW={"7xl"}>
@@ -194,7 +196,7 @@ export default function Details() {
           </Container>
         </div>
       ) : (
-        <div>LOADING</div>
+        <LoadingPage></LoadingPage>
       )}
     </div>
   );
