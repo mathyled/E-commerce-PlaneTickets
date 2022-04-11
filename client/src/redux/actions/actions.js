@@ -126,11 +126,18 @@ export const removeFromCart = (id) => {
     payload: id
   };
 };
-export const addQuatity = (total) => {
-  console.log("action total",total)
+
+export const addQuatity = (id, total) => {
+  // console.log("action total", id, total)
   return {
     type: TYPES.ADD_QUANTITY,
-   payload:total
+    payload: {id, total}
+  };
+};
+
+export const calculateTotal = () => {
+  return {
+    type: TYPES.CALCULATE_TOTAL,
   };
 };
 // export const addCart = () => {
