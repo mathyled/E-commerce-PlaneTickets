@@ -7,7 +7,7 @@ function LoadingSection() {
     <Center
       backgroundColor="#fff"
       zIndex="999"
-      top={"-90px"}
+      top={"-60px"}
       position="relative"
       w="100vw"
     >

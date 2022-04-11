@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import Paged from "./Paged/Paged";
-import { SimpleGrid } from "@chakra-ui/react";
+import {
+  SimpleGrid,
+  Text,
+  Center,
+  AlertIcon,
+  Alert,
+  AlertTitle,
+} from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
 import { getCities } from "../../../redux/actions/actions";
@@ -30,6 +37,7 @@ export default function Home() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
   console.log(IsOnSearch);
   useEffect(() => {
     if (search.length > 0) {
@@ -59,7 +67,12 @@ export default function Home() {
           currentTickets.length === 1 &&
           currentTickets[0]?.departure === undefined &&
           currentTickets[0]?.arrival === undefined ? (
-            <p>Not flight avaiable</p>
+            <Center width={"100vw"}>
+              <Alert width={80} status="error">
+                <AlertIcon />
+                <AlertTitle mr={2}> Not flight avaiable!</AlertTitle>
+              </Alert>
+            </Center>
           ) : (
             currentTickets.map((o) => {
               {
