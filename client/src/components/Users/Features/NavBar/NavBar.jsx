@@ -30,7 +30,7 @@ function NavBar() {
   const { toggleColorMode } = useColorMode()
   const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   async function handlerLogOut(e) {
     e.preventDefault();
     // handle logout
