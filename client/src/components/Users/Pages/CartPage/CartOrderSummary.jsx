@@ -2,25 +2,28 @@ import {
   Button,
   Flex,
   Heading,
-  Link,
+  // Link,
   Stack,
   Text,
   useColorModeValue as mode,
   useToast,
 } from '@chakra-ui/react'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaArrowRight } from 'react-icons/fa'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../context/AuthContext';
+import { calculateTotal } from '../../../../redux/actions/actions';
 
 const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9JxuyO4pQQBz70izz0LQeKE29rVsQNZZ5YtjcOT0zc00jGxHBB6r"
 
 export const CartOrderSummary = () => {
   const toast = useToast()
-  const cart = useSelector(state => state.cart)
+  // const cart = useSelector(state => state.cart)
+  const totalCalculated = useSelector(state => state.totalCalculado);
+  const dispatch = useDispatch();
   const { currentUser } = useAuth()
   const navigate = useNavigate()
   const [stripeToken, setStripeToken] = useState()
@@ -43,7 +46,9 @@ export const CartOrderSummary = () => {
       }
     }
     stripeToken && makeRequest()
-  }, [stripeToken, navigate])
+    dispatch(calculateTotal());
+  }, [stripeToken, navigate, dispatch])
+
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
       <Heading size="md">Order Summary</Heading>
@@ -51,20 +56,23 @@ export const CartOrderSummary = () => {
       <Stack spacing="6">
 
         <Flex justify="space-between">
+
           <Text fontSize="lg" fontWeight="semibold">
             Total
           </Text>
+
           <Text fontSize="xl" fontWeight="extrabold">
-            {cart.length > 0 && cart.map(c =>
-              c.price * c.quantity
-            )}
+            {totalCalculated}
           </Text>
+
         </Flex>
 
       </Stack>
+
       <div>
         {
           stripeToken ? (
+
             <Button
               colorScheme="blue"
               size="lg" fontSize="md"
@@ -72,6 +80,7 @@ export const CartOrderSummary = () => {
               />}>
               Processing. Please wait..
             </Button>
+
           ) : (
             <div>
 
@@ -86,9 +95,11 @@ export const CartOrderSummary = () => {
                   token={onToken}
                   stripeKey={STRIPE_KEY}
                 >
+
                   <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
                     Checkout
                   </Button>
+
                 </StripeCheckout>
                 :
                 <>
@@ -112,9 +123,6 @@ export const CartOrderSummary = () => {
             </div>
           )}
       </div>
-
-
-
 
     </Stack>
   )

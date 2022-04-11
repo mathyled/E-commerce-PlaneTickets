@@ -10,6 +10,8 @@ const initialState = {
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   qtySelect: 0,
+  totalCalculado: 0
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -221,25 +223,35 @@ function rootReducer(state = initialState, action) {
             )
           : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
       };
-    case TYPES.REMOVE_FROM_CART:
-      return {
-        ...state,
-        cart: state.cart.filter((item) => item._id !== action.payload),
-      };
 
-    case TYPES.ADD_QUANTITY:
-      return {
-        ...state,
-        qtySelect: state.qtySelect + action.payload,
-      };
-    // case TYPES.ADD_QUANTITY:
-    //   return {
-    //     ...state,
-    //     cart: state.cart.map(item.id === action.payload.id
-    //       ? {...item, quantity: action.payload.id}
-    //       :item
-    //       )
-    //   }
+      case TYPES.REMOVE_FROM_CART:
+        return {
+          ...state,
+          cart: state.cart.filter(item=> item._id !== action.payload)
+        };
+
+      case TYPES.ADD_QUANTITY:
+        const carrito = state.cart;
+        let pos = carrito.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = carrito[pos];
+        itemchange.price = action.payload.total;
+        carrito[pos] = itemchange
+        return{
+          ...state,
+          cart: carrito
+        };
+      case TYPES.CALCULATE_TOTAL:
+        let total = 0;
+        if(state.cart.length > 0) {
+          total = state.cart.reduce((prev, next) => prev + next.price,
+            0
+          );
+        };
+        return{
+          ...state,
+          totalCalculado: total,
+        };
+
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {
     //     ...state,
