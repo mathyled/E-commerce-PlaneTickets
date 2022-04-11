@@ -30,7 +30,38 @@ function Order() {
 
   function handleRadio(e) {
     e.target.checked = !inputs[e.target.name];
-    setInputs({ ...inputs, [e.target.name]: e.target.checked });
+    console.log(e.target.name);
+
+    switch (e.target.name) {
+      case "to":
+        console.log("entro 1");
+        setInputs({
+          ...inputs,
+          [e.target.name]: e.target.checked,
+          price: false,
+          schedule: false,
+        });
+        break;
+      case "price":
+        console.log("entro 2");
+        setInputs({
+          ...inputs,
+          [e.target.name]: e.target.checked,
+          to: false,
+          schedule: false,
+        });
+        break;
+      case "schedule":
+        console.log("entro 3");
+
+        setInputs({
+          ...inputs,
+          [e.target.name]: e.target.checked,
+          to: false,
+          price: false,
+        });
+        break;
+    }
   }
 
   return (

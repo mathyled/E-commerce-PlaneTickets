@@ -4,13 +4,14 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
-
+  isSearching: false,
   ///CART ///////////
   products: [], // { id, origin, destination, price, image, departureTime }
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   qtySelect: 0,
   totalCalculado: 0
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -25,6 +26,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         city_details: action.payload.data,
+      };
+
+    case TYPES.IS_ON_SEARCH:
+      return {
+        ...state,
+        city: [],
+        isSearching: action.payload,
       };
 
     case TYPES.SORT_CITIES:
@@ -148,9 +156,12 @@ function rootReducer(state = initialState, action) {
     case TYPES.FILTER_CITIES:
       if (action.payload.departure !== "") {
         state.city = state.city.filter((fly) => {
-          return fly.arrival?.nameCity
-            .toLowerCase()
-            .includes(action.payload.to.toLowerCase());
+          console.log(fly?.arrival?.nameCity);
+          if (fly?.arrival?.nameCity !== undefined) {
+            return fly?.arrival?.nameCity
+              .toLowerCase()
+              .includes(action.payload.to.toLowerCase());
+          }
         });
       }
       if (action.payload.ret !== "") {
@@ -172,8 +183,9 @@ function rootReducer(state = initialState, action) {
     case TYPES.GET_FLIGHTS:
       return {
         ...state,
-        city: action.payload,
-        cityBackUp: action.payload,
+        isSearching: action.payload.isSearching,
+        city: action.payload.data,
+        cityBackUp: action.payload.data,
       };
 
     case TYPES.GET_CITIES:
@@ -211,6 +223,7 @@ function rootReducer(state = initialState, action) {
             )
           : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
       };
+
       case TYPES.REMOVE_FROM_CART:
         return {
           ...state,
@@ -238,6 +251,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           totalCalculado: total,
         };
+
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {
     //     ...state,
