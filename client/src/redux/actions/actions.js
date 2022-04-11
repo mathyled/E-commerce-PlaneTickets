@@ -101,9 +101,34 @@ export const resetStates = () => {
 export const postFlight = (payload) => {
   return async (dispatch) => {
     var res = await axios.post(
-      "http://localhost:3001/api/createFlight",
+      "http://localhost:3001/api/itineraries",
       payload
     );
     return res;
+  };
+};
+
+export const getItineraries = () => {
+  return async (dispatch) => {
+    var res = await axios.get("http://localhost:3001/api/itineraries");
+    console.log("Info from db...", res.data.data);
+    return dispatch({
+      type: TYPES.GET_ITINERARIES,
+      payload: res.data.data,
+    });
+  };
+};
+
+export const updateItinerary = (id) => {
+  return {
+    type: TYPES.PUT_ITINERARY,
+    payload: id,
+  };
+};
+
+export const deleteItinerary = (id) => {
+  return {
+    type: TYPES.DELETE_ITINERARY,
+    payload: id,
   };
 };
