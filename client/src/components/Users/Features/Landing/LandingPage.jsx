@@ -3,6 +3,7 @@ import {
   Box,
   Heading,
   Stack,
+  Center,
   Text,
   Icon,
   Button,
@@ -12,12 +13,13 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  HStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./styles.css";
-import Airport1 from "../../../../assets/Airport1.mp4"
+import Airport1 from "../../../../assets/Airport1.mp4";
 
 function LandingPage() {
   const [time, setTime] = useState(false);
@@ -44,38 +46,46 @@ function LandingPage() {
     setTime(true);
   }, 1000);
 
-//   function showAlert(event) {
-//     alert("The place is: "+ place);
-//     event.preventDefault();
-//   }
+  //   function showAlert(event) {
+  //     alert("The place is: "+ place);
+  //     event.preventDefault();
+  //   }
 
   return (
     <div className="showcase">
-      <video  style={{ width:"100vw", height:"100vh" }} loop autoPlay muted>
-    <source src= { Airport1 } type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-    <source src={ Airport1 } type="video/ogg" />Your browser does not support the video tag. I suggest you upgrade your browser.
-</video>
-<div class="overlay"></div>  
-<div class="text">
-<h2>Heading North</h2>
-<h3>Exploring The World</h3>
-</div>
-      <Button
-                as={Link}
-                colorScheme={"green"}
-                bg={"green.400"}
-                rounded={"full"}
-                px={6}
-                to="/home"
-                // onClick={showAlert}
-                _hover={{
-                  bg: "green.500",
-                }}
-              >
-                Get Started
-              </Button>
+      <video style={{ width: "100vw", height: "100vh" }} loop autoPlay muted>
+        <source src={Airport1} type="video/mp4" />
+        Your browser does not support the video tag. I suggest you upgrade your
+        browser.
+        <source src={Airport1} type="video/ogg" />
+        Your browser does not support the video tag. I suggest you upgrade your
+        browser.
+      </video>
+      <div class="overlay"></div>
+      <Center w={"100vw"}>
+        <HStack spacing={"50px"}>
+          <div class="text">
+            <h2>Heading North</h2>
+            <h3>Exploring The World</h3>
+          </div>
 
-      
+          <Button
+            size="lg"
+            as={Link}
+            colorScheme={"green"}
+            bg={"green.400"}
+            rounded={"full"}
+            px={6}
+            to="/home"
+            // onClick={showAlert}
+            _hover={{
+              bg: "green.500",
+            }}
+          >
+            Get Started
+          </Button>
+        </HStack>
+      </Center>
     </div>
   );
 }
