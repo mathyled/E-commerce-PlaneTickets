@@ -5,6 +5,7 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
+  itineraries: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -101,7 +102,7 @@ function rootReducer(state = initialState, action) {
               return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
             }));
       }
-      if (action.payload.schedule != "") {
+      if (action.payload.schedule !== "") {
         action.payload.ascending
           ? state.city.sort((a, b) => {
               if (a.departure.scheduledTime === undefined) {
@@ -182,6 +183,19 @@ function rootReducer(state = initialState, action) {
     case TYPES.POST_FLIGHT:
       return {
         ...state,
+      };
+    case TYPES.GET_ITINERARIES:
+      return {
+        ...state,
+        itineraries: action.payload,
+      };
+    // case TYPES.PUT_ITINERARY:
+    //   return{
+
+    //   }
+    case TYPES.DELETE_ITINERARY:
+      return {
+        ...state.itineraries.filter((el) => el.id !== action.payload),
       };
 
     default:
