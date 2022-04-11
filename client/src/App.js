@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Users/Features/Home";
-import { NotfoundPage } from "./components/Users/Pages/NotfoundPage/NotfoundPage";
+import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
 import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage";
 import ProtectedRoute from "./ProtectedRoutes";
@@ -12,6 +12,9 @@ import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
 import Demo from "./components/Users/Features/Autocomplete";
 import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
+import Checkout from "./components/Users/Pages/Checkout/Checkout";
+import SuccessBuy from "./components/Users/Pages/SuccessBuy";
+
 
 function App() {
   return (
@@ -28,11 +31,18 @@ function App() {
           <Route exact path="/profile" element={<Profilepage />} />
         </Route>
 
-        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
+        <Route element={<ProtectedRoute />}>
+           <Route exact path="/success" element={<SuccessBuy />} />
+        </Route>
 
-        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
+        <Route exact path="/loadingtest" element={<LoadingPage />} /> 
         <Route exact path="/demo" element={<Demo />} />
+      
+          
+        <Route exact path="*" element={<NotfoundPage />} />
+
       </Routes>
     </div>
   );

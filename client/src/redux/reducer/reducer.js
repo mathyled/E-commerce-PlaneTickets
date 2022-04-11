@@ -1,22 +1,23 @@
 import { TYPES } from "../actions/types";
-
 const initialState = {
   city: [],
   city_details: {},
   cityBackUp: [],
   search: [],
   itineraries: [],
+  isSearching: false,
+  ///CART ///////////
+  products: [], // { id, origin, destination, price, image, departureTime }
+  cart: [], // { id, origin, destination, price, image, departureTime, quantity }
+  currentItem: null,
+  qtySelect: 0,
+  totalCalculado: 0
+
+
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    // case TYPES.GET_OFFERS:
-    //   return {
-    //     ...state,
-    //     city: action.payload.data,
-    //     cityBackUp: action.payload.data,
-    //   };
-
     case TYPES.RESET_STATES:
       return {
         ...state,
@@ -27,6 +28,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         city_details: action.payload.data,
+      };
+
+    case TYPES.IS_ON_SEARCH:
+      return {
+        ...state,
+        city: [],
+        isSearching: action.payload,
       };
 
     case TYPES.SORT_CITIES:
@@ -104,7 +112,7 @@ function rootReducer(state = initialState, action) {
       }
       if (action.payload.schedule !== "") {
         action.payload.ascending
-          ? state.city.sort((a, b) => {
+          ? (sortedData = state.city.sort((a, b) => {
               if (a.departure.scheduledTime === undefined) {
                 return 1;
               }
@@ -117,11 +125,18 @@ function rootReducer(state = initialState, action) {
               if (b.departure.scheduledTime === null) {
                 return -1;
               }
-              return a.departure.scheduledTime < b.price.departure.scheduledTime
+              if (a.departure.scheduledTime === "") {
+                return 1;
+              }
+              if (b.departure.scheduledTime === "") {
+                return -1;
+              }
+
+              return a.departure.scheduledTime < b.departure.scheduledTime
                 ? -1
                 : 1;
-            })
-          : state.city.sort((a, b) => {
+            }))
+          : (sortedData = state.city.sort((a, b) => {
               if (a.departure.scheduledTime === undefined) {
                 return 1;
               }
@@ -134,23 +149,28 @@ function rootReducer(state = initialState, action) {
               if (b.departure.scheduledTime === null) {
                 return -1;
               }
-              return a.departure.scheduledTime > b.price.departure.scheduledTime
+              return a.departure.scheduledTime > b.departure.scheduledTime
                 ? -1
                 : 1;
-            });
+            }));
       }
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
       if (action.payload.departure !== "") {
-        // EL PROBLEMA ESTA ACA
-
-        state.city = state.city.filter(
-          (fly) => fly.departureDate === action.payload.to
-        );
+        state.city = state.city.filter((fly) => {
+          console.log(fly?.arrival?.nameCity);
+          if (fly?.arrival?.nameCity !== undefined) {
+            return fly?.arrival?.nameCity
+              .toLowerCase()
+              .includes(action.payload.to.toLowerCase());
+          }
+        });
       }
       if (action.payload.ret !== "") {
-        state.city = state.city.filter(
-          (fly) => fly.returnDate === action.payload.airline
+        state.city = state.city.filter((fly) =>
+          fly.airline?.name
+            .toLowerCase()
+            .includes(action.payload.airline.toLowerCase())
         );
       }
 
@@ -162,17 +182,12 @@ function rootReducer(state = initialState, action) {
       }*/
       return { ...state };
 
-    // case TYPES.GET_CITIES:
-    //   return {
-    //     ...state,
-    //     city: action.payload.data,
-    //     cityBackUp: action.payload.data,
-    //   };
     case TYPES.GET_FLIGHTS:
       return {
         ...state,
-        city: action.payload,
-        cityBackUp: action.payload,
+        isSearching: action.payload.isSearching,
+        city: action.payload.data,
+        cityBackUp: action.payload.data,
       };
 
     case TYPES.GET_CITIES:
@@ -198,6 +213,65 @@ function rootReducer(state = initialState, action) {
         ...state.itineraries.filter((el) => el.id !== action.payload),
       };
 
+    //// CART ////////////
+
+    case TYPES.ADD_TO_CART:
+      var newItem = state.city_details.find(
+        (prod) => prod.id === action.payload.id
+      );
+      console.log("ADD_TO_CART", newItem);
+      // Check if item is in the cart already
+      var inCart = false;
+      if (state.cart.length > 0) {
+        inCart = state.cart.some((item) => {
+          return item._id === newItem._id;
+        });
+      }
+      console.log("INCART", inCart);
+      return {
+        ...state,
+        cart: inCart
+          ? state.cart.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            )
+          : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
+      };
+
+      case TYPES.REMOVE_FROM_CART:
+        return {
+          ...state,
+          cart: state.cart.filter(item=> item._id !== action.payload)
+        };
+
+      case TYPES.ADD_QUANTITY:
+        const carrito = state.cart;
+        let pos = carrito.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = carrito[pos];
+        itemchange.price = action.payload.total;
+        carrito[pos] = itemchange
+        return{
+          ...state,
+          cart: carrito
+        };
+      case TYPES.CALCULATE_TOTAL:
+        let total = 0;
+        if(state.cart.length > 0) {
+          total = state.cart.reduce((prev, next) => prev + next.price,
+            0
+          );
+        };
+        return{
+          ...state,
+          totalCalculado: total,
+        };
+
+    // case TYPES.LOAD_CURRENT_ITEM:
+    //   return {
+    //     ...state,
+    //     currentItem: action.payload
+    //   }
     default:
       return { ...state };
   }

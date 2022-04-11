@@ -1,86 +1,104 @@
 import {
   Box,
-  Container,
+  // Container,
   Flex,
   Heading,
   HStack,
-  Link,
   Stack,
-  SimpleGrid,
+  // SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react'
 
-
-import { Layout } from '../../Features/UserModal/components/Layout'
+import { useSelector } from 'react-redux'
+// import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
-import { cartData } from './_data'
+import {Link} from "react-router-dom";
 
-const CartPage = () => (
-<>
-
-
-  <Box
-    bg={useColorModeValue("white", "gray.800")}
-       shadow="xl"
-    maxW={{
-      base: '3xl',
-      lg: '7xl',
-    }}
-    mx="auto"
-    px={{
-      base: '4',
-      md: '8',
-      lg: '12',
-    }}
-    py={{
-      base: '6',
-      md: '8',
-      lg: '100',
-    }}
-    >
-    <Stack
-      direction={{
-        base: 'column',
-        lg: 'row',
+const CartPage = ()=>{
+  const cart = useSelector(state=> state.cart)
+  return(
+  <>
+    <Box
+      bg={useColorModeValue("white", "gray.800")}
+      shadow="xl"
+      maxW={{
+        base: '3xl',
+        lg: '7xl',
       }}
-      align={{
-        lg: 'flex-start',
+      mx="auto"
+      px={{
+        base: '4',
+        md: '8',
+        lg: '12',
       }}
-      spacing={{
-        base: '8',
-        md: '16',
+      py={{
+        base: '6',
+        md: '8',
+        lg: '100',
       }}
       >
-      <Stack
-        spacing={{
-          base: '8',
-          md: '10',
-        }}
-        flex="2"
+
+      {cart.length > 0 ?
+
+        <Stack
+          direction={{
+            base: 'column',
+            lg: 'row',
+          }}
+          align={{
+            lg: 'flex-start',
+          }}
+          spacing={{
+            base: '8',
+            md: '16',
+          }}
         >
-        <Heading fontSize="2xl" fontWeight="extrabold">
-          Shopping Cart (3 items)
-        </Heading>
 
-        <Stack spacing="6">
-          {cartData.map((item) => (
-            <CartItem key={item.id} {...item} />
-            ))}
+          <Stack
+            spacing={{
+              base: '8',
+              md: '10',
+            }}
+            flex="2"
+          >
+
+            <Heading fontSize="2xl" fontWeight="extrabold">
+              Shopping cart {cart.length} items
+            </Heading>
+
+            <Stack spacing="6">
+              {cart.map((item) => (
+                <CartItem key={item.id} {...item} />
+              ))}
+            </Stack>
+
+          </Stack>
+
+          <Flex direction="column" align="center" flex="1">
+
+            <CartOrderSummary />
+
+            <HStack mt="6" fontWeight="semibold">
+              <p>or</p>
+              <Link to="/home">Continue searching</Link>
+            </HStack>
+
+          </Flex>
         </Stack>
-      </Stack>
+      :
+        <div>
 
-      <Flex direction="column" align="center" flex="1">
-        <CartOrderSummary />
-        <HStack mt="6" fontWeight="semibold">
-          <p>or</p>
-          <Link color={useColorModeValue('blue.500', 'blue.200')}   href={"/home"} >Continue searching</Link>
-        </HStack>
-      </Flex>
-    </Stack>
-  </Box>
-          
-            </>
-)
+            <Link to="/home">
+              <button>Go to Home</button>
+            </Link>
+          <p>No items</p>
+
+        </div>
+      }
+
+    </Box>
+  </>
+)}
 
 export default CartPage;

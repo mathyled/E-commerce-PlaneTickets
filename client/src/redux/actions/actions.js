@@ -66,6 +66,7 @@ export const getOfferDetails = (id) => {
 
 export const getFlights = ({ airline, date }) => {
   console.log(airline, date);
+
   return async (dispatch) => {
     var { data } = await axios.get(
       `http://localhost:3001/api/flights?city=${airline}&date=${date}`
@@ -73,7 +74,7 @@ export const getFlights = ({ airline, date }) => {
     // console.log("JSON",json)
     return dispatch({
       type: TYPES.GET_FLIGHTS,
-      payload: data.data, // [{}]
+      payload: { data: data.data, isSearching: false }, // [{}]
     });
   };
 };
@@ -108,6 +109,7 @@ export const postFlight = (payload) => {
   };
 };
 
+
 export const getItineraries = () => {
   return async (dispatch) => {
     var res = await axios.get("http://localhost:3001/api/itineraries");
@@ -132,3 +134,54 @@ export const deleteItinerary = (id) => {
     payload: id,
   };
 };
+
+export const isOnSearch = (boolean) => {
+  return {
+    type: TYPES.IS_ON_SEARCH,
+    payload: boolean,
+  };
+};
+
+/////////////////ACTIONS CART ////////////////////////////////////
+
+export const addToCart = (id) => {
+  return {
+    type: TYPES.ADD_TO_CART,
+    payload: id,
+  };
+};
+export const removeFromCart = (id) => {
+  // console.log("action id",id)
+  return {
+    type: TYPES.REMOVE_FROM_CART,
+    payload: id,
+  };
+};
+
+export const addQuatity = (id, total) => {
+  // console.log("action total", id, total)
+  return {
+    type: TYPES.ADD_QUANTITY,
+    payload: {id, total}
+  };
+};
+
+export const calculateTotal = () => {
+  return {
+    type: TYPES.CALCULATE_TOTAL,
+  };
+};
+// export const addCart = () => {
+//   return {
+//     type: TYPES.RESET_STATES,
+//     payload: {},
+//   };
+// };
+
+export const loadCurrentItem = (item) => {
+  return {
+    type: TYPES.LOAD_CURRENT_ITEM,
+    payload: item,
+  };
+};
+

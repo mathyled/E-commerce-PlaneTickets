@@ -26,6 +26,7 @@ const getCities = () => {
         citiesData[i].airports = [];
         for(let j = 0; j < airportsData.length; j++) {
             if(citiesData[i]["codeIataCity"] === airportsData[j]["codeIataCity"]) {
+                citiesData[i]["nameCountry"] = airportsData[j]["nameCountry"];
                 citiesData[i]["airports"].push(airportsData[j])
             };
         };

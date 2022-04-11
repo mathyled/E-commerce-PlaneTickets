@@ -1,11 +1,10 @@
-const { itineraryModel } = require("../../models");
+const { ItineraryModel } = require("../../models");
 
 const updateItinerarie = async (req, res) => {
+  const id = { _id: req.params.id };
+  const update = req.body;
   try {
-    const id = { _id: req.params.id };
-    const update = req.body;
-
-    itineraryModel.findOneAndUpdate(
+    ItineraryModel.findOneAndUpdate(
       id,
       update,
       { new: true },

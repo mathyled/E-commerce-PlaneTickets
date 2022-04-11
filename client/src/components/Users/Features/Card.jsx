@@ -4,13 +4,16 @@ import {
   Image,
   Flex,
   Icon,
+  Spacer,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { MdHeadset, MdEmail, MdLocationOn } from "react-icons/md";
-import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
+import { MdHeadset, MdTimer, MdLocationOn } from "react-icons/md";
+import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs"; 
+import { GiCommercialAirplane } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { FavouriteButton } from "./FavouriteButton";
 
-function Card({ id, origin, destination, price, image }) {
+function Card({ id, origin, destination, price, image, departureTime,airline }) {
   return (
     <div>
       <Flex
@@ -30,14 +33,24 @@ function Card({ id, origin, destination, price, image }) {
           boxShadow={
             "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
           }
+
           _hover={{
             bg: "teal.50",
+            transform: "translateY(2px)",
+            boxShadow: "lg",
           }}
           _focus={{
             bg: "teal.50",
           }}
         >
           <Link to={`/detailspage${id}`}>
+            <Box
+                 _hover={{
+            
+                   filter:'auto',
+                    blur:'2px'
+                }}
+            >
             <Image
               w="full"
               h={56}
@@ -46,13 +59,20 @@ function Card({ id, origin, destination, price, image }) {
               src={image}
               alt="avatar"
             />
+
+            </Box>
           </Link>
+          <FavouriteButton
+          position="absolute"
+          top="4"
+          right="4"
+        />
 
           <Flex alignItems="center" px={6} py={3} bg="gray.900">
-            <Icon as={BsFillBriefcaseFill} h={6} w={6} color="white" />
+            <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-              Heading North
+             {airline || "Airline information to be updated "}
             </chakra.h1>
           </Flex>
 
@@ -62,7 +82,7 @@ function Card({ id, origin, destination, price, image }) {
               fontWeight="bold"
               color={useColorModeValue("gray.800", "white")}
             >
-              {}
+              { }
             </chakra.h1>
 
             {/* <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
@@ -80,6 +100,12 @@ function Card({ id, origin, destination, price, image }) {
               <chakra.h1 px={2} fontSize="sm">
                 {origin}
               </chakra.h1>
+              <Spacer></Spacer>
+
+              <Icon as={MdTimer} h={6} w={6} mr={2} />
+              <chakra.h1 px={2} fontSize="sm">
+                {departureTime}
+              </chakra.h1>
             </Flex>
 
             <Flex
@@ -92,18 +118,14 @@ function Card({ id, origin, destination, price, image }) {
               <chakra.h1 px={2} fontSize="sm">
                 {destination}
               </chakra.h1>
-            </Flex>
-            <Flex
-              alignItems="center"
-              mt={4}
-              color={useColorModeValue("gray.700", "gray.200")}
-            >
+              <Spacer></Spacer>
               <Icon as={BsCurrencyDollar} h={6} w={6} mr={2} />
-
               <chakra.h1 px={2} fontSize="sm">
                 {price}
-              </chakra.h1>
+              </chakra.h1> 
+             
             </Flex>
+        
           </Box>
         </Box>
       </Flex>
