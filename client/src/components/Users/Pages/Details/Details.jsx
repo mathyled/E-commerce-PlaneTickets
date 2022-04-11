@@ -31,10 +31,10 @@ import NavBar from "../../Features/NavBar/NavBar";
 import LoadingPage from "../../Features/Loading/LoadingPage";
 
 export default function Details() {
-  const toast = useToast()
+  const toast = useToast();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const addCart = useSelector(state=> state.cart)
+  const addCart = useSelector((state) => state.cart);
   let cityDetails = useSelector((state) => state.city_details);
   let cityDetailsUsage = cityDetails[0];
   console.log(id);
@@ -48,9 +48,7 @@ export default function Details() {
   console.log("Details 2", cityDetailsUsage);
   return (
     <div>
-      
       {Object.keys(cityDetails).length > 0 ? (
-
         <div>
           <NavBar />
           <Container maxW={"7xl"}>
@@ -70,14 +68,14 @@ export default function Details() {
                   h={{ base: "100%", sm: "400px", lg: "500px" }}
                 />
               </Flex>
-              <Stack spacing={{ base: 6, md: 10 }}>
-                <Box as={"header"}>
+              <Stack spacing={{ base: 1, md: 4 }}>
+                <Box>
                   <Heading
-                    lineHeight={1.1}
                     fontWeight={600}
                     fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   >
-                    {cityDetailsUsage["departure"]["nameCity"]}, {cityDetailsUsage["departure"]["nameCountry"]}
+                    {cityDetailsUsage["arrival"]["nameCity"]},{" "}
+                    {cityDetailsUsage["arrival"]["nameCountry"]}
                   </Heading>
                   <Text
                     color={
@@ -95,7 +93,8 @@ export default function Details() {
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
-                    {cityDetailsUsage["airline"]["name"] && "Airline: " + cityDetailsUsage["airline"]["name"]}
+                    {cityDetailsUsage["airline"]["name"] &&
+                      "Airline: " + cityDetailsUsage["airline"]["name"]}
                   </Text>
                 </Box>
                 <Stack
@@ -131,24 +130,6 @@ export default function Details() {
                       </ListItem>
                       <ListItem>
                         <Text as={"span"} fontWeight={"bold"}>
-                          Departure airport:
-                        </Text>{" "}
-                        {cityDetailsUsage["departure"]["nameAirport"]}
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Scheduled departure time:
-                        </Text>{" "}
-                        {cityDetailsUsage["departure"]["scheduledTime"] + " hs"}
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
-                          Arrival:
-                        </Text>{" "}
-                        {cityDetailsUsage["arrival"]["nameCity"]}, {cityDetailsUsage["arrival"]["nameCountry"]}
-                      </ListItem>
-                      <ListItem>
-                        <Text as={"span"} fontWeight={"bold"}>
                           Arrival airport:
                         </Text>{" "}
                         {cityDetailsUsage["arrival"]["nameAirport"]}
@@ -158,6 +139,26 @@ export default function Details() {
                           Scheduled arrival time
                         </Text>{" "}
                         {cityDetailsUsage["arrival"]["scheduledTime"] + " hs"}
+                      </ListItem>
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
+                          Departure:
+                        </Text>{" "}
+                        {cityDetailsUsage["departure"]["nameCity"]},{" "}
+                        {cityDetailsUsage["departure"]["nameCountry"]}
+                      </ListItem>
+
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
+                          Departure airport:
+                        </Text>{" "}
+                        {cityDetailsUsage["departure"]["nameAirport"]}
+                      </ListItem>
+                      <ListItem>
+                        <Text as={"span"} fontWeight={"bold"}>
+                          Scheduled departure time:
+                        </Text>{" "}
+                        {cityDetailsUsage["departure"]["scheduledTime"] + " hs"}
                       </ListItem>
                     </List>
                   </Box>
@@ -176,18 +177,16 @@ export default function Details() {
                     transform: "translateY(2px)",
                     boxShadow: "lg",
                   }}
-                  onClick={()=>{ 
-                    addCart.find(item => item._id=== id ) ? 
-                    toast({
-                      description: "Already added to cart",
-                      status: 'error',
-                      duration: 9000,
-                      isClosable: true,
-                    })
-                    :
-                    dispatch(addToCart(id))
-                  }
-                  }
+                  onClick={() => {
+                    addCart.find((item) => item._id === id)
+                      ? toast({
+                          description: "Already added to cart",
+                          status: "error",
+                          duration: 9000,
+                          isClosable: true,
+                        })
+                      : dispatch(addToCart(id));
+                  }}
                 >
                   Add to cart
                 </Button>

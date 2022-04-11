@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
+import { Search2Icon, CalendarIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { getFlights, isOnSearch } from "../../../../redux/actions/actions";
@@ -79,13 +79,20 @@ function SearchBar() {
   return (
     <Box>
       <Flex>
-        <InputGroup>
-          <InputLeftElement children={<Search2Icon opacity="40%" />} />
+        <InputGroup width={200}>
+          <InputLeftElement
+            children={<Search2Icon opacity="60%" />}
+            color={useColorModeValue("grey.200", "Black")}
+          />
           <Input
             marginRight="2px"
-            width={200}
+            width={"100%"}
             bg="white"
             type="text"
+            _placeholder={{
+              color: useColorModeValue("grey.200", "Black"),
+            }}
+            color="black"
             name="airline"
             variant="flushed"
             placeholder="Search a origin..."
@@ -102,26 +109,32 @@ function SearchBar() {
               </option>
             ))}
           </datalist>
-          <Input
-            width={200}
-            bg="white"
-            name="date"
-            variant="flushed"
-            placeholder="Departure Date"
-            type={isFocus ? "date" : "text"}
-            onFocus={(e) => {
-              setIsFocus(true);
-            }}
-            onBlur={() => {
-              setIsFocus(false);
-            }}
-            min={getAfterDate()}
-            onChange={
-              //setTempInput({...tempInput,tempAirline:e.target.value})
-              handlerOnChange
-            }
-          />
         </InputGroup>
+
+        <Input
+          _placeholder={{
+            color: useColorModeValue("grey.200", "Black"),
+          }}
+          textAlign="center"
+          color="black"
+          width={200}
+          bg="white"
+          name="date"
+          variant="flushed"
+          placeholder="Departure Date"
+          type={isFocus ? "date" : "text"}
+          onFocus={(e) => {
+            setIsFocus(true);
+          }}
+          onBlur={() => {
+            setIsFocus(false);
+          }}
+          min={getAfterDate()}
+          onChange={
+            //setTempInput({...tempInput,tempAirline:e.target.value})
+            handlerOnChange
+          }
+        />
         <Button
           colorScheme="blue"
           _hover={{ bg: "blue.800", color: "white" }}
