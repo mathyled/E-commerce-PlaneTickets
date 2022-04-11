@@ -10,7 +10,7 @@ import {
     Center,
 } from '@chakra-ui/react';
 
-export default function UserMenu({logout,photo,name}) {
+export default function UserMenu({logout,photo,name, myPlans}) {
     return (
         <>
             <Menu>
@@ -39,8 +39,8 @@ export default function UserMenu({logout,photo,name}) {
                     </Center>
                     <br />
                     <MenuDivider />
-                    {/* <MenuItem>Your Servers</MenuItem>
-                    <MenuItem>Account Settings</MenuItem> */}
+                     <MenuItem onClick={myPlans}>My Plans</MenuItem>
+                    {/*<MenuItem>Account Settings</MenuItem> */}
                     <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
             </Menu>

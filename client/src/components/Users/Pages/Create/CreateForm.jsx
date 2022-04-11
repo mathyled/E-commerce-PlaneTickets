@@ -4,30 +4,14 @@ import {
   Stack,
   Heading,
   Text,
-  Input,
-  Button,
-  FormControl,
-  FormLabel,
-  Textarea,
   useColorModeValue,
-  useToast,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 
-import { useFormik } from "formik";
 import NavBar from "../../Features/NavBar/NavBar";
-import * as Yup from "yup";
-import { postFlight } from "../../../../redux/actions/actions";
-import { useDispatch } from "react-redux";
 
-import { useNavigate } from "react-router-dom";
+import PlanForm from "../../Features/PlanForm/PlanForm";
 
 function CreateForm() {
-  // const [input, setInput] = useState({
-  //   origin: "",
-  //   destiny: "",
-  //   comments: "",
-  // });
   // function Blur(IconProps) {
   //   return (
   //     <Icon
@@ -43,36 +27,6 @@ function CreateForm() {
   //     </Icon>
   //   );
   // }
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const toast = useToast();
-  const formik = useFormik({
-    initialValues: {
-      origin: "",
-      destination: "",
-      comment: "",
-    },
-    onSubmit: (values, actions) => {
-      console.log("El plan creado...", values);
-      dispatch(postFlight(values));
-      actions.resetForm();
-      navigate("/home");
-      toast({
-        title: "Flight Plan Created Successfully!",
-        status: "success",
-        duration: 3000,
-      });
-    },
-    validationSchema: Yup.object({
-      origin: Yup.string()
-        .required("This field is required!")
-        .min(4, "The origin place is too short!"),
-      destination: Yup.string()
-        .required("This field is required!")
-        .min(4, "The destination place is too short!"),
-      comment: Yup.string(),
-    }),
-  });
 
   return (
     <div>
@@ -131,69 +85,7 @@ function CreateForm() {
                     from the admin so that other users can purchase it
                   </Text>
                 </Stack>
-                <Box as="form" onSubmit={formik.handleSubmit} spacing={6}>
-                  <FormControl
-                    isRequired
-                    isInvalid={formik.errors.origin && formik.touched.origin}
-                  >
-                    <FormLabel>What is your origin place?</FormLabel>
-                    <Input
-                      name="origin"
-                      value={formik.values.origin}
-                      placeholder="Origin..."
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    <FormErrorMessage>{formik.errors.origin}</FormErrorMessage>
-                  </FormControl>
-
-                  <FormControl
-                    isRequired
-                    isInvalid={
-                      formik.errors.destination && formik.touched.destination
-                    }
-                  >
-                    <FormLabel>
-                      What is your destination you want to travel?
-                    </FormLabel>
-
-                    <Input
-                      name="destination"
-                      value={formik.values.destination}
-                      placeholder="destination..."
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    <FormErrorMessage>
-                      {formik.errors.destination}
-                    </FormErrorMessage>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>
-                      Do you have any comments about this travel? Let us know!
-                    </FormLabel>
-                    <Textarea
-                      name="comment"
-                      value={formik.values.comment}
-                      placeholder="Type here..."
-                      onChange={formik.handleChange}
-                    />
-                  </FormControl>
-                  <Button
-                    fontFamily={"heading"}
-                    mt={8}
-                    w={"full"}
-                    bgGradient="linear(to-r,teal.400,teal.300)"
-                    color={"white"}
-                    _hover={{
-                      bgGradient: "linear(to-r, teal.400,teal.300)",
-                      boxShadow: "xl",
-                    }}
-                    type="submit"
-                  >
-                    Submit my ideal trip
-                  </Button>
-                </Box>
+                <PlanForm type="create"/>
               </Stack>
             </Box>
           </Stack>

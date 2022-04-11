@@ -4,6 +4,7 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
+  itineraries: [],
   isSearching: false,
   ///CART ///////////
   products: [], // { id, origin, destination, price, image, departureTime }
@@ -11,6 +12,7 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   totalCalculado: 0
+
 
 };
 
@@ -108,7 +110,7 @@ function rootReducer(state = initialState, action) {
               return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
             }));
       }
-      if (action.payload.schedule != "") {
+      if (action.payload.schedule !== "") {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
               if (a.departure.scheduledTime === undefined) {
@@ -196,6 +198,19 @@ function rootReducer(state = initialState, action) {
     case TYPES.POST_FLIGHT:
       return {
         ...state,
+      };
+    case TYPES.GET_ITINERARIES:
+      return {
+        ...state,
+        itineraries: action.payload,
+      };
+    // case TYPES.PUT_ITINERARY:
+    //   return{
+
+    //   }
+    case TYPES.DELETE_ITINERARY:
+      return {
+        ...state.itineraries.filter((el) => el.id !== action.payload),
       };
 
     //// CART ////////////
