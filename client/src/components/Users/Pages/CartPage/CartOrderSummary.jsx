@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../context/AuthContext';
 import { calculateTotal } from '../../../../redux/actions/actions';
-
+import defaultPhoto from "../../../../assets/defaultPhoto.png"
 const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9JxuyO4pQQBz70izz0LQeKE29rVsQNZZ5YtjcOT0zc00jGxHBB6r"
 
 export const CartOrderSummary = () => {
@@ -87,11 +87,11 @@ export const CartOrderSummary = () => {
               {currentUser ?
                 <StripeCheckout
                   name="Heading North"
-                  image="#"
+                  image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"
                   billingAddress
                   shippingAddress
-                  description=" Your total is $ 73"
-                  amount={2000}
+                  description={`Your total is $ ${totalCalculated}`}
+                  amount={totalCalculated *100}
                   token={onToken}
                   stripeKey={STRIPE_KEY}
                 >

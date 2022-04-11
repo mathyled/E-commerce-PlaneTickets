@@ -61,6 +61,14 @@ function Order() {
           price: false,
         });
         break;
+        default:
+          setInputs({
+            ...inputs,
+            [e.target.name]: e.target.checked,
+            to: false,
+            price: false,
+            schedule: false,
+          })
     }
   }
 
