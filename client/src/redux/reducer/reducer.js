@@ -265,7 +265,7 @@ function rootReducer(state = initialState, action) {
         const carrito = state.cart;
         let pos = carrito.map(e => e._id).indexOf(action.payload.id);
         let itemchange = carrito[pos];
-        itemchange.price = action.payload.total;
+        itemchange.quantity = action.payload.quantity;
         carrito[pos] = itemchange
         return{
           ...state,
