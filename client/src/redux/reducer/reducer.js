@@ -4,6 +4,9 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
+
+  favoriteCard: [],
+
   itineraries: [],
   isSearching: false,
   ///CART ///////////
@@ -12,6 +15,7 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   totalCalculado: 0
+
 
 
 };
@@ -199,6 +203,20 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+
+    case TYPES.ADD_FAVORITE:
+      return {
+        ...state,
+        favoriteCard: state.favoriteCard.concat(action.payload),
+      };
+    case TYPES.REMOVE_FAVORITE:
+      return {
+        ...state,
+        favoriteCard: state.favoriteCard.filter(
+          (card) => card.id !== action.payload
+        ),
+      };
+
     case TYPES.GET_ITINERARIES:
       return {
         ...state,
@@ -266,6 +284,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           totalCalculado: total,
         };
+
 
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {

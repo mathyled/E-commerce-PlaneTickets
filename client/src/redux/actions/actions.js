@@ -99,6 +99,20 @@ export const resetStates = () => {
   };
 };
 
+export function addFavorite(payload) {
+  return {
+    type: TYPES.ADD_FAVORITE,
+    payload: payload,
+  };
+}
+
+export function removeFavorite(payload) {
+  return {
+    type: TYPES.REMOVE_FAVORITE,
+    payload: payload,
+  };
+}
+
 export const postFlight = (payload) => {
   return async (dispatch) => {
     var res = await axios.post(

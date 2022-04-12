@@ -10,10 +10,14 @@ import LandingPage from "./components/Users/Features/Landing/LandingPage";
 import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
+
+import Favorite from "./components/Users/Features/Favorite/Favorite";
+
 import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
 import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
+
 
 
 function App() {
@@ -35,6 +39,9 @@ function App() {
            <Route exact path="/success" element={<SuccessBuy />} />
         </Route>
 
+
+        <Route exact path="/favorite" element={<Favorite />} />
+
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
         <Route exact path="/loadingtest" element={<LoadingPage />} /> 
@@ -42,6 +49,7 @@ function App() {
       
           
         <Route exact path="*" element={<NotfoundPage />} />
+
 
       </Routes>
     </div>

@@ -1,8 +1,12 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-lone-blocks */
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
+import { Link } from "react-router-dom";
 import Paged from "./Paged/Paged";
+
 import {
   SimpleGrid,
   Text,
@@ -11,6 +15,7 @@ import {
   Alert,
   AlertTitle,
 } from "@chakra-ui/react";
+
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
 import { getCities } from "../../../redux/actions/actions";
@@ -19,11 +24,13 @@ import LoadingSection from "./Loading/LoadingSection";
 
 export default function Home() {
   const dispatch = useDispatch();
+
   let cities = useSelector((state) => state.city);
   const search = useSelector((state) => state.search);
   const IsOnSearch = useSelector((state) => state.isSearching);
 
   const [isLoading, setIsLoading] = useState(true);
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
@@ -33,10 +40,18 @@ export default function Home() {
     indexOfFirstCharacter,
     indexOfLastCharacter
   );
+  const [buttons, setButtons] = React.useState([]);
+  const [subArray, setSubArray] = React.useState([]);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+
+ // function setFavorite(Card) {
+  //  dispatch(addFavorite(Card));
+  //  alert("Add to Favorite Successfully!");
+  //}
 
   console.log(IsOnSearch);
   useEffect(() => {
@@ -44,6 +59,7 @@ export default function Home() {
       setIsLoading(false);
     }
   }, [search]);
+
 
   useEffect(() => {
     dispatch(getCities());
@@ -62,17 +78,20 @@ export default function Home() {
           currentPage={currentPage}
         />
         {IsOnSearch ? <LoadingSection /> : <></>}
+
         <SimpleGrid columns={[2, null, 3]} spacing="40px">
           {currentTickets &&
           currentTickets.length === 1 &&
           currentTickets[0]?.departure === undefined &&
           currentTickets[0]?.arrival === undefined ? (
+
             <Center width={"100vw"}>
               <Alert width={80} status="error">
                 <AlertIcon />
                 <AlertTitle mr={2}> Not flight avaiable!</AlertTitle>
               </Alert>
             </Center>
+
           ) : (
             currentTickets.map((o) => {
               {
@@ -97,6 +116,23 @@ export default function Home() {
           )}
         </SimpleGrid>
       </div>
+
+
+  //    <div>
+   //     {subArray.length !== 0 ? ( subArray its not define
+   //       subArray.map((Card) => (
+   //         <div>
+    //          <Link to={`//api/flights/detail/${Card.id}`}>
+      //          <Card props={Card} onClick={() => onClick(Card.id)} />
+        //      </Link>
+          //    <buttons onClick={() => setFavorite(Card)}> AddF </buttons>
+            //</div>
+         // ))
+       // ) : (
+        //  <p>Card not found.</p>
+       // )}
+     // </div>
+
     </div>
   );
 }
