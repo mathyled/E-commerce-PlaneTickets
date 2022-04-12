@@ -23,6 +23,9 @@ const FlightsScheme = new mongoose.Schema(
     codeshared: {
       type: Object,
     },
+    date: {
+      type: String,
+    },
     price: {
       type: Number,
     },
