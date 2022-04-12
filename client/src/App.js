@@ -11,7 +11,7 @@ import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
 import Demo from "./components/Users/Features/Autocomplete";
-
+import Favorite from "./components/Users/Features/Favorite/Favorite";
 
 function App() {
   return (
@@ -29,10 +29,10 @@ function App() {
 
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
 
-        <Route exact path="*" element={<NotfoundPage />} /> 
-        <Route exact path="/cart" element={< CartPage />} /> 
-        <Route exact path="/demo" element={< Demo />} /> 
-      
+        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="/cart" element={<CartPage />} />
+        <Route exact path="/demo" element={<Demo />} />
+        <Route exact path="/favorite" element={<Favorite />} />
       </Routes>
     </div>
   );

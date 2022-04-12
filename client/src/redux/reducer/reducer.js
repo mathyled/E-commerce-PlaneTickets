@@ -5,6 +5,7 @@ const initialState = {
   city_details: {},
   cityBackUp: [],
   search: [],
+  favoriteCard: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -182,6 +183,18 @@ function rootReducer(state = initialState, action) {
     case TYPES.POST_FLIGHT:
       return {
         ...state,
+      };
+    case TYPES.ADD_FAVORITE:
+      return {
+        ...state,
+        favoriteCard: state.favoriteCard.concat(action.payload),
+      };
+    case TYPES.REMOVE_FAVORITE:
+      return {
+        ...state,
+        favoriteCard: state.favoriteCard.filter(
+          (card) => card.id !== action.payload
+        ),
       };
 
     default:
