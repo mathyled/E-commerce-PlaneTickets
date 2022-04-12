@@ -58,10 +58,9 @@ function SearchBar() {
     var arr = e.target.value.split(",");
     var relation = search.filter(
       (city) =>
-        city.nameCity.toLowerCase().includes(arr[0].toLowerCase()) &&
+        city.nameCity.toLowerCase() === arr[0].toLowerCase() &&
         city.nameCountry
-          ?.toLowerCase()
-          .includes(arr[1]?.replace(" ", "").toLowerCase())
+          ?.toLowerCase() === arr[1]?.replace(" ", "").toLowerCase()
     );
     // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
     if (relation.length > 0) {
