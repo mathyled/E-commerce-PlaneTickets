@@ -1,20 +1,15 @@
-const Cart = require("../models/Cart");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
+const { CartModel } = require("../../models/");
 
-const router = require("express").Router();
+const getUserCart = async (req, res) => {
+  try {
+    const cart = await CartModel.findOne({ userId: req.params.userId });
+    res.status(200).send({ message: "Cart retrieved successfully", cart });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: `Error retrieving cart: ${err}` });
+  }
+};
 
-
-const getCart= async (req, res) => {
-    try {
-      const cart = await Cart.findOne({ userId: req.params.userId });
-      res.status(200).json(cart);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  };
-
-  module.exports = router
+module.exports = {
+  getUserCart,
+};
