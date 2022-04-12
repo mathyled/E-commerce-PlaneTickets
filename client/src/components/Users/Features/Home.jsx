@@ -118,7 +118,7 @@ export default function Home() {
       </div>
 
 
-  //    <div>
+  {/* //    <div>
    //     {subArray.length !== 0 ? ( subArray its not define
    //       subArray.map((Card) => (
    //         <div>
@@ -131,7 +131,7 @@ export default function Home() {
        // ) : (
         //  <p>Card not found.</p>
        // )}
-     // </div>
+     // </div> */}
 
     </div>
   );
