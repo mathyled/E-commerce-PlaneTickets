@@ -1,17 +1,16 @@
-const { flightCartDb } = require("../../models");
+const { FlightCartModel } = require("../../models");
 
 const deleteFlightCart = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await flightCartDb.findByIdAndDelete(id);
-        res.status(200).send({ status: "success", data: "deleted flight" });
-    }
-    catch(error) {
-        console.log(error);
-        res.status(400).send({ message: "error deleting flight" });
-    };
+  try {
+    const { id } = req.params;
+    await FlightCartModel.findByIdAndDelete(id);
+    res.status(200).send({ status: "success", data: "deleted flight" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: "error deleting flight" });
+  }
 };
 
 module.exports = {
-    deleteFlightCart,
+  deleteFlightCart,
 };

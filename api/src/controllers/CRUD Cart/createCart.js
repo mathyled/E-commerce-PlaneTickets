@@ -1,21 +1,16 @@
-const Cart = require("../models/Cart");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
+const { CartModel } = require("../../models/");
 
-const router = require("express").Router();
+const createCart = async (req, res) => {
+  new CartModel(req.body);
 
-                  
-const newCart = async (req, res) => {
-    new Cart(req.body);
-
-try {
-  const savedCart = await newCart.save();
-  res.status(200).json(savedCart);
-} catch (err) {
-  res.status(500).json(err);
-}
+  try {
+    const savedCart = await newCart.save();
+    res.status(200).send({ message: "Cart has been created...", savedCart });
+  } catch (err) {
+    res.status(400).json({ mesasge: "Cart has not been created...", err });
+  }
 };
-module.exports = router
+
+module.exports = {
+  createCart,
+};

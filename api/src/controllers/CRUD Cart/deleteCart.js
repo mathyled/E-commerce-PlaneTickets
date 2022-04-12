@@ -1,19 +1,14 @@
-const Cart = require("../models/Cart");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
-
-const router = require("express").Router();
+const { CartModel } = require("../../models/");
 
 const deleteCart = async (req, res) => {
-    try {
-      await Cart.findByIdAndDelete(req.params.id);
-      res.status(200).json("Cart has been deleted...");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  };
+  try {
+    await CartModel.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Cart has been deleted..." });
+  } catch (err) {
+    res.status(400).send({ message: "Cart has not been deleted...", err });
+  }
+};
 
-module.exports = router
+module.exports = {
+  deleteCart,
+};
