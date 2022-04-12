@@ -14,9 +14,7 @@ const initialState = {
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   qtySelect: 0,
-  totalCalculado: 0
-
-
+  calculatedTotal: 0
 
 };
 
@@ -282,9 +280,8 @@ function rootReducer(state = initialState, action) {
         };
         return{
           ...state,
-          totalCalculado: total,
-        };
-
+          calculatedTotal: total,
+        }
 
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {

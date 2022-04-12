@@ -16,13 +16,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../context/AuthContext';
 import { calculateTotal } from '../../../../redux/actions/actions';
-import defaultPhoto from "../../../../assets/defaultPhoto.png"
+// import defaultPhoto from "../../../../assets/defaultPhoto.png"
 const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9JxuyO4pQQBz70izz0LQeKE29rVsQNZZ5YtjcOT0zc00jGxHBB6r"
 
 export const CartOrderSummary = () => {
   const toast = useToast()
   // const cart = useSelector(state => state.cart)
-  const totalCalculated = useSelector(state => state.totalCalculado);
+  const calculatedTotal = useSelector(state => state.calculatedTotal);
   const dispatch = useDispatch();
   const { currentUser } = useAuth()
   const navigate = useNavigate()
@@ -62,7 +62,7 @@ export const CartOrderSummary = () => {
           </Text>
 
           <Text fontSize="xl" fontWeight="extrabold">
-            {totalCalculated}
+            {calculatedTotal}
           </Text>
 
         </Flex>
@@ -90,8 +90,8 @@ export const CartOrderSummary = () => {
                   image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"
                   billingAddress
                   shippingAddress
-                  description={`Your total is $ ${totalCalculated}`}
-                  amount={totalCalculated *100}
+                  description={`Your total is $ ${calculatedTotal}`}
+                  amount={calculatedTotal *100}
                   token={onToken}
                   stripeKey={STRIPE_KEY}
                 >
