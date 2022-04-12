@@ -11,7 +11,6 @@ const getAllCities = (req, res) => {
       };
       return 0;
     });
-    console.log(citiesData);
     res.status(200).send({ message: "success", data: citiesData });
 };
 
