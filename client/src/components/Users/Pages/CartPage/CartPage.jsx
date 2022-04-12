@@ -9,14 +9,26 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
 import {Link} from "react-router-dom";
+import { addQuatity } from '../../../../redux/actions/actions';
 
 const CartPage = ()=>{
-  const cart = useSelector(state=> state.cart)
+  const dispatch = useDispatch();
+  const cart = useSelector(state=> state.cart);
+
+  function onChangeQuantity(e) {
+    // setQtySelect(
+    //   [e.target.name] = e.target.value
+    // );
+    dispatch(addQuatity(e.target.id, e.target.value))
+    // dispatch(calculateTotal())
+    console.log("CartPage", e.target.id, e.target.value);
+  }
+
   return(
   <>
     <Box
@@ -67,7 +79,7 @@ const CartPage = ()=>{
               Shopping cart {cart.length} items
             </Heading>
 
-            <Stack spacing="6">
+            <Stack spacing="6" onChange={onChangeQuantity}>
               {cart.map((item) => (
                 <CartItem key={item.id} {...item} />
               ))}

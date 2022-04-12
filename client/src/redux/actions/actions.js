@@ -172,11 +172,11 @@ export const removeFromCart = (id) => {
   };
 };
 
-export const addQuatity = (id, total) => {
-  // console.log("action total", id, total)
+export const addQuatity = (id, quantity) => {
+  console.log("ACTION", id, quantity)
   return {
     type: TYPES.ADD_QUANTITY,
-    payload: {id, total}
+    payload: {id, quantity}
   };
 };
 
