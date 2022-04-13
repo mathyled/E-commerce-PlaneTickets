@@ -9,7 +9,7 @@ import Paged from "./Paged/Paged";
 import { SimpleGrid } from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
-import { getCities, addFavorite } from "../../../redux/actions/actions";
+import { getCities } from "../../../redux/actions/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const cities = useSelector((state) => state.city);

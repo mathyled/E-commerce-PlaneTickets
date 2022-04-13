@@ -6,7 +6,7 @@ import {
   Icon,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { MdLocationOn } from "react-icons/md";
+import { MdHeadset, MdEmail, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
