@@ -103,7 +103,7 @@ function SearchBar() {
           />
           <datalist id="cities">
             {search.map((e) => (
-              <option key={e._id}>
+              <option key={ Date() + Math.random(e.nameCity.length) }>
                 {e.nameCity}, {e.nameCountry}
               </option>
             ))}
