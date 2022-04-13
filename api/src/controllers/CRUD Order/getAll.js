@@ -1,14 +1,14 @@
 const { OrderModel } = require("../../models");
 
-const getAll = async (req, res) => {
-    try {
-      const orders = await OrderModel.find();
-      res.status(200).json(orders);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  };
+const getAllOrder = async (req, res) => {
+  try {
+    const orders = await OrderModel.find();
+    res.status(200).send({ message: "Orders retrieved successfully", orders });
+  } catch (err) {
+    res.status(400).send({ message: `Error retrieving orders: ${err}` });
+  }
+};
 
-  module.exports = { 
-    getAll,
+module.exports = {
+  getAllOrder,
 };

@@ -101,7 +101,7 @@ function NavBar() {
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
-                photo={currentUser.photoURL}
+                photo={currentUser?.photoURL}
                 name={currentUser.displayName}
               />
             )}
