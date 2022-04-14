@@ -14,20 +14,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
 import {Link} from "react-router-dom";
-import { addQuatity } from '../../../../redux/actions/actions';
+import { calculateTotal, updateQuantity } from '../../../../redux/actions/actions';
 
 const CartPage = ()=>{
   const dispatch = useDispatch();
   const cart = useSelector(state=> state.cart);
 
   function onChangeQuantity(e) {
-    // setQtySelect(
-    //   [e.target.name] = e.target.value
-    // );
-    dispatch(addQuatity(e.target.id, e.target.value))
-    // dispatch(calculateTotal())
-    console.log("CartPage", e.target.id, e.target.value);
-  }
+    dispatch(updateQuantity(e.target.id, e.target.value))
+    dispatch(calculateTotal())
+  };
 
   return(
   <>

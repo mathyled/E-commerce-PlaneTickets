@@ -15,6 +15,9 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
+
+  user:""
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -251,7 +254,7 @@ function rootReducer(state = initialState, action) {
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             )
-          : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
+          : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
     case TYPES.REMOVE_FROM_CART:
@@ -260,25 +263,42 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
 
-    case TYPES.ADD_QUANTITY:
-      const carrito = state.cart;
-      let pos = carrito.map((e) => e._id).indexOf(action.payload.id);
-      let itemchange = carrito[pos];
-      itemchange.quantity = action.payload.quantity;
-      carrito[pos] = itemchange;
-      return {
-        ...state,
-        cart: carrito,
-      };
-    case TYPES.CALCULATE_TOTAL:
-      let total = 0;
-      if (state.cart.length > 0) {
-        total = state.cart.reduce((prev, next) => prev + next.price, 0);
-      }
-      return {
-        ...state,
-        calculatedTotal: total,
-      };
+
+      case TYPES.ADD_QUANTITY:
+        const cartCopy = state.cart;
+        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = cartCopy[pos];
+        itemchange.quantity = action.payload.quantity;
+        itemchange.price = itemchange.total * action.payload.quantity;
+        cartCopy[pos] = itemchange
+        return{
+          ...state,
+          cart: cartCopy
+        };
+      case TYPES.CALCULATE_TOTAL:
+        let total = 0;
+        if(state.cart.length > 0) {
+          total = state.cart.reduce((prev, next) => prev + next.price,
+            0
+          );
+        };
+        return{
+          ...state,
+          calculatedTotal: total,
+        };
+
+        case TYPES.SIGN_UP :
+          return{
+            ...state,
+            user:action.payload
+          }
+
+          case TYPES.SIGN_IN :
+            return{
+              ...state,
+              user:action.payload
+            }
+
 
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {

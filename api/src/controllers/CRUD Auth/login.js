@@ -3,11 +3,13 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
+
   try {
+
     const user = await UserModel.findOne({ username: req.body.username });
 
     if (!user) {
-      res.status(400).send({ message: "User not found" });
+      res.status(200).send({ message: "User not found" });
     }
     ///////
     else if (user.status === "Pending") {
@@ -27,7 +29,7 @@ const login = async (req, res) => {
       const inputPassword = req.body.password;
 
       originalPassword != inputPassword &&
-        res.status(400).send({ message: "Wrong Password" });
+        res.status(200).send({ message: "Wrong Password" });
 
       const accessToken = jwt.sign(
         {
@@ -37,10 +39,11 @@ const login = async (req, res) => {
         process.env.JWT_SEC,
         { expiresIn: "3d" }
       );
-
+ user && res.status(200).send({ message: "Sign In" });
       const { password, ...others } = user._doc;
       res.status(200).send({ ...others, accessToken });
     }
+
   } catch (err) {
     res.status(403).send({ message: `Error logging in: ${err}` });
   }

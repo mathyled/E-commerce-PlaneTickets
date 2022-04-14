@@ -6,6 +6,7 @@ const { sendConfirmationEmail } = require("../../helpers/nodemailer.config");
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
+
   // token for email confirmation
   const accesToken = jwt.sign(
     {
@@ -17,12 +18,12 @@ const register = async (req, res) => {
   // verify if user exists
   const user = await UserModel.findOne({ username });
   if (user) {
-    res.status(400).send({ message: "User already exists" });
+    res.status(200).send({ message: "User already exists" });
   } else {
     //verify if email exists
     const user = await UserModel.findOne({ email });
     if (user) {
-      res.status(400).send({ message: "Email already exists" });
+      res.status(200).send({ message: "Email already exists" });
     } else {
       // create user
       const user = new UserModel({
@@ -46,6 +47,7 @@ const register = async (req, res) => {
       sendConfirmationEmail(user.username, user.email, user.confirmationCode);
     }
   }
+
 };
 
 module.exports = {
