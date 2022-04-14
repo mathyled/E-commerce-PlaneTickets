@@ -1,8 +1,10 @@
-const { UserModel } = require("../models");
+const { UserModel } = require("../../models");
 
 const verifyUser = (req, res) => {
+  const {confirmationCode} = req.params
+  console.log("CONF",confirmationCode)
   UserModel.findOne({
-    confirmationCode: req.params.confirmationCode,
+    confirmationCode: confirmationCode,
   })
     .then((user) => {
       if (!user) {
