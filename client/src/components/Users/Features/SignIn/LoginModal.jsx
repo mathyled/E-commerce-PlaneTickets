@@ -28,8 +28,8 @@ function LoginModal() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Login</ModalHeader>
-          <ModalCloseButton />
+          {/* <ModalHeader>Login</ModalHeader>
+          <ModalCloseButton /> */}
           <ModalBody>
             <LoginForm />
           </ModalBody>
