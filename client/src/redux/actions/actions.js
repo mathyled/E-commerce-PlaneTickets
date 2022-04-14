@@ -175,6 +175,7 @@ export const loadCurrentItem = (item) => {
 };
 
 
+
 export const signUp = (inputs) => {
   return async (dispatch) => {
     try {
@@ -218,3 +219,4 @@ export const signIn = (inputs) => {
 //           isAuthenticated: true,
 //           user: action.payload
 //       }
+
