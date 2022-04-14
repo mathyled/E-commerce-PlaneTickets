@@ -14,7 +14,9 @@ const initialState = {
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   qtySelect: 0,
-  calculatedTotal: 0
+  calculatedTotal: 0,
+
+  user:""
 
 };
 
@@ -255,11 +257,12 @@ function rootReducer(state = initialState, action) {
           : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
-      case TYPES.REMOVE_FROM_CART:
-        return {
-          ...state,
-          cart: state.cart.filter(item=> item._id !== action.payload)
-        };
+    case TYPES.REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item._id !== action.payload),
+      };
+
 
       case TYPES.ADD_QUANTITY:
         const cartCopy = state.cart;
@@ -284,11 +287,25 @@ function rootReducer(state = initialState, action) {
           calculatedTotal: total,
         };
 
+        case TYPES.SIGN_UP :
+          return{
+            ...state,
+            user:action.payload
+          }
+
+          case TYPES.SIGN_IN :
+            return{
+              ...state,
+              user:action.payload
+            }
+
+
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {
     //     ...state,
     //     currentItem: action.payload
     //   }
+
     default:
       return { ...state };
   }
