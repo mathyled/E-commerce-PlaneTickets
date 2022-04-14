@@ -1,7 +1,7 @@
 const { UserModel } = require("../../models");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-// const nodemailer = require("./nodemailer.config");
+
 const { sendConfirmationEmail } = require("../../helpers/nodemailer.config");
 
 const register = async (req, res) => {
@@ -29,7 +29,7 @@ const register = async (req, res) => {
       const user = new UserModel({
         username: username,
         email: email,
-        password: password,
+        password: CryptoJS.AES.encrypt(password, process.env.PASS_SEC),
         confirmationCode: accesToken,
       });
       // save user
@@ -47,7 +47,6 @@ const register = async (req, res) => {
       sendConfirmationEmail(user.username, user.email, user.confirmationCode);
     }
   }
-
 };
 
 module.exports = {
