@@ -252,7 +252,7 @@ function rootReducer(state = initialState, action) {
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             )
-          : [...state.cart, { ...newItem, quantity: 1 }], // [{manzana:3},{perro:1}]
+          : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
       case TYPES.REMOVE_FROM_CART:
@@ -262,14 +262,15 @@ function rootReducer(state = initialState, action) {
         };
 
       case TYPES.ADD_QUANTITY:
-        const carrito = state.cart;
-        let pos = carrito.map(e => e._id).indexOf(action.payload.id);
-        let itemchange = carrito[pos];
+        const cartCopy = state.cart;
+        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = cartCopy[pos];
         itemchange.quantity = action.payload.quantity;
-        carrito[pos] = itemchange
+        itemchange.price = itemchange.total * action.payload.quantity;
+        cartCopy[pos] = itemchange
         return{
           ...state,
-          cart: carrito
+          cart: cartCopy
         };
       case TYPES.CALCULATE_TOTAL:
         let total = 0;
@@ -281,7 +282,7 @@ function rootReducer(state = initialState, action) {
         return{
           ...state,
           calculatedTotal: total,
-        }
+        };
 
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {

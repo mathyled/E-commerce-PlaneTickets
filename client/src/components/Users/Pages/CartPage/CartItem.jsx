@@ -3,8 +3,8 @@ import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/r
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 import { useEffect, useState } from 'react'
-import {addQuatity, calculateTotal, removeFromCart} from "../../../../redux/actions/actions"
-import { useDispatch } from 'react-redux'
+import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
+import { useDispatch, useSelector } from 'react-redux'
 const QuantitySelect = (props) => {
   // console.log("CartItem", props);
   return (
@@ -29,33 +29,29 @@ export const CartItem = (props) => {
   const dispatch = useDispatch()
   let {
     _id,
-    price,
+    total,
     arrival,
     departure,
     quantity
   } = props
-  let [qtySelect, setQtySelect] =  useState(quantity)
+  let [qtySelect, setQtySelect] = useState(quantity)
+
   // qtySelect = quantity;
   // useEffect(() => {
   //   setQtySelect(quantity);
   // }, [dispatch, quantity]);
-  console.log("AAAA", quantity)
   
   function onChangeQuantity(e) {
     setQtySelect(e.target.value);
-    // dispatch(addQuatity(_id, e.target.value))
-    // quantity = e.target.value
-    dispatch(calculateTotal())
-    console.log("BBB", quantity)
   }
-  // console.log("ID]",price* qtySelect)
 
   function onClickDelete(e) {
-    e.preventDefault()
+    // e.target.value = qtySelect;
+    // setQtySelect(qtySelect);
     dispatch(removeFromCart(_id))
     dispatch(calculateTotal())
   }
-  console.log("CCC", qtySelect)
+
   return (
     <Flex
       direction={{
@@ -89,7 +85,7 @@ export const CartItem = (props) => {
           onChange={onChangeQuantity}
         />
 
-        <PriceTag price={new Intl.NumberFormat().format(price)} />
+        <PriceTag price={new Intl.NumberFormat().format(total * qtySelect)} />
 
         <CloseButton onClick={onClickDelete} />
 
@@ -114,7 +110,7 @@ export const CartItem = (props) => {
           onChange={onChangeQuantity}
         />
 
-        <PriceTag price={new Intl.NumberFormat().format(price*qtySelect)} />
+        <PriceTag price={new Intl.NumberFormat().format(total * qtySelect)} />
 
         <CloseButton onClick={onClickDelete} />
 
