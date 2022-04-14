@@ -1,22 +1,13 @@
 import {
-  Container,
-  Box,
-  Heading,
-  Stack,
+
   Center,
-  Text,
-  Icon,
+ 
   Button,
-  useColorModeValue,
+
   createIcon,
-  SlideFade,
-  Input,
-  InputGroup,
-  InputLeftAddon,
   HStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import Airport1 from "../../../../assets/Airport1.mp4";
@@ -61,10 +52,10 @@ function LandingPage() {
         Your browser does not support the video tag. I suggest you upgrade your
         browser.
       </video>
-      <div class="overlay"></div>
+      <div className="overlay"></div>
       <Center w={"100vw"}>
         <HStack spacing={"50px"}>
-          <div class="text">
+          <div className="text">
             <h2>Heading North</h2>
             <h3>Exploring The World</h3>
           </div>
