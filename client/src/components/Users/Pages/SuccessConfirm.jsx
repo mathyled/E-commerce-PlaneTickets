@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 import {
     Box,
@@ -8,19 +8,26 @@ import {
     Center,
 } from "@chakra-ui/react";
 import success from "../../../assets/success.png";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import {useDispatch,useSelector} from "react-redux";
+import {getConfirm} from "../../../redux/actions/actions";
 const Confirm = () => {
     const { token } = useParams()
+    const dispatch = useDispatch()
+    const confirm = useSelector(state => state.confirm)
 
-    console.log(token)
+    console.log(confirm)
+    useEffect(()=>{
+        dispatch(getConfirm(token))
+    },[dispatch,token])
 
+ 
     return (
         <Center py={6}>
 
             <Box
-                maxW={'50%'}
+                maxW= {'50%'}
                 w={'full'}
                 height={"auto"}
                 bg={useColorModeValue('white', 'gray.900')}
@@ -43,10 +50,9 @@ const Confirm = () => {
                 <Text
                     fontWeight={200}
                     fontSize={'2xl'}
-                    letterSpacing={1.1}
-                    >Thanks, you can
-                    <Link to="/home"><Text
-                        color={'green.500'}>sign in</Text> </Link></Text>
+                    letterSpacing={1.1} >Thanks, you can </Text>
+
+                    <NavLink to="/home" >sign in </NavLink>
 
             </Box>
         </Center>
