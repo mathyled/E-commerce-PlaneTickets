@@ -17,8 +17,7 @@ import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
 import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
-
-
+import Welcome from "./components/Users/Pages/Welcome/Welcome";
 
 function App() {
   return (
@@ -36,21 +35,17 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoute />}>
-           <Route exact path="/success" element={<SuccessBuy />} />
+          <Route exact path="/success" element={<SuccessBuy />} />
         </Route>
-
 
         <Route exact path="/favorite" element={<Favorite />} />
 
         <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
-        <Route exact path="/loadingtest" element={<LoadingPage />} /> 
-     
-      
-          
+        <Route exact path="/loadingtest" element={<LoadingPage />} />
+
         <Route exact path="*" element={<NotfoundPage />} />
-
-
+        <Route exact path="/confirm/:confirmationCode" element={<Welcome />} />
       </Routes>
     </div>
   );
