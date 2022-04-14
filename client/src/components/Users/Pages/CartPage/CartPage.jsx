@@ -21,8 +21,8 @@ const CartPage = ()=>{
   const cart = useSelector(state=> state.cart);
 
   function onChangeQuantity(e) {
-    dispatch(updateQuantity(e.target.id, e.target.value))
-    dispatch(calculateTotal())
+    dispatch(updateQuantity(e.target.id, e.target.value));
+    dispatch(calculateTotal());
   };
 
   return(
@@ -45,7 +45,7 @@ const CartPage = ()=>{
         md: '8',
         lg: '100',
       }}
-      >
+    >
 
       {cart.length > 0 ?
 
@@ -76,8 +76,8 @@ const CartPage = ()=>{
             </Heading>
 
             <Stack spacing="6" onChange={onChangeQuantity}>
-              {cart.map((item) => (
-                <CartItem key={item.id} {...item} />
+              {cart.map((item, i) => (
+                <CartItem key={i} {...item} />
               ))}
             </Stack>
 
@@ -97,9 +97,9 @@ const CartPage = ()=>{
       :
         <div>
 
-            <Link to="/home">
-              <button>Go to Home</button>
-            </Link>
+          <Link to="/home">
+            <button>Go to Home</button>
+          </Link>
           <p>No items</p>
 
         </div>
