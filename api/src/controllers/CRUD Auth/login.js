@@ -3,12 +3,15 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
+  const username = req.body.username
   try {
     const user = await UserModel.findOne({
-      username: req.body.username,
+      username: username ,
     });
+    console.log(username)
+   
 
-    !user && res.status(400).send({ message: "Wrong User Name" });
+    !user && res.status(200).send({ message: "Wrong User Name" });
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
@@ -20,7 +23,8 @@ const login = async (req, res) => {
     const inputPassword = req.body.password;
 
     originalPassword != inputPassword &&
-      res.status(400).send({ message: "Wrong Password" });
+      res.status(200).send({ message: "Wrong Password" });
+
 
     const accessToken = jwt.sign(
       {
@@ -30,7 +34,7 @@ const login = async (req, res) => {
       process.env.JWT_SEC,
       { expiresIn: "3d" }
     );
-
+ user && res.status(200).send({ message: "Sign In" });
     const { password, ...others } = user._doc;
     res.status(200).send({ ...others, accessToken });
   } catch (err) {
