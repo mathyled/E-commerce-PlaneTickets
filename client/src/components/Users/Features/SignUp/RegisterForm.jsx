@@ -8,24 +8,27 @@ import {
   useToast,
 
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { useAuth } from '../../../../context/AuthContext';
 // import useMounted from "../../../../hooks/useMounted";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signUp} from "../../../../redux/actions/actions"
 export function RegisterForm() {
+
   const [inputs, setInputs] = useState({
     username:"",
     email: "",
     password: "",
   });
-  // const [submit, setSubmit] = useState(false)
-  // const toast = useToast()
-  // const { register } = useAuth()
-  // const mounted = useMounted()
-  const dispatch = useDispatch()
-console.log("register",inputs)
 
+  const dispatch = useDispatch()
+ const currentUser = useSelector(state=> state.user)
+
+
+ useEffect(()=>{
+   if(currentUser.data?.message.length > 0)
+   alert(currentUser.data.message)
+ },[currentUser])
   function handlerOnChange(e) {
     setInputs({
       ...inputs,
@@ -35,10 +38,16 @@ console.log("register",inputs)
   return (
     <>
       <chakra.form
-        onSubmit={( e )=> {
+        onSubmit={ ( e )=> {
           e.preventDefault()
           dispatch(signUp(inputs))
+          setInputs({
+            username:"",
+            email: "",
+            password: "",
+          })
         }}
+        
       >
         <Stack spacing='6'>
 

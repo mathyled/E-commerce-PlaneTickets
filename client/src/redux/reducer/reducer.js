@@ -288,6 +288,7 @@ function rootReducer(state = initialState, action) {
 
 
           case TYPES.SIGN_IN :
+            console.log(action.payload)
             return{
               ...state,
               user:action.payload
