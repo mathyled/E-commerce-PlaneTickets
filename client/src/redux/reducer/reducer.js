@@ -15,8 +15,8 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
-
-  user:""
+  confirm: {},
+  user: ""
 
 };
 
@@ -47,116 +47,116 @@ function rootReducer(state = initialState, action) {
       if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-              if (a.arrival.nameCity === undefined) {
-                return 1;
-              }
-              if (b.arrival.nameCity === undefined) {
-                return -1;
-              }
-              if (a.arrival.nameCity.area === null) {
-                return 1;
-              }
-              if (b.arrival.nameCity === null) {
-                return -1;
-              }
-              return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
-                ? -1
-                : 1;
-            }))
+            if (a.arrival.nameCity === undefined) {
+              return 1;
+            }
+            if (b.arrival.nameCity === undefined) {
+              return -1;
+            }
+            if (a.arrival.nameCity.area === null) {
+              return 1;
+            }
+            if (b.arrival.nameCity === null) {
+              return -1;
+            }
+            return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
+              ? -1
+              : 1;
+          }))
           : (sortedData = state.city.sort((a, b) => {
-              if (a.arrival.nameCity === undefined) {
-                return 1;
-              }
-              if (b.arrival.nameCity === undefined) {
-                return -1;
-              }
-              if (a.arrival.nameCity.area === null) {
-                return 1;
-              }
-              if (b.arrival.nameCity === null) {
-                return -1;
-              }
-              return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
-                ? -1
-                : 1;
-            }));
+            if (a.arrival.nameCity === undefined) {
+              return 1;
+            }
+            if (b.arrival.nameCity === undefined) {
+              return -1;
+            }
+            if (a.arrival.nameCity.area === null) {
+              return 1;
+            }
+            if (b.arrival.nameCity === null) {
+              return -1;
+            }
+            return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
+              ? -1
+              : 1;
+          }));
       }
       if (action.payload.price === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-              if (a.price === undefined) {
-                return 1;
-              }
-              if (b.price === undefined) {
-                return -1;
-              }
-              if (a.price === null) {
-                return 1;
-              }
-              if (b.price === null) {
-                return -1;
-              }
-              return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
-            }))
+            if (a.price === undefined) {
+              return 1;
+            }
+            if (b.price === undefined) {
+              return -1;
+            }
+            if (a.price === null) {
+              return 1;
+            }
+            if (b.price === null) {
+              return -1;
+            }
+            return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
+          }))
           : (sortedData = state.city.sort((a, b) => {
-              if (a.price === undefined) {
-                return 1;
-              }
-              if (b.price === undefined) {
-                return -1;
-              }
-              if (a.price === null) {
-                return 1;
-              }
-              if (b.price === null) {
-                return -1;
-              }
-              return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
-            }));
+            if (a.price === undefined) {
+              return 1;
+            }
+            if (b.price === undefined) {
+              return -1;
+            }
+            if (a.price === null) {
+              return 1;
+            }
+            if (b.price === null) {
+              return -1;
+            }
+            return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
+          }));
       }
       if (action.payload.schedule !== "") {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-              if (a.departure.scheduledTime === undefined) {
-                return 1;
-              }
-              if (b.departure.scheduledTime === undefined) {
-                return -1;
-              }
-              if (a.departure.scheduledTimee === null) {
-                return 1;
-              }
-              if (b.departure.scheduledTime === null) {
-                return -1;
-              }
-              if (a.departure.scheduledTime === "") {
-                return 1;
-              }
-              if (b.departure.scheduledTime === "") {
-                return -1;
-              }
+            if (a.departure.scheduledTime === undefined) {
+              return 1;
+            }
+            if (b.departure.scheduledTime === undefined) {
+              return -1;
+            }
+            if (a.departure.scheduledTimee === null) {
+              return 1;
+            }
+            if (b.departure.scheduledTime === null) {
+              return -1;
+            }
+            if (a.departure.scheduledTime === "") {
+              return 1;
+            }
+            if (b.departure.scheduledTime === "") {
+              return -1;
+            }
 
-              return a.departure.scheduledTime < b.departure.scheduledTime
-                ? -1
-                : 1;
-            }))
+            return a.departure.scheduledTime < b.departure.scheduledTime
+              ? -1
+              : 1;
+          }))
           : (sortedData = state.city.sort((a, b) => {
-              if (a.departure.scheduledTime === undefined) {
-                return 1;
-              }
-              if (b.departure.scheduledTime === undefined) {
-                return -1;
-              }
-              if (a.departure.scheduledTime === null) {
-                return 1;
-              }
-              if (b.departure.scheduledTime === null) {
-                return -1;
-              }
-              return a.departure.scheduledTime > b.departure.scheduledTime
-                ? -1
-                : 1;
-            }));
+            if (a.departure.scheduledTime === undefined) {
+              return 1;
+            }
+            if (b.departure.scheduledTime === undefined) {
+              return -1;
+            }
+            if (a.departure.scheduledTime === null) {
+              return 1;
+            }
+            if (b.departure.scheduledTime === null) {
+              return -1;
+            }
+            return a.departure.scheduledTime > b.departure.scheduledTime
+              ? -1
+              : 1;
+          }));
       }
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
@@ -250,10 +250,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: inCart
           ? state.cart.map((item) =>
-              item.id === action.payload.id
-                ? { ...item, quantity: item.quantity + 1 }
-                : item
-            )
+            item.id === action.payload.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
           : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
@@ -264,40 +264,46 @@ function rootReducer(state = initialState, action) {
       };
 
 
-      case TYPES.ADD_QUANTITY:
-        const cartCopy = state.cart;
-        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
-        let itemchange = cartCopy[pos];
-        itemchange.quantity = action.payload.quantity;
-        itemchange.price = itemchange.total * action.payload.quantity;
-        cartCopy[pos] = itemchange
-        return{
-          ...state,
-          cart: cartCopy
-        };
-      case TYPES.CALCULATE_TOTAL:
-        let total = 0;
-        if(state.cart.length > 0) {
-          total = state.cart.reduce((prev, next) => prev + next.price,
-            0
-          );
-        };
-        return{
-          ...state,
-          calculatedTotal: total,
-        };
+    case TYPES.ADD_QUANTITY:
+      const cartCopy = state.cart;
+      let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
+      let itemchange = cartCopy[pos];
+      itemchange.quantity = action.payload.quantity;
+      itemchange.price = itemchange.total * action.payload.quantity;
+      cartCopy[pos] = itemchange
+      return {
+        ...state,
+        cart: cartCopy
+      };
+    case TYPES.CALCULATE_TOTAL:
+      let total = 0;
+      if (state.cart.length > 0) {
+        total = state.cart.reduce((prev, next) => prev + next.price,
+          0
+        );
+      };
+      return {
+        ...state,
+        calculatedTotal: total,
+      };
 
-        case TYPES.SIGN_UP :
-          return{
-            ...state,
-            user:action.payload
-          }
+    case TYPES.SIGN_UP:
+      return {
+        ...state,
+        user: action.payload
+      }
 
-          case TYPES.SIGN_IN :
-            return{
-              ...state,
-              user:action.payload
-            }
+    case TYPES.SIGN_IN:
+      return {
+        ...state,
+        user: action.payload
+      }
+
+    case TYPES.GET_CONFIRM:
+      return {
+        ...state,
+        confirm: action.payload,
+      };
 
 
     // case TYPES.LOAD_CURRENT_ITEM:
