@@ -149,7 +149,7 @@ export const removeFromCart = (id) => {
 export const updateQuantity = (id, quantity) => {
   // console.log("ACTION", id, quantity)
   return {
-    type: TYPES.ADD_QUANTITY,
+    type: TYPES.UPDATE_QUANTITY,
     payload: {id, quantity}
   };
 };

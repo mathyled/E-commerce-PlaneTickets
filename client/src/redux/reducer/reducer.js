@@ -264,34 +264,35 @@ function rootReducer(state = initialState, action) {
       };
 
 
-    case TYPES.ADD_QUANTITY:
-      const cartCopy = state.cart;
-      let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
-      let itemchange = cartCopy[pos];
-      itemchange.quantity = action.payload.quantity;
-      itemchange.price = itemchange.total * action.payload.quantity;
-      cartCopy[pos] = itemchange
-      return {
-        ...state,
-        cart: cartCopy
-      };
-    case TYPES.CALCULATE_TOTAL:
-      let total = 0;
-      if (state.cart.length > 0) {
-        total = state.cart.reduce((prev, next) => prev + next.price,
-          0
-        );
-      };
-      return {
-        ...state,
-        calculatedTotal: total,
-      };
+      case TYPES.UPDATE_QUANTITY:
+        const cartCopy = state.cart;
+        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = cartCopy[pos];
+        itemchange.quantity = action.payload.quantity;
+        itemchange.total = itemchange.price * action.payload.quantity;
+        cartCopy[pos] = itemchange;
+        return{
+          ...state,
+          cart: cartCopy,
+        };
+
+      case TYPES.CALCULATE_TOTAL:
+        let total = 0;
+        if(state.cart.length > 0) {
+          total = state.cart.reduce((prev, next) => prev + next.total, 0);
+        };
+        return{
+          ...state,
+          calculatedTotal: total,
+        };
+
 
     case TYPES.SIGN_UP:
       return {
         ...state,
         user: action.payload
       }
+
 
     case TYPES.SIGN_IN:
       return {
