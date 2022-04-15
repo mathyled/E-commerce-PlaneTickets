@@ -36,7 +36,7 @@ const login = async (req, res) => {
     }
 
     ///////
-    else if (user.status === "Pending") {
+   if (user.status === "Pending") {
       res
         .status(200)
         .send({ message: "User not confirmed, please check your email" });
