@@ -17,7 +17,7 @@ import Navlink from "../UserModal/components/Navlink";
 import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
 // import { getOffers } from "../../../../redux/actions/actions";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
 import { useNavigate } from "react-router-dom";
