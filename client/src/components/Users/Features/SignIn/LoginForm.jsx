@@ -33,8 +33,8 @@ export function LoginForm() {
   // const mounted = useMounted()
 
   useEffect(()=>{
-    if(currentUser?.message)
-    alert(currentUser.message)
+    if(currentUser.accessToken || currentUser?.message  )
+   alert(currentUser.message)
     navigate("/home")
   },[currentUser])
 
