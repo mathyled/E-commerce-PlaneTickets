@@ -30,7 +30,7 @@ function NavBar() {
   const cart = useSelector(state=> state.cart)
   const currentUser = useSelector(state=> state.user)
   const { toggleColorMode } = useColorMode()
-
+console.log(currentUser)
   // const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
 
@@ -67,21 +67,13 @@ function NavBar() {
               display={{ base: "none", md: "flex" }}
             >
               <Link
-                // px={2}
-                // py={1}
-                // rounded={"md"}
-                // _hover={{
-                //   textDecoration: "none",
-                //   bg: useColorModeValue("gray.200", "gray.700"),
-                // }}
-                // href={"#"}
                 to="/about"
               >
                 {" "}
                 About
               </Link>
 
-              {currentUser?.status && (
+              {currentUser?.accessToken?.length > 0 && (
                 <Navlink to="/new-flight" name=" New flight plan" />
               )}
 
@@ -96,11 +88,11 @@ function NavBar() {
           >
             <SearchBar />
 
-            {!currentUser.status && <LoginModal />}
-            {!currentUser.status && <RegisterModal />}
+            {!currentUser?.accessToken?.length > 0 &&<LoginModal />}
+            {!currentUser?.accessToken?.length > 0 &&<RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            {currentUser?.status && (
+            { currentUser?.accessToken?.length > 0 && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}

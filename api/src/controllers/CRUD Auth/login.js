@@ -13,21 +13,21 @@ const login = async (req, res) => {
 
     !user && res.status(200).send({ message: "Wrong User Name" });
 
-    // const hashedPassword = CryptoJS.AES.decrypt(
-    //   user.password,
-    //   process.env.PASS_SEC
-    // );
+    const hashedPassword = CryptoJS.AES.decrypt(
+      user.password,
+      process.env.PASS_SEC
+    );
 
-    // const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+    const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
     
-    //   console.log("ORIGINAL",originalPassword) // undefined
-
-
-      const originalPassword = user.password
-
+    
+    
+    
+    
+    console.log("ORIGINAL",originalPassword) 
       const inputPassword = req.body.password;
-
+      console.log("input",inputPassword) 
     originalPassword !== inputPassword && res.status(200).send({ message: "Wrong Password" });
 
 
