@@ -25,5 +25,5 @@ export const TYPES = {
 
   SIGN_UP:"SIGN_UP",
   SIGN_IN:"SIGN_IN",
-
+  GET_CONFIRM:"GET_CONFIRM",
 };

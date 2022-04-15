@@ -211,6 +211,19 @@ export const signIn = (inputs) => {
 };
 
 
+export const getConfirm = (token) => {
+  return async (dispatch) => {
+    var json = await axios.get(
+      `http://localhost:3001/api/auth/confirm/${token}`
+    );
+   console.log("TOKEN",token)
+    return dispatch({
+      type: TYPES.GET_CONFIRM,
+      payload: json.data,
+    });
+  };
+};
+
 
 // case REGISTER_USER_SUCCESS:
 //       return {
