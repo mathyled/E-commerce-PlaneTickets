@@ -210,6 +210,13 @@ export const signIn = (inputs) => {
   };
 };
 
+export const logOut = () => {
+  return {
+    type: TYPES.LOG_OUT,
+   
+  };
+};
+
 
 export const getConfirm = (token) => {
   return async (dispatch) => {

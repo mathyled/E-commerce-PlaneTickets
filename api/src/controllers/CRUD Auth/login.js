@@ -4,6 +4,13 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
+
+    const user = await UserModel.findOne({
+      username: username ,
+    });
+    console.log("PASS",user.password) // decrypt password already
+   
+
     const { username, password } = req.body;
     // verify if user exists
     const user = await UserModel.findOne({ username });
@@ -35,6 +42,7 @@ const login = async (req, res) => {
       }
     }
 
+
     ///////
    if (user.status === "Pending") {
       res
@@ -48,25 +56,35 @@ const login = async (req, res) => {
         process.env.PASS_SEC
       );
 
-      const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+    // const hashedPassword = CryptoJS.AES.decrypt(
+    //   user.password,
+    //   process.env.PASS_SEC
+    // );
+
+    // const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+    //   console.log("ORIGINAL",originalPassword) // undefined
+
+
+      const originalPassword = user.password
 
       const inputPassword = req.body.password;
 
-      originalPassword != inputPassword &&
-        res.status(200).send({ message: "Wrong Password" });
+    originalPassword !== inputPassword && res.status(200).send({ message: "Wrong Password" });
 
-      const accessToken = jwt.sign(
-        {
-          id: user._id,
-          isAdmin: user.isAdmin,
-        },
-        process.env.JWT_SEC,
-        { expiresIn: "3d" }
-      );
- user && res.status(200).send({ message: "Sign In" });
-      const { password, ...others } = user._doc;
-      res.status(200).send({ ...others, accessToken });
-    }
+
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SEC,
+      { expiresIn: "3d" }
+    );
+//  user && res.status(200).send({ message: "Sign In" });
+    const { password, ...others } = user._doc;
+    res.status(200).send({ ...others, accessToken });
 
   } catch (err) {
     res.status(500).send({ message: err });

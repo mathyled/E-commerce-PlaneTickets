@@ -15,9 +15,8 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
+  user:{},
   confirm: {},
-  user: ""
-
 };
 
 function rootReducer(state = initialState, action) {
@@ -287,6 +286,18 @@ function rootReducer(state = initialState, action) {
         };
 
 
+
+          case TYPES.SIGN_IN :
+            return{
+              ...state,
+              user:action.payload
+            }
+            case TYPES.LOG_OUT:
+              return{
+                ...state,
+                user:{}
+              }
+
     case TYPES.SIGN_UP:
       return {
         ...state,
@@ -294,11 +305,7 @@ function rootReducer(state = initialState, action) {
       }
 
 
-    case TYPES.SIGN_IN:
-      return {
-        ...state,
-        user: action.payload
-      }
+ 
 
     case TYPES.GET_CONFIRM:
       return {
