@@ -15,7 +15,7 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
-  user:""
+  user:{}
 };
 
 function rootReducer(state = initialState, action) {
@@ -294,6 +294,11 @@ function rootReducer(state = initialState, action) {
               ...state,
               user:action.payload
             }
+            case TYPES.LOG_OUT:
+              return{
+                ...state,
+                user:{}
+              }
 
     // case TYPES.LOAD_CURRENT_ITEM:
     //   return {

@@ -208,6 +208,13 @@ export const signIn = (inputs) => {
   };
 };
 
+export const logOut = () => {
+  return {
+    type: TYPES.LOG_OUT,
+   
+  };
+};
+
 
 
 // case REGISTER_USER_SUCCESS:

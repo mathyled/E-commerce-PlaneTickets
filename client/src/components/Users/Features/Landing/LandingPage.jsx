@@ -61,10 +61,10 @@ function LandingPage() {
         Your browser does not support the video tag. I suggest you upgrade your
         browser.
       </video>
-      <div class="overlay"></div>
+      <div className="overlay"></div>
       <Center w={"100vw"}>
         <HStack spacing={"50px"}>
-          <div class="text">
+          <div className="text">
             <h2>Heading North</h2>
             <h3>Exploring The World</h3>
           </div>

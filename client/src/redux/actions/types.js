@@ -24,6 +24,6 @@ export const TYPES = {
   IS_ON_SEARCH: "IS_ON_SEARCH",
   SIGN_UP:"SIGN_UP",
   SIGN_IN:"SIGN_IN",
-
+  LOG_OUT:"LOG_OUT"
 
 };
