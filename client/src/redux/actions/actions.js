@@ -146,10 +146,10 @@ export const removeFromCart = (id) => {
   };
 };
 
-export const addQuatity = (id, quantity) => {
-  console.log("ACTION", id, quantity)
+export const updateQuantity = (id, quantity) => {
+  // console.log("ACTION", id, quantity)
   return {
-    type: TYPES.ADD_QUANTITY,
+    type: TYPES.UPDATE_QUANTITY,
     payload: {id, quantity}
   };
 };
@@ -159,6 +159,7 @@ export const calculateTotal = () => {
     type: TYPES.CALCULATE_TOTAL,
   };
 };
+
 // export const addCart = () => {
 //   return {
 //     type: TYPES.RESET_STATES,
@@ -172,6 +173,7 @@ export const loadCurrentItem = (item) => {
     payload: item,
   };
 };
+
 
 
 export const signUp = (inputs) => {
@@ -216,6 +218,19 @@ export const logOut = () => {
 };
 
 
+export const getConfirm = (token) => {
+  return async (dispatch) => {
+    var json = await axios.get(
+      `http://localhost:3001/api/auth/confirm/${token}`
+    );
+   console.log("TOKEN",token)
+    return dispatch({
+      type: TYPES.GET_CONFIRM,
+      payload: json.data,
+    });
+  };
+};
+
 
 // case REGISTER_USER_SUCCESS:
 //       return {
@@ -224,3 +239,4 @@ export const logOut = () => {
 //           isAuthenticated: true,
 //           user: action.payload
 //       }
+

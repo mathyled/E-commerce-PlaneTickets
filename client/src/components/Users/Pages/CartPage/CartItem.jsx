@@ -1,10 +1,11 @@
-import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/react'
+import { CloseButton, Flex, Select, useColorModeValue } from '@chakra-ui/react'
 
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 import { useEffect, useState } from 'react'
-import {addQuatity, calculateTotal, removeFromCart} from "../../../../redux/actions/actions"
+import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
 import { useDispatch } from 'react-redux'
+
 const QuantitySelect = (props) => {
   // console.log("CartItem", props);
   return (
@@ -22,40 +23,33 @@ const QuantitySelect = (props) => {
       <option id={props.id} name={props.name} value="6">6</option>
     </Select>
   )
-}
+};
 
 export const CartItem = (props) => {
-  // const cart = useSelector(state=> state.cart)
-  const dispatch = useDispatch()
-  let {
+  const dispatch = useDispatch();
+  const {
     _id,
     price,
     arrival,
     departure,
     quantity
-  } = props
-  let [qtySelect, setQtySelect] =  useState(quantity)
-  // qtySelect = quantity;
-  // useEffect(() => {
-  //   setQtySelect(quantity);
-  // }, [dispatch, quantity]);
-  console.log("AAAA", quantity)
+  } = props;
+  let [qtySelect, setQtySelect] = useState(quantity);
+
+  useEffect(() => {
+    setQtySelect(quantity);
+  }, [dispatch, quantity]);
   
   function onChangeQuantity(e) {
     setQtySelect(e.target.value);
-    // dispatch(addQuatity(_id, e.target.value))
-    // quantity = e.target.value
-    dispatch(calculateTotal())
-    console.log("BBB", quantity)
-  }
-  // console.log("ID]",price* qtySelect)
+  };
 
   function onClickDelete(e) {
-    e.preventDefault()
-    dispatch(removeFromCart(_id))
-    dispatch(calculateTotal())
-  }
-  console.log("CCC", qtySelect)
+    e.preventDefault();
+    dispatch(removeFromCart(_id));
+    dispatch(calculateTotal());
+  };
+
   return (
     <Flex
       direction={{
@@ -89,7 +83,7 @@ export const CartItem = (props) => {
           onChange={onChangeQuantity}
         />
 
-        <PriceTag price={new Intl.NumberFormat().format(price)} />
+        <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
         <CloseButton onClick={onClickDelete} />
 
@@ -114,7 +108,7 @@ export const CartItem = (props) => {
           onChange={onChangeQuantity}
         />
 
-        <PriceTag price={new Intl.NumberFormat().format(price*qtySelect)} />
+        <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
         <CloseButton onClick={onClickDelete} />
 
@@ -122,4 +116,4 @@ export const CartItem = (props) => {
 
     </Flex>
   )
-}
+};

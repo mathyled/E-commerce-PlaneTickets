@@ -1,22 +1,13 @@
 import {
-  Container,
-  Box,
-  Heading,
-  Stack,
+
   Center,
-  Text,
-  Icon,
+ 
   Button,
-  useColorModeValue,
+
   createIcon,
-  SlideFade,
-  Input,
-  InputGroup,
-  InputLeftAddon,
   HStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import Airport1 from "../../../../assets/Airport1.mp4";

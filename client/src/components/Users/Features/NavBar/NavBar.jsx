@@ -6,32 +6,34 @@ import {
   useColorModeValue,
   useColorMode,
   Stack,
-  Button,
+  // Button,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
 import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import { MdTravelExplore } from "react-icons/md";
+// import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
 // import { getOffers } from "../../../../redux/actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import { logOut } from "../../../../redux/actions/actions";
 
 function NavBar() {
-  const[cartCount,setCartCount] = useState(0) 
+  // const[cartCount,setCartCount] = useState(0)
   const cart = useSelector(state=> state.cart)
   const currentUser = useSelector(state=> state.user)
   const { toggleColorMode } = useColorMode()
+
   // const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
+
   const navigate = useNavigate()
   async function handlerLogOut(e) {
     e.preventDefault();
@@ -39,13 +41,12 @@ function NavBar() {
     dispatch(logOut()) 
   }
 
-  useEffect(()=>{
-    let count = 0;
-    cart.forEach(item=>{
-      count+= item.quantity
-    })
-    setCartCount(count)
-  },[cart,cartCount])
+  // useEffect(()=>{
+  //   let count = 0;
+  //   cart.forEach(item=>{
+  //     count+= item.quantity
+  //   })
+  // },[cart])
 
   return (
     <>
@@ -129,7 +130,7 @@ function NavBar() {
               <Cart  quantity={cartCount}/>
             </Link> */}
              <Link to="/cart">
-             <Cart  quantity={cartCount}/>
+             <Cart quantity={cart.length}/>
              </Link>
 
             <IconButton
