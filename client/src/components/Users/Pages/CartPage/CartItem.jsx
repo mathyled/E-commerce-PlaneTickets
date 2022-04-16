@@ -1,11 +1,13 @@
-import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/react'
+import { CloseButton, Flex, Select, useColorModeValue } from '@chakra-ui/react'
 
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
-import { useState } from 'react'
-import {addQuatity, removeFromCart} from "../../../../redux/actions/actions"
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
+import { useDispatch } from 'react-redux'
+
 const QuantitySelect = (props) => {
+  // console.log("CartItem", props);
   return (
     <Select
       maxW="64px"
@@ -13,39 +15,41 @@ const QuantitySelect = (props) => {
       focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
       {...props}
     >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
+      <option id={props.id} name={props.name} value="1">1</option>
+      <option id={props.id} name={props.name} value="2">2</option>
+      <option id={props.id} name={props.name} value="3">3</option>
+      <option id={props.id} name={props.name} value="4">4</option>
+      <option id={props.id} name={props.name} value="5">5</option>
+      <option id={props.id} name={props.name} value="6">6</option>
     </Select>
   )
-}
+};
 
 export const CartItem = (props) => {
-  const [qtySelect,setQtySelect] =  useState(1)
-  const cart = useSelector(state=> state.cart)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {
     _id,
-       price,
-       arrival,
-        departure
-  } = props
+    price,
+    arrival,
+    departure,
+    quantity
+  } = props;
+  let [qtySelect, setQtySelect] = useState(quantity);
 
+  useEffect(() => {
+    setQtySelect(quantity);
+  }, [dispatch, quantity]);
+  
   function onChangeQuantity(e) {
-    setQtySelect(
-      [e.target.name] = e.target.value
-    )
-    dispatch(addQuatity(price* e.target.value))
-  }
-  console.log("ID]",_id)
+    setQtySelect(e.target.value);
+  };
 
   function onClickDelete(e) {
-    e.preventDefault()
-    dispatch(removeFromCart(_id))
-  }
+    e.preventDefault();
+    dispatch(removeFromCart(_id));
+    dispatch(calculateTotal());
+  };
+
   return (
     <Flex
       direction={{
@@ -55,6 +59,7 @@ export const CartItem = (props) => {
       justify="space-between"
       align="center"
     >
+
       <CartProductMeta
         origin={departure.nameCity}
         destination={arrival.nameCity}
@@ -70,13 +75,16 @@ export const CartItem = (props) => {
           md: 'flex',
         }}
       >
+
         <QuantitySelect
+          id={_id}
           value={qtySelect}
           name={arrival.nameCity}
           onChange={onChangeQuantity}
         />
-    
-        <PriceTag price={new Intl.NumberFormat().format(price*qtySelect)} />
+
+        <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
+
         <CloseButton onClick={onClickDelete} />
 
       </Flex>
@@ -94,12 +102,18 @@ export const CartItem = (props) => {
       >
 
         <QuantitySelect
+          id={_id}
           value={qtySelect}
+          name={arrival.nameCity}
           onChange={onChangeQuantity}
         />
-        <PriceTag price={price} />
+
+        <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
+
         <CloseButton onClick={onClickDelete} />
+
       </Flex>
+
     </Flex>
   )
-}
+};

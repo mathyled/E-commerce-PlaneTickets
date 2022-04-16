@@ -32,8 +32,8 @@ function RegisterModal() {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Register</ModalHeader>
-                    <ModalCloseButton />
+                    {/* <ModalHeader>Register</ModalHeader> */}
+                    {/* <ModalCloseButton /> */}
 
                     <ModalBody>
                         <RegisterForm />

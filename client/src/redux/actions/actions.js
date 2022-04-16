@@ -22,33 +22,7 @@ export const filterTickets = (to, airline) => {
   };
 };
 
-// export const getCities = () => {
-//   //LANDING
-//   return async (dispatch) => {
-//     var json = await axios.get(`http://localhost:3001/api/cities`);
-//     // console.log("JSON",json)
-//     return dispatch({
-//       type: TYPES.GET_CITIES,
-//       payload: json.data,
-//     });
-//   };
-// };
 
-// getCity debería cambiar de nombre a getOffer.
-// Y el type también debería cambiar a GET_OFFER.
-// export const getOffers = (origin, destination, departureDate, adults) => {
-//   //HOME
-//   return async (dispatch) => {
-//     var json = await axios.get(
-//       `http://localhost:3001/api/flights?origin=${origin}&destination=${destination}&departureDate=${departureDate}&adults=${adults}`
-//     );
-//     // console.log("JSON",json)
-//     return dispatch({
-//       type: TYPES.GET_OFFERS,
-//       payload: json.data,
-//     });
-//   };
-// };
 
 export const getOfferDetails = (id) => {
   //DETAILS
@@ -103,13 +77,53 @@ export const resetMessageErrors = () => {
   return { type: TYPES.RESET_MESSAGE_ERRORS, payload: {} };
 };
 
+export function addFavorite(payload) {
+  return {
+    type: TYPES.ADD_FAVORITE,
+    payload: payload,
+  };
+}
+
+export function removeFavorite(payload) {
+  return {
+    type: TYPES.REMOVE_FAVORITE,
+    payload: payload,
+  };
+}
+
 export const postFlight = (payload) => {
   return async (dispatch) => {
     var res = await axios.post(
-      "http://localhost:3001/api/createFlight",
+      "http://localhost:3001/api/itineraries",
       payload
     );
     return res;
+  };
+};
+
+
+export const getItineraries = () => {
+  return async (dispatch) => {
+    var res = await axios.get("http://localhost:3001/api/itineraries");
+    console.log("Info from db...", res.data.data);
+    return dispatch({
+      type: TYPES.GET_ITINERARIES,
+      payload: res.data.data,
+    });
+  };
+};
+
+export const updateItinerary = (id) => {
+  return {
+    type: TYPES.PUT_ITINERARY,
+    payload: id,
+  };
+};
+
+export const deleteItinerary = (id) => {
+  return {
+    type: TYPES.DELETE_ITINERARY,
+    payload: id,
   };
 };
 
@@ -141,13 +155,21 @@ export const removeFromCart = (id) => {
     payload: id,
   };
 };
-export const addQuatity = (total) => {
-  console.log("action total", total);
+
+export const updateQuantity = (id, quantity) => {
+  // console.log("ACTION", id, quantity)
   return {
-    type: TYPES.ADD_QUANTITY,
-    payload: total,
+    type: TYPES.UPDATE_QUANTITY,
+    payload: {id, quantity}
   };
 };
+
+export const calculateTotal = () => {
+  return {
+    type: TYPES.CALCULATE_TOTAL,
+  };
+};
+
 // export const addCart = () => {
 //   return {
 //     type: TYPES.RESET_STATES,
@@ -161,3 +183,70 @@ export const loadCurrentItem = (item) => {
     payload: item,
   };
 };
+
+
+
+export const signUp = (inputs) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/auth/register',inputs);
+      dispatch({
+        type: TYPES.SIGN_UP,
+        payload: response.data,
+      });
+      console.log(response.data.message);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+
+export const signIn = (inputs) => {
+  // console.log(inputs)
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/auth/login',inputs);
+      dispatch({
+        type: TYPES.SIGN_IN,
+        payload: response.data,
+      });
+      // console.log(response.data.message);
+      // console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: TYPES.LOG_OUT,
+   
+  };
+};
+
+
+export const getConfirm = (token) => {
+  return async (dispatch) => {
+    var json = await axios.get(
+      `http://localhost:3001/api/auth/confirm/${token}`
+    );
+   console.log("TOKEN",token)
+    return dispatch({
+      type: TYPES.GET_CONFIRM,
+      payload: json.data,
+    });
+  };
+};
+
+
+// case REGISTER_USER_SUCCESS:
+//       return {
+//           ...state,
+//           loading: false,
+//           isAuthenticated: true,
+//           user: action.payload
+//       }
+

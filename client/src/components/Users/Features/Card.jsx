@@ -78,7 +78,9 @@ function Card({
             <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-              {airline || "Airline information to be updated "}
+
+             {airline || " Not Airline information"}
+
             </chakra.h1>
           </Flex>
 
@@ -113,7 +115,8 @@ function Card({
                 {departureTime}
               </chakra.h1>
             </Flex>
-
+          <Spacer />
+          <Spacer ></Spacer>
             <Flex
               alignItems="center"
               mt={4}

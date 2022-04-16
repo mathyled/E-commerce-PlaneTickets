@@ -9,9 +9,10 @@ import * as React from 'react'
 
 
 export const CartProductMeta = (props) => {
-  const {   origin, destination,image } = props
+  const { origin, destination,image } = props
   return (
     <Stack direction="row" spacing="5" width="full">
+
       <Image
         rounded="lg"
         width="120px"
@@ -22,12 +23,16 @@ export const CartProductMeta = (props) => {
         draggable="false"
         loading="lazy"
       />
+
       <Box pt="4">
         <Stack spacing="0.5">
+
           <Text fontWeight="medium">{origin}</Text>
+
           <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
             {destination}
           </Text>
+
         </Stack>
         {/* {isGiftWrapping && (
           <HStack spacing="1" mt="3" color={mode('gray.600', 'gray.400')}>

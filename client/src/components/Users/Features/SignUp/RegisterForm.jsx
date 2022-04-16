@@ -8,84 +8,83 @@ import {
   useToast,
 
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useAuth } from '../../../../context/AuthContext';
-import useMounted from "../../../../hooks/useMounted";
-
+import React, { useEffect, useState } from 'react'
+// import { useAuth } from '../../../../context/AuthContext';
+// import useMounted from "../../../../hooks/useMounted";
+import {useDispatch, useSelector} from "react-redux";
+import {signUp} from "../../../../redux/actions/actions"
 export function RegisterForm() {
+
   const [inputs, setInputs] = useState({
+    username:"",
     email: "",
     password: "",
   });
-  const [submit, setSubmit] = useState(false)
-  const toast = useToast()
-  const { register } = useAuth()
-  const mounted = useMounted()
 
+  const dispatch = useDispatch()
+ const currentUser = useSelector(state=> state.user)
+
+
+ useEffect(()=>{
+   if(currentUser.data?.message.length > 0)
+   alert(currentUser.data.message)
+ },[currentUser])
   function handlerOnChange(e) {
     setInputs({
       ...inputs,
-      [e.target.name]: e.target.value,
+      [e.target.id]: e.target.value,
     });
   };
   return (
     <>
       <chakra.form
-        onSubmit={async e => {
+        onSubmit={ ( e )=> {
           e.preventDefault()
-          // register logic here
-          // console.log(inputs)
-          if (!inputs.email || !inputs.password) {
-            toast({
-              description: 'Credentials not valid.',
-              status: 'error',
-              duration: 9000,
-              isClosable: true,
-            })
-          }
-          setSubmit(true)
-          register(inputs.email, inputs.password)
-            .then(res => console.log(res))
-            .catch(error => {
-              console.log(error.message)
-              toast({
-                description: error.message,
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-              })
-            })
-            .finally(() => {
-              mounted.current && setSubmit(false)
-            })
+          dispatch(signUp(inputs))
+          setInputs({
+            username:"",
+            email: "",
+            password: "",
+          })
         }}
+        
       >
         <Stack spacing='6'>
 
-          <FormControl id='email'>
+        <FormControl >
+            <FormLabel>Username</FormLabel>
+            <Input
+              name='usermane'
+              id="username"
+              required
+              onChange={handlerOnChange}
+            />
+          </FormControl>
+
+          <FormControl >
             <FormLabel>Email address</FormLabel>
             <Input
               name='email'
               type='email'
-              autoComplete='email'
+              id="email"
               required
               onChange={handlerOnChange}
             />
           </FormControl>
 
-          <FormControl id='password'>
+          <FormControl>
             <FormLabel>Password</FormLabel>
             <Input
               name='password'
               type='password'
-              autoComplete='password'
+              id="password"
               required
               onChange={handlerOnChange}
             />
           </FormControl>
 
 
-          <Button isLoading={submit} type='submit' colorScheme='primary' size='lg' fontSize='md'>
+          <Button  type='submit' colorScheme='primary' size='lg' fontSize='md'>
             Sign up
           </Button>
         </Stack>
