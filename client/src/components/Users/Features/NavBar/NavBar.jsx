@@ -6,44 +6,47 @@ import {
   useColorModeValue,
   useColorMode,
   Stack,
-  Button,
+  // Button,
 } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
 import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-import { MdTravelExplore } from "react-icons/md";
+// import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
 // import { getOffers } from "../../../../redux/actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
+import { logOut } from "../../../../redux/actions/actions";
 
 function NavBar() {
-  const[cartCount,setCartCount] = useState(0) 
+  // const[cartCount,setCartCount] = useState(0)
   const cart = useSelector(state=> state.cart)
+  const currentUser = useSelector(state=> state.user)
   const { toggleColorMode } = useColorMode()
-  const { currentUser, logout } = useAuth()
+console.log(currentUser)
+  // const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
+
   const navigate = useNavigate()
   async function handlerLogOut(e) {
     e.preventDefault();
     // handle logout
-    logout();
+    dispatch(logOut()) 
   }
 
-  useEffect(()=>{
-    let count = 0;
-    cart.forEach(item=>{
-      count+= item.quantity
-    })
-    setCartCount(count)
-  },[cart,cartCount])
+  // useEffect(()=>{
+  //   let count = 0;
+  //   cart.forEach(item=>{
+  //     count+= item.quantity
+  //   })
+  // },[cart])
 
   return (
     <>
@@ -64,21 +67,13 @@ function NavBar() {
               display={{ base: "none", md: "flex" }}
             >
               <Link
-                // px={2}
-                // py={1}
-                // rounded={"md"}
-                // _hover={{
-                //   textDecoration: "none",
-                //   bg: useColorModeValue("gray.200", "gray.700"),
-                // }}
-                // href={"#"}
                 to="/about"
               >
                 {" "}
                 About
               </Link>
 
-              {currentUser && (
+              {currentUser?.accessToken?.length > 0 && (
                 <Navlink to="/new-flight" name=" New flight plan" />
               )}
 
@@ -93,16 +88,16 @@ function NavBar() {
           >
             <SearchBar />
 
-            {!currentUser && <LoginModal />}
-            {!currentUser && <RegisterModal />}
+            {!currentUser?.accessToken?.length > 0 &&<LoginModal />}
+            {!currentUser?.accessToken?.length > 0 &&<RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            {currentUser && (
+            { currentUser?.accessToken?.length > 0 && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
-                name={currentUser.displayName}
+                name={currentUser.username}
               />
             )}
             {/* {currentUser && < Navlink
@@ -127,7 +122,7 @@ function NavBar() {
               <Cart  quantity={cartCount}/>
             </Link> */}
              <Link to="/cart">
-             <Cart  quantity={cartCount}/>
+             <Cart quantity={cart.length}/>
              </Link>
 
             <IconButton

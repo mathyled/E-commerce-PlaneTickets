@@ -149,7 +149,7 @@ export const removeFromCart = (id) => {
 export const updateQuantity = (id, quantity) => {
   // console.log("ACTION", id, quantity)
   return {
-    type: TYPES.ADD_QUANTITY,
+    type: TYPES.UPDATE_QUANTITY,
     payload: {id, quantity}
   };
 };
@@ -182,7 +182,7 @@ export const signUp = (inputs) => {
       const response = await axios.post('http://localhost:3001/api/auth/register',inputs);
       dispatch({
         type: TYPES.SIGN_UP,
-        payload: response,
+        payload: response.data,
       });
       console.log(response.data.message);
       console.log(response);
@@ -194,22 +194,42 @@ export const signUp = (inputs) => {
 
 
 export const signIn = (inputs) => {
-  console.log(inputs)
+  // console.log(inputs)
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/api/auth/login',inputs);
       dispatch({
         type: TYPES.SIGN_IN,
-        payload: response,
+        payload: response.data,
       });
-      console.log(response.data.message);
-      console.log(response);
+      // console.log(response.data.message);
+      // console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
 };
 
+export const logOut = () => {
+  return {
+    type: TYPES.LOG_OUT,
+   
+  };
+};
+
+
+export const getConfirm = (token) => {
+  return async (dispatch) => {
+    var json = await axios.get(
+      `http://localhost:3001/api/auth/confirm/${token}`
+    );
+   console.log("TOKEN",token)
+    return dispatch({
+      type: TYPES.GET_CONFIRM,
+      payload: json.data,
+    });
+  };
+};
 
 
 // case REGISTER_USER_SUCCESS:

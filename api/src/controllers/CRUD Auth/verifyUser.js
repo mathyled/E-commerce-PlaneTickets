@@ -1,6 +1,7 @@
 const { UserModel } = require("../../models");
 
 const verifyUser = (req, res) => {
+
   try {
     const { confirmationCode } = req.params;
     UserModel.findOne({ confirmationCode }, (err, user) => {
@@ -8,6 +9,7 @@ const verifyUser = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
+
       if (!user) {
         res.status(404).send({ message: "User not found" });
         return;
