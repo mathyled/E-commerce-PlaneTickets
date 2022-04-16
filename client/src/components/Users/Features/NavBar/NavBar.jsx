@@ -14,46 +14,45 @@ import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
 import { MdTravelExplore } from "react-icons/md";
-import { useAuth } from "../../../../context/AuthContext"
+import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
-// import { getOffers } from "../../../../redux/actions/actions";
+import { getBackUpState } from "../../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
 import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar() {
-  const[cartCount,setCartCount] = useState(0) 
-  const cart = useSelector(state=> state.cart)
-  const { toggleColorMode } = useColorMode()
-  const { currentUser, logout } = useAuth()
-  const dispatch = useDispatch()
+  const [cartCount, setCartCount] = useState(0);
+  const cart = useSelector((state) => state.cart);
+  const { toggleColorMode } = useColorMode();
+  const { currentUser, logout } = useAuth();
+  const dispatch = useDispatch();
   async function handlerLogOut(e) {
     e.preventDefault();
     // handle logout
-    logout()
-  };
+    logout();
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     let count = 0;
-    cart.forEach(item=>{
-      count+= item.quantity
-    })
-    setCartCount(count)
-  },[cart,cartCount])
+    cart.forEach((item) => {
+      count += item.quantity;
+    });
+    setCartCount(count);
+  }, [cart, cartCount]);
 
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-
           <HStack spacing={12} alignItems={"center"}>
             <Box>
               <Navlink
                 to="/home"
                 name="Heading North"
-              //  onClick={() => dispatch()}
+                onClick={() => dispatch(getBackUpState())}
               />
             </Box>
 
@@ -77,10 +76,11 @@ function NavBar() {
                 About
               </Link>
 
-              {currentUser && <Navlink to="/new-flight" name=" New flight plan" />}
+              {currentUser && (
+                <Navlink to="/new-flight" name=" New flight plan" />
+              )}
 
               <FilterModal />
-
             </HStack>
           </HStack>
           <Stack
@@ -94,9 +94,14 @@ function NavBar() {
             {!currentUser && <LoginModal />}
             {!currentUser && <RegisterModal />}
 
-
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            {currentUser && <UserMenu logout={handlerLogOut} photo={currentUser.photoURL} name={currentUser.displayName} />}
+            {currentUser && (
+              <UserMenu
+                logout={handlerLogOut}
+                photo={currentUser.photoURL}
+                name={currentUser.displayName}
+              />
+            )}
             {/* {currentUser && < Navlink
               to="/logout"
               name="Logout"
@@ -118,9 +123,9 @@ function NavBar() {
             >
               <Cart  quantity={cartCount}/>
             </Link> */}
-             <Link to="/cart">
-             <Cart  quantity={cartCount}/>
-             </Link>
+            <Link to="/cart">
+              <Cart quantity={cartCount} />
+            </Link>
 
             <IconButton
               variant="outline"

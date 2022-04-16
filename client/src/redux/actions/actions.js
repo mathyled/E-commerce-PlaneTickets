@@ -99,6 +99,10 @@ export const resetStates = () => {
   };
 };
 
+export const resetMessageErrors = () => {
+  return { type: TYPES.RESET_MESSAGE_ERRORS, payload: {} };
+};
+
 export const postFlight = (payload) => {
   return async (dispatch) => {
     var res = await axios.post(
@@ -113,6 +117,12 @@ export const isOnSearch = (boolean) => {
   return {
     type: TYPES.IS_ON_SEARCH,
     payload: boolean,
+  };
+};
+
+export const getBackUpState = () => {
+  return {
+    type: TYPES.GET_BACKUP_STATE,
   };
 };
 
