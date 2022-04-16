@@ -20,7 +20,7 @@ const forgotPass = async (req, res) => {
         },
       });
       const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: '"Heading North" <process.env.EMAIL_USER>',
         to: email,
         subject: "Recover Password",
         html: `<h1>Recover Password</h1>
