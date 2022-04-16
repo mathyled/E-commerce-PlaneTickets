@@ -14,6 +14,7 @@ import {
   AlertIcon,
   Alert,
   AlertTitle,
+  CloseButton,
 } from "@chakra-ui/react";
 
 import NavBar from "./NavBar/NavBar";
@@ -27,6 +28,7 @@ export default function Home() {
 
   let cities = useSelector((state) => state.city);
   const search = useSelector((state) => state.search);
+  const errors = useSelector((state) => state.errorMessage);
   const IsOnSearch = useSelector((state) => state.isSearching);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -79,6 +81,17 @@ export default function Home() {
         />
         {IsOnSearch ? <LoadingSection /> : <></>}
 
+        {errors.map((error) => {
+          return (
+            <Center width={"100vw"}>
+              <Alert width={80} status="warning">
+                <AlertIcon />
+                <AlertTitle mr={2}>{error}</AlertTitle>
+              </Alert>
+            </Center>
+          );
+        })}
+
         <SimpleGrid columns={[2, null, 3]} spacing="40px">
           {currentTickets &&
           currentTickets.length === 1 &&
@@ -89,6 +102,7 @@ export default function Home() {
               <Alert width={80} status="error">
                 <AlertIcon />
                 <AlertTitle mr={2}> Not flight avaiable!</AlertTitle>
+                <CloseButton position="absolute" right="8px" top="8px" />
               </Alert>
             </Center>
 

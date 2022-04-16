@@ -13,16 +13,22 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-// import { MdTravelExplore } from "react-icons/md";
+
+import { MdTravelExplore } from "react-icons/md";
 import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
-// import { getOffers } from "../../../../redux/actions/actions";
-import { useDispatch,useSelector } from "react-redux";
+import { getBackUpState } from "../../../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
 import Cart from "../Cart";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+
+// import { MdTravelExplore } from "react-icons/md";
+
 import { useNavigate } from "react-router-dom";
 // import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
 import { logOut } from "../../../../redux/actions/actions";
 
 function NavBar() {
@@ -30,7 +36,7 @@ function NavBar() {
   const cart = useSelector(state=> state.cart)
   const currentUser = useSelector(state=> state.user)
   const { toggleColorMode } = useColorMode()
-console.log(currentUser)
+
   // const { currentUser, logout } = useAuth()
   const dispatch = useDispatch()
 
@@ -48,6 +54,7 @@ console.log(currentUser)
   //   })
   // },[cart])
 
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -57,7 +64,7 @@ console.log(currentUser)
               <Navlink
                 to="/home"
                 name="Heading North"
-              //  onClick={() => dispatch()}
+                onClick={() => dispatch(getBackUpState())}
               />
             </Box>
 
@@ -73,7 +80,9 @@ console.log(currentUser)
                 About
               </Link>
 
+
               {currentUser?.accessToken?.length > 0 && (
+
                 <Navlink to="/new-flight" name=" New flight plan" />
               )}
 
@@ -88,6 +97,7 @@ console.log(currentUser)
           >
             <SearchBar />
 
+
             {!currentUser?.accessToken?.length > 0 &&<LoginModal />}
             {!currentUser?.accessToken?.length > 0 &&<RegisterModal />}
 
@@ -98,6 +108,7 @@ console.log(currentUser)
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
                 name={currentUser.username}
+
               />
             )}
             {/* {currentUser && < Navlink
@@ -121,9 +132,11 @@ console.log(currentUser)
             >
               <Cart  quantity={cartCount}/>
             </Link> */}
+
              <Link to="/cart">
              <Cart quantity={cart.length}/>
              </Link>
+
 
             <IconButton
               variant="outline"

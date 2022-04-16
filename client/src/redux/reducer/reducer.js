@@ -9,6 +9,7 @@ const initialState = {
 
   itineraries: [],
   isSearching: false,
+  errorMessage: [],
   ///CART ///////////
   products: [], // { id, origin, destination, price, image, departureTime }
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
@@ -159,22 +160,34 @@ function rootReducer(state = initialState, action) {
       }
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
-      if (action.payload.departure !== "") {
+      state.city = [...state.cityBackUp];
+      let message = [];
+
+      if (action.payload.to !== "") {
         state.city = state.city.filter((fly) => {
-          console.log(fly?.arrival?.nameCity);
           if (fly?.arrival?.nameCity !== undefined) {
             return fly?.arrival?.nameCity
               .toLowerCase()
               .includes(action.payload.to.toLowerCase());
           }
         });
+        if (state.city.length === 0) {
+          message.push(
+            `There isnt a destination named ${action.payload.to} on this location`
+          );
+        }
       }
-      if (action.payload.ret !== "") {
+      if (action.payload.airline !== "") {
         state.city = state.city.filter((fly) =>
           fly.airline?.name
             .toLowerCase()
             .includes(action.payload.airline.toLowerCase())
         );
+        if (state.city.length === 0) {
+          message.push(
+            `There isnt an airport named ${action.payload.airline} on this location`
+          );
+        }
       }
 
       /*
@@ -183,7 +196,16 @@ function rootReducer(state = initialState, action) {
           (fly) => fly.property === action.payload.time
         );
       }*/
-      return { ...state };
+      return { ...state, errorMessage: [...message] };
+
+    case TYPES.RESET_MESSAGE_ERRORS:
+      return {
+        ...state,
+        errorMessage: [],
+      };
+
+    case TYPES.GET_BACKUP_STATE:
+      return { ...state, city: [...state.cityBackUp] };
 
     case TYPES.GET_FLIGHTS:
       return {

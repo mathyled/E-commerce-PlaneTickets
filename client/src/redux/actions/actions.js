@@ -73,6 +73,10 @@ export const resetStates = () => {
   };
 };
 
+export const resetMessageErrors = () => {
+  return { type: TYPES.RESET_MESSAGE_ERRORS, payload: {} };
+};
+
 export function addFavorite(payload) {
   return {
     type: TYPES.ADD_FAVORITE,
@@ -127,6 +131,12 @@ export const isOnSearch = (boolean) => {
   return {
     type: TYPES.IS_ON_SEARCH,
     payload: boolean,
+  };
+};
+
+export const getBackUpState = () => {
+  return {
+    type: TYPES.GET_BACKUP_STATE,
   };
 };
 
