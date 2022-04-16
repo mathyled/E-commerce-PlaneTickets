@@ -10,12 +10,12 @@ import {
   useToast,
 
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import DividerWithText from '../UserModal/components/DividerWithText'
 import { useAuth } from '../../../../context/AuthContext';
-import{useDispatch} from "react-redux";
+import{useDispatch, useSelector} from "react-redux";
 import { signIn } from '../../../../redux/actions/actions';
 // import useMounted from "../../../../hooks/useMounted";
 
@@ -29,7 +29,14 @@ export function LoginForm() {
   const { login,signInWithGoogle } = useAuth()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const currentUser = useSelector(state=> state.user)
   // const mounted = useMounted()
+
+  useEffect(()=>{
+    if(currentUser.accessToken || currentUser?.message  )
+   alert(currentUser.message)
+    navigate("/home")
+  },[currentUser])
 
   function handlerOnChange(e) {
     setInputs({
@@ -37,7 +44,7 @@ export function LoginForm() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(inputs)
+  // console.log(inputs)
 
  async function hanldlerSignIn(){
    try{
