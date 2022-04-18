@@ -52,7 +52,7 @@ function App() {
 
         <Route exact path="/favorite" element={<Favorite />} />
 
-        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
+        <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
 
         <Route path="/admin/" element={<AdminLayout />} />
@@ -80,7 +80,7 @@ function App() {
         <Route exact path="/confirm:token" element={<Confirm />} /> 
 
         <Route exact path="*" element={<NotfoundPage />} />
-        {/* <Route exact path="/confirm/:confirmationCode" element={<Welcome />} /> */}
+
       </Routes>
     </div>
   );

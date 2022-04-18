@@ -18,6 +18,7 @@ const initialState = {
   calculatedTotal: 0,
   user:{},
   confirm: {},
+  forgot:{}
 };
 
 function rootReducer(state = initialState, action) {
@@ -337,11 +338,17 @@ function rootReducer(state = initialState, action) {
       };
 
 
-    // case TYPES.LOAD_CURRENT_ITEM:
-    //   return {
-    //     ...state,
-    //     currentItem: action.payload
-    //   }
+  case TYPES.FORGOT_PASSWORD:
+    return{
+      ...state,
+      forgot: action.payload,
+    } 
+
+    case TYPES.RESET_PASSWORD:
+      return{
+        ...state,
+        forgot: action.payload,
+      }
 
     default:
       return { ...state };

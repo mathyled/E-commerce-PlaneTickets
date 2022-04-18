@@ -239,14 +239,41 @@ export const getConfirm = (token) => {
       payload: json.data,
     });
   };
+}; 
+
+
+
+export const forgotPassword = (email) => {
+  return async (dispatch) => {
+    try {
+      
+      console.log("EMAIL",email)
+      const response = await axios.post('http://localhost:3001/api/auth/recover/',email );
+      dispatch({
+        type: TYPES.FORGOT_PASSWORD,
+        payload: response.data,
+      });
+      console.log(response.data.message);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}; 
+
+
+export const resetPassword = (token,password) => {
+  console.log(password,token)
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/api/auth/recover/${token}`, password);
+      dispatch({
+        type: TYPES.RESET_PASSWORD,
+        payload: response.data,
+      });
+      console.log(response.data.message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
-
-
-// case REGISTER_USER_SUCCESS:
-//       return {
-//           ...state,
-//           loading: false,
-//           isAuthenticated: true,
-//           user: action.payload
-//       }
-
