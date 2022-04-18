@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import DividerWithText from '../UserModal/components/DividerWithText'
-import { useAuth } from '../../../../context/AuthContext';
+
 import{useDispatch, useSelector} from "react-redux";
 import { signIn } from '../../../../redux/actions/actions';
 // import useMounted from "../../../../hooks/useMounted";
@@ -26,7 +26,7 @@ export function LoginForm() {
   });
   // const [submit, setSubmit] = useState(false)
   // const toast = useToast()
-  const { login,signInWithGoogle } = useAuth()
+  
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector(state=> state.user)
@@ -48,8 +48,8 @@ export function LoginForm() {
 
  async function hanldlerSignIn(){
    try{
-     const user = await signInWithGoogle()
-        console.log(user)
+    //  const user = await signInWithGoogle()
+        // console.log(user)
    }catch(error) {
      console.log(error)
    }

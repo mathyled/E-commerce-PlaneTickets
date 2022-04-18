@@ -9,10 +9,10 @@ import {
 
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-// import { useAuth } from '../../../../context/AuthContext';
 // import useMounted from "../../../../hooks/useMounted";
 import {useDispatch, useSelector} from "react-redux";
-import {signUp} from "../../../../redux/actions/actions"
+import { useNavigate } from 'react-router-dom';
+import {logOut, signUp} from "../../../../redux/actions/actions"
 export function RegisterForm() {
 
   const [inputs, setInputs] = useState({
@@ -25,28 +25,33 @@ export function RegisterForm() {
  const currentUser = useSelector(state=> state.user)
 
 
+ console.log("currentUser",currentUser.message)
  useEffect(()=>{
-   if(currentUser.data?.message.length > 0)
-   alert(currentUser.data.message)
+   if(currentUser.message){
+ 
+     alert(currentUser.message)
+  
+     dispatch(logOut() )
+   }
  },[currentUser])
+
   function handlerOnChange(e) {
     setInputs({
       ...inputs,
       [e.target.id]: e.target.value,
-    });
+    })
+
   };
+
+  function handlerSubmit(e) {
+      e.preventDefault()
+      dispatch(signUp(inputs))
+   
+  }
   return (
     <>
       <chakra.form
-        onSubmit={ ( e )=> {
-          e.preventDefault()
-          dispatch(signUp(inputs))
-          setInputs({
-            username:"",
-            email: "",
-            password: "",
-          })
-        }}
+        onSubmit={handlerSubmit}
         
       >
         <Stack spacing='6'>
