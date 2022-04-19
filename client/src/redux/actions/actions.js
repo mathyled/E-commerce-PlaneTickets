@@ -220,6 +220,23 @@ export const signIn = (inputs) => {
   };
 };
 
+export const signInGoogle = () => {
+  // console.log(userGoogle)
+  return async (dispatch) => {
+    try {
+      const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true})
+      dispatch({
+        type: TYPES.SIGN_IN_GOOGLE,
+        payload: response.data,
+      });
+      // console.log(response.data.message);
+       console.log("GOOGLE",response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const logOut = () => {
   return {
     type: TYPES.LOG_OUT,

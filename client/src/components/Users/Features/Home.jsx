@@ -19,7 +19,7 @@ import {
 
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
-import { getCities } from "../../../redux/actions/actions";
+import { getCities , signInGoogle} from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
 
@@ -65,6 +65,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getCities());
+    dispatch(signInGoogle())
   }, [dispatch]);
   return (
     <div>
