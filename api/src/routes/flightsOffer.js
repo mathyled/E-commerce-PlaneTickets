@@ -3,9 +3,11 @@ const router = express.Router();
 const {
   flightOffers,
   getOfferDetail,
+  getAllOffers,
 } = require("../controllers/flightsController");
 
 router.get("/", flightOffers); // test http://localhost:3001/api/flights?origin=SYD&destination=BKK&departureDate=2022-04-04&adults=2
 router.get("/detailspage/:id", getOfferDetail); // test localhost:3001/api/flights/inspiration?origin=MAD
+router.get("/getall", getAllOffers);
 
 module.exports = router;

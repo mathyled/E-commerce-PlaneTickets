@@ -16,8 +16,9 @@ import CardBody from "../../../../components/Card/CardBody.js";
 import CardHeader from "../../../../components/Card/CardHeader.js";
 import TablesProjectRow from "../../../../components/Tables/TablesProjectRow";
 import React from "react";
+import { Router, Route, Link } from "react-router-dom";
 
-const Projects = ({ title, captions, data }) => {
+const Projects = ({ title, captions, data, details }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -42,16 +43,28 @@ const Projects = ({ title, captions, data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((row) => {
-              return (
-                <TablesProjectRow
-                  key={row.name}
-                  name={row.name}
-                  logo={row.logo}
-                  budget={row.budget}
-                />
-              );
-            })}
+            {details
+              ? data.map((row) => {
+                  return (
+                    <TablesProjectRow
+                      key={row._id}
+                      name={row.departure.nameCity}
+                      budget={row.price}
+                    />
+                  );
+                })
+              : data.map((row) => {
+                  return (
+                    <Link to={`/admin/orders/${row._id}`}>
+                      <TablesProjectRow
+                        key={row.name}
+                        name={row.username}
+                        budget={row.amount}
+                        status={row.status}
+                      />
+                    </Link>
+                  );
+                })}
           </Tbody>
         </Table>
       </CardBody>
