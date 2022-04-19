@@ -18,7 +18,9 @@ passport.use(
         username: profile.displayName,
         email: profile.emails[0].value,
         status: "Active",
+        accesToken: accessToken,
       };
+      console.log(newUser);
       try {
         let user = await UserModel.findOne({ email: newUser.email });
         if (user) {
