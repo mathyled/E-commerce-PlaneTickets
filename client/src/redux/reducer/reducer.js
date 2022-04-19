@@ -18,7 +18,11 @@ const initialState = {
   calculatedTotal: 0,
   user:{},
   confirm: {},
-  forgot:{}
+  forgot:{},
+  /// ORDER ///////////
+  flightOffer: [],
+  order: [],
+  order_detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -306,6 +310,36 @@ function rootReducer(state = initialState, action) {
         return{
           ...state,
           calculatedTotal: total,
+        };
+
+      case TYPES.ADD_FLIGHT_OFFER:
+        return {
+          ...state,
+        };
+
+      case TYPES.GET_FLIGHT_OFFER:
+        return {
+          ...state,
+          flightOffer: action.payload,
+        };
+
+
+
+      case TYPES.CREATE_ORDER:
+        return {
+          ...state,
+        };
+
+      case TYPES.GET_ALL_ORDERS:
+        return {
+          ...state,
+          order: action.payload,
+        };
+
+      case TYPES.GET_ORDER:
+        return {
+          ...state,
+          order_detail: action.payload,
         };
 
 

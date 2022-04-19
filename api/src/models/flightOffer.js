@@ -2,22 +2,32 @@ const mongoose = require("mongoose");
 
 const FlightOfferScheme = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
+    weekday: {
+      type: String,
     },
-    nameCity: {
-        type: String,
-        default: "Sin nombre",
-    },
-    itineraries: {
-      type: Array,
-    },
-    price: {
+    departure: {
       type: Object,
     },
-    travelerPricings: {
-      type: Array,
+    arrival: {
+      type: Object,
+    },
+    aircraft: {
+      type: Object,
+    },
+    airline: {
+      type: Object,
+    },
+    flight: {
+      type: Object,
+    },
+    codeshared: {
+      type: Object,
+    },
+    date: {
+      type: String,
+    },
+    price: {
+      type: Number,
     },
   },
   {

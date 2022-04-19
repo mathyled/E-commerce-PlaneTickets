@@ -278,7 +278,6 @@ export const forgotPassword = (email) => {
   };
 }; 
 
-
 export const resetPassword = (token,password) => {
   console.log(password,token)
   return async (dispatch) => {
@@ -292,5 +291,62 @@ export const resetPassword = (token,password) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+
+///////////////// ACTIONS ORDER ////////////////////////////////////
+
+export const createFlightOffer = (payload) => {
+  return async function() {
+    try {
+      const json = await axios.post(`http://localhost:3001/api/flightsOffer/create`, payload);
+      return json;
+    }
+    catch(err) {
+      console.log(err);
+    };
+  };
+};
+
+export const getFlightOffer = (id) => {
+  return async (dispatch) => {
+    const json = await axios.get(`http://localhost:3001/api/flightsOffer/${id}`);
+    return dispatch({
+      type: TYPES.GET_FLIGHT_OFFER,
+      payload: json.data,
+    });
+  };
+};
+
+export const createOrder = (payload) => {
+  return async function() {
+    try {
+      const json = await axios.post(`http://localhost:3001/api/Order`, payload);
+      return json;
+    }
+    catch(err) {
+      console.log(err);
+    };
+  };
+};
+
+export const getAllOrders = () => {
+  return async (dispatch) => {
+    const json = await axios.get(`http://localhost:3001/api/Order`);
+    return dispatch({
+      type: TYPES.GET_ALL_ORDERS,
+      payload: json.data,
+    });
+  };
+};
+
+export const getOrder = (id) => {
+  return async (dispatch) => {
+    const json = await axios.get(`http://localhost:3001/api/Order/${id}`);
+    return dispatch({
+      type: TYPES.GET_ORDER,
+      payload: json.data,
+    });
   };
 };
