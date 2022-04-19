@@ -328,8 +328,12 @@ function rootReducer(state = initialState, action) {
         user: action.payload
       }
 
+      case TYPES.SIGN_IN_GOOGLE:
+        return {
+          ...state,
+          user: action.payload
+        }
 
- 
 
     case TYPES.GET_CONFIRM:
       return {

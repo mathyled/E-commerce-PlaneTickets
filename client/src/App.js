@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Home from "./components/Users/Features/Home";
 import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
@@ -30,13 +31,27 @@ import SuccessBuy from "./components/Users/Pages/SuccessBuy";
 import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 // import Welcome from "./components/Users/Pages/Welcome/Welcome";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
+import axios from "axios";
 
 function App() {
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //    const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true}).catch(
+  //      console.log("not")
+  //    );
+  //     if(response && response.data){
+  //       console.log("USER IS ", response.data)
+  //     }
+  //   }
+  //   getUser();
+  // },[]);
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home  />} />
         <Route path="/my-plans" element={<MyPlans />} />
         <Route path="/new-flight" element={<CreateForm />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />

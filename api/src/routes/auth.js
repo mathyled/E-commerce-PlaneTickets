@@ -27,6 +27,19 @@ router.get(
     failureRedirect: "/login/failed",
   })
 );
+
+router.get("/login/success",(req,res)=>{
+  console.log("google",req.user)
+  if(req.user){
+    res.status(200).json(
+      {
+        success:true,
+        message: "successfull",
+        user:req.user
+      }
+    )
+  }
+})
 router.get("/logout", logout);
 
 module.exports = router;

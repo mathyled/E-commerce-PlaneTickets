@@ -105,7 +105,7 @@ function NavBar() {
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
-                name={currentUser.username}
+                name={currentUser.username || currentUser.user.username }
 
               />
             )}
