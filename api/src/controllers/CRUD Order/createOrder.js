@@ -2,7 +2,7 @@ const { OrderModel } = require("../../models");
 
 const createOrder = async (req, res) => {
   try {
-    const { userId, products, amount } = req.body;
+    const { userId, username, products, amount } = req.body;
 
     let arr = [];
     for(let i = 0; i < products.length; i++) {
@@ -14,6 +14,7 @@ const createOrder = async (req, res) => {
 
     const newOrder = {
       userId,
+      username,
       products: arr,
       amount,
     };

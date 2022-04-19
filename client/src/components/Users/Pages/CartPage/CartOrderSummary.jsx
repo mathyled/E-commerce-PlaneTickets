@@ -72,6 +72,7 @@ export const CartOrderSummary = () => {
     };
     let order = {
       userId: user._id,
+      username: user.username,
       products: prod,
       amount: calculatedTotal,
     };
