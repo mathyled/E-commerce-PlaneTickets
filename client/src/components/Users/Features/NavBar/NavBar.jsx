@@ -79,7 +79,7 @@ function NavBar() {
               </Link>
 
 
-              {currentUser?.accessToken?.length > 0 && (
+              {currentUser?.confirmationCode?.length > 0 && (
 
                 <Navlink to="/new-flight" name=" New flight plan" />
               )}
@@ -96,11 +96,11 @@ function NavBar() {
             <SearchBar />
 
 
-            {!currentUser?.accessToken?.length > 0 &&<LoginModal />}
-            {!currentUser?.accessToken?.length > 0 &&<RegisterModal />}
+            {!currentUser?.confirmationCode?.length > 0 &&<LoginModal />}
+            {!currentUser?.confirmationCode?.length > 0 &&<RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            { currentUser?.accessToken?.length > 0 && (
+            { currentUser?.confirmationCode?.length > 0 && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}

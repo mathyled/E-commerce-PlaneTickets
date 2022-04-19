@@ -31,13 +31,7 @@ router.get(
 router.get("/login/success",(req,res)=>{
   console.log("google",req.user)
   if(req.user){
-    res.status(200).json(
-      {
-        success:true,
-        message: "successfull",
-        user:req.user
-      }
-    )
+    res.status(200).json(req.user)
   }
 })
 router.get("/logout", logout);
