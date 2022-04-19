@@ -1,11 +1,13 @@
-import { useAuth} from "./context/AuthContext"
+
+import { useSelector } from "react-redux";
 import { Navigate,Outlet } from "react-router-dom";
 
 function ProtectedRoute(props) {
-    const { currentUser } = useAuth()
-    const { path } = props
+
+    const currentUser = useSelector(state=> state.user)
+    // const { path } = props
   
-    return currentUser ? (
+    return currentUser.confirmationCode ? (
       < Outlet />
     ) : (
       <Navigate
