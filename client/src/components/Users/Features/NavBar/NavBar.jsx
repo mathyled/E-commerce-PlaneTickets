@@ -14,8 +14,6 @@ import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
 
-import { MdTravelExplore } from "react-icons/md";
-import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
 import { getBackUpState } from "../../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -107,7 +105,7 @@ function NavBar() {
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
-                name={currentUser.username}
+                name={currentUser.username || currentUser.user.username }
 
               />
             )}

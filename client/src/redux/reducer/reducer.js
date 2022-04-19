@@ -18,6 +18,7 @@ const initialState = {
   calculatedTotal: 0,
   user:{},
   confirm: {},
+  forgot:{},
   /// ORDER ///////////
   flightOffer: [],
   order: [],
@@ -361,8 +362,12 @@ function rootReducer(state = initialState, action) {
         user: action.payload
       }
 
+      case TYPES.SIGN_IN_GOOGLE:
+        return {
+          ...state,
+          user: action.payload
+        }
 
- 
 
     case TYPES.GET_CONFIRM:
       return {
@@ -371,11 +376,17 @@ function rootReducer(state = initialState, action) {
       };
 
 
-    // case TYPES.LOAD_CURRENT_ITEM:
-    //   return {
-    //     ...state,
-    //     currentItem: action.payload
-    //   }
+  case TYPES.FORGOT_PASSWORD:
+    return{
+      ...state,
+      forgot: action.payload,
+    } 
+
+    case TYPES.RESET_PASSWORD:
+      return{
+        ...state,
+        forgot: action.payload,
+      }
 
     default:
       return { ...state };
