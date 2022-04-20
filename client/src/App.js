@@ -43,18 +43,19 @@ function App() {
     currentUser?.email &&
     window.localStorage.setItem("User", JSON.stringify(currentUser))
    
-     if(currentUser?.email){
-       const loggedUserJSON= window.localStorage.getItem("User") ;
-       var user = JSON.parse(loggedUserJSON) } 
-       console.log(user)
+    //  if(currentUser?.email){
+    //    const loggedUserJSON= window.localStorage.getItem("User") ;
+    //    var user = JSON.parse(loggedUserJSON) } 
+    //    console.log(user)
     //  dispatch(dispatchUser(user))
   }, [currentUser]);
-
+   const cUser = JSON.parse(localStorage.getItem("User"))
+  console.log("AAAA",cUser)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home user={cUser}/>} />
         <Route path="/my-plans" element={<MyPlans />} />
         <Route path="/new-flight" element={<CreateForm />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />

@@ -23,7 +23,7 @@ import { dispatchUser, getCities, signInGoogle } from "../../../redux/actions/ac
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
 
-export default function Home() {
+export default function Home({user}) {
   const dispatch = useDispatch();
 
   let cities = useSelector((state) => state.city);
@@ -61,16 +61,20 @@ export default function Home() {
       setIsLoading(false);
     }
   }, [search]);
-
+  const currentUser = useSelector(state=> state.user)
+  
+  useEffect(() => {
+    dispatch(dispatchUser(user))
+  }, []);
 
   useEffect(() => {
     dispatch(getCities());
-    dispatch(signInGoogle())
-  }, [dispatch]);
+    // dispatch(signInGoogle())
+  }, [dispatch,currentUser]);
   return (
     <div>
       {isLoading ? <LoadingPage></LoadingPage> : <></>}
-      <NavBar />
+      <NavBar user={user} />
       <CallToAction />
    
       <div>
