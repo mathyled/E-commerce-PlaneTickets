@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import { useEffect, useState } from "react";
 import Home from "./components/Users/Features/Home";
 import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
@@ -30,8 +31,22 @@ import SuccessBuy from "./components/Users/Pages/SuccessBuy";
 import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 // import Welcome from "./components/Users/Pages/Welcome/Welcome";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
+import axios from "axios";
 
 function App() {
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //    const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true}).catch(
+  //      console.log("not")
+  //    );
+  //     if(response && response.data){
+  //       console.log("USER IS ", response.data)
+  //     }
+  //   }
+  //   getUser();
+  // },[]);
   return (
     <div className="App">
       <Routes>
@@ -52,7 +67,7 @@ function App() {
 
         <Route exact path="/favorite" element={<Favorite />} />
 
-        <Route exact path="/reset-password" element={<ResetPasswordPage />} />
+        <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
 
         {
@@ -89,7 +104,6 @@ function App() {
         <Route exact path="/confirm:token" element={<Confirm />} />
 
         <Route exact path="*" element={<NotfoundPage />} />
-        {/* <Route exact path="/confirm/:confirmationCode" element={<Welcome />} /> */}
       </Routes>
     </div>
   );

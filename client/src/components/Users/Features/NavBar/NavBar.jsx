@@ -14,8 +14,6 @@ import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
 
-import { MdTravelExplore } from "react-icons/md";
-import { useAuth } from "../../../../context/AuthContext";
 import FilterModal from "../FilterModal";
 import { getBackUpState } from "../../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -81,7 +79,7 @@ function NavBar() {
               </Link>
 
 
-              {currentUser?.accessToken?.length > 0 && (
+              {currentUser?.confirmationCode?.length > 0 && (
 
                 <Navlink to="/new-flight" name=" New flight plan" />
               )}
@@ -98,16 +96,16 @@ function NavBar() {
             <SearchBar />
 
 
-            {!currentUser?.accessToken?.length > 0 &&<LoginModal />}
-            {!currentUser?.accessToken?.length > 0 &&<RegisterModal />}
+            {!currentUser?.confirmationCode?.length > 0 &&<LoginModal />}
+            {!currentUser?.confirmationCode?.length > 0 &&<RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            { currentUser?.accessToken?.length > 0 && (
+            { currentUser?.confirmationCode?.length > 0 && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
-                name={currentUser.username}
+                name={currentUser.username || currentUser.user.username }
 
               />
             )}

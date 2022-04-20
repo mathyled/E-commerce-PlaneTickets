@@ -4,8 +4,10 @@ const jwt = require("jsonwebtoken");
 
 const forgotPass = async (req, res) => {
   try {
-    const { email } = req.body;
+    const email = req.body.email;
+    console.log(email)
     const user = await UserModel.findOne({ email });
+    console.log("USER",user)
     if (!user) {
       res.status(200).send({ message: "User not found" });
     } else {

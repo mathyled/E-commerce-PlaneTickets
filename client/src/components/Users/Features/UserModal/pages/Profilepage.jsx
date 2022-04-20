@@ -8,12 +8,11 @@ import {
 } from "@chakra-ui/react";
 import React from 'react'
 import { Layout } from '../components/Layout'
-import { useAuth } from '../../../../../context/AuthContext'
 import { MdHeadset, MdEmail, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 import defaultPhoto from "../../../../../assets/defaultPhoto.png"
 export default function Profilepage() {
-  const { currentUser } = useAuth()
+
 
   return (
     <Layout>
@@ -37,7 +36,7 @@ export default function Profilepage() {
           h={56}
           fit="cover"
           objectPosition="center"
-          src={currentUser.photoURL || defaultPhoto}
+          // src={currentUser.photoURL || defaultPhoto}
           alt="avatar"
         />
 
@@ -55,7 +54,7 @@ export default function Profilepage() {
             fontWeight="bold"
             color={useColorModeValue("gray.800", "white")}
           >
-           {currentUser.displayName}
+           {/* {currentUser.displayName} */}
           </chakra.h1>
 
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>

@@ -18,6 +18,11 @@ const initialState = {
   calculatedTotal: 0,
   user: {},
   confirm: {},
+  forgot: {},
+  /// ORDER ///////////
+  flightOffer: [],
+  order: [],
+  order_detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -306,6 +311,34 @@ function rootReducer(state = initialState, action) {
         calculatedTotal: total,
       };
 
+    case TYPES.ADD_FLIGHT_OFFER:
+      return {
+        ...state,
+      };
+
+    case TYPES.GET_FLIGHT_OFFER:
+      return {
+        ...state,
+        flightOffer: action.payload,
+      };
+
+    case TYPES.CREATE_ORDER:
+      return {
+        ...state,
+      };
+
+    case TYPES.GET_ALL_ORDERS:
+      return {
+        ...state,
+        order: action.payload,
+      };
+
+    case TYPES.GET_ORDER:
+      return {
+        ...state,
+        order_detail: action.payload,
+      };
+
     case TYPES.SIGN_IN:
       console.log(action.payload);
       return {
@@ -324,17 +357,29 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
 
+    case TYPES.SIGN_IN_GOOGLE:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
     case TYPES.GET_CONFIRM:
       return {
         ...state,
         confirm: action.payload,
       };
 
-    // case TYPES.LOAD_CURRENT_ITEM:
-    //   return {
-    //     ...state,
-    //     currentItem: action.payload
-    //   }
+    case TYPES.FORGOT_PASSWORD:
+      return {
+        ...state,
+        forgot: action.payload,
+      };
+
+    case TYPES.RESET_PASSWORD:
+      return {
+        ...state,
+        forgot: action.payload,
+      };
 
     default:
       return { ...state };
