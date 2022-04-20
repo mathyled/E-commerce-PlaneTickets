@@ -16,7 +16,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import DividerWithText from '../UserModal/components/DividerWithText'
 
 import{useDispatch, useSelector} from "react-redux";
-import { signIn} from '../../../../redux/actions/actions';
+import { signIn, signInGoogle} from '../../../../redux/actions/actions';
 // import useMounted from "../../../../hooks/useMounted";
 
 export function LoginForm() {
@@ -48,7 +48,7 @@ export function LoginForm() {
 
  function hanldlerSignIn(){
      window.open("http://localhost:3001/api/auth/google","_self")
-
+     dispatch(signInGoogle())
   };
 
   function handlerSubmit(e) {
