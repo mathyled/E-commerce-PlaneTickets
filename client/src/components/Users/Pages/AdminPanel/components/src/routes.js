@@ -27,7 +27,7 @@ var dashRoutes = [
     name: "Users",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
-    component: userTable,
+    component: UserTable,
     layout: "/admin",
   },
   {
@@ -35,7 +35,7 @@ var dashRoutes = [
     name: "Orders",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
-    component: ordersTable,
+    component: OrdersTable,
     layout: "/admin",
   },
   {

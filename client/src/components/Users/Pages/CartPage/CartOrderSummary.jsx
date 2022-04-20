@@ -14,13 +14,15 @@ import StripeCheckout from 'react-stripe-checkout'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { calculateTotal } from '../../../../redux/actions/actions';
+// import { useAuth } from '../../../../context/AuthContext';
+import { calculateTotal, createFlightOffer, createOrder } from '../../../../redux/actions/actions';
 // import defaultPhoto from "../../../../assets/defaultPhoto.png"
 const STRIPE_KEY = "pk_test_51KmQZ1Cz6RSCMCCXpRfTNxGgQFkHovBTwCQqgw162K050s9JxuyO4pQQBz70izz0LQeKE29rVsQNZZ5YtjcOT0zc00jGxHBB6r"
 
 export const CartOrderSummary = () => {
   const toast = useToast()
-  // const cart = useSelector(state => state.cart)
+  const user = useSelector(state => state.user)
+  const cart = useSelector(state => state.cart)
   const calculatedTotal = useSelector(state => state.calculatedTotal);
   const dispatch = useDispatch();
   // const { currentUser } = useAuth()
@@ -36,7 +38,7 @@ export const CartOrderSummary = () => {
       try {
         const response = axios.post("http://localhost:3001/api/payments", {
           tokenId: stripeToken.id,
-          amount: 2000
+          amount: calculatedTotal * 100
         }
         );
         navigate("/success")
@@ -48,6 +50,34 @@ export const CartOrderSummary = () => {
     stripeToken && makeRequest()
     dispatch(calculateTotal());
   }, [stripeToken, navigate, dispatch])
+
+  function relation(e) {
+    e.preventDefault();
+    let prod = [];
+    for(let i = 0; i < cart.length; i++) {
+      let offer = {
+        id: cart[i]._id,
+        weekday: cart[i].weekday,
+        departure: cart[i].departure,
+        arrival: cart[i].arrival,
+        aircraft: cart[i].aircraft,
+        airline: cart[i].airline,
+        flight: cart[i].flight,
+        codeshared: cart[i].codeshared,
+        date: cart[i].date,
+        price: cart[i].price,
+      };
+      dispatch(createFlightOffer(offer));
+      prod.push({product: cart[i]._id, quantity: cart[i].quantity});
+    };
+    let order = {
+      userId: user._id,
+      username: user.username,
+      products: prod,
+      amount: calculatedTotal,
+    };
+    dispatch(createOrder(order));
+  };
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
@@ -84,7 +114,7 @@ export const CartOrderSummary = () => {
           ) : (
             <div>
 
-              {currentUser.accessToken ?
+              {currentUser.confirmationCode ?
                 <StripeCheckout
                   name="Heading North"
                   image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"
@@ -96,7 +126,7 @@ export const CartOrderSummary = () => {
                   stripeKey={STRIPE_KEY}
                 >
 
-                  <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
+                  <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />} onClick={relation}>
                     Checkout
                   </Button>
 

@@ -19,18 +19,18 @@ import {
 
 import NavBar from "./NavBar/NavBar";
 import CallToAction from "./CallToAction/CallToAction";
-import { getCities , signInGoogle} from "../../../redux/actions/actions";
+import { dispatchUser, getCities, signInGoogle } from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
 
-export default function Home() {
+export default function Home({user}) {
   const dispatch = useDispatch();
 
   let cities = useSelector((state) => state.city);
   const search = useSelector((state) => state.search);
   const errors = useSelector((state) => state.errorMessage);
   const IsOnSearch = useSelector((state) => state.isSearching);
-
+  // const currentUser = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -50,7 +50,7 @@ export default function Home() {
   };
 
 
- // function setFavorite(Card) {
+  // function setFavorite(Card) {
   //  dispatch(addFavorite(Card));
   //  alert("Add to Favorite Successfully!");
   //}
@@ -61,18 +61,23 @@ export default function Home() {
       setIsLoading(false);
     }
   }, [search]);
-
+  const currentUser = useSelector(state=> state.user)
+  
+  useEffect(() => {
+    dispatch(dispatchUser(user))
+    // dispatch(signInGoogle())
+  }, []);
 
   useEffect(() => {
     dispatch(getCities());
-    dispatch(signInGoogle())
-  }, [dispatch]);
+    // dispatch(signInGoogle())
+  }, [dispatch,currentUser]);
   return (
     <div>
       {isLoading ? <LoadingPage></LoadingPage> : <></>}
-      <NavBar />
+      <NavBar user={user} />
       <CallToAction />
-      {/* {cities.hasOwnProperty(cities.departure) ? */}
+   
       <div>
         <Paged
           TicketsPerPage={TicketsPerPage}
@@ -93,11 +98,11 @@ export default function Home() {
           );
         })}
 
-        <SimpleGrid columns={[2, null, 3]} spacing="40px">
+        <SimpleGrid columns={[2, null, 4]} spacing="40px">
           {currentTickets &&
-          currentTickets.length === 1 &&
-          currentTickets[0]?.departure === undefined &&
-          currentTickets[0]?.arrival === undefined ? (
+            currentTickets.length === 1 &&
+            currentTickets[0]?.departure === undefined &&
+            currentTickets[0]?.arrival === undefined ? (
 
             <Center width={"100vw"}>
               <Alert width={80} status="error">
@@ -133,7 +138,7 @@ export default function Home() {
       </div>
 
 
-  {/* //    <div>
+      {/* //    <div>
    //     {subArray.length !== 0 ? ( subArray its not define
    //       subArray.map((Card) => (
    //         <div>

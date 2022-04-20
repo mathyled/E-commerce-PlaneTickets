@@ -6,7 +6,7 @@ const initialState = {
   search: [],
 
   favoriteCard: [],
-
+  user: {},
   itineraries: [],
   isSearching: false,
   errorMessage: [],
@@ -19,6 +19,12 @@ const initialState = {
   user: {},
   confirm: {},
   forgot: {},
+
+  /// ORDER ///////////
+  flightOffer: [],
+  order: [],
+  order_detail: [],
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -307,6 +313,36 @@ function rootReducer(state = initialState, action) {
         calculatedTotal: total,
       };
 
+
+    case TYPES.ADD_FLIGHT_OFFER:
+      return {
+        ...state,
+      };
+
+    case TYPES.GET_FLIGHT_OFFER:
+      return {
+        ...state,
+        flightOffer: action.payload,
+      };
+
+    case TYPES.CREATE_ORDER:
+      return {
+        ...state,
+
+      };
+
+    case TYPES.GET_ALL_ORDERS:
+      return {
+        ...state,
+        order: action.payload,
+      };
+
+    case TYPES.GET_ORDER:
+      return {
+        ...state,
+        order_detail: action.payload,
+      };
+
     case TYPES.SIGN_IN:
       console.log(action.payload);
       return {
@@ -324,6 +360,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+
 
     case TYPES.SIGN_IN_GOOGLE:
       return {
@@ -347,7 +384,14 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         forgot: action.payload,
-      };
+        
+      }
+      case TYPES.USER:
+        return{
+          ...state,
+          user: action.payload 
+        }
+
 
     /*----Admin CRUD reducer-----*/
     

@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import Home from "./components/Users/Features/Home";
 import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
@@ -15,17 +16,17 @@ import CartPage from "./components/Users/Pages/CartPage/CartPage";
 import AdminLayout from "./components/Users/Pages/AdminPanel/components/src/layouts/Admin.js";
 import Dashboard from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/index";
 
-
 import Favorite from "./components/Users/Features/Favorite/Favorite";
 
 import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
-
+import DetailsAdmin from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/components/DetailsAdmin";
 import {
-  userTable,
-  ordersTable,
+
   flightsTable,
+  UserTable,
+  OrdersTable,
 } from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Tables/index";
 import Profile from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Profile";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
@@ -33,26 +34,30 @@ import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 // import Welcome from "./components/Users/Pages/Welcome/Welcome";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { dispatchUser } from "./redux/actions/actions";
 
 function App() {
-  // const [user, setUser] = useState(null);
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //    const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true}).catch(
-  //      console.log("not")
-  //    );
-  //     if(response && response.data){
-  //       console.log("USER IS ", response.data)
-  //     }
-  //   }
-  //   getUser();
-  // },[]);
+  const currentUser = useSelector(state=> state.user)
+  useEffect(() => {
+    currentUser?.email &&
+    window.localStorage.setItem("User", JSON.stringify(currentUser))
+   
+    //  if(currentUser?.email){
+    //    const loggedUserJSON= window.localStorage.getItem("User") ;
+    //    var user = JSON.parse(loggedUserJSON) } 
+    //    console.log(user)
+    //  dispatch(dispatchUser(user))
+  }, [currentUser]);
+   const cUser = JSON.parse(localStorage.getItem("User"))
+  console.log("AAAA",cUser)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home  />} />
+        <Route path="/home" element={<Home user={cUser}/>} />
         <Route path="/my-plans" element={<MyPlans />} />
         <Route path="/new-flight" element={<CreateForm />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -71,7 +76,9 @@ function App() {
         <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
 
-        <Route path="/admin/" element={<AdminLayout />} />
+        {
+          // useSelector(isAdmin)
+        }
         <Route
           exact
           path={"/admin/dashboard"}
@@ -80,12 +87,12 @@ function App() {
         <Route
           exact
           path={"/admin/users"}
-          element={<AdminLayout currentLinkActive={userTable} />}
+          element={<AdminLayout currentLinkActive={UserTable} />}
         />
         <Route
           exact
           path={"/admin/orders"}
-          element={<AdminLayout currentLinkActive={ordersTable} />}
+          element={<AdminLayout currentLinkActive={OrdersTable} />}
         />
         <Route
           exact
@@ -97,11 +104,17 @@ function App() {
           path={"/admin/profile"}
           element={<AdminLayout currentLinkActive={Profile} />}
         />
+        <Route
+          exact
+          path={"/admin/orders/:id"}
+          element={<AdminLayout currentLinkActive={DetailsAdmin} />}
+        />
 
-        <Route exact path="/confirm:token" element={<Confirm />} /> 
+        <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
+
+        <Route exact path="/confirm:token" element={<Confirm />} />
 
         <Route exact path="*" element={<NotfoundPage />} />
-
       </Routes>
     </div>
   );
