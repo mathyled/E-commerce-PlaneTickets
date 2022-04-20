@@ -32,26 +32,29 @@ import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 // import Welcome from "./components/Users/Pages/Welcome/Welcome";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { dispatchUser } from "./redux/actions/actions";
 
 function App() {
-  // const [user, setUser] = useState(null);
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //    const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true}).catch(
-  //      console.log("not")
-  //    );
-  //     if(response && response.data){
-  //       console.log("USER IS ", response.data)
-  //     }
-  //   }
-  //   getUser();
-  // },[]);
+  const currentUser = useSelector(state=> state.user)
+  useEffect(() => {
+    currentUser?.email &&
+    window.localStorage.setItem("User", JSON.stringify(currentUser))
+   
+     if(currentUser?.email){
+       const loggedUserJSON= window.localStorage.getItem("User") ;
+       var user = JSON.parse(loggedUserJSON) } 
+       console.log(user)
+    //  dispatch(dispatchUser(user))
+  }, [currentUser]);
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home  />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/my-plans" element={<MyPlans />} />
         <Route path="/new-flight" element={<CreateForm />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
