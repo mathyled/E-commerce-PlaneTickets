@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { MdHeadset, MdTimer, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
-import { GiCommercialAirplane } from "react-icons/gi";
+import { GiCommercialAirplane, GiAirplaneDeparture, GiAirplaneArrival } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { FavouriteButton } from "./FavouriteButton";
 
@@ -105,7 +105,7 @@ function Card({
               mt={4}
               color={useColorModeValue("gray.700", "gray.200")}
             >
-              <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+              <Icon as={GiAirplaneDeparture} h={6} w={6} mr={2} />
 
               <chakra.h1 px={2} fontSize="sm">
                 {origin}
@@ -124,7 +124,7 @@ function Card({
               mt={4}
               color={useColorModeValue("gray.700", "gray.200")}
             >
-              <Icon as={BsFillBriefcaseFill} h={6} w={6} mr={2} />
+              <Icon as={GiAirplaneArrival} h={6} w={6} mr={2} />
 
               <chakra.h1 px={2} fontSize="sm">
                 {destination}

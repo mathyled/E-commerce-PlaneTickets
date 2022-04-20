@@ -78,18 +78,13 @@ export default function Details() {
                     {cityDetailsUsage["arrival"]["nameCountry"]}
                   </Heading>
                   <Text
-                    color={
-                      /*useColorModeValue("gray.900", "gray.400")*/ "gray.900"
-                    }
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
                     {`${cityDetailsUsage["price"]} EUR`}
                   </Text>
                   <Text
-                    color={
-                      /*useColorModeValue("gray.900", "gray.400")*/ "gray.900"
-                    }
+                   
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
@@ -108,7 +103,8 @@ export default function Details() {
                     />
                   }
                 >
-                  <Box>
+                  <Box
+                  textAlign={"left"}>
                     <Text
                       fontSize={{ base: "16px", lg: "18px" }}
                       color={
