@@ -214,13 +214,16 @@ export const signInGoogle = () => {
   // console.log(userGoogle)
   return async (dispatch) => {
     try {
-      const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true})
+      const response = await axios.get(
+        "http://localhost:3001/api/auth/login/success",
+        { withCredentials: true }
+      );
       dispatch({
         type: TYPES.SIGN_IN_GOOGLE,
         payload: response.data,
       });
       // console.log(response.data.message);
-       console.log("GOOGLE",response.data);
+      console.log("GOOGLE", response.data);
     } catch (err) {
       console.log(err);
     }
@@ -242,16 +245,16 @@ export const getConfirm = (token) => {
       payload: json.data,
     });
   };
-}; 
-
-
+};
 
 export const forgotPassword = (email) => {
   return async (dispatch) => {
     try {
-      
-      console.log("EMAIL",email)
-      const response = await axios.post('http://localhost:3001/api/auth/recover/',email );
+      console.log("EMAIL", email);
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/recover/",
+        email
+      );
       dispatch({
         type: TYPES.FORGOT_PASSWORD,
         payload: response.data,
@@ -262,13 +265,16 @@ export const forgotPassword = (email) => {
       console.log(err);
     }
   };
-}; 
+};
 
-export const resetPassword = (token,password) => {
-  console.log(password,token)
+export const resetPassword = (token, password) => {
+  console.log(password, token);
   return async (dispatch) => {
     try {
-      const response = await axios.put(`http://localhost:3001/api/auth/recover/${token}`, password);
+      const response = await axios.put(
+        `http://localhost:3001/api/auth/recover/${token}`,
+        password
+      );
       dispatch({
         type: TYPES.RESET_PASSWORD,
         payload: response.data,
@@ -280,24 +286,27 @@ export const resetPassword = (token,password) => {
   };
 };
 
-
 ///////////////// ACTIONS ORDER ////////////////////////////////////
 
 export const createFlightOffer = (payload) => {
-  return async function() {
+  return async function () {
     try {
-      const json = await axios.post(`http://localhost:3001/api/flightsOffer/create`, payload);
+      const json = await axios.post(
+        `http://localhost:3001/api/flightsOffer/create`,
+        payload
+      );
       return json;
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
-    };
+    }
   };
 };
 
 export const getFlightOffer = (id) => {
   return async (dispatch) => {
-    const json = await axios.get(`http://localhost:3001/api/flightsOffer/${id}`);
+    const json = await axios.get(
+      `http://localhost:3001/api/flightsOffer/${id}`
+    );
     return dispatch({
       type: TYPES.GET_FLIGHT_OFFER,
       payload: json.data,
@@ -305,24 +314,14 @@ export const getFlightOffer = (id) => {
   };
 };
 
-<<<<<<< HEAD
-// case REGISTER_USER_SUCCESS:
-//       return {
-//           ...state,
-//           loading: false,
-//           isAuthenticated: true,
-//           user: action.payload
-//       }
-=======
 export const createOrder = (payload) => {
-  return async function() {
+  return async function () {
     try {
       const json = await axios.post(`http://localhost:3001/api/Order`, payload);
       return json;
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
-    };
+    }
   };
 };
 
@@ -345,4 +344,3 @@ export const getOrder = (id) => {
     });
   };
 };
->>>>>>> 7c47d61f0369d8beb6b9ec4d3000735ec2e0d374
