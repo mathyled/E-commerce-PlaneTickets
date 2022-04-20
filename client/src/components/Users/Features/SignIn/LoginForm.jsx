@@ -46,9 +46,15 @@ export function LoginForm() {
   };
   // console.log(inputs)
 
+function handlerGoogle(e) {
+
+  window.open("http://localhost:3001/api/auth/google","_self")
+}
+
  function hanldlerSignIn(){
-     window.open("http://localhost:3001/api/auth/google","_self")
-     dispatch(signInGoogle())
+  handlerGoogle()
+  dispatch(signInGoogle())
+       
   };
 
   function handlerSubmit(e) {

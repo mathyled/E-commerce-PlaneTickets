@@ -80,10 +80,10 @@ function NavBar({user}) {
               </Link>
 
 
-              {currentUser?.confirmationCode?.length > 0  && (
+              {/* {currentUser?.confirmationCode?.length > 0  && (
 
                 <Navlink to="/new-flight" name=" New flight plan" />
-              )}
+              )} */}
 
               <FilterModal />
             </HStack>
