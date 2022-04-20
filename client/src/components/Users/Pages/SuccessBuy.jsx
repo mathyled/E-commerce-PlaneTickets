@@ -20,30 +20,30 @@ export default function SuccessBuy() {
     useEffect(() => {
         let prod = [];
         for(let i = 0; i < cart.length; i++) {
-          let offer = {
-            id: cart[i]._id,
-            weekday: cart[i].weekday,
-            departure: cart[i].departure,
-            arrival: cart[i].arrival,
-            aircraft: cart[i].aircraft,
-            airline: cart[i].airline,
-            flight: cart[i].flight,
-            codeshared: cart[i].codeshared,
-            date: cart[i].date,
-            price: cart[i].price,
-          };
-          dispatch(createFlightOffer(offer));
-          prod.push({product: cart[i]._id, quantity: cart[i].quantity});
+            let offer = {
+                id: cart[i]._id,
+                weekday: cart[i].weekday,
+                departure: cart[i].departure,
+                arrival: cart[i].arrival,
+                aircraft: cart[i].aircraft,
+                airline: cart[i].airline,
+                flight: cart[i].flight,
+                codeshared: cart[i].codeshared,
+                date: cart[i].date,
+                price: cart[i].price,
+            };
+            dispatch(createFlightOffer(offer));
+            prod.push({product: cart[i]._id, quantity: cart[i].quantity});
         };
         let order = {
-          userId: user._id,
-          username: user.username,
-          products: prod,
-          amount: calculatedTotal,
+            userId: user._id,
+            username: user.username,
+            products: prod,
+            amount: calculatedTotal,
         };
         dispatch(createOrder(order));
         dispatch(clearCart());
-    });
+    }, []);
 
     return (
         <Center py={6}>
