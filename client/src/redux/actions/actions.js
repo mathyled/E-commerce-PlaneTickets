@@ -22,8 +22,6 @@ export const filterTickets = (to, airline) => {
   };
 };
 
-
-
 export const getOfferDetails = (id) => {
   //DETAILS
   return async (dispatch) => {
@@ -101,7 +99,6 @@ export const postFlight = (payload) => {
   };
 };
 
-
 export const getItineraries = () => {
   return async (dispatch) => {
     var res = await axios.get("http://localhost:3001/api/itineraries");
@@ -160,7 +157,7 @@ export const updateQuantity = (id, quantity) => {
   // console.log("ACTION", id, quantity)
   return {
     type: TYPES.UPDATE_QUANTITY,
-    payload: {id, quantity}
+    payload: { id, quantity },
   };
 };
 
@@ -184,12 +181,13 @@ export const loadCurrentItem = (item) => {
   };
 };
 
-
-
 export const signUp = (inputs) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/register',inputs);
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/register",
+        inputs
+      );
       dispatch({
         type: TYPES.SIGN_UP,
         payload: response.data,
@@ -202,12 +200,14 @@ export const signUp = (inputs) => {
   };
 };
 
-
 export const signIn = (inputs) => {
   // console.log(inputs)
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login',inputs);
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/login",
+        inputs
+      );
       dispatch({
         type: TYPES.SIGN_IN,
         payload: response.data,
@@ -224,13 +224,16 @@ export const signInGoogle = () => {
   // console.log(userGoogle)
   return async (dispatch) => {
     try {
-      const response = await  axios.get("http://localhost:3001/api/auth/login/success",{withCredentials:true})
+      const response = await axios.get(
+        "http://localhost:3001/api/auth/login/success",
+        { withCredentials: true }
+      );
       dispatch({
         type: TYPES.SIGN_IN_GOOGLE,
         payload: response.data,
       });
       // console.log(response.data.message);
-       console.log("GOOGLE",response.data);
+      console.log("GOOGLE", response.data);
     } catch (err) {
       console.log(err);
     }
@@ -240,32 +243,30 @@ export const signInGoogle = () => {
 export const logOut = () => {
   return {
     type: TYPES.LOG_OUT,
-   
   };
 };
-
 
 export const getConfirm = (token) => {
   return async (dispatch) => {
     var json = await axios.get(
       `http://localhost:3001/api/auth/confirm/${token}`
     );
-   console.log("TOKEN",token)
+    console.log("TOKEN", token);
     return dispatch({
       type: TYPES.GET_CONFIRM,
       payload: json.data,
     });
   };
-}; 
-
-
+};
 
 export const forgotPassword = (email) => {
   return async (dispatch) => {
     try {
-      
-      console.log("EMAIL",email)
-      const response = await axios.post('http://localhost:3001/api/auth/recover/',email );
+      console.log("EMAIL", email);
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/recover/",
+        email
+      );
       dispatch({
         type: TYPES.FORGOT_PASSWORD,
         payload: response.data,
@@ -276,14 +277,16 @@ export const forgotPassword = (email) => {
       console.log(err);
     }
   };
-}; 
+};
 
-
-export const resetPassword = (token,password) => {
-  console.log(password,token)
+export const resetPassword = (token, password) => {
+  console.log(password, token);
   return async (dispatch) => {
     try {
-      const response = await axios.put(`http://localhost:3001/api/auth/recover/${token}`, password);
+      const response = await axios.put(
+        `http://localhost:3001/api/auth/recover/${token}`,
+        password
+      );
       dispatch({
         type: TYPES.RESET_PASSWORD,
         payload: response.data,
@@ -292,5 +295,13 @@ export const resetPassword = (token,password) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+/*------------------Admin CRUD actions-----------------*/
+export const postFlightAdmin = (payload) => {
+  return async (dispatch) => {
+    var res = await axios.post("http://localhost:3001/api/create", payload);
+    return res;
   };
 };
