@@ -350,3 +350,12 @@ export const getOrder = (id) => {
     });
   };
 };
+
+
+export const dispatchUser = (item) => {
+  console.log("%cUSER","background:blue",item)
+  return {
+    type: TYPES.USER,
+    payload: item,
+  };
+};
