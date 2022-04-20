@@ -1,6 +1,6 @@
 // import
 import Dashboard from "./views/Dashboard/Dashboard/index.js";
-import { userTable, ordersTable, flightsTable } from "./views/Dashboard/Tables/index";
+import { UserTable, OrdersTable, flightsTable } from "./views/Dashboard/Tables/index";
 import Profile from "./views/Dashboard/Profile";
 
 import {
