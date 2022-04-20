@@ -16,9 +16,9 @@ const initialState = {
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
-  user:{},
+  user: {},
   confirm: {},
-  forgot:{}
+  forgot: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -48,116 +48,116 @@ function rootReducer(state = initialState, action) {
       if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.arrival.nameCity === undefined) {
-              return 1;
-            }
-            if (b.arrival.nameCity === undefined) {
-              return -1;
-            }
-            if (a.arrival.nameCity.area === null) {
-              return 1;
-            }
-            if (b.arrival.nameCity === null) {
-              return -1;
-            }
-            return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
-              ? -1
-              : 1;
-          }))
+              if (a.arrival.nameCity === undefined) {
+                return 1;
+              }
+              if (b.arrival.nameCity === undefined) {
+                return -1;
+              }
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.arrival.nameCity === undefined) {
-              return 1;
-            }
-            if (b.arrival.nameCity === undefined) {
-              return -1;
-            }
-            if (a.arrival.nameCity.area === null) {
-              return 1;
-            }
-            if (b.arrival.nameCity === null) {
-              return -1;
-            }
-            return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
-              ? -1
-              : 1;
-          }));
+              if (a.arrival.nameCity === undefined) {
+                return 1;
+              }
+              if (b.arrival.nameCity === undefined) {
+                return -1;
+              }
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
+            }));
       }
       if (action.payload.price === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.price === undefined) {
-              return 1;
-            }
-            if (b.price === undefined) {
-              return -1;
-            }
-            if (a.price === null) {
-              return 1;
-            }
-            if (b.price === null) {
-              return -1;
-            }
-            return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
-          }))
+              if (a.price === undefined) {
+                return 1;
+              }
+              if (b.price === undefined) {
+                return -1;
+              }
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.price === undefined) {
-              return 1;
-            }
-            if (b.price === undefined) {
-              return -1;
-            }
-            if (a.price === null) {
-              return 1;
-            }
-            if (b.price === null) {
-              return -1;
-            }
-            return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
-          }));
+              if (a.price === undefined) {
+                return 1;
+              }
+              if (b.price === undefined) {
+                return -1;
+              }
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
+            }));
       }
       if (action.payload.schedule !== "") {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.departure.scheduledTime === undefined) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === undefined) {
-              return -1;
-            }
-            if (a.departure.scheduledTimee === null) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === null) {
-              return -1;
-            }
-            if (a.departure.scheduledTime === "") {
-              return 1;
-            }
-            if (b.departure.scheduledTime === "") {
-              return -1;
-            }
+              if (a.departure.scheduledTime === undefined) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === undefined) {
+                return -1;
+              }
+              if (a.departure.scheduledTimee === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              if (a.departure.scheduledTime === "") {
+                return 1;
+              }
+              if (b.departure.scheduledTime === "") {
+                return -1;
+              }
 
-            return a.departure.scheduledTime < b.departure.scheduledTime
-              ? -1
-              : 1;
-          }))
+              return a.departure.scheduledTime < b.departure.scheduledTime
+                ? -1
+                : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.departure.scheduledTime === undefined) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === undefined) {
-              return -1;
-            }
-            if (a.departure.scheduledTime === null) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === null) {
-              return -1;
-            }
-            return a.departure.scheduledTime > b.departure.scheduledTime
-              ? -1
-              : 1;
-          }));
+              if (a.departure.scheduledTime === undefined) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === undefined) {
+                return -1;
+              }
+              if (a.departure.scheduledTime === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              return a.departure.scheduledTime > b.departure.scheduledTime
+                ? -1
+                : 1;
+            }));
       }
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
@@ -272,10 +272,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: inCart
           ? state.cart.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
+              item.id === action.payload.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            )
           : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
@@ -285,55 +285,51 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
 
+    case TYPES.UPDATE_QUANTITY:
+      const cartCopy = state.cart;
+      let pos = cartCopy.map((e) => e._id).indexOf(action.payload.id);
+      let itemchange = cartCopy[pos];
+      itemchange.quantity = action.payload.quantity;
+      itemchange.total = itemchange.price * action.payload.quantity;
+      cartCopy[pos] = itemchange;
+      return {
+        ...state,
+        cart: cartCopy,
+      };
 
-      case TYPES.UPDATE_QUANTITY:
-        const cartCopy = state.cart;
-        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
-        let itemchange = cartCopy[pos];
-        itemchange.quantity = action.payload.quantity;
-        itemchange.total = itemchange.price * action.payload.quantity;
-        cartCopy[pos] = itemchange;
-        return{
-          ...state,
-          cart: cartCopy,
-        };
+    case TYPES.CALCULATE_TOTAL:
+      let total = 0;
+      if (state.cart.length > 0) {
+        total = state.cart.reduce((prev, next) => prev + next.total, 0);
+      }
+      return {
+        ...state,
+        calculatedTotal: total,
+      };
 
-      case TYPES.CALCULATE_TOTAL:
-        let total = 0;
-        if(state.cart.length > 0) {
-          total = state.cart.reduce((prev, next) => prev + next.total, 0);
-        };
-        return{
-          ...state,
-          calculatedTotal: total,
-        };
-
-
-
-          case TYPES.SIGN_IN :
-            console.log(action.payload)
-            return{
-              ...state,
-              user:action.payload
-            }
-            case TYPES.LOG_OUT:
-              return{
-                ...state,
-                user:{}
-              }
+    case TYPES.SIGN_IN:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case TYPES.LOG_OUT:
+      return {
+        ...state,
+        user: {},
+      };
 
     case TYPES.SIGN_UP:
       return {
         ...state,
-        user: action.payload
-      }
+        user: action.payload,
+      };
 
-      case TYPES.SIGN_IN_GOOGLE:
-        return {
-          ...state,
-          user: action.payload
-        }
-
+    case TYPES.SIGN_IN_GOOGLE:
+      return {
+        ...state,
+        user: action.payload,
+      };
 
     case TYPES.GET_CONFIRM:
       return {
@@ -341,19 +337,24 @@ function rootReducer(state = initialState, action) {
         confirm: action.payload,
       };
 
-
-  case TYPES.FORGOT_PASSWORD:
-    return{
-      ...state,
-      forgot: action.payload,
-    } 
-
-    case TYPES.RESET_PASSWORD:
-      return{
+    case TYPES.FORGOT_PASSWORD:
+      return {
         ...state,
         forgot: action.payload,
-      }
+      };
 
+    case TYPES.RESET_PASSWORD:
+      return {
+        ...state,
+        forgot: action.payload,
+      };
+
+    /*----Admin CRUD reducer-----*/
+    
+      case TYPES.POST_FLIGHT_ADMIN:
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }
