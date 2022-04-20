@@ -7,6 +7,7 @@ import {
   tablesTableData,
   dashboardTableData,
 } from "../../../variables/general";
+import Flights from "./components/Flights";
 
 export function userTable() {
   return (
@@ -28,6 +29,15 @@ export function ordersTable() {
         captions={["Name", "Price"]}
         data={dashboardTableData}
       />
+    </Flex>
+  );
+}
+
+export function flightsTable() {
+  return (
+    <Flex direction="column" pt={{ base: "0", md: "0" }}>
+      <Flights title={"Flights"}
+      captions={['Depature', 'Arrival', 'Price','Date', 'actions']} />
     </Flex>
   );
 }
