@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import Home from "./components/Users/Features/Home";
 import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
@@ -15,16 +16,15 @@ import CartPage from "./components/Users/Pages/CartPage/CartPage";
 import AdminLayout from "./components/Users/Pages/AdminPanel/components/src/layouts/Admin.js";
 import Dashboard from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/index";
 
-
 import Favorite from "./components/Users/Features/Favorite/Favorite";
 
 import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
-
+import DetailsAdmin from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/components/DetailsAdmin";
 import {
-  userTable,
-  ordersTable,
+  UserTable,
+  OrdersTable,
 } from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Tables/index";
 import Profile from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Profile";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
@@ -73,7 +73,9 @@ function App() {
         <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
         <Route exact path="/cart" element={<CartPage />} />
 
-        <Route path="/admin/" element={<AdminLayout />} />
+        {
+          // useSelector(isAdmin)
+        }
         <Route
           exact
           path={"/admin/dashboard"}
@@ -82,23 +84,29 @@ function App() {
         <Route
           exact
           path={"/admin/users"}
-          element={<AdminLayout currentLinkActive={userTable} />}
+          element={<AdminLayout currentLinkActive={UserTable} />}
         />
         <Route
           exact
           path={"/admin/orders"}
-          element={<AdminLayout currentLinkActive={ordersTable} />}
+          element={<AdminLayout currentLinkActive={OrdersTable} />}
         />
         <Route
           exact
           path={"/admin/profile"}
           element={<AdminLayout currentLinkActive={Profile} />}
         />
+        <Route
+          exact
+          path={"/admin/orders/:id"}
+          element={<AdminLayout currentLinkActive={DetailsAdmin} />}
+        />
 
-        <Route exact path="/confirm:token" element={<Confirm />} /> 
+        <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
+
+        <Route exact path="/confirm:token" element={<Confirm />} />
 
         <Route exact path="*" element={<NotfoundPage />} />
-
       </Routes>
     </div>
   );
