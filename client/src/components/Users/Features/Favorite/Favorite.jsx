@@ -22,7 +22,6 @@ export default function Favorites() {
 
   return (
     <div>
-      <h3>Hola aqui estoy </h3>
       <div>
         {favorites.map((card) => (
           <div>

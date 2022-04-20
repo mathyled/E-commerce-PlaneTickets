@@ -72,15 +72,13 @@ function Card({
               />
             </Box>
           </Link>
-          <FavouriteButton position="absolute" top="4" right="4" />
+          <FavouriteButton id={id} position="absolute" top="4" right="4" />
 
           <Flex alignItems="center" px={6} py={3} bg="gray.900">
             <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-
-             {airline || " Not Airline information"}
-
+              {airline || " Not Airline information"}
             </chakra.h1>
           </Flex>
 
@@ -115,8 +113,8 @@ function Card({
                 {departureTime}
               </chakra.h1>
             </Flex>
-          <Spacer />
-          <Spacer ></Spacer>
+            <Spacer />
+            <Spacer></Spacer>
             <Flex
               alignItems="center"
               mt={4}

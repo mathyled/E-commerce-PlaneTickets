@@ -75,9 +75,9 @@ export const resetMessageErrors = () => {
 };
 
 export function addFavorite(payload) {
-  return {
-    type: TYPES.ADD_FAVORITE,
-    payload: payload,
+  return async (dispatch) => {
+    let json = await axios.post(`${baseUrl}api/Favorites/`, payload);
+    return json;
   };
 }
 
@@ -345,9 +345,8 @@ export const getOrder = (id) => {
   };
 };
 
-
 export const dispatchUser = (item) => {
-  console.log("%cUSER","background:blue",item)
+  console.log("%cUSER", "background:blue", item);
   return {
     type: TYPES.USER,
     payload: item,
