@@ -29,6 +29,8 @@ const Paged = ({ TicketsPerPage, total, paginate, currentPage }) => {
             return (
               <div key={num}>
                 <Button
+                marginLeft={"5px"}
+                marginBottom={"5px"}
                   colorScheme="teal"
                   spacing="6"
                   variant="outline"

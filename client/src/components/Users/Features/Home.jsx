@@ -98,7 +98,7 @@ export default function Home({user}) {
           );
         })}
 
-        <SimpleGrid columns={[2, null, 4]} spacing="40px">
+        <SimpleGrid columns={[2, null, 4]} spacing="5px">
           {currentTickets &&
             currentTickets.length === 1 &&
             currentTickets[0]?.departure === undefined &&

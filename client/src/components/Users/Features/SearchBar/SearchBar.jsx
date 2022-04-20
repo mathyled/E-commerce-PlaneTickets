@@ -87,7 +87,7 @@ function SearchBar() {
             color={useColorModeValue("grey.200", "Black")}
           />
           <Input
-            marginRight="2px"
+            marginRight="5px"
             width={"100%"}
             bg="white"
             type="text"
@@ -119,6 +119,7 @@ function SearchBar() {
           _placeholder={{
             color: useColorModeValue("grey.200", "Black"),
           }}
+          marginRight="5px"
           textAlign="center"
           color="black"
           value={tempInput.date}
