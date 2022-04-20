@@ -379,7 +379,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         forgot: action.payload,
-      };
+
+      }
+      case TYPES.USER:
+        return{
+          ...state,
+          user: action.payload 
+        }
 
     default:
       return { ...state };
