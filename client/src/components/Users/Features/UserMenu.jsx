@@ -39,7 +39,7 @@ export default function UserMenu({logout,photo,name, myPlans}) {
                     </Center>
                     <br />
                     <MenuDivider />
-                     <MenuItem onClick={myPlans}>My Plans</MenuItem>
+                     {/* <MenuItem onClick={myPlans}>My Plans</MenuItem> */}
                     {/*<MenuItem>Account Settings</MenuItem> */}
                     <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
