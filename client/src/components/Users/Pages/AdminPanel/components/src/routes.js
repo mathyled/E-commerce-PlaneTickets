@@ -1,6 +1,6 @@
 // import
 import Dashboard from "./views/Dashboard/Dashboard/index.js";
-import { UserTable, OrdersTable } from "./views/Dashboard/Tables/index";
+import { UserTable, OrdersTable, flightsTable } from "./views/Dashboard/Tables/index";
 import Profile from "./views/Dashboard/Profile";
 
 import {
@@ -38,7 +38,14 @@ var dashRoutes = [
     component: OrdersTable,
     layout: "/admin",
   },
-
+  {
+    path: "/flights",
+    name: "Flights",
+    rtlName: "لوحة القيادة",
+    icon: <StatsIcon color="inherit" />,
+    component: flightsTable,
+    layout: "/admin",
+  },
   {
     name: "ACCOUNT PAGES",
     category: "account",

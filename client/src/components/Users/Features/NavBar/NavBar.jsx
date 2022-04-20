@@ -29,7 +29,7 @@ import { useNavigate } from "react-router-dom";
 // import { useEffect, useState } from "react";
 import { logOut } from "../../../../redux/actions/actions";
 
-function NavBar() {
+function NavBar({user}) {
   // const[cartCount,setCartCount] = useState(0)
   const cart = useSelector(state=> state.cart)
   const currentUser = useSelector(state=> state.user)
@@ -42,7 +42,8 @@ function NavBar() {
   async function handlerLogOut(e) {
     e.preventDefault();
     // handle logout
-    dispatch(logOut()) 
+    dispatch(logOut())
+    localStorage.clear("User") 
   }
 
   // useEffect(()=>{
@@ -79,10 +80,10 @@ function NavBar() {
               </Link>
 
 
-              {currentUser?.confirmationCode?.length > 0 && (
+              {/* {currentUser?.confirmationCode?.length > 0  && (
 
                 <Navlink to="/new-flight" name=" New flight plan" />
-              )}
+              )} */}
 
               <FilterModal />
             </HStack>
@@ -96,16 +97,16 @@ function NavBar() {
             <SearchBar />
 
 
-            {!currentUser?.confirmationCode?.length > 0 &&<LoginModal />}
-            {!currentUser?.confirmationCode?.length > 0 &&<RegisterModal />}
+            {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 &&<LoginModal />}
+            {!currentUser?.confirmationCode?.length > 0  && !user?.confirmationCode?.length > 0&&<RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            { currentUser?.confirmationCode?.length > 0 && (
+            { currentUser?.confirmationCode?.length > 0  && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
                 photo={currentUser?.photoURL}
-                name={currentUser.username || currentUser.user.username }
+                name={currentUser.username || user?.username }
 
               />
             )}

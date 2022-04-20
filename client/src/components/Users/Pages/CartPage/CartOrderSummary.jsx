@@ -38,7 +38,7 @@ export const CartOrderSummary = () => {
       try {
         const response = axios.post("http://localhost:3001/api/payments", {
           tokenId: stripeToken.id,
-          amount: 2000
+          amount: calculatedTotal * 100
         }
         );
         navigate("/success")
@@ -114,7 +114,7 @@ export const CartOrderSummary = () => {
           ) : (
             <div>
 
-              {currentUser.accessToken ?
+              {currentUser.confirmationCode ?
                 <StripeCheckout
                   name="Heading North"
                   image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"

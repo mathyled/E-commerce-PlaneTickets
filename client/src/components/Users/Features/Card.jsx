@@ -13,6 +13,10 @@ import { GiCommercialAirplane } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { FavouriteButton } from "./FavouriteButton";
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Card({
   id,
   origin,
@@ -78,7 +82,7 @@ function Card({
             <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-              {airline || " Not Airline information"}
+              {capitalizeFirstLetter(airline) || "Not Airline"}
             </chakra.h1>
           </Flex>
 
