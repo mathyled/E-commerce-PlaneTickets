@@ -291,6 +291,12 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
 
+    case TYPES.CLEAR_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+
     case TYPES.UPDATE_QUANTITY:
       const cartCopy = state.cart;
       let pos = cartCopy.map((e) => e._id).indexOf(action.payload.id);
