@@ -23,6 +23,8 @@ import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 import Checkout from "./components/Users/Pages/Checkout/Checkout";
 import DetailsAdmin from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/components/DetailsAdmin";
 import {
+
+  flightsTable,
   UserTable,
   OrdersTable,
 } from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Tables/index";
@@ -91,6 +93,11 @@ function App() {
           exact
           path={"/admin/orders"}
           element={<AdminLayout currentLinkActive={OrdersTable} />}
+        />
+        <Route
+          exact
+          path = {"/admin/flights"}
+          element = {<AdminLayout currentLinkActive={flightsTable}/>}
         />
         <Route
           exact

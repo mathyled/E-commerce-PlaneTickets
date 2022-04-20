@@ -180,7 +180,9 @@ export const loadCurrentItem = (item) => {
 export const signUp = (inputs) => {
   return async (dispatch) => {
     try {
+
       const response = await axios.post(`${baseUrl}api/auth/register`, inputs);
+
       dispatch({
         type: TYPES.SIGN_UP,
         payload: response.data,
@@ -197,7 +199,9 @@ export const signIn = (inputs) => {
   // console.log(inputs)
   return async (dispatch) => {
     try {
+
       const response = await axios.post(`${baseUrl}api/auth/login`, inputs);
+
       dispatch({
         type: TYPES.SIGN_IN,
         payload: response.data,
@@ -238,7 +242,9 @@ export const logOut = () => {
 
 export const getConfirm = (token) => {
   return async (dispatch) => {
+
     var json = await axios.get(`${baseUrl}api/auth/confirm/${token}`);
+
     console.log("TOKEN", token);
     return dispatch({
       type: TYPES.GET_CONFIRM,
@@ -283,6 +289,15 @@ export const resetPassword = (token, password) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+
+/*------------------Admin CRUD actions-----------------*/
+export const postFlightAdmin = (payload) => {
+  return async (dispatch) => {
+    var res = await axios.post("http://localhost:3001/api/create", payload);
+    return res;
   };
 };
 
@@ -353,3 +368,4 @@ export const dispatchUser = (item) => {
     payload: item,
   };
 };
+

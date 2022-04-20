@@ -19,10 +19,12 @@ const initialState = {
   user: {},
   confirm: {},
   forgot: {},
+
   /// ORDER ///////////
   flightOffer: [],
   order: [],
   order_detail: [],
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -311,6 +313,7 @@ function rootReducer(state = initialState, action) {
         calculatedTotal: total,
       };
 
+
     case TYPES.ADD_FLIGHT_OFFER:
       return {
         ...state,
@@ -325,6 +328,7 @@ function rootReducer(state = initialState, action) {
     case TYPES.CREATE_ORDER:
       return {
         ...state,
+
       };
 
     case TYPES.GET_ALL_ORDERS:
@@ -357,6 +361,7 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
 
+
     case TYPES.SIGN_IN_GOOGLE:
       return {
         ...state,
@@ -379,7 +384,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         forgot: action.payload,
-
+        
       }
       case TYPES.USER:
         return{
@@ -387,6 +392,13 @@ function rootReducer(state = initialState, action) {
           user: action.payload 
         }
 
+
+    /*----Admin CRUD reducer-----*/
+    
+      case TYPES.POST_FLIGHT_ADMIN:
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }
