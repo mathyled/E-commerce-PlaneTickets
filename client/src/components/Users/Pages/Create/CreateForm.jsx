@@ -6,8 +6,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import WithSubnavigation from "../../Features/NavBar";
 
-import NavBar from "../../Features/NavBar/NavBar";
+
 
 import PlanForm from "../../Features/PlanForm/PlanForm";
 
@@ -30,7 +31,7 @@ function CreateForm() {
 
   return (
     <div>
-      <NavBar />
+     <WithSubnavigation  />
       <Box display={"relative"} zIndex={"-15"}>
         <Flex
           minH={"100vh"}

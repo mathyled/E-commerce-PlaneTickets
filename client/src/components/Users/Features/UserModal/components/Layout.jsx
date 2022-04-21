@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Container } from '@chakra-ui/react'
-import NavBar  from '../../NavBar/NavBar'
+import WithSubnavigation from '../../NavBar'
 
 
 export function Layout({ children }) {
   return (
     <Box mb={16}>
-      <NavBar />
+     <WithSubnavigation/>
       <Container maxW='container.lg'>{children}</Container>
     </Box>
   )

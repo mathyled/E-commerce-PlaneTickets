@@ -15,22 +15,32 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { postFlightAdmin } from "../../../../../../../../redux/actions/actions";
+import {
+  getFlightsAdmin,
+  postFlightAdmin,
+} from "../../../../../../../../redux/actions/actions";
 
 const CreateForm = () => {
   const dispatch = useDispatch();
+
   const toast = useToast();
   const [isFocus, setIsFocus] = useState(false);
   const formik = useFormik({
     initialValues: {
-      weekdays: 0,
-      depature: "",
-      arrival: "",
+      weekday: 0,
+      departure: {
+        iataCode: "",
+      },
+      arrival: {
+        iataCode: "",
+      },
       aircraft: {
         modelCode: "",
         model: "",
       },
-      airline: "",
+      airline: {
+        iataCode: "",
+      },
       flight: {
         number: 0,
         iataNumber: "",
@@ -42,15 +52,21 @@ const CreateForm = () => {
 
     /*-------Fields validation with Yup---------- */
     validationSchema: Yup.object({
-      weekdays: Yup.number().required("weekdays is required!"),
-      depature: Yup.string()
-        .required("Depature is required!")
-        .min(3, "The info is too short!"),
-      arrival: Yup.string()
-        .required("Arrival is required!")
-        .min(3, "The info is too short!"),
+      weekday: Yup.number().required("weekday is required!"),
+      departure: Yup.object({
+        iataCode: Yup.string()
+          .required("Depature is required!")
+          .min(3, "The info is too short!"),
+      }),
+      arrival: Yup.object({
+        iataCode: Yup.string()
+          .required("Arrival is required!")
+          .min(3, "The info is too short!"),
+      }),
       price: Yup.number().required("Price is required!"),
-      airline: Yup.string().required("Airline is required!"),
+      airline: Yup.object({
+        iataCode: Yup.string().required("Airline is required!"),
+      }),
       date: Yup.string().required("The date is required"),
       number: Yup.number().required("Flight number is required!"),
       flight: Yup.object({
@@ -69,19 +85,29 @@ const CreateForm = () => {
         model: Yup.string().required("The aircraft model is required!"),
       }),
     }),
-
-    onSubmit: (values, actions) => {
-      console.log("form values and structure...", values);
-      actions.resetForm();
-      dispatch(postFlightAdmin(values));
-      toast({
-        title: "Flight created successfully!",
-        status: "success",
-        duration: 3000,
-      });
-    },
+    // onSubmit: (values, actions) => {
+    //   console.log("form values and structure...", values);
+    //   dispatch(postFlightAdmin(values));
+    //   actions.resetForm();
+    //   toast({
+    //     title: "Flight created successfully",
+    //     status: "success",
+    //     duration: 3000,
+    //   });
+    // },
   });
 
+  const submited = () => {
+    dispatch(postFlightAdmin(formik.values));
+    dispatch(getFlightsAdmin());
+
+    // formik.actions.resetForm()
+    toast({
+      title: "Flight created successfully",
+      status: "success",
+      duration: 3000,
+    });
+  };
   const textColor = useColorModeValue("black", "gray.200");
   return (
     <Box
@@ -98,50 +124,57 @@ const CreateForm = () => {
       <HStack spacing={"5"}>
         <FormControl
           isRequired
-          isInvalid={formik.errors.weekdays && formik.touched.weekdays}
+          isInvalid={formik.errors.weekday && formik.touched.weekday}
         >
-          <FormLabel>Count of weekdays</FormLabel>
+          <FormLabel>Count of weekday</FormLabel>
           <Input
             type="number"
             min={0}
             max={10}
-            name="weekdays"
-            value={formik.values.weekdays}
+            name="weekday"
+            value={formik.values.weekday}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
 
-          <FormErrorMessage>{formik.errors.weekdays}</FormErrorMessage>
+          <FormErrorMessage>{formik.errors.weekday}</FormErrorMessage>
         </FormControl>
         <FormControl
           isRequired
-          isInvalid={formik.errors.depature && formik.touched.depature}
+          isInvalid={
+            formik.errors.departure?.iataCode &&
+            formik.touched.departure?.iataCode
+          }
         >
-          <FormLabel>Depature Place</FormLabel>
+          <FormLabel>Departure Code</FormLabel>
           <Input
-            name="depature"
-            value={formik.values.depature}
-            placeholder="depature..."
+            name="departure.iataCode"
+            value={formik.values.departure.iataCode}
+            placeholder="departure..."
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <FormErrorMessage>{formik.errors.depature}</FormErrorMessage>
+          <FormErrorMessage>
+            {formik.errors.departure?.iataCode}
+          </FormErrorMessage>
         </FormControl>
 
         <FormControl
           isRequired
-          isInvalid={formik.errors.arrival && formik.touched.arrival}
+          isInvalid={
+            formik.errors.arrival?.iataCode && formik.touched.arrival?.iataCode
+          }
         >
-          <FormLabel>Arrival Place</FormLabel>
+          <FormLabel>Arrival Code</FormLabel>
 
           <Input
-            name="arrival"
-            value={formik.values.arrival}
+            name="arrival.iataCode"
+            value={formik.values.arrival.iataCode}
             placeholder="arrival..."
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <FormErrorMessage>{formik.errors.arrival}</FormErrorMessage>
+          <FormErrorMessage>{formik.errors.arrival?.iataCode}</FormErrorMessage>
         </FormControl>
       </HStack>
       <br />
@@ -149,17 +182,19 @@ const CreateForm = () => {
       <HStack spacing={"5"}>
         <FormControl
           isRequired
-          isInvalid={formik.errors.airline && formik.touched.airline}
+          isInvalid={
+            formik.errors.airline?.iataCode && formik.touched.airline?.iataCode
+          }
         >
           <FormLabel>airline of the flight</FormLabel>
           <Input
-            name="airline"
-            value={formik.values.airline}
+            name="airline.iataCode"
+            value={formik.values.airline.iataCode}
             placeholder="airline..."
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <FormErrorMessage>{formik.errors.airline}</FormErrorMessage>
+          <FormErrorMessage>{formik.errors.airline?.iataCode}</FormErrorMessage>
         </FormControl>
 
         <FormControl
@@ -280,9 +315,6 @@ const CreateForm = () => {
         >
           <FormLabel>Depature Date</FormLabel>
           <Input
-            // _placeholder={{
-            //   color: useColorModeValue("white", "Black"),
-            // }}
             value={formik.values.date}
             name="date"
             htmlSize={12}
@@ -292,10 +324,7 @@ const CreateForm = () => {
             onFocus={(e) => {
               setIsFocus(true);
             }}
-            onBlur={() => {
-              setIsFocus(false);
-              //  this.formik.handleBlur;
-            }}
+            onBlur={formik.handleBlur}
           />
         </FormControl>
       </HStack>
@@ -309,9 +338,7 @@ const CreateForm = () => {
           boxShadow: "xl",
         }}
         type="submit"
-        // onClick={() => {
-        //   console.log("los valores", formik.values);
-        // }}
+        onClick={submited}
       >
         Create fligth!
       </Button>

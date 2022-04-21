@@ -24,6 +24,11 @@ const initialState = {
   flightOffer: [],
   order: [],
   order_detail: [],
+
+  /*----Flight Cart Admin */
+  flights_Cart: [],
+  flight_Detail: {},
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -298,6 +303,12 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
 
+    case TYPES.CLEAR_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+
     case TYPES.UPDATE_QUANTITY:
       const cartCopy = state.cart;
       let pos = cartCopy.map((e) => e._id).indexOf(action.payload.id);
@@ -397,10 +408,32 @@ function rootReducer(state = initialState, action) {
 
     /*----Admin CRUD reducer-----*/
 
+    case TYPES.GET_ALL_FLIGHTS_ADMIN:
+      return {
+        ...state,
+        flights_Cart: action.payload,
+      };
+    case TYPES.GET_FLIGHT_DETAILS_ADMIN:
+      return {
+        ...state,
+        flight_Detail: action.payload,
+      };
     case TYPES.POST_FLIGHT_ADMIN:
       return {
         ...state,
       };
+    case TYPES.DELETE_FLIGHT_ADMIN:
+      return {
+        ...state,
+        flight_Cart: state.flights_Cart.filter(
+          (el) => el._id !== action.payload
+        ),
+      };
+
+      case TYPES.UPDATE_FLIGHT_ADMIN:
+        return{
+          ...state,          
+        }
     default:
       return { ...state };
   }

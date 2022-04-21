@@ -6,7 +6,7 @@ import Home from "./components/Users/Features/Home";
 import NotfoundPage from "./components/Users/Pages/NotfoundPage/NotfoundPage";
 import { ForgotPasswordPage } from "./components/Users/Features/UserModal/pages/ForgotPasswordPage";
 import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage";
-import ProtectedRoute from "./ProtectedRoutes";
+import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import { ResetPasswordPage } from "./components/Users/Features/UserModal/pages/ResetPasswordPage";
 import LandingPage from "./components/Users/Features/Landing/LandingPage";
 import CreateForm from "./components/Users/Pages/Create/CreateForm";
@@ -34,7 +34,8 @@ import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { dispatchUser } from "./redux/actions/actions";
+import ProtectedUserRoute from "./ProtectedUserRoute";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -56,28 +57,17 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home user={cUser} />} />
-        <Route path="/my-plans" element={<MyPlans />} />
-        <Route path="/new-flight" element={<CreateForm />} />
+        <Route path="/home" element={<Home user={cUser}/>} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route exact path="/detailspage:id" element={<Details />}></Route>
 
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedUserRoute user={cUser} />}>
           <Route exact path="/profile" element={<Profilepage />} />
-        </Route>
-
-        <Route element={<ProtectedRoute />}>
           <Route exact path="/success" element={<SuccessBuy />} />
-        </Route>
-
         <Route exact path="/favorite" element={<Favorite />} />
-
         <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
-        <Route exact path="/cart" element={<CartPage />} />
 
-        {
-          // useSelector(isAdmin)
-        }
+/*
         <Route element={<ProtectAdminRoute />}>
           <Route
             exact
@@ -128,6 +118,46 @@ function App() {
         </Route>
         <Route exact path="/confirm:token" element={<Confirm />} />
 
+      </Route>
+*/
+        <Route exact path="/cart" element={<CartPage />} /> 
+       
+
+   <Route element={<ProtectedAdminRoute  user={cUser}/>}>
+        <Route
+          exact
+          path={"/admin/dashboard"}
+          element={<AdminLayout user={cUser} currentLinkActive={Dashboard} />}
+        />
+        <Route
+          exact
+          path={"/admin/users"}
+          element={<AdminLayout currentLinkActive={UserTable} />}
+        />
+        <Route
+          exact
+          path={"/admin/orders"}
+          element={<AdminLayout currentLinkActive={OrdersTable} />}
+        />
+        <Route
+          exact
+          path = {"/admin/flights"}
+          element = {<AdminLayout currentLinkActive={flightsTable}/>}
+        />
+        <Route
+          exact
+          path={"/admin/profile"}
+          element={<AdminLayout currentLinkActive={Profile} />}
+        />
+        <Route
+          exact
+          path={"/admin/orders/:id"}
+          element={<AdminLayout currentLinkActive={DetailsAdmin} />}
+        />
+        <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
+        </Route>
+
+        <Route exact path="/confirm:token" element={<Confirm />} />
         <Route exact path="*" element={<NotfoundPage />} />
       </Routes>
     </div>

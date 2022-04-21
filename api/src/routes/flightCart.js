@@ -23,9 +23,9 @@ const {
   getAllFlightCart,
 } = require("../controllers/CRUD flightCart/getAllFlightCart");
 
-router.post("/create", verifyTokenAndAdmin, createFlightCart);
-router.put("/:id", verifyTokenAndAdmin, updateFlightCart);
-router.delete("/delete/:id", verifyTokenAndAdmin, deleteFlightCart);
+router.post("/create", /*verifyTokenAndAdmin,*/ createFlightCart);
+router.put("/:id", /*verifyTokenAndAdmin,*/ updateFlightCart);
+router.delete("/delete/:id", /*verifyTokenAndAdmin,*/ deleteFlightCart);
 router.get("/:id", getFlightCart);
 router.get("/", getAllFlightCart);
 
