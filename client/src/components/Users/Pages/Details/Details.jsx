@@ -31,7 +31,7 @@ import {
 import LoadingPage from "../../Features/Loading/LoadingPage";
 import WithSubnavigation from "../../Features/NavBar";
 
-export default function Details() {
+export default function Details({user}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -51,7 +51,7 @@ export default function Details() {
     <div>
       {Object.keys(cityDetails).length > 0 ? (
         <div>
-          <WithSubnavigation />
+          <WithSubnavigation user={user} />
           <Container maxW={"7xl"}>
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}
