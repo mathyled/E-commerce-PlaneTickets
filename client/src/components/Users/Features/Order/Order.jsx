@@ -30,11 +30,9 @@ function Order() {
 
   function handleRadio(e) {
     e.target.checked = !inputs[e.target.name];
-    console.log(e.target.name);
 
     switch (e.target.name) {
       case "to":
-        console.log("entro 1");
         setInputs({
           ...inputs,
           [e.target.name]: e.target.checked,
@@ -43,7 +41,6 @@ function Order() {
         });
         break;
       case "price":
-        console.log("entro 2");
         setInputs({
           ...inputs,
           [e.target.name]: e.target.checked,
@@ -52,8 +49,6 @@ function Order() {
         });
         break;
       case "schedule":
-        console.log("entro 3");
-
         setInputs({
           ...inputs,
           [e.target.name]: e.target.checked,

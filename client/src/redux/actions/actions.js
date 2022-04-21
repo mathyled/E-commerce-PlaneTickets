@@ -65,10 +65,29 @@ export const getCities = () => {
 export const getUserFavorites = (userId) => {
   return async (dispatch) => {
     var { data } = await axios.get(`${baseUrl}api/Favorites/find/${userId}`);
-    console.log("ENTRO");
+
     return dispatch({
       type: TYPES.GET_USER_FAVORITES,
       payload: data?.favs, // [{}]
+    });
+  };
+};
+export const removeUserFavorite = (userId, productId) => {
+  console.log(userId);
+  console.log(productId);
+  return async (dispatch) => {
+    var { data } = await axios.request({
+      method: "delete",
+      url: `${baseUrl}api/Favorites/delete/`,
+      data: {
+        userId: userId,
+        deleteId: productId,
+        // This is the body part
+      },
+    });
+    return dispatch({
+      type: TYPES.REMOVE_USER_FAVORITE,
+      // [{}]
     });
   };
 };
@@ -92,13 +111,14 @@ export function addFavorite(payload) {
   };
 }
 
+/*
 export function removeFavorite(payload) {
   return {
     type: TYPES.REMOVE_FAVORITE,
     payload: payload,
   };
 }
-
+*/
 export const postFlight = (payload) => {
   return async (dispatch) => {
     var res = await axios.post(`${baseUrl}api/itineraries`, payload);

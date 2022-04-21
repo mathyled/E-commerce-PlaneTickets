@@ -14,6 +14,7 @@ import { Container } from "@chakra-ui/react";
 
 export default function Favorites() {
   const dispatch = useDispatch();
+  let [currentUser, setCurrentUser] = useState({});
   let user = useSelector((state) => state.user);
   const [favorites, setFavorites] = useState([]);
   const favCard = useSelector((state) => state.favoriteCard);
@@ -21,18 +22,14 @@ export default function Favorites() {
   useEffect(() => {
     const cUser = JSON.parse(localStorage.getItem("User"));
     if (cUser && Object.keys(cUser).length > 0) {
-      console.log("SISI A", cUser._id);
+      setCurrentUser(cUser);
       dispatch(getUserFavorites(cUser._id));
     }
-    console.log("xdddddddddddddddddd");
   }, []);
 
   useMemo(() => {
     setFavorites(favCard);
   }, [favCard]);
-
-  console.log("22222222222222222222222");
-  console.log(favorites);
 
   function onClick(id) {
     // dispatch(getOfferDetails(id));
@@ -57,6 +54,7 @@ export default function Favorites() {
             ]}
             data={favorites?.products?.length > 0 ? favorites["products"] : []}
             favorites={true}
+            userId={currentUser?._id}
           />
         }
       </Container>

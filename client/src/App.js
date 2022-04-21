@@ -51,7 +51,7 @@ function App() {
     //  dispatch(dispatchUser(user))
   }, [currentUser]);
   const cUser = JSON.parse(localStorage.getItem("User"));
-  console.log("AAAA", cUser);
+  //console.log("AAAA", cUser);
   return (
     <div className="App">
       <Routes>

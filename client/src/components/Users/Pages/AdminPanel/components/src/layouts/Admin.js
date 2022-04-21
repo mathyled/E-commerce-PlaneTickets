@@ -18,7 +18,7 @@ import NavBar from "../../../../../Features/NavBar/NavBar";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
-  console.log(props);
+
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
   const [fixed, setFixed] = useState(false);
@@ -79,7 +79,6 @@ export default function Dashboard(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/admin") {
-        console.log(prop);
         return <Route exact path={prop.layout + prop.path} key={key}></Route>;
       } else {
         return null;
