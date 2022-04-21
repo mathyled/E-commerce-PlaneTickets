@@ -27,8 +27,9 @@ import {
   resetStates,
 } from "../../../../redux/actions/actions";
 
-import NavBar from "../../Features/NavBar/NavBar";
+
 import LoadingPage from "../../Features/Loading/LoadingPage";
+import WithSubnavigation from "../../Features/NavBar";
 
 export default function Details() {
   const toast = useToast();
@@ -50,7 +51,7 @@ export default function Details() {
     <div>
       {Object.keys(cityDetails).length > 0 ? (
         <div>
-          <NavBar />
+          <WithSubnavigation />
           <Container maxW={"7xl"}>
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}

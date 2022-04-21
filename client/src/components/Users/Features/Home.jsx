@@ -17,11 +17,12 @@ import {
   CloseButton,
 } from "@chakra-ui/react";
 
-import NavBar from "./NavBar/NavBar";
+
 import CallToAction from "./CallToAction/CallToAction";
 import { dispatchUser, getCities, signInGoogle } from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
+import WithSubnavigation from "./NavBar";
 
 export default function Home({user}) {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ export default function Home({user}) {
   return (
     <div>
       {isLoading ? <LoadingPage></LoadingPage> : <></>}
-      <NavBar user={user} />
+      <WithSubnavigation user={user} />
       <CallToAction />
    
       <div>

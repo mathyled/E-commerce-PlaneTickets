@@ -36,6 +36,7 @@ import Confirm from "./components/Users/Pages/SuccessConfirm";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { dispatchUser } from "./redux/actions/actions";
+import WithSubnavigation from "./components/Users/Features/NavBar";
 
 function App() {
   const dispatch = useDispatch()
@@ -74,8 +75,8 @@ function App() {
         <Route exact path="/favorite" element={<Favorite />} />
 
         <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
-        <Route exact path="/cart" element={<CartPage />} />
-
+        <Route exact path="/cart" element={<CartPage />} /> 
+        <Route exact path="/demo" element={<WithSubnavigation />} />
         {
           // useSelector(isAdmin)
         }
