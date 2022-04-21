@@ -96,7 +96,9 @@ export function flightsTable() {
     <Flex direction="column" pt={{ base: "0", md: "0" }}>
       <Flights
         title={"Flights"}
-        captions={["Depature", "Arrival", "Price", "Date", "actions"]}
+
+        captions={[" ", "Depature", "Arrival", "Price", "Date", "actions"]}
+
       />
     </Flex>
   );

@@ -13,22 +13,31 @@ import {
   HStack,
   useToast,
 } from "@chakra-ui/react";
-// import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  deleteFlightAdmin,
+  getFlightsAdmin,
+} from "../../../../../../../../../redux/actions/actions";
 // import { deleteItinerary } from "../../../../redux/actions/actions";
 
 function DeleteCartModal({ id }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  //   const toast = useToast();
-  //   const dispatch = useDispatch();
-  //   function handleDelete() {
-  //     dispatch(deleteItinerary(id));
-  //     console.log("Se borró el vuelo con este id...", id);
-  //     toast({
-  //       title: "The plan was deleted succesfully",
-  //       status: "success",
-  //       duration: 3000,
-  //     });
-  //   }
+  const toast = useToast();
+  const dispatch = useDispatch();
+  // useEffect(()=>{
+  // },[dispatch])
+  function handleDelete() {
+    dispatch(deleteFlightAdmin(id));
+    dispatch(getFlightsAdmin());
+
+    console.log("Se borró el vuelo con este id...", id);
+    toast({
+      title: "flight deleted succesfully",
+      status: "success",
+      duration: 3000,
+    });
+  }
   return (
     <>
       <IconButton size="sm" onClick={onOpen} icon={<DeleteIcon />} />
@@ -37,7 +46,7 @@ function DeleteCartModal({ id }) {
         <ModalContent>
           <ModalHeader>Delete Fligth</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody m={"3"} mt={"12"}>
             <Text>
               Are you sure you want to delete this Flight? It won't be able to
               recovery later
@@ -48,7 +57,7 @@ function DeleteCartModal({ id }) {
               my={5}
               spacing="10px"
             >
-              <Button variant="solid" colorScheme="red">
+              <Button variant="solid" colorScheme="red" onClick={handleDelete}>
                 Delete
               </Button>
               <Button variant="outline" colorScheme="teal.400">
