@@ -111,7 +111,7 @@ export const CartOrderSummary = () => {
                       toast({
                         description: "You must to be login",
                         status: 'error',
-                        duration: 9000,
+                        duration: 3000,
                         isClosable: true,
                       })}
                   >

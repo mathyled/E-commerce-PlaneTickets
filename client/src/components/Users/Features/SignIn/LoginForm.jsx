@@ -8,7 +8,6 @@ import {
   Input,
   Stack,
   useToast,
-
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
@@ -17,24 +16,27 @@ import DividerWithText from '../UserModal/components/DividerWithText'
 
 import{useDispatch, useSelector} from "react-redux";
 import { signIn, signInGoogle} from '../../../../redux/actions/actions';
-// import useMounted from "../../../../hooks/useMounted";
+
 
 export function LoginForm() {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
-  // const [submit, setSubmit] = useState(false)
-  // const toast = useToast()
-  
+ 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector(state=> state.user)
-  // const mounted = useMounted()
+  const toast = useToast()
 
   useEffect(()=>{
     if(currentUser?.accessToken || currentUser?.message  )
-   alert(currentUser.message)
+    toast({
+      description: currentUser?.message,
+      status: 'error',
+      duration: 2000,
+      isClosable: true,
+    })
     navigate("/home")
   },[currentUser])
 

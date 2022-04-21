@@ -13,7 +13,6 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "../SignIn/LoginModal";
 import RegisterModal from "../SignUp/RegisterModal";
 import Navlink from "../UserModal/components/Navlink";
-
 import FilterModal from "../FilterModal";
 import { getBackUpState } from "../../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,30 +20,25 @@ import UserMenu from "../UserMenu";
 import Cart from "../Cart";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-
-// import { MdTravelExplore } from "react-icons/md";
-
 import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
 import { logOut } from "../../../../redux/actions/actions";
 
 function NavBar({user}) {
   // const[cartCount,setCartCount] = useState(0)
-  const cart = useSelector(state=> state.cart)
-  const currentUser = useSelector(state=> state.user)
-  const { toggleColorMode } = useColorMode()
+  // const cart = useSelector(state=> state.cart)
+  // const currentUser = useSelector(state=> state.user)
+  // const { toggleColorMode } = useColorMode()
 
   // const { currentUser, logout } = useAuth()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  const navigate = useNavigate()
-  async function handlerLogOut(e) {
-    e.preventDefault();
-    // handle logout
-    dispatch(logOut())
-    localStorage.clear("User") 
-  }
+  // const navigate = useNavigate()
+  // async function handlerLogOut(e) {
+  //   e.preventDefault();
+  //   // handle logout
+  //   dispatch(logOut())
+  //   localStorage.clear("User") 
+  // }
 
   // useEffect(()=>{
   //   let count = 0;
@@ -55,29 +49,29 @@ function NavBar({user}) {
 
 
   return (
-    <>
+   
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={12} alignItems={"center"}>
-            <Box>
+            {/* <Box>
               <Navlink
                 to="/home"
                 name="Heading North"
                 onClick={() => dispatch(getBackUpState())}
               />
-            </Box>
+            </Box> */}
 
             <HStack
               as={"nav"}
               spacing={6}
               display={{ base: "none", md: "flex" }}
             >
-              <Link
+              {/* <Link
                 to="/about"
               >
                 {" "}
                 About
-              </Link>
+              </Link> */}
 
 
               {/* {currentUser?.confirmationCode?.length > 0  && (
@@ -85,7 +79,7 @@ function NavBar({user}) {
                 <Navlink to="/new-flight" name=" New flight plan" />
               )} */}
 
-              <FilterModal />
+              {/* <FilterModal /> */}
             </HStack>
           </HStack>
           <Stack
@@ -94,14 +88,14 @@ function NavBar({user}) {
             direction={"row"}
             spacing={6}
           >
-            <SearchBar />
+            {/* <SearchBar /> */}
 
-
+{/* 
             {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 &&<LoginModal />}
-            {!currentUser?.confirmationCode?.length > 0  && !user?.confirmationCode?.length > 0&&<RegisterModal />}
+            {!currentUser?.confirmationCode?.length > 0  && !user?.confirmationCode?.length > 0&&<RegisterModal />} */}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            { currentUser?.confirmationCode?.length > 0  && (
+            {/* { currentUser?.confirmationCode?.length > 0  && (
               <UserMenu
                 logout={handlerLogOut}
                 myPlans={() => navigate("/my-plans")}
@@ -109,7 +103,7 @@ function NavBar({user}) {
                 name={currentUser.username || user?.username }
 
               />
-            )}
+            )} */}
             {/* {currentUser && < Navlink
               to="/logout"
               name="Logout"
@@ -132,7 +126,7 @@ function NavBar({user}) {
               <Cart  quantity={cartCount}/>
             </Link> */}
 
-             <Link to="/cart">
+             {/* <Link to="/cart">
              <Cart quantity={cart.length}/>
              </Link>
 
@@ -142,11 +136,10 @@ function NavBar({user}) {
               icon={useColorModeValue(<FaSun />, <FaMoon />)}
               onClick={toggleColorMode}
               aria-label="toggle-dark-mode"
-            />
+            /> */}
           </Stack>
         </Flex>
       </Box>
-    </>
   );
 }
 
