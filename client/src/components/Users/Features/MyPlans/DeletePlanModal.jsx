@@ -22,7 +22,7 @@ function DeletePlanModal({ id }) {
   const dispatch = useDispatch();
   function handleDelete() {
     dispatch(deleteItinerary(id));
-    console.log("Se borró el vuelo con este id...", id);
+    //console.log("Se borró el vuelo con este id...", id);
     toast({
       title: "The plan was deleted succesfully",
       status: "success",

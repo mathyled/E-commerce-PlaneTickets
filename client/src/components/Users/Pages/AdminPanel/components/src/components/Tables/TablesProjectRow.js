@@ -13,6 +13,12 @@ import {
 import { FaEllipsisV } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
+
+import {
+  removeUserFavorite,
+  getUserFavorites,
+} from "../../../../../../../../redux/actions/actions";
 
 function DashboardTableRow(props) {
   const {
@@ -26,8 +32,10 @@ function DashboardTableRow(props) {
     budget,
     isOrder,
     id,
+    userId,
   } = props;
-  console.log(props);
+
+  const dispatch = useDispatch();
   const textColor = useColorModeValue("gray.700", "white");
   if (isOrder) {
     return (
@@ -88,7 +96,14 @@ function DashboardTableRow(props) {
           </Text>
         </Td>
         <Td>
-          <DeleteIcon _hover={{ cursor: "pointer" }} />
+          <DeleteIcon
+            onClick={() => {
+              dispatch(removeUserFavorite(userId, id));
+
+              dispatch(getUserFavorites(userId));
+            }}
+            _hover={{ cursor: "pointer" }}
+          />
         </Td>
       </Tr>
     );

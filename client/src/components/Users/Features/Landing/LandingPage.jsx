@@ -1,12 +1,4 @@
-import {
-
-  Center,
- 
-  Button,
-
-  createIcon,
-  HStack,
-} from "@chakra-ui/react";
+import { Center, Button, createIcon, HStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
@@ -30,7 +22,7 @@ function LandingPage() {
 
   function handleInput(event) {
     setPlace(event.target.value);
-    console.log(place);
+    //console.log(place);
   }
 
   setTimeout(() => {

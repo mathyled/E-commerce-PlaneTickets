@@ -15,12 +15,20 @@ import Card from "../../../../components/Card/Card.js";
 import CardBody from "../../../../components/Card/CardBody.js";
 import CardHeader from "../../../../components/Card/CardHeader.js";
 import TablesProjectRow from "../../../../components/Tables/TablesProjectRow";
-import React from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Router, Route, Link } from "react-router-dom";
 
-const Projects = ({ title, captions, data, details, favorites }) => {
-  console.log(data);
+const Projects = ({
+  title,
+  captions,
+  data,
+  details,
+  favorites,
+  userId,
+  forceUpdate,
+}) => {
   const textColor = useColorModeValue("gray.700", "white");
+
   return (
     <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p="6px 0px 22px 0px">
@@ -48,13 +56,14 @@ const Projects = ({ title, captions, data, details, favorites }) => {
               ? data.map((row) => {
                   return (
                     <TablesProjectRow
-                      key={row._id}
+                      key={row.id}
+                      userId={userId}
                       isFavorites={true}
                       origin={row.origin}
                       arrival={row.destination}
                       departureTime={row.departureTime}
                       image={row.image}
-                      id={row._id}
+                      id={row.id}
                       budget={row.price}
                     />
                   );

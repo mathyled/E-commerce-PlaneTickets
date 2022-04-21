@@ -58,7 +58,7 @@ export default function Home({ user }) {
   //  alert("Add to Favorite Successfully!");
   //}
 
-  console.log(IsOnSearch);
+  //console.log(IsOnSearch);
   useEffect(() => {
     if (search.length > 0) {
       setIsLoading(false);

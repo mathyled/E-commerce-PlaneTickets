@@ -16,7 +16,7 @@ const { updateFav } = require("../controllers/CRUD favorites/updateFav");
 
 router.post("/", createFav);
 router.put("/update/:id", updateFav);
-router.delete("/delete/:id", deleteFav);
+router.delete("/delete/", deleteFav);
 router.get("/find/:userId", getUserFavs);
 router.get("/", getAllFavs);
 
