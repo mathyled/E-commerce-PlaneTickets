@@ -19,12 +19,16 @@ import {
 
 
 import CallToAction from "./CallToAction/CallToAction";
-import { dispatchUser, getCities, signInGoogle } from "../../../redux/actions/actions";
+import {
+  dispatchUser,
+  getCities,
+  signInGoogle,
+} from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
 import WithSubnavigation from "./NavBar";
 
-export default function Home({user}) {
+export default function Home({ user }) {
   const dispatch = useDispatch();
 
   let cities = useSelector((state) => state.city);
@@ -33,7 +37,6 @@ export default function Home({user}) {
   const IsOnSearch = useSelector((state) => state.isSearching);
   // const currentUser = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
-
 
   const [currentPage, setCurrentPage] = useState(1);
   const [TicketsPerPage, setCharactersPerPage] = useState(24); // setea cuantos vuelos quiero por pagina
@@ -50,7 +53,6 @@ export default function Home({user}) {
     setCurrentPage(pageNumber);
   };
 
-
   // function setFavorite(Card) {
   //  dispatch(addFavorite(Card));
   //  alert("Add to Favorite Successfully!");
@@ -62,23 +64,23 @@ export default function Home({user}) {
       setIsLoading(false);
     }
   }, [search]);
-  const currentUser = useSelector(state=> state.user)
-  
+  const currentUser = useSelector((state) => state.user);
+
   useEffect(() => {
-    dispatch(dispatchUser(user))
+    dispatch(dispatchUser(user));
     // dispatch(signInGoogle())
   }, []);
 
   useEffect(() => {
     dispatch(getCities());
     // dispatch(signInGoogle())
-  }, [dispatch,currentUser]);
+  }, [dispatch, currentUser]);
   return (
     <div>
       {isLoading ? <LoadingPage></LoadingPage> : <></>}
       <WithSubnavigation user={user} />
       <CallToAction />
-   
+
       <div>
         <Paged
           TicketsPerPage={TicketsPerPage}
@@ -99,12 +101,11 @@ export default function Home({user}) {
           );
         })}
 
-        <SimpleGrid columns={[2, null, 4]} spacing="40px">
+        <SimpleGrid columns={[2, null, 3]} spacing="40px">
           {currentTickets &&
-            currentTickets.length === 1 &&
-            currentTickets[0]?.departure === undefined &&
-            currentTickets[0]?.arrival === undefined ? (
-
+          currentTickets.length === 1 &&
+          currentTickets[0]?.departure === undefined &&
+          currentTickets[0]?.arrival === undefined ? (
             <Center width={"100vw"}>
               <Alert width={80} status="error">
                 <AlertIcon />
@@ -112,7 +113,6 @@ export default function Home({user}) {
                 <CloseButton position="absolute" right="8px" top="8px" />
               </Alert>
             </Center>
-
           ) : (
             currentTickets.map((o) => {
               {
@@ -138,7 +138,6 @@ export default function Home({user}) {
         </SimpleGrid>
       </div>
 
-
       {/* //    <div>
    //     {subArray.length !== 0 ? ( subArray its not define
    //       subArray.map((Card) => (
@@ -153,7 +152,6 @@ export default function Home({user}) {
         //  <p>Card not found.</p>
        // )}
      // </div> */}
-
     </div>
   );
 }

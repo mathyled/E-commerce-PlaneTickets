@@ -62,6 +62,17 @@ export const getCities = () => {
   };
 };
 
+export const getUserFavorites = (userId) => {
+  return async (dispatch) => {
+    var { data } = await axios.get(`${baseUrl}api/Favorites/find/${userId}`);
+    console.log("ENTRO");
+    return dispatch({
+      type: TYPES.GET_USER_FAVORITES,
+      payload: data?.favs, // [{}]
+    });
+  };
+};
+
 export const resetStates = () => {
   //DETAILS
   return {
@@ -75,9 +86,9 @@ export const resetMessageErrors = () => {
 };
 
 export function addFavorite(payload) {
-  return {
-    type: TYPES.ADD_FAVORITE,
-    payload: payload,
+  return async (dispatch) => {
+    let json = await axios.post(`${baseUrl}api/Favorites/`, payload);
+    return json;
   };
 }
 
@@ -188,7 +199,6 @@ export const loadCurrentItem = (item) => {
 export const signUp = (inputs) => {
   return async (dispatch) => {
     try {
-
       const response = await axios.post(`${baseUrl}api/auth/register`, inputs);
 
       dispatch({
@@ -207,7 +217,6 @@ export const signIn = (inputs) => {
   // console.log(inputs)
   return async (dispatch) => {
     try {
-
       const response = await axios.post(`${baseUrl}api/auth/login`, inputs);
 
       dispatch({
@@ -250,7 +259,6 @@ export const logOut = () => {
 
 export const getConfirm = (token) => {
   return async (dispatch) => {
-
     var json = await axios.get(`${baseUrl}api/auth/confirm/${token}`);
 
     console.log("TOKEN", token);
@@ -299,7 +307,6 @@ export const resetPassword = (token, password) => {
     }
   };
 };
-
 
 /*------------------Admin CRUD actions-----------------*/
 export const postFlightAdmin = (payload) => {
@@ -368,12 +375,10 @@ export const getOrder = (id) => {
   };
 };
 
-
 export const dispatchUser = (item) => {
-  console.log("%cUSER","background:blue",item)
+  console.log("%cUSER", "background:blue", item);
   return {
     type: TYPES.USER,
     payload: item,
   };
 };
-

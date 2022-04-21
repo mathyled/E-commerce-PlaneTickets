@@ -9,12 +9,16 @@ import {
 } from "@chakra-ui/react";
 import { MdHeadset, MdTimer, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill, BsCurrencyDollar } from "react-icons/bs";
-import { GiCommercialAirplane, GiAirplaneDeparture, GiAirplaneArrival } from "react-icons/gi";
+import {
+  GiCommercialAirplane,
+  GiAirplaneDeparture,
+  GiAirplaneArrival,
+} from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { FavouriteButton } from "./FavouriteButton";
 
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return string?.charAt(0).toUpperCase() + string?.slice(1);
 }
 
 function Card({
@@ -76,15 +80,24 @@ function Card({
               />
             </Box>
           </Link>
-          <FavouriteButton position="absolute" top="4" right="4" />
+          <FavouriteButton
+            id={id}
+            origin={origin}
+            destination={destination}
+            price={price}
+            image={image}
+            departureTime={departureTime}
+            airline={airline}
+            position="absolute"
+            top="4"
+            right="4"
+          />
 
           <Flex alignItems="center" px={6} py={3} bg="gray.900">
             <Icon as={GiCommercialAirplane} h={6} w={6} color="white" />
 
             <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-
-             {capitalizeFirstLetter(airline) || "Not Airline"}
-
+              {capitalizeFirstLetter(airline) || "Not Airline"}
             </chakra.h1>
           </Flex>
 
@@ -119,8 +132,8 @@ function Card({
                 {departureTime}
               </chakra.h1>
             </Flex>
-          <Spacer />
-          <Spacer ></Spacer>
+            <Spacer />
+            <Spacer></Spacer>
             <Flex
               alignItems="center"
               mt={4}

@@ -50,7 +50,7 @@ const Projects = ({ title, amount, captions, data }) => {
           <Tr my=".8rem" ps="0px">
             {captions.map((caption, idx) => {
               return (
-                <Th color="gray.400" key={idx} ps={idx === 0 ? "0px" : null}>
+                <Th color="gray.400" key={idx}>
                   {caption}
                 </Th>
               );
