@@ -25,6 +25,9 @@ const initialState = {
   order: [],
   order_detail: [],
 
+  /*----Flight Cart Admin */
+  flights_Cart: [],
+  flight_Detail: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -319,7 +322,6 @@ function rootReducer(state = initialState, action) {
         calculatedTotal: total,
       };
 
-
     case TYPES.ADD_FLIGHT_OFFER:
       return {
         ...state,
@@ -334,7 +336,6 @@ function rootReducer(state = initialState, action) {
     case TYPES.CREATE_ORDER:
       return {
         ...state,
-
       };
 
     case TYPES.GET_ALL_ORDERS:
@@ -367,7 +368,6 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
 
-
     case TYPES.SIGN_IN_GOOGLE:
       return {
         ...state,
@@ -390,21 +390,40 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         forgot: action.payload,
-        
-      }
-      case TYPES.USER:
-        return{
-          ...state,
-          user: action.payload 
-        }
-
+      };
+    case TYPES.USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
 
     /*----Admin CRUD reducer-----*/
-    
-      case TYPES.POST_FLIGHT_ADMIN:
+    case TYPES.GET_ALL_FLIGHTS_ADMIN:
+      return {
+        ...state,
+        flights_Cart: action.payload,
+      };
+    case TYPES.GET_FLIGHT_DETAILS_ADMIN:
+      return {
+        ...state,
+        flight_Detail: action.payload,
+      };
+    case TYPES.POST_FLIGHT_ADMIN:
       return {
         ...state,
       };
+    case TYPES.DELETE_FLIGHT_ADMIN:
+      return {
+        ...state,
+        flight_Cart: state.flights_Cart.filter(
+          (el) => el._id !== action.payload
+        ),
+      };
+
+      case TYPES.UPDATE_FLIGHT_ADMIN:
+        return{
+          ...state,          
+        }
     default:
       return { ...state };
   }
