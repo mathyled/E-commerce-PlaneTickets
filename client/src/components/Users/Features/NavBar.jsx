@@ -139,16 +139,10 @@ const DesktopNav = () => {
                 name="Heading North"
                 onClick={() => dispatch(getBackUpState())}
             />
-            < Spacer />
-            <Spacer />
-            <Spacer />
-            <Link to="/about">About</Link>
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            <Spacer />
+         
+            <NavLink to="/about">About</NavLink>
+
+          
             <SearchBar />
 
         </Stack>
