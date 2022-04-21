@@ -123,7 +123,7 @@ function NavBar({ user }) {
               !actualUser?.confirmationCode?.length > 0 && <RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            {actualUser?.confirmationCode?.length > 0 && (
+            {/* {actualUser?.confirmationCode?.length > 0 && ( */}
 
             {/* <SearchBar /> */}
 
@@ -185,7 +185,9 @@ function NavBar({ user }) {
           </Stack>
         </Flex>
       </Box>
+            
   );
+          
 }
 
 export default NavBar;

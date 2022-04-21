@@ -19,7 +19,7 @@ export default function UserMenu({
   sendToPanelAdmin,
 }) {
   return (
-    <>
+  
       <Menu>
         <MenuButton
           as={Button}
@@ -52,6 +52,6 @@ export default function UserMenu({
           <MenuItem onClick={logout}>Logout</MenuItem>
         </MenuList>
       </Menu>
-    </>
+  
   );
 }
