@@ -8,14 +8,14 @@ import {
   getOfferDetails,
   getUserFavorites,
 } from "../../../../redux/actions/actions";
-import NavBar from "../NavBar/NavBar.jsx";
 import Projects from "../../Pages/AdminPanel/components/src/views/Dashboard/Tables/components/Projects";
 import { Container } from "@chakra-ui/react";
+import WithSubnavigation from "../NavBar.jsx";
 
-export default function Favorites() {
+export default function Favorites({user}) {
   const dispatch = useDispatch();
   let [currentUser, setCurrentUser] = useState({});
-  let user = useSelector((state) => state.user);
+  // let user = useSelector((state) => state.user);
   const [favorites, setFavorites] = useState([]);
   const favCard = useSelector((state) => state.favoriteCard);
 
@@ -41,7 +41,7 @@ export default function Favorites() {
 
   return (
     <div>
-      <NavBar />
+      <WithSubnavigation user={user} />
       <Container minW="90%" centerContent>
         {
           <Projects

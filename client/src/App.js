@@ -57,108 +57,57 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home user={cUser}/>} />
+        <Route path="/home" element={<Home user={cUser} />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route exact path="/detailspage:id" element={<Details />}></Route>
+        <Route exact path="/cart" element={<CartPage />} />
 
         <Route element={<ProtectedUserRoute user={cUser} />}>
           <Route exact path="/profile" element={<Profilepage />} />
           <Route exact path="/success" element={<SuccessBuy />} />
-        <Route exact path="/favorite" element={<Favorite />} />
-        <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
+          <Route exact path="/favorite" element={<Favorite user={cUser} />} />
+          <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
+          <Route exact path="/confirm:token" element={<Confirm />} />
+        </Route>
+    
 
-/*
-        <Route element={<ProtectAdminRoute />}>
+
+        <Route element={<ProtectedAdminRoute user={cUser} />}>
           <Route
             exact
             path={"/admin/dashboard"}
-            element={<AdminLayout currentLinkActive={Dashboard} />}
+            element={<AdminLayout user={cUser} currentLinkActive={Dashboard} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
           <Route
             exact
             path={"/admin/users"}
-            element={<AdminLayout currentLinkActive={UserTable} />}
+            element={<AdminLayout user={cUser} currentLinkActive={UserTable} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
           <Route
             exact
             path={"/admin/orders"}
-            element={<AdminLayout currentLinkActive={OrdersTable} />}
+            element={<AdminLayout user={cUser} currentLinkActive={OrdersTable} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
           <Route
             exact
             path={"/admin/flights"}
-            element={<AdminLayout currentLinkActive={flightsTable} />}
+            element={<AdminLayout user={cUser} currentLinkActive={flightsTable} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
           <Route
             exact
             path={"/admin/profile"}
-            element={<AdminLayout currentLinkActive={Profile} />}
+            element={<AdminLayout user={cUser} currentLinkActive={Profile} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
           <Route
             exact
             path={"/admin/orders/:id"}
-            element={<AdminLayout currentLinkActive={DetailsAdmin} />}
+            element={<AdminLayout user={cUser} currentLinkActive={DetailsAdmin} />}
           />
-        </Route>
-        <Route element={<ProtectAdminRoute />}>
-          <Route
-            path="/admin/*"
-            element={<Navigate to={"/admin/dashboard"} />}
-          />
-        </Route>
-        <Route exact path="/confirm:token" element={<Confirm />} />
-
-      </Route>
-*/
-        <Route exact path="/cart" element={<CartPage />} /> 
-       
-
-   <Route element={<ProtectedAdminRoute  user={cUser}/>}>
-        <Route
-          exact
-          path={"/admin/dashboard"}
-          element={<AdminLayout user={cUser} currentLinkActive={Dashboard} />}
-        />
-        <Route
-          exact
-          path={"/admin/users"}
-          element={<AdminLayout currentLinkActive={UserTable} />}
-        />
-        <Route
-          exact
-          path={"/admin/orders"}
-          element={<AdminLayout currentLinkActive={OrdersTable} />}
-        />
-        <Route
-          exact
-          path = {"/admin/flights"}
-          element = {<AdminLayout currentLinkActive={flightsTable}/>}
-        />
-        <Route
-          exact
-          path={"/admin/profile"}
-          element={<AdminLayout currentLinkActive={Profile} />}
-        />
-        <Route
-          exact
-          path={"/admin/orders/:id"}
-          element={<AdminLayout currentLinkActive={DetailsAdmin} />}
-        />
-        <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
+          <Route path="/admin/*" element={<Navigate to={"/admin/dashboard"} />} />
         </Route>
 
         <Route exact path="/confirm:token" element={<Confirm />} />
-        <Route exact path="*" element={<NotfoundPage />} />
+        <Route exact path="*" element={<NotfoundPage user={cUser} />} />
       </Routes>
     </div>
   );

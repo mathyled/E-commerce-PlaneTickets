@@ -51,11 +51,12 @@ export default function Configurator(props) {
         finalFocusRef={settingsRef}
         blockScrollOnMount={false}
       >
-        <DrawerContent>
+        <DrawerContent >
       
             <DrawerCloseButton />
 
             <Sidebar
+           
         routes={routes}
         logoText={"Heading North"}
         display="none"
