@@ -46,13 +46,7 @@ export default function Dashboard() {
         templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
         gap="24px"
         mb={{ lg: "26px" }}
-      >
-        <SalesOverview
-          title={"Sales Overview"}
-          percentage={5}
-          chart={<LineChart />}
-        />
-      </Grid>
+      ></Grid>
     </Flex>
   );
 }

@@ -1,15 +1,14 @@
 const { FavoriteModel } = require("../../models");
 const mongoose = require("mongoose");
 const createFav = async (req, res) => {
-  let convertToObjectId = mongoose.Types.ObjectId(req.body.product_id);
   let convertToObjectId2 = mongoose.Types.ObjectId(req.body.userId);
   let options = { upsert: true, new: true, setDefaultsOnInsert: true };
-
+  console.log(req.body.product);
   const favs = await FavoriteModel.findOneAndUpdate(
     {
       userId: req.body.userId,
     },
-    { $push: { products: convertToObjectId } },
+    { $push: { products: req.body.product } },
     options
   );
 

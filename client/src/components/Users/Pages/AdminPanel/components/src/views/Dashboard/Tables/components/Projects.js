@@ -18,7 +18,8 @@ import TablesProjectRow from "../../../../components/Tables/TablesProjectRow";
 import React from "react";
 import { Router, Route, Link } from "react-router-dom";
 
-const Projects = ({ title, captions, data, details }) => {
+const Projects = ({ title, captions, data, details, favorites }) => {
+  console.log(data);
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -43,26 +44,43 @@ const Projects = ({ title, captions, data, details }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {details
+            {favorites
+              ? data.map((row) => {
+                  return (
+                    <TablesProjectRow
+                      key={row._id}
+                      isFavorites={true}
+                      origin={row.origin}
+                      arrival={row.destination}
+                      departureTime={row.departureTime}
+                      image={row.image}
+                      id={row._id}
+                      budget={row.price}
+                    />
+                  );
+                })
+              : details
               ? data.map((row) => {
                   return (
                     <TablesProjectRow
                       key={row._id}
                       name={row.departure.nameCity}
+                      id={row._id}
                       budget={row.price}
                     />
                   );
                 })
               : data.map((row) => {
                   return (
-                    <Link to={`/admin/orders/${row._id}`}>
-                      <TablesProjectRow
-                        key={row.name}
-                        name={row.username}
-                        budget={row.amount}
-                        status={row.status}
-                      />
-                    </Link>
+                    <TablesProjectRow
+                      style={{ position: "relative" }}
+                      key={row.name}
+                      isOrder={true}
+                      name={row.username}
+                      budget={row.amount}
+                      id={row._id}
+                      status={row.status}
+                    />
                   );
                 })}
           </Tbody>

@@ -82,6 +82,7 @@ function Filters() {
           size="xs"
           onClick={() => {
             dispatch(filterTickets(inputs.to, inputs.airline));
+            setInputs({ ...inputs, to: "", airline: "" });
             setTimeout(() => {
               dispatch(resetMessageErrors());
             }, 4000);

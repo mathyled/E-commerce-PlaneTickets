@@ -22,28 +22,33 @@ import Cart from "../Cart";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 // import { MdTravelExplore } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
 // import { useEffect, useState } from "react";
 import { logOut } from "../../../../redux/actions/actions";
 
-function NavBar({user}) {
+function NavBar({ user }) {
   // const[cartCount,setCartCount] = useState(0)
-  const cart = useSelector(state=> state.cart)
-  const currentUser = useSelector(state=> state.user)
-  const { toggleColorMode } = useColorMode()
+  const cart = useSelector((state) => state.cart);
+  const [actualUser, setActualUser] = useState({});
+  const currentUser = useSelector((state) => state.user);
+  const { toggleColorMode } = useColorMode();
 
   // const { currentUser, logout } = useAuth()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cUser = JSON.parse(localStorage.getItem("User"));
+    setActualUser(cUser);
+  }, []);
   async function handlerLogOut(e) {
     e.preventDefault();
     // handle logout
-    dispatch(logOut())
-    localStorage.clear("User") 
+    dispatch(logOut());
+    localStorage.clear("User");
   }
 
   // useEffect(()=>{
@@ -52,7 +57,6 @@ function NavBar({user}) {
   //     count+= item.quantity
   //   })
   // },[cart])
-
 
   return (
     <>
@@ -72,13 +76,7 @@ function NavBar({user}) {
               spacing={6}
               display={{ base: "none", md: "flex" }}
             >
-              <Link
-                to="/about"
-              >
-                {" "}
-                About
-              </Link>
-
+              <Link to="/about"> About</Link>
 
               {/* {currentUser?.confirmationCode?.length > 0  && (
 
@@ -96,18 +94,21 @@ function NavBar({user}) {
           >
             <SearchBar />
 
-
-            {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 &&<LoginModal />}
-            {!currentUser?.confirmationCode?.length > 0  && !user?.confirmationCode?.length > 0&&<RegisterModal />}
+            {!actualUser?.confirmationCode?.length > 0 &&
+              !actualUser?.confirmationCode?.length > 0 && <LoginModal />}
+            {!actualUser?.confirmationCode?.length > 0 &&
+              !actualUser?.confirmationCode?.length > 0 && <RegisterModal />}
 
             {/* {currentUser && <Navlink to="/profile" name="Profile" />} */}
-            { currentUser?.confirmationCode?.length > 0  && (
+            {actualUser?.confirmationCode?.length > 0 && (
               <UserMenu
                 logout={handlerLogOut}
+                isAdmin={actualUser?.isAdmin}
+                sendToFavorites={() => navigate("/favorite")}
+                sendToPanelAdmin={() => navigate("/admin")}
                 myPlans={() => navigate("/my-plans")}
-                photo={currentUser?.photoURL}
-                name={currentUser.username || user?.username }
-
+                photo={actualUser?.photoURL}
+                name={actualUser?.username || actualUser?.username}
               />
             )}
             {/* {currentUser && < Navlink
@@ -132,10 +133,9 @@ function NavBar({user}) {
               <Cart  quantity={cartCount}/>
             </Link> */}
 
-             <Link to="/cart">
-             <Cart quantity={cart.length}/>
-             </Link>
-
+            <Link to="/cart">
+              <Cart quantity={cart.length} />
+            </Link>
 
             <IconButton
               variant="outline"

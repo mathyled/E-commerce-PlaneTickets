@@ -62,6 +62,17 @@ export const getCities = () => {
   };
 };
 
+export const getUserFavorites = (userId) => {
+  return async (dispatch) => {
+    var { data } = await axios.get(`${baseUrl}api/Favorites/find/${userId}`);
+    console.log("ENTRO");
+    return dispatch({
+      type: TYPES.GET_USER_FAVORITES,
+      payload: data?.favs, // [{}]
+    });
+  };
+};
+
 export const resetStates = () => {
   //DETAILS
   return {
