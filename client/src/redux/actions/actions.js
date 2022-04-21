@@ -188,7 +188,6 @@ export const loadCurrentItem = (item) => {
 export const signUp = (inputs) => {
   return async (dispatch) => {
     try {
-
       const response = await axios.post(`${baseUrl}api/auth/register`, inputs);
 
       dispatch({
@@ -207,7 +206,6 @@ export const signIn = (inputs) => {
   // console.log(inputs)
   return async (dispatch) => {
     try {
-
       const response = await axios.post(`${baseUrl}api/auth/login`, inputs);
 
       dispatch({
@@ -250,7 +248,6 @@ export const logOut = () => {
 
 export const getConfirm = (token) => {
   return async (dispatch) => {
-
     var json = await axios.get(`${baseUrl}api/auth/confirm/${token}`);
 
     console.log("TOKEN", token);
@@ -300,12 +297,57 @@ export const resetPassword = (token, password) => {
   };
 };
 
-
 /*------------------Admin CRUD actions-----------------*/
 export const postFlightAdmin = (payload) => {
   return async (dispatch) => {
-    var res = await axios.post("http://localhost:3001/api/create", payload);
+    var res = await axios.post(`${baseUrl}api/flightCart/create`, payload);
     return res;
+  };
+};
+
+export const getFlightsAdmin = () => {
+  return async (dispatch) => {
+    const res = await axios.get(`${baseUrl}api/flightCart/`);
+    // console.log("Qué llega acá?...", res.data.data);
+    dispatch({
+      type: TYPES.GET_ALL_FLIGHTS_ADMIN,
+      payload: res.data.data,
+    });
+  };
+};
+
+export const getFlightDetailsAdmin = (id) => {
+  try {
+    return async (dispatch) => {
+      const res = await axios.get(`${baseUrl}api/flightCart/${id}`);
+      // console.log("Qué sale de acá...", res.data.data);
+      dispatch({
+        type: TYPES.GET_FLIGHT_DETAILS_ADMIN,
+        payload: res.data.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteFlightAdmin = (id) => {
+  return async (dispatch) => {
+    const res = await axios.delete(`${baseUrl}api/flightCart/delete/${id}`);
+    dispatch({
+      type: TYPES.DELETE_FLIGHT_ADMIN,
+      payload: id,
+    });
+  };
+};
+
+export const updateFlightAdmin = (id, flight) => {
+  return async (dispatch) => {
+    const res = await axios.put(`${baseUrl}api/flightCart/${id}`);
+    dispatch({
+      type: TYPES.UPDATE_FLIGHT_ADMIN,
+      payload: { id, flight },
+    });
   };
 };
 
@@ -368,12 +410,10 @@ export const getOrder = (id) => {
   };
 };
 
-
 export const dispatchUser = (item) => {
-  console.log("%cUSER","background:blue",item)
+  console.log("%cUSER", "background:blue", item);
   return {
     type: TYPES.USER,
     payload: item,
   };
 };
-
