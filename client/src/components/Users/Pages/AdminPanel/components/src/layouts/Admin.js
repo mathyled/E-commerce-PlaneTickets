@@ -91,7 +91,7 @@ export default function Dashboard(props) {
   // Chakra Color Mode
   return (
     <ChakraProvider theme={theme} resetCss={false}>
-    <WithSubnavigation  />
+    <WithSubnavigation user={props.user} />
       <Sidebar
         routes={routes}
         logoText={"Heading North"}
