@@ -6,7 +6,7 @@ const initialState = {
   search: [],
 
   favoriteCard: [],
-  user: {},
+
   itineraries: [],
   isSearching: false,
   errorMessage: [],
@@ -28,6 +28,7 @@ const initialState = {
   /*----Flight Cart Admin */
   flights_Cart: [],
   flight_Detail: {},
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -52,7 +53,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case TYPES.SORT_CITIES:
-      let sortedData = [];
+      let sortedData = [...state.city];
 
       if (action.payload.to === true) {
         action.payload.ascending
@@ -86,6 +87,7 @@ function rootReducer(state = initialState, action) {
               if (b.arrival.nameCity === null) {
                 return -1;
               }
+              console.log(a.arrival.nameCity.charAt(0));
               return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
                 ? -1
                 : 1;
@@ -124,7 +126,7 @@ function rootReducer(state = initialState, action) {
               return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
             }));
       }
-      if (action.payload.schedule !== "") {
+      if (action.payload.schedule === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
               if (a.departure.scheduledTime === undefined) {
@@ -168,6 +170,7 @@ function rootReducer(state = initialState, action) {
                 : 1;
             }));
       }
+
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
       state.city = [...state.cityBackUp];
@@ -195,7 +198,7 @@ function rootReducer(state = initialState, action) {
         );
         if (state.city.length === 0) {
           message.push(
-            `There isnt an airport named ${action.payload.airline} on this location`
+            `There isnt an airline named ${action.payload.airline} on this location`
           );
         }
       }
@@ -223,6 +226,12 @@ function rootReducer(state = initialState, action) {
         isSearching: action.payload.isSearching,
         city: action.payload.data,
         cityBackUp: action.payload.data,
+      };
+    case TYPES.GET_USER_FAVORITES:
+      console.log("HECHOOOOOO");
+      return {
+        ...state,
+        favoriteCard: action.payload,
       };
 
     case TYPES.GET_CITIES:
@@ -398,6 +407,7 @@ function rootReducer(state = initialState, action) {
       };
 
     /*----Admin CRUD reducer-----*/
+
     case TYPES.GET_ALL_FLIGHTS_ADMIN:
       return {
         ...state,

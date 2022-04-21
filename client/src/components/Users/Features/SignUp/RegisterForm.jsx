@@ -23,14 +23,19 @@ export function RegisterForm() {
 
   const dispatch = useDispatch()
  const currentUser = useSelector(state=> state.user)
+ const toast = useToast()
 
-
- console.log("currentUser",currentUser.message)
+//  console.log("currentUser",currentUser?.message)
  useEffect(()=>{
-   if(currentUser.message){
- 
-     alert(currentUser.message)
-  
+   if(currentUser?.message){
+    toast({
+      description: currentUser?.message,
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+    })
+    //  alert(currentUser.message)
+
      dispatch(logOut() )
    }
  },[currentUser])
@@ -89,7 +94,8 @@ export function RegisterForm() {
           </FormControl>
 
 
-          <Button  type='submit' colorScheme='primary' size='lg' fontSize='md'>
+          <Button 
+           type='submit' colorScheme='primary' size='lg' fontSize='md'>
             Sign up
           </Button>
         </Stack>

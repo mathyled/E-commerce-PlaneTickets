@@ -8,39 +8,91 @@ import {
   Icon,
   Button,
   useColorModeValue,
+  Avatar,
 } from "@chakra-ui/react";
 import { FaEllipsisV } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 function DashboardTableRow(props) {
-  const { logo, name, status, budget, progression } = props;
+  const {
+    image,
+    isFavorites,
+    origin,
+    arrival,
+    departureTime,
+    name,
+    status,
+    budget,
+    isOrder,
+    id,
+  } = props;
+  console.log(props);
   const textColor = useColorModeValue("gray.700", "white");
-  return (
-    <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
-        <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Text
-            fontSize="md"
-            color={textColor}
-            fontWeight="bold"
-            minWidth="100%"
-          >
-            {name}
+  if (isOrder) {
+    return (
+      <Tr>
+        <Td minWidth={{ sm: "250px" }} pl="0px">
+          <Link to={`/admin/orders/${id}`}>
+            <Text
+              fontSize="md"
+              color={textColor}
+              fontWeight="bold"
+              minWidth="100%"
+            >
+              {name}
+            </Text>
+          </Link>
+        </Td>
+        <Td>
+          <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+            {budget}
           </Text>
-        </Flex>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {budget}
-        </Text>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {status}
-        </Text>
-      </Td>
-      <Td></Td>
-    </Tr>
-  );
+        </Td>
+        <Td>
+          <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+            {status}
+          </Text>
+        </Td>
+      </Tr>
+    );
+  } else if (isFavorites) {
+    return (
+      <Tr>
+        <Td minWidth={{ sm: "250px" }} pl="0px">
+          <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
+            <Avatar src={image} w="50px" borderRadius="12px" me="18px" />
+            <Text
+              fontSize="md"
+              color={textColor}
+              fontWeight="bold"
+              minWidth="100%"
+            >
+              {origin}
+            </Text>
+          </Flex>
+        </Td>
+        <Td>
+          <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+            {arrival}
+          </Text>
+        </Td>
+        <Td>
+          <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+            {departureTime}
+          </Text>
+        </Td>
+        <Td>
+          <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+            {budget}
+          </Text>
+        </Td>
+        <Td>
+          <DeleteIcon _hover={{ cursor: "pointer" }} />
+        </Td>
+      </Tr>
+    );
+  }
 }
 
 export default DashboardTableRow;

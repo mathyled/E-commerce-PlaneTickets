@@ -15,14 +15,14 @@ import {
   Container,
   VStack,
 } from "@chakra-ui/react";
-import NavBar from "../../Features/NavBar/NavBar";
+import WithSubnavigation from "../../Features/NavBar";
 
 const NotfoundPage = () => {
   let imgUrl =
     "https://images.unsplash.com/photo-1548957175-84f0f9af659e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZnJpZW5kcyUyMHRyYXZlbHxlbnwwfHwwfHw%3D&w=1000&q=80";
   return (
     <div>
-      <NavBar></NavBar>
+      <WithSubnavigation  />
       <Box
         pos={"absolute"}
         overflow="hidden"

@@ -15,7 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItineraries } from "../../../../redux/actions/actions";
 import DeletePlanModal from "../../Features/MyPlans/DeletePlanModal";
 import EditPlanModal from "../../Features/MyPlans/EditPlanModal";
-import NavBar from "../../Features/NavBar/NavBar";
+import WithSubnavigation from "../../Features/NavBar";
+
 
 function MyPlans() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function MyPlans() {
   }, [dispatch]);
   return (
     <>
-      <NavBar />
+      <WithSubnavigation  />
       <Heading>My plans</Heading>
       {myPlans.length > 0 ? (
         <TableContainer mx={8} my={8}>
