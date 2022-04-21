@@ -18,7 +18,7 @@ passport.use(
         username: profile.displayName,
         email: profile.emails[0].value,
         status: "Active",
-        photo: profile.photos[0].value,
+        photo: profile.photos[0].value, //photo
         accessToken: accessToken,
       };
       console.log(newUser);
