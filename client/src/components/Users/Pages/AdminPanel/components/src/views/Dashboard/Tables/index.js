@@ -11,7 +11,6 @@ import {
 import Flights from "./components/Flights";
 import axios from "axios";
 
-
 let baseUrl = "http://localhost:3001/";
 
 export function UserTable() {
@@ -94,8 +93,10 @@ export function OrdersTable() {
 export function flightsTable() {
   return (
     <Flex direction="column" pt={{ base: "0", md: "0" }}>
-      <Flights title={"Flights"}
-      captions={['Depature', 'Arrival', 'Price','Date', 'actions']} />
+      <Flights
+        title={"Flights"}
+        captions={[" ", "Depature", "Arrival", "Price", "Date", "actions"]}
+      />
     </Flex>
   );
 }
