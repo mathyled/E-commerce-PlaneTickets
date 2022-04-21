@@ -11,36 +11,41 @@ import DeleteCartModal from "../CRUD/Modals/DeleteCartModal";
 import EditCartModal from "../CRUD/Modals/EditCartModal";
 import ViewCartModal from "../CRUD/Modals/ViewCartModal";
 
-const FligthsRow = ({ depature, arrival, price, date }) => {
+const FligthsRow = ({ index, depature, arrival, price, date, id }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
     <Tr>
       <Td minWidth={{ sm: "150px" }} pl="0px">
         <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
-          Madrid
+          {index}
         </Text>
       </Td>
       <Td minWidth={{ sm: "150px" }} pl="0px">
         <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
-          Bogota
+          {depature}
         </Text>
       </Td>
       <Td minWidth={{ sm: "150px" }} pl="0px">
         <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
-          $450
+          {arrival}
         </Text>
       </Td>
       <Td minWidth={{ sm: "150px" }} pl="0px">
         <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
-          2022-12-12
+          {price}
+        </Text>
+      </Td>
+      <Td minWidth={{ sm: "150px" }} pl="0px">
+        <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
+          {date}
         </Text>
       </Td>
       <Td>
         <HStack>
-          <DeleteCartModal />
-          <ViewCartModal />
-          <EditCartModal/>
+          <DeleteCartModal id={id} />
+          <ViewCartModal id={id} />
+          {/* <EditCartModal id={id} /> */}
         </HStack>
       </Td>
     </Tr>
