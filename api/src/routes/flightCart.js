@@ -9,10 +9,10 @@ const {
 
 const {
   createFlightCart,
-} = require("../controllers/CRUD flightCart/createflightCart");
+} = require("../controllers/CRUD flightCart/createFlightCart");
 const {
   updateFlightCart,
-} = require("../controllers/CRUD flightCart/updateflightCart");
+} = require("../controllers/CRUD flightCart/updateFlightCart");
 const {
   getFlightCart,
 } = require("../controllers/CRUD flightCart/getFlightCart");

@@ -18,12 +18,14 @@ passport.use(
         username: profile.displayName,
         email: profile.emails[0].value,
         status: "Active",
+        photo: profile.photos[0].value,
         accessToken: accessToken,
       };
       console.log(newUser);
       try {
         let user = await UserModel.findOne({ email: newUser.email });
         if (user) {
+          user.photo = newUser.photo;
           done(null, user);
           console.log("User already exists");
         } else {
