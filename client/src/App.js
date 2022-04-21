@@ -59,7 +59,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home user={cUser} />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route exact path="/detailspage:id" element={<Details />}></Route>
+        <Route exact path="/detailspage:id" element={<Details  user={cUser} />}></Route>
         <Route exact path="/cart" element={<CartPage />} />
 
         <Route element={<ProtectedUserRoute user={cUser} />}>
