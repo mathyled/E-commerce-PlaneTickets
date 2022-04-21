@@ -98,7 +98,7 @@ export default function WithSubnavigation({ user }) {
                         <UserMenu
                             logout={handlerLogOut}
                             myPlans={() => navigate("/my-plans")}
-                            photo={currentUser?.photoURL}
+                            photo={currentUser?.photo}
                             name={currentUser.username || user?.username}
                             isAdmin={currentUser?.isAdmin}
                             sendToFavorites={() => navigate("/favorite")}
