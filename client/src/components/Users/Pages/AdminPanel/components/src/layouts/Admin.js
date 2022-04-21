@@ -14,7 +14,7 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
-import NavBar from "../../../../../Features/NavBar/NavBar";
+import WithSubnavigation from "../../../../../Features/NavBar";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -91,7 +91,7 @@ export default function Dashboard(props) {
   // Chakra Color Mode
   return (
     <ChakraProvider theme={theme} resetCss={false}>
-      <NavBar />
+    <WithSubnavigation user={props.user} />
       <Sidebar
         routes={routes}
         logoText={"Heading North"}
@@ -116,7 +116,7 @@ export default function Dashboard(props) {
         <PanelContent>
           <PanelContainer>{<props.currentLinkActive />}</PanelContainer>
         </PanelContent>
-        <Footer />
+        {/* <Footer /> */}
         <Portal>
           <FixedPlugin
             secondary={getActiveNavbar(routes)}

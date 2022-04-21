@@ -152,11 +152,19 @@ export const addToCart = (id) => {
     payload: id,
   };
 };
+
 export const removeFromCart = (id) => {
   // console.log("action id",id)
   return {
     type: TYPES.REMOVE_FROM_CART,
     payload: id,
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: TYPES.CLEAR_CART,
+    payload: [],
   };
 };
 
