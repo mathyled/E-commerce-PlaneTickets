@@ -8,33 +8,35 @@ import {
   Input,
   Stack,
   useToast,
-
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import DividerWithText from '../UserModal/components/DividerWithText'
-import { useAuth } from '../../../../context/AuthContext';
+
 import{useDispatch, useSelector} from "react-redux";
-import { signIn } from '../../../../redux/actions/actions';
-// import useMounted from "../../../../hooks/useMounted";
+import { signIn, signInGoogle} from '../../../../redux/actions/actions';
+
 
 export function LoginForm() {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
-  // const [submit, setSubmit] = useState(false)
-  // const toast = useToast()
-  const { login,signInWithGoogle } = useAuth()
+ 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector(state=> state.user)
-  // const mounted = useMounted()
+  const toast = useToast()
 
   useEffect(()=>{
-    if(currentUser.accessToken || currentUser?.message  )
-   alert(currentUser.message)
+    if(currentUser?.accessToken || currentUser?.message  )
+    toast({
+      description: currentUser?.message,
+      status: 'error',
+      duration: 2000,
+      isClosable: true,
+    })
     navigate("/home")
   },[currentUser])
 
@@ -46,13 +48,15 @@ export function LoginForm() {
   };
   // console.log(inputs)
 
- async function hanldlerSignIn(){
-   try{
-     const user = await signInWithGoogle()
-        console.log(user)
-   }catch(error) {
-     console.log(error)
-   }
+function handlerGoogle(e) {
+
+  window.open("http://localhost:3001/api/auth/google","_self")
+}
+
+ function hanldlerSignIn(){
+  handlerGoogle()
+  dispatch(signInGoogle())
+       
   };
 
   function handlerSubmit(e) {

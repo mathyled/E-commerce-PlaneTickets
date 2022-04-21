@@ -27,10 +27,11 @@ import {
   resetStates,
 } from "../../../../redux/actions/actions";
 
-import NavBar from "../../Features/NavBar/NavBar";
-import LoadingPage from "../../Features/Loading/LoadingPage";
 
-export default function Details() {
+import LoadingPage from "../../Features/Loading/LoadingPage";
+import WithSubnavigation from "../../Features/NavBar";
+
+export default function Details({user}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -50,7 +51,7 @@ export default function Details() {
     <div>
       {Object.keys(cityDetails).length > 0 ? (
         <div>
-          <NavBar />
+          <WithSubnavigation user={user} />
           <Container maxW={"7xl"}>
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}
@@ -78,18 +79,13 @@ export default function Details() {
                     {cityDetailsUsage["arrival"]["nameCountry"]}
                   </Heading>
                   <Text
-                    color={
-                      /*useColorModeValue("gray.900", "gray.400")*/ "gray.900"
-                    }
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
                     {`${cityDetailsUsage["price"]} EUR`}
                   </Text>
                   <Text
-                    color={
-                      /*useColorModeValue("gray.900", "gray.400")*/ "gray.900"
-                    }
+                   
                     fontWeight={300}
                     fontSize={"2xl"}
                   >
@@ -108,7 +104,8 @@ export default function Details() {
                     />
                   }
                 >
-                  <Box>
+                  <Box
+                  textAlign={"left"}>
                     <Text
                       fontSize={{ base: "16px", lg: "18px" }}
                       color={

@@ -8,26 +8,38 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from '../components/Card'
 import { Layout } from '../components/Layout'
-import { useHistory, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../../../context/AuthContext'
+import { useNavigate, useParams } from 'react-router-dom'
+import { resetPassword } from '../../../../../redux/actions/actions'
+import { useDispatch, useSelector } from 'react-redux'
 
-function useQuery(){
-  const location = useLocation()
-  return new URLSearchParams(location.search)
-};
 
-export  function ResetPasswordPage() {
-  const [newPassword, setNewPassword] = useState()
- const {resetPassword} = useAuth()
- const query = useQuery()
- const toast =  useToast()
- const navigate = useNavigate()
- console.log(query.get("mode"))
- console.log(query.get("oobCode"))
- console.log(query.get("continueUrl"))
+
+
+export function ResetPasswordPage() {
+  const [newPassword, setNewPassword] = useState({password:"" })
+  const {token} = useParams()
+  const dispatch = useDispatch()
+console.log(token)
+  const navigate = useNavigate()
+
+  
+  const forgot = useSelector(state=> state.forgot)
+
+  useEffect(()=>{
+    if(forgot.message){
+  
+      alert(forgot.message)
+      navigate("/home")
+    }
+  },[forgot])
+  
+function handlerSubmit(e) {
+  e.preventDefault()
+  dispatch(resetPassword(token,newPassword))
+}
   return (
     <Layout>
       <Heading textAlign='center' my={12}>
@@ -35,32 +47,17 @@ export  function ResetPasswordPage() {
       </Heading>
       <Card maxW='md' mx='auto' mt={4}>
         <chakra.form
-          onSubmit={async e => {
-            e.preventDefault()
-            try {
-              await resetPassword(query.get('oobCode'), newPassword)
-              toast({
-                description: 'Password has been changed, you can login now.',
-                status: 'success',
-                duration: 9000,
-                isClosable: true,
-              })
-              navigate('/')
-            } catch (error) {
-              toast({
-                description: error.message,
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-              })
-              console.log(error.message)
-            }
-          }}
+          onSubmit={handlerSubmit}
         >
           <Stack spacing='6'>
-            <FormControl id='password'>
+            <FormControl>
               <FormLabel>New password</FormLabel>
-              <Input type='password' autoComplete='password' required onChange={e=> setNewPassword(e.target.value)} />
+              <Input type='password'  id='password' name="password" required
+                onChange={e => setNewPassword({
+                  ...newPassword,
+                  [e.target.name]: e.target.value,
+                })
+                } />
             </FormControl>
             <Button type='submit' colorScheme='primary' size='lg' fontSize='md'>
               Reset password

@@ -1,13 +1,13 @@
 const amadeus = require("../helpers/amadeus");
 const { flightOffer } = require("../models");
-const airportsByCities_Cities = require('./AirportsByCities_Cities.json')
+const airportsByCities_Cities = require("./AirportsByCities_Cities.json");
 
 const flightOffers = async (req, res) => {
   try {
     const { origin, destination, departureDate, adults } = req.query;
 
     //Airports
-    
+
     const airportsByCity = airportsByCities_Cities.airportsByCities;
     const cities = airportsByCities_Cities.cities;
 
@@ -25,16 +25,15 @@ const flightOffers = async (req, res) => {
         nameCity: city.nameCity,
       };
     });
-    
 
-    for(let i = 0; i < citiesData.length; i++) {
+    for (let i = 0; i < citiesData.length; i++) {
       citiesData[i].airports = [];
-      for(let j = 0; j < airportsData.length; j++) {
-        if(citiesData[i]["codeIataCity"] === airportsData[j]["codeIataCity"]) {
-          citiesData[i]["airports"].push(airportsData[j])
-        };
-      };
-    };
+      for (let j = 0; j < airportsData.length; j++) {
+        if (citiesData[i]["codeIataCity"] === airportsData[j]["codeIataCity"]) {
+          citiesData[i]["airports"].push(airportsData[j]);
+        }
+      }
+    }
 
     //offers
     const offer = await amadeus.shopping.flightOffersSearch.get({
@@ -43,7 +42,7 @@ const flightOffers = async (req, res) => {
       departureDate: departureDate,
       adults: adults,
     });
-    let flights = offer.data.map(flight => {
+    let flights = offer.data.map((flight) => {
       return {
         id: flight.id,
         itineraries: flight.itineraries,
@@ -52,24 +51,28 @@ const flightOffers = async (req, res) => {
       };
     });
 
-    for(let i = 0; i < flights.length; i++) {
-      for(let j = 0; j < citiesData.length; j++) {
-        if(citiesData[j]["airports"].length > 0){
-          for(let k = 0; k < citiesData[j]["airports"].length; k++) {
-            if(flights[i]["itineraries"][0]["segments"][0]["departure"]["iataCode"] === citiesData[j]["airports"][k]["codeIataAirport"]) {
+    for (let i = 0; i < flights.length; i++) {
+      for (let j = 0; j < citiesData.length; j++) {
+        if (citiesData[j]["airports"].length > 0) {
+          for (let k = 0; k < citiesData[j]["airports"].length; k++) {
+            if (
+              flights[i]["itineraries"][0]["segments"][0]["departure"][
+                "iataCode"
+              ] === citiesData[j]["airports"][k]["codeIataAirport"]
+            ) {
               flights[i].nameCity = citiesData[j]["nameCity"];
-            };
-          };
-        };
-      };
-    };
+            }
+          }
+        }
+      }
+    }
 
-    if(flightOffer.length > 0) {
+    if (flightOffer.length > 0) {
       await flightOffer.deleteMany({});
       await flightOffer.insertMany(flights);
-    };
+    }
     const flightOffersDb = await flightOffer.find();
-    res.status(200).send({ message: "success", data: flightOffersDb});
+    res.status(200).send({ message: "success", data: flightOffersDb });
   } catch (error) {
     console.log(error);
     res.status(400).send({
@@ -82,8 +85,21 @@ const getOfferDetail = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const flight = await flightOffer.find({"id": id});
+    const flight = await flightOffer.find({ id: id });
     res.status(200).send({ status: "success", data: { offer: flight } });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: "error getting flights" });
+  }
+};
+
+const getAllOffers = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const flights = await flightOffer.find({});
+    console.log(flights);
+    res.status(200).send({ status: "success", data: { offers: flights } });
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: "error getting flights" });
@@ -93,4 +109,5 @@ const getOfferDetail = async (req, res) => {
 module.exports = {
   flightOffers,
   getOfferDetail,
+  getAllOffers,
 };

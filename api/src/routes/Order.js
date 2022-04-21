@@ -16,7 +16,7 @@ const {
 const { getUserOrders } = require("../controllers/CRUD Order/getUserOrders");
 const { updateOrder } = require("../controllers/CRUD Order/updateOrder");
 
-router.post("/", verifyToken, createOrder);
+router.post("/", /*verifyToken ,*/ createOrder);
 router.put("/update/:id", verifyTokenAndAdmin, updateOrder);
 router.delete("/delete/:id", verifyTokenAndAdmin, deleteOrder);
 router.get("/find/:userId", verifyTokenAndAuthorization, getUserOrders);

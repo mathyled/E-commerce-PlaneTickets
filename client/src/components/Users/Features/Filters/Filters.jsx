@@ -9,10 +9,15 @@ import {
   Container,
   InputLeftAddon,
   InputGroup,
+  HStack,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { filterTickets } from "../../../../redux/actions/actions";
+import {
+  filterTickets,
+  getBackUpState,
+  resetMessageErrors,
+} from "../../../../redux/actions/actions";
 
 function Filters() {
   const dispatch = useDispatch();
@@ -71,17 +76,30 @@ function Filters() {
         />
       </Container>
 
-      <Container>
+      <HStack paddingLeft={15} paddingTop={2} spacing={5}>
         <Button
           colorScheme="teal"
           size="xs"
           onClick={() => {
             dispatch(filterTickets(inputs.to, inputs.airline));
+            setInputs({ ...inputs, to: "", airline: "" });
+            setTimeout(() => {
+              dispatch(resetMessageErrors());
+            }, 4000);
           }}
         >
           Filter
         </Button>
-      </Container>
+        <Button
+          colorScheme="teal"
+          size="xs"
+          onClick={() => {
+            dispatch(getBackUpState());
+          }}
+        >
+          Clear
+        </Button>
+      </HStack>
     </Stack>
   );
 }

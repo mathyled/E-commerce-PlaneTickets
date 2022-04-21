@@ -9,14 +9,26 @@ const initialState = {
 
   itineraries: [],
   isSearching: false,
+  errorMessage: [],
   ///CART ///////////
   products: [], // { id, origin, destination, price, image, departureTime }
   cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   qtySelect: 0,
   calculatedTotal: 0,
-  user:{},
+  user: {},
   confirm: {},
+  forgot: {},
+
+  /// ORDER ///////////
+  flightOffer: [],
+  order: [],
+  order_detail: [],
+
+  /*----Flight Cart Admin */
+  flights_Cart: [],
+  flight_Detail: {},
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -41,140 +53,154 @@ function rootReducer(state = initialState, action) {
       };
 
     case TYPES.SORT_CITIES:
-      let sortedData = [];
+      let sortedData = [...state.city];
 
       if (action.payload.to === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.arrival.nameCity === undefined) {
-              return 1;
-            }
-            if (b.arrival.nameCity === undefined) {
-              return -1;
-            }
-            if (a.arrival.nameCity.area === null) {
-              return 1;
-            }
-            if (b.arrival.nameCity === null) {
-              return -1;
-            }
-            return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
-              ? -1
-              : 1;
-          }))
+              if (a.arrival.nameCity === undefined) {
+                return 1;
+              }
+              if (b.arrival.nameCity === undefined) {
+                return -1;
+              }
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              return a.arrival.nameCity.charAt(0) < b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.arrival.nameCity === undefined) {
-              return 1;
-            }
-            if (b.arrival.nameCity === undefined) {
-              return -1;
-            }
-            if (a.arrival.nameCity.area === null) {
-              return 1;
-            }
-            if (b.arrival.nameCity === null) {
-              return -1;
-            }
-            return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
-              ? -1
-              : 1;
-          }));
+              if (a.arrival.nameCity === undefined) {
+                return 1;
+              }
+              if (b.arrival.nameCity === undefined) {
+                return -1;
+              }
+              if (a.arrival.nameCity.area === null) {
+                return 1;
+              }
+              if (b.arrival.nameCity === null) {
+                return -1;
+              }
+              console.log(a.arrival.nameCity.charAt(0));
+              return a.arrival.nameCity.charAt(0) > b.arrival.nameCity.charAt(0)
+                ? -1
+                : 1;
+            }));
       }
       if (action.payload.price === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.price === undefined) {
-              return 1;
-            }
-            if (b.price === undefined) {
-              return -1;
-            }
-            if (a.price === null) {
-              return 1;
-            }
-            if (b.price === null) {
-              return -1;
-            }
-            return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
-          }))
+              if (a.price === undefined) {
+                return 1;
+              }
+              if (b.price === undefined) {
+                return -1;
+              }
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) < parseFloat(b.price) ? -1 : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.price === undefined) {
-              return 1;
-            }
-            if (b.price === undefined) {
-              return -1;
-            }
-            if (a.price === null) {
-              return 1;
-            }
-            if (b.price === null) {
-              return -1;
-            }
-            return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
-          }));
+              if (a.price === undefined) {
+                return 1;
+              }
+              if (b.price === undefined) {
+                return -1;
+              }
+              if (a.price === null) {
+                return 1;
+              }
+              if (b.price === null) {
+                return -1;
+              }
+              return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
+            }));
       }
-      if (action.payload.schedule !== "") {
+      if (action.payload.schedule === true) {
         action.payload.ascending
           ? (sortedData = state.city.sort((a, b) => {
-            if (a.departure.scheduledTime === undefined) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === undefined) {
-              return -1;
-            }
-            if (a.departure.scheduledTimee === null) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === null) {
-              return -1;
-            }
-            if (a.departure.scheduledTime === "") {
-              return 1;
-            }
-            if (b.departure.scheduledTime === "") {
-              return -1;
-            }
+              if (a.departure.scheduledTime === undefined) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === undefined) {
+                return -1;
+              }
+              if (a.departure.scheduledTimee === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              if (a.departure.scheduledTime === "") {
+                return 1;
+              }
+              if (b.departure.scheduledTime === "") {
+                return -1;
+              }
 
-            return a.departure.scheduledTime < b.departure.scheduledTime
-              ? -1
-              : 1;
-          }))
+              return a.departure.scheduledTime < b.departure.scheduledTime
+                ? -1
+                : 1;
+            }))
           : (sortedData = state.city.sort((a, b) => {
-            if (a.departure.scheduledTime === undefined) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === undefined) {
-              return -1;
-            }
-            if (a.departure.scheduledTime === null) {
-              return 1;
-            }
-            if (b.departure.scheduledTime === null) {
-              return -1;
-            }
-            return a.departure.scheduledTime > b.departure.scheduledTime
-              ? -1
-              : 1;
-          }));
+              if (a.departure.scheduledTime === undefined) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === undefined) {
+                return -1;
+              }
+              if (a.departure.scheduledTime === null) {
+                return 1;
+              }
+              if (b.departure.scheduledTime === null) {
+                return -1;
+              }
+              return a.departure.scheduledTime > b.departure.scheduledTime
+                ? -1
+                : 1;
+            }));
       }
+
       return { ...state, city: [...sortedData] };
     case TYPES.FILTER_CITIES:
-      if (action.payload.departure !== "") {
+      state.city = [...state.cityBackUp];
+      let message = [];
+
+      if (action.payload.to !== "") {
         state.city = state.city.filter((fly) => {
-          console.log(fly?.arrival?.nameCity);
           if (fly?.arrival?.nameCity !== undefined) {
             return fly?.arrival?.nameCity
               .toLowerCase()
               .includes(action.payload.to.toLowerCase());
           }
         });
+        if (state.city.length === 0) {
+          message.push(
+            `There isnt a destination named ${action.payload.to} on this location`
+          );
+        }
       }
-      if (action.payload.ret !== "") {
+      if (action.payload.airline !== "") {
         state.city = state.city.filter((fly) =>
           fly.airline?.name
             .toLowerCase()
             .includes(action.payload.airline.toLowerCase())
         );
+        if (state.city.length === 0) {
+          message.push(
+            `There isnt an airline named ${action.payload.airline} on this location`
+          );
+        }
       }
 
       /*
@@ -183,7 +209,16 @@ function rootReducer(state = initialState, action) {
           (fly) => fly.property === action.payload.time
         );
       }*/
-      return { ...state };
+      return { ...state, errorMessage: [...message] };
+
+    case TYPES.RESET_MESSAGE_ERRORS:
+      return {
+        ...state,
+        errorMessage: [],
+      };
+
+    case TYPES.GET_BACKUP_STATE:
+      return { ...state, city: [...state.cityBackUp] };
 
     case TYPES.GET_FLIGHTS:
       return {
@@ -191,6 +226,12 @@ function rootReducer(state = initialState, action) {
         isSearching: action.payload.isSearching,
         city: action.payload.data,
         cityBackUp: action.payload.data,
+      };
+    case TYPES.GET_USER_FAVORITES:
+      console.log("HECHOOOOOO");
+      return {
+        ...state,
+        favoriteCard: action.payload,
       };
 
     case TYPES.GET_CITIES:
@@ -249,10 +290,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: inCart
           ? state.cart.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
+              item.id === action.payload.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            )
           : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
       };
 
@@ -262,51 +303,85 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
 
+    case TYPES.CLEAR_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
 
-      case TYPES.UPDATE_QUANTITY:
-        const cartCopy = state.cart;
-        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
-        let itemchange = cartCopy[pos];
-        itemchange.quantity = action.payload.quantity;
-        itemchange.total = itemchange.price * action.payload.quantity;
-        cartCopy[pos] = itemchange;
-        return{
-          ...state,
-          cart: cartCopy,
-        };
+    case TYPES.UPDATE_QUANTITY:
+      const cartCopy = state.cart;
+      let pos = cartCopy.map((e) => e._id).indexOf(action.payload.id);
+      let itemchange = cartCopy[pos];
+      itemchange.quantity = action.payload.quantity;
+      itemchange.total = itemchange.price * action.payload.quantity;
+      cartCopy[pos] = itemchange;
+      return {
+        ...state,
+        cart: cartCopy,
+      };
 
-      case TYPES.CALCULATE_TOTAL:
-        let total = 0;
-        if(state.cart.length > 0) {
-          total = state.cart.reduce((prev, next) => prev + next.total, 0);
-        };
-        return{
-          ...state,
-          calculatedTotal: total,
-        };
+    case TYPES.CALCULATE_TOTAL:
+      let total = 0;
+      if (state.cart.length > 0) {
+        total = state.cart.reduce((prev, next) => prev + next.total, 0);
+      }
+      return {
+        ...state,
+        calculatedTotal: total,
+      };
 
+    case TYPES.ADD_FLIGHT_OFFER:
+      return {
+        ...state,
+      };
 
+    case TYPES.GET_FLIGHT_OFFER:
+      return {
+        ...state,
+        flightOffer: action.payload,
+      };
 
-          case TYPES.SIGN_IN :
-            console.log(action.payload)
-            return{
-              ...state,
-              user:action.payload
-            }
-            case TYPES.LOG_OUT:
-              return{
-                ...state,
-                user:{}
-              }
+    case TYPES.CREATE_ORDER:
+      return {
+        ...state,
+      };
+
+    case TYPES.GET_ALL_ORDERS:
+      return {
+        ...state,
+        order: action.payload,
+      };
+
+    case TYPES.GET_ORDER:
+      return {
+        ...state,
+        order_detail: action.payload,
+      };
+
+    case TYPES.SIGN_IN:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case TYPES.LOG_OUT:
+      return {
+        ...state,
+        user: {},
+      };
 
     case TYPES.SIGN_UP:
       return {
         ...state,
-        user: action.payload
-      }
+        user: action.payload,
+      };
 
-
- 
+    case TYPES.SIGN_IN_GOOGLE:
+      return {
+        ...state,
+        user: action.payload,
+      };
 
     case TYPES.GET_CONFIRM:
       return {
@@ -314,13 +389,51 @@ function rootReducer(state = initialState, action) {
         confirm: action.payload,
       };
 
+    case TYPES.FORGOT_PASSWORD:
+      return {
+        ...state,
+        forgot: action.payload,
+      };
 
-    // case TYPES.LOAD_CURRENT_ITEM:
-    //   return {
-    //     ...state,
-    //     currentItem: action.payload
-    //   }
+    case TYPES.RESET_PASSWORD:
+      return {
+        ...state,
+        forgot: action.payload,
+      };
+    case TYPES.USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
 
+    /*----Admin CRUD reducer-----*/
+
+    case TYPES.GET_ALL_FLIGHTS_ADMIN:
+      return {
+        ...state,
+        flights_Cart: action.payload,
+      };
+    case TYPES.GET_FLIGHT_DETAILS_ADMIN:
+      return {
+        ...state,
+        flight_Detail: action.payload,
+      };
+    case TYPES.POST_FLIGHT_ADMIN:
+      return {
+        ...state,
+      };
+    case TYPES.DELETE_FLIGHT_ADMIN:
+      return {
+        ...state,
+        flight_Cart: state.flights_Cart.filter(
+          (el) => el._id !== action.payload
+        ),
+      };
+
+      case TYPES.UPDATE_FLIGHT_ADMIN:
+        return{
+          ...state,          
+        }
     default:
       return { ...state };
   }

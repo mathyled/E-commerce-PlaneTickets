@@ -6,6 +6,7 @@ const models = {
   OrderModel: require("./Order"),
   UserModel: require("./User"),
   CartModel: require("./Cart"),
+  FavoriteModel: require("./Favorites"),
 };
 
 module.exports = models;

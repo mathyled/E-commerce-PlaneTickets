@@ -17,7 +17,7 @@ function SearchBar() {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.search);
   const [input, setInput] = useState({ airline: "", date: "" });
-  const [tempInput, setTempInput] = useState({ tempAirline: "", tempDate: "" });
+  const [tempInput, setTempInput] = useState({ airline: "", date: "" });
   const [isFocus, setIsFocus] = useState(false);
 
   function getAfterDate() {
@@ -47,11 +47,14 @@ function SearchBar() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log(input);
   }
 
   function clearInputs() {
-    setInput({ ...input, airline: "", date: "" });
+    setTempInput({ ...tempInput, airline: "", date: "" });
+  }
+
+  function handleTempInput(e) {
+    setTempInput({ ...tempInput, [e.target.name]: e.target.value });
   }
 
   function handler(e) {
@@ -88,6 +91,7 @@ function SearchBar() {
             width={"100%"}
             bg="white"
             type="text"
+            value={tempInput.airline}
             _placeholder={{
               color: useColorModeValue("grey.200", "Black"),
             }}
@@ -98,6 +102,7 @@ function SearchBar() {
             list="cities"
             onChange={(e) => {
               //setTempInput({...tempInput,tempAirline:e.target.value})
+              handleTempInput(e);
               handler(e);
             }}
           />
@@ -116,6 +121,7 @@ function SearchBar() {
           }}
           textAlign="center"
           color="black"
+          value={tempInput.date}
           width={200}
           bg="white"
           name="date"
@@ -129,10 +135,11 @@ function SearchBar() {
             setIsFocus(false);
           }}
           min={getAfterDate()}
-          onChange={
+          onChange={(e) => {
             //setTempInput({...tempInput,tempAirline:e.target.value})
-            handlerOnChange
-          }
+            handleTempInput(e);
+            handlerOnChange(e);
+          }}
         />
         <Button
           colorScheme="blue"
