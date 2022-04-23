@@ -9,20 +9,30 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 // import { Layout } from '../../Features/UserModal/components/Layout'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
 import {Link} from "react-router-dom";
-import { calculateTotal, updateQuantity } from '../../../../redux/actions/actions';
+import { useState } from 'react';
+// import { calculateTotal, updateQuantity } from '../../../../redux/actions/actions';
 
 const CartPage = ()=>{
-  const dispatch = useDispatch();
-  const cart = useSelector(state=> state.cart);
+  // const dispatch = useDispatch();
+  // const cart = useSelector(state=> state.cart);
+  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
 
-  function onChangeQuantity(e) {
-    dispatch(updateQuantity(e.target.id, e.target.value));
-    dispatch(calculateTotal());
+  function updateQuantity(cart, id, quantity) {
+    console.log(cart)
+    console.log(id)
+    console.log(quantity)
+    const cartCopy = cart;
+    let pos = cartCopy.map(e => e._id).indexOf(id);
+    let itemchange = cartCopy[pos];
+    itemchange.quantity = quantity;
+    itemchange.total = itemchange.price * quantity;
+    cartCopy[pos] = itemchange;
+    return cartCopy;
   };
 
   return(
@@ -75,7 +85,7 @@ const CartPage = ()=>{
               Shopping cart {cart.length} items
             </Heading>
 
-            <Stack spacing="6" onChange={onChangeQuantity}>
+            <Stack spacing="6" onChange={e => window.localStorage.setItem("Cart", JSON.stringify(cart = updateQuantity(cart, e.target.id, e.target.value)))}>
               {cart.map((item, i) => (
                 <CartItem key={i} {...item} />
               ))}

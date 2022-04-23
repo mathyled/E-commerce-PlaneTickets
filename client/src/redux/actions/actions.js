@@ -166,41 +166,41 @@ export const getBackUpState = () => {
 
 /////////////////ACTIONS CART ////////////////////////////////////
 
-export const addToCart = (id) => {
-  return {
-    type: TYPES.ADD_TO_CART,
-    payload: id,
-  };
-};
+// export const addToCart = (id) => {
+//   return {
+//     type: TYPES.ADD_TO_CART,
+//     payload: id,
+//   };
+// };
 
-export const removeFromCart = (id) => {
-  // console.log("action id",id)
-  return {
-    type: TYPES.REMOVE_FROM_CART,
-    payload: id,
-  };
-};
+// export const removeFromCart = (id) => {
+//   // console.log("action id",id)
+//   return {
+//     type: TYPES.REMOVE_FROM_CART,
+//     payload: id,
+//   };
+// };
 
-export const clearCart = () => {
-  return {
-    type: TYPES.CLEAR_CART,
-    payload: [],
-  };
-};
+// export const clearCart = () => {
+//   return {
+//     type: TYPES.CLEAR_CART,
+//     payload: [],
+//   };
+// };
 
-export const updateQuantity = (id, quantity) => {
-  // console.log("ACTION", id, quantity)
-  return {
-    type: TYPES.UPDATE_QUANTITY,
-    payload: { id, quantity },
-  };
-};
+// export const updateQuantity = (id, quantity) => {
+//   // console.log("ACTION", id, quantity)
+//   return {
+//     type: TYPES.UPDATE_QUANTITY,
+//     payload: { id, quantity },
+//   };
+// };
 
-export const calculateTotal = () => {
-  return {
-    type: TYPES.CALCULATE_TOTAL,
-  };
-};
+// export const calculateTotal = () => {
+//   return {
+//     type: TYPES.CALCULATE_TOTAL,
+//   };
+// };
 
 // export const addCart = () => {
 //   return {
