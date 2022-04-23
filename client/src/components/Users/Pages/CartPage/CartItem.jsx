@@ -3,7 +3,7 @@ import { CloseButton, Flex, Select, useColorModeValue } from '@chakra-ui/react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 import { useEffect, useState } from 'react'
-import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
+// import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
 import { useDispatch } from 'react-redux'
 
 const QuantitySelect = (props) => {
@@ -25,6 +25,8 @@ const QuantitySelect = (props) => {
   )
 };
 
+// let cart = JSON.parse(localStorage.getItem("Cart"));
+
 export const CartItem = (props) => {
   const dispatch = useDispatch();
   const {
@@ -35,19 +37,18 @@ export const CartItem = (props) => {
     quantity
   } = props;
   let [qtySelect, setQtySelect] = useState(quantity);
+  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
 
   useEffect(() => {
     setQtySelect(quantity);
   }, [dispatch, quantity]);
-  
+
   function onChangeQuantity(e) {
     setQtySelect(e.target.value);
   };
 
-  function onClickDelete(e) {
-    e.preventDefault();
-    dispatch(removeFromCart(_id));
-    dispatch(calculateTotal());
+  function removeToCart(cart, id) {
+    return cart.filter(item => item._id !== id);
   };
 
   return (
@@ -85,7 +86,14 @@ export const CartItem = (props) => {
 
         <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
-        <CloseButton onClick={onClickDelete} />
+        <CloseButton onClick={() => {
+          cart = removeToCart(cart, _id);
+          if(cart.length === 0) {
+            window.localStorage.setItem("Cart", JSON.stringify([]));
+          }else {
+            window.localStorage.setItem("Cart", JSON.stringify(cart));
+          };
+        }} />
 
       </Flex>
 
@@ -110,7 +118,14 @@ export const CartItem = (props) => {
 
         <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
-        <CloseButton onClick={onClickDelete} />
+        <CloseButton onClick={() => {
+          cart = removeToCart(cart, _id);
+          if(cart.length === 0) {
+            window.localStorage.setItem("Cart", JSON.stringify([]));
+          }else {
+            window.localStorage.setItem("Cart", JSON.stringify(cart));
+          };
+        }} />
 
       </Flex>
 

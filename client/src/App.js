@@ -9,18 +9,18 @@ import Profilepage from "./components/Users/Features/UserModal/pages/Profilepage
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import { ResetPasswordPage } from "./components/Users/Features/UserModal/pages/ResetPasswordPage";
 import LandingPage from "./components/Users/Features/Landing/LandingPage";
-import CreateForm from "./components/Users/Pages/Create/CreateForm";
+// import CreateForm from "./components/Users/Pages/Create/CreateForm";
 import Details from "./components/Users/Pages/Details/Details";
 import CartPage from "./components/Users/Pages/CartPage/CartPage";
-import ProtectAdminRoute from "./helpers/ProtectAdminRoutes";
+// import ProtectAdminRoute from "./helpers/ProtectAdminRoutes";
 import AdminLayout from "./components/Users/Pages/AdminPanel/components/src/layouts/Admin.js";
 import Dashboard from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/index";
 
 import Favorite from "./components/Users/Features/Favorite/Favorite";
 
-import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
+// import MyPlans from "./components/Users/Pages/MyPlans/MyPlans";
 
-import Checkout from "./components/Users/Pages/Checkout/Checkout";
+// import Checkout from "./components/Users/Pages/Checkout/Checkout";
 import DetailsAdmin from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Dashboard/components/DetailsAdmin";
 import {
   flightsTable,
@@ -29,18 +29,23 @@ import {
 } from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Tables/index";
 import Profile from "./components/Users/Pages/AdminPanel/components/src/views/Dashboard/Profile";
 import SuccessBuy from "./components/Users/Pages/SuccessBuy";
-import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
+// import LoadingPage from "./components/Users/Features/Loading/LoadingPage";
 // import Welcome from "./components/Users/Pages/Welcome/Welcome";
 import Confirm from "./components/Users/Pages/SuccessConfirm";
-import axios from "axios";
+// import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedUserRoute from "./ProtectedUserRoute";
 
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.user);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("Cart", JSON.stringify([]));
+  // });
+
   useEffect(() => {
     currentUser?.email &&
       window.localStorage.setItem("User", JSON.stringify(currentUser));
@@ -69,7 +74,7 @@ function App() {
           <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
           <Route exact path="/confirm:token" element={<Confirm />} />
         </Route>
-    
+
 
 
         <Route element={<ProtectedAdminRoute user={cUser} />}>
