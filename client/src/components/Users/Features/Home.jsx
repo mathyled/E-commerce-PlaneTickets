@@ -28,7 +28,7 @@ import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
 import WithSubnavigation from "./NavBar";
 
-export default function Home({ user }) {
+export default function Home({ user ,cCart}) {
   const dispatch = useDispatch();
 
   let cities = useSelector((state) => state.city);
@@ -78,7 +78,7 @@ export default function Home({ user }) {
   return (
     <div>
       {isLoading ? <LoadingPage></LoadingPage> : <></>}
-      <WithSubnavigation user={user} />
+      <WithSubnavigation user={user} cCart={cCart} />
       <CallToAction />
 
       <div>

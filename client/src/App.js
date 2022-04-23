@@ -41,10 +41,11 @@ function App() {
   // const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.user);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("Cart", JSON.stringify([]));
-  // });
+  const cart = useSelector((state) => state.cart);
+  useEffect(() => {
+cart?.length > 0 &&
+    window.localStorage.setItem("Cart", JSON.stringify([]));
+  },[cart]);
 
   useEffect(() => {
     currentUser?.email &&
@@ -57,14 +58,15 @@ function App() {
     //  dispatch(dispatchUser(user))
   }, [currentUser]);
   const cUser = JSON.parse(localStorage.getItem("User"));
-  //console.log("AAAA", cUser);
+  let [ cCart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  console.log("%ccCart","background:red",cCart,cCart.length)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home user={cUser} />} />
+        <Route path="/home" element={<Home user={cUser} cCart={cCart} />} />
         <Route exact path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route exact path="/detailspage:id" element={<Details  user={cUser} />}></Route>
+        <Route exact path="/detailspage:id" element={<Details user={cUser} cCart={cCart}/>}></Route>
         <Route exact path="/cart" element={<CartPage />} />
 
         <Route element={<ProtectedUserRoute user={cUser} />}>

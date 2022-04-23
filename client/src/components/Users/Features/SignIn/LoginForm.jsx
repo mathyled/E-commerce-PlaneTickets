@@ -34,7 +34,7 @@ export function LoginForm() {
     toast({
       description: currentUser?.message,
       status: 'error',
-      duration: 2000,
+      duration: 8000,
       isClosable: true,
     })
     navigate("/home")

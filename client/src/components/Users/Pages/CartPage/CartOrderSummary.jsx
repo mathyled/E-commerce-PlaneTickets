@@ -87,7 +87,7 @@ export const CartOrderSummary = () => {
           </Button>
         ) : (
           <div>
-            {currentUser.confirmationCode ? (
+            {currentUser?.confirmationCode ? (
               <StripeCheckout
                 name="Heading North"
                 image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"

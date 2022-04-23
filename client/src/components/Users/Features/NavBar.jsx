@@ -36,7 +36,7 @@ import { getBackUpState, logOut } from "../../../redux/actions/actions";
 import Navlink from './UserModal/components/Navlink';
 import { useEffect, useState } from 'react';
 
-export default function WithSubnavigation({ user }) {
+export default function WithSubnavigation({ user,cCart }) {
     const { isOpen, onToggle } = useDisclosure();
     // const cart = useSelector(state => state.cart)
     const currentUser = useSelector(state => state.user)
@@ -107,7 +107,7 @@ export default function WithSubnavigation({ user }) {
                         />
                     )}
                     <NavLink to="/cart">
-                        <Cart quantity={cart.length} />
+                        <Cart quantity={cCart?.length} />
                     </NavLink>
 
 
