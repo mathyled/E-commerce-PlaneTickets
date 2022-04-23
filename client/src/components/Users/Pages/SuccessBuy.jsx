@@ -6,16 +6,17 @@ import {
     useColorModeValue,
 
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { clearCart, createFlightOffer, createOrder } from '../../../redux/actions/actions';
 
 export default function SuccessBuy() {
-    const cart = useSelector(state => state.cart);
+    // const cart = useSelector(state => state.cart);
     const user = useSelector(state => state.user);
     const calculatedTotal = useSelector(state => state.calculatedTotal);
     const dispatch = useDispatch();
+    let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
 
     useEffect(() => {
         let prod = [];
@@ -42,7 +43,8 @@ export default function SuccessBuy() {
             amount: calculatedTotal,
         };
         dispatch(createOrder(order));
-        dispatch(clearCart());
+        localStorage.clear("Cart");
+        // window.localStorage.setItem("Cart", JSON.stringify([]));
     }, []);
 
     return (

@@ -3,25 +3,25 @@ import {
     Flex,
     Text,
     IconButton,
-    Button,
+    // Button,
     Stack,
     Collapse,
     Icon,
     Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
+    // Popover,
+    // PopoverTrigger,
+    // PopoverContent,
     useColorModeValue,
     useColorMode,
-    useBreakpointValue,
+    // useBreakpointValue,
     useDisclosure,
-    Spacer,
+    // Spacer,
 } from '@chakra-ui/react';
 import {
     HamburgerIcon,
     CloseIcon,
     ChevronDownIcon,
-    ChevronRightIcon,
+    // ChevronRightIcon,
 } from '@chakra-ui/icons';
 import LoginModal from './SignIn/LoginModal';
 import RegisterModal from './SignUp/RegisterModal';
@@ -34,16 +34,17 @@ import Cart from './Cart';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { getBackUpState, logOut } from "../../../redux/actions/actions";
 import Navlink from './UserModal/components/Navlink';
+import { useEffect, useState } from 'react';
 
-
-
-export default function WithSubnavigation({ user }) {
+export default function WithSubnavigation({ user,cCart }) {
     const { isOpen, onToggle } = useDisclosure();
-    const cart = useSelector(state => state.cart)
+    // const cart = useSelector(state => state.cart)
     const currentUser = useSelector(state => state.user)
     const { toggleColorMode } = useColorMode()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+
     async function handlerLogOut(e) {
         e.preventDefault();
         // handle logout
@@ -106,7 +107,7 @@ export default function WithSubnavigation({ user }) {
                         />
                     )}
                     <NavLink to="/cart">
-                        <Cart quantity={cart.length} />
+                        <Cart quantity={cCart?.length} />
                     </NavLink>
 
 
@@ -226,7 +227,7 @@ const MobileNavItem = ({ label, children, href }) => {
 //   />
 // </Box>
 
-{/* <Link  to="/about">{" "}About</Link> */ }
+// {/* <Link  to="/about">{" "}About</Link> */ }
 
 const NAV_ITEMS = [
     // {

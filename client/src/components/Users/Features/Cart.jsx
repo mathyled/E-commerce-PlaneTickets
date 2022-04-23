@@ -1,6 +1,7 @@
 import { chakra, IconButton } from "@chakra-ui/react";
 import {  AiOutlineShoppingCart } from "react-icons/ai";
 function Cart({quantity}) {
+    console.log("quantity",quantity)
     return (
 
         <IconButton
