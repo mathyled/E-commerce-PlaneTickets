@@ -31,7 +31,7 @@ export function RegisterForm() {
     toast({
       description: currentUser?.message,
       status: 'error',
-      duration: 3000,
+      duration: 8000,
       isClosable: true,
     })
     //  alert(currentUser.message)

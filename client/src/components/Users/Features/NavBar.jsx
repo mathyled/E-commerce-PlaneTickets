@@ -94,13 +94,13 @@ export default function WithSubnavigation({ user }) {
                     <FilterModal />
                     {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 && <LoginModal />}
                     {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 && <RegisterModal />}
-                    {user?.confirmationCode?.length > 0 && (
+                    {currentUser?.confirmationCode?.length > 0 && (
                         <UserMenu
                             logout={handlerLogOut}
                             myPlans={() => navigate("/my-plans")}
-                            photo={user?.photoURL}
-                            name={user.username || user?.username}
-                            isAdmin={user?.isAdmin}
+                            photo={currentUser?.photo}
+                            name={currentUser.username || user?.username}
+                            isAdmin={currentUser?.isAdmin}
                             sendToFavorites={() => navigate("/favorite")}
                             sendToPanelAdmin={() => navigate("/admin")}
                         />

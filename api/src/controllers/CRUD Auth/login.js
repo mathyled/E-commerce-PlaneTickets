@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
+
     const { username, password } = req.body;
     // verify if user exists
     const user = await UserModel.findOne({ username });
@@ -35,6 +36,7 @@ const login = async (req, res) => {
         }
       }
     }
+
   } catch (err) {
     res.status(500).send({ message: err });
   }

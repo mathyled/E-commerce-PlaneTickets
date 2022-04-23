@@ -101,12 +101,14 @@ const CreateForm = () => {
     dispatch(postFlightAdmin(formik.values));
     dispatch(getFlightsAdmin());
 
-    // formik.actions.resetForm()
+    
     toast({
       title: "Flight created successfully",
       status: "success",
       duration: 3000,
     });
+  formik.values = formik.initialValues
+
   };
   const textColor = useColorModeValue("black", "gray.200");
   return (
