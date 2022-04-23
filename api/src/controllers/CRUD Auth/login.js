@@ -33,7 +33,7 @@ const login = async (req, res) => {
       process.env.JWT_SEC,
       { expiresIn: "3d" }
     );
-    //  user && res.status(200).send({ message: "Sign In" });
+    // if(user) return res.status(200).send({ message: "Sign In" });
     const { password, ...others } = user._doc;
     res.status(200).send({ ...others, accessToken });
   } catch (err) {
