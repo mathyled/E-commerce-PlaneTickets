@@ -51,15 +51,11 @@ cart?.length > 0 &&
     currentUser?.email &&
       window.localStorage.setItem("User", JSON.stringify(currentUser));
 
-    //  if(currentUser?.email){
-    //    const loggedUserJSON= window.localStorage.getItem("User") ;
-    //    var user = JSON.parse(loggedUserJSON) }
-    //    console.log(user)
-    //  dispatch(dispatchUser(user))
   }, [currentUser]);
   const cUser = JSON.parse(localStorage.getItem("User"));
   let [ cCart ] = useState(JSON.parse(localStorage.getItem("Cart")));
-  console.log("%ccCart","background:red",cCart,cCart.length)
+  // console.log("%cUser","background:red",currentUser)
+  console.log("%ccUSER","background:red",cUser)
   return (
     <div className="App">
       <Routes>
@@ -71,11 +67,11 @@ cart?.length > 0 &&
 
         <Route element={<ProtectedUserRoute user={cUser} />}>
           <Route exact path="/profile" element={<Profilepage />} />
-          <Route exact path="/success" element={<SuccessBuy />} />
           <Route exact path="/favorite" element={<Favorite user={cUser} />} />
+        </Route>
           <Route exact path="/recover/:token" element={<ResetPasswordPage />} />
           <Route exact path="/confirm:token" element={<Confirm />} />
-        </Route>
+          <Route exact path="/success" element={<SuccessBuy />} />
 
 
 

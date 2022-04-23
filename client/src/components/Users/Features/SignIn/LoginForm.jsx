@@ -63,6 +63,12 @@ function handlerGoogle(e) {
     e.preventDefault()
    dispatch(signIn(inputs))
   }
+
+  useEffect(() => {
+    currentUser?.email &&
+      window.localStorage.setItem("User", JSON.stringify(currentUser));
+
+  }, [dispatch]);
   return (
 
     <>

@@ -11,13 +11,10 @@ import {
   Heading,
   SimpleGrid,
   StackDivider,
-  // useColorModeValue,
-  // VisuallyHidden,
   useToast,
   List,
   ListItem,
 } from "@chakra-ui/react";
-// import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";

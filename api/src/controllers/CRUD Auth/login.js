@@ -8,6 +8,9 @@ const login = async (req, res) => {
     const { username, password } = req.body;
     // verify if user exists
     const user = await UserModel.findOne({ username });
+
+    const {email,photo,isAdmin,_id} = user
+
     if (!user) {
       res.status(200).send({ message: "User not found" });
     } else {
@@ -29,7 +32,13 @@ const login = async (req, res) => {
             process.env.JWT_SEC,
             { expiresIn: "3d" }
           );
+          
           res.status(200).send({
+            username,
+            email,
+            photo,
+            _id,
+            isAdmin,
             message: "User logged in successfully",
             accesToken: accesToken,
           });
