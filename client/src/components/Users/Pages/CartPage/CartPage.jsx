@@ -57,7 +57,7 @@ const CartPage = ()=>{
       }}
     >
 
-      {cart.length > 0 ?
+      {cart?.length > 0 ?
 
         <Stack
           direction={{

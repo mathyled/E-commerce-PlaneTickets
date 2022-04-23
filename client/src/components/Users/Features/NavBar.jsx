@@ -93,9 +93,9 @@ export default function WithSubnavigation({ user,cCart }) {
                     direction={'row'}
                     spacing={6}>
                     <FilterModal />
-                    {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 && <LoginModal />}
-                    {!currentUser?.confirmationCode?.length > 0 && !user?.confirmationCode?.length > 0 && <RegisterModal />}
-                    {currentUser?.confirmationCode?.length > 0 && (
+                    {!currentUser?.email && <LoginModal />}
+                    {!currentUser?.email && <RegisterModal />}
+                    {currentUser?.email && (
                         <UserMenu
                             logout={handlerLogOut}
                             myPlans={() => navigate("/my-plans")}
