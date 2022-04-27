@@ -25,6 +25,9 @@ const Flights = ({ title, captions }) => {
   useEffect(() => {
     dispatch(getFlightsAdmin());
   }, [dispatch]);
+  useEffect(() => {
+    
+  }, [data]);
   // console.log("La info que llega de back", data);
   return (
     <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }}>

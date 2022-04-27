@@ -38,14 +38,14 @@ var dashRoutes = [
     component: OrdersTable,
     layout: "/admin",
   },
-  {
-    path: "/flights",
-    name: "Flights",
-    rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
-    component: flightsTable,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/flights",
+  //   name: "Flights",
+  //   rtlName: "لوحة القيادة",
+  //   icon: <StatsIcon color="inherit" />,
+  //   component: flightsTable,
+  //   layout: "/admin",
+  // },
   {
     name: "ACCOUNT PAGES",
     category: "account",

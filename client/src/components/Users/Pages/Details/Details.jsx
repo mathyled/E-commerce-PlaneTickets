@@ -1,28 +1,25 @@
 import {
   Box,
-  chakra,
+  // chakra,
   Container,
   Stack,
   Text,
   Image,
   Flex,
-  VStack,
+  // VStack,
   Button,
   Heading,
   SimpleGrid,
   StackDivider,
-  useColorModeValue,
-  VisuallyHidden,
   useToast,
   List,
   ListItem,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  addToCart,
+  // addToCart,
   getOfferDetails,
   resetStates,
 } from "../../../../redux/actions/actions";
@@ -31,11 +28,12 @@ import {
 import LoadingPage from "../../Features/Loading/LoadingPage";
 import WithSubnavigation from "../../Features/NavBar";
 
-export default function Details() {
+export default function Details({user,cCart}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const addCart = useSelector((state) => state.cart);
+  // const addCart = useSelector((state) => state.cart);
+  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
   let cityDetails = useSelector((state) => state.city_details);
   let cityDetailsUsage = cityDetails[0];
   console.log(id);
@@ -45,13 +43,28 @@ export default function Details() {
     return () => dispatch(resetStates());
   }, [id, dispatch]);
 
+  function addToCart(cityDetailsUsage, cart, id) {
+    let inCart = false;
+    if (cart.length > 0) {
+      inCart = cart.some(item => item.id === cityDetailsUsage._id);
+    };
+    console.log(cityDetailsUsage)
+    return (
+      inCart ?
+        cart.map(item => item.id === id ? { ...item } : item)
+      :
+        [...cart, { ...cityDetailsUsage, quantity: 1, total: cityDetailsUsage.price }]
+    );
+  };
+
   console.log("Details 1", cityDetails);
   console.log("Details 2", cityDetailsUsage);
+  console.log("CART", cart);
   return (
     <div>
       {Object.keys(cityDetails).length > 0 ? (
         <div>
-          <WithSubnavigation />
+          <WithSubnavigation user={user} cCart={cCart} />
           <Container maxW={"7xl"}>
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}
@@ -175,14 +188,14 @@ export default function Details() {
                     boxShadow: "lg",
                   }}
                   onClick={() => {
-                    addCart.find((item) => item._id === id)
+                    cart.find((item) => item._id === id)
                       ? toast({
                           description: "Already added to cart",
                           status: "error",
                           duration: 9000,
                           isClosable: true,
                         })
-                      : dispatch(addToCart(id));
+                      : window.localStorage.setItem("Cart", JSON.stringify(cart = addToCart(cityDetailsUsage, cart, id)));
                   }}
                 >
                   Add to cart
