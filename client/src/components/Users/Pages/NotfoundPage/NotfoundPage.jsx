@@ -15,6 +15,7 @@ import {
   Container,
   VStack,
 } from "@chakra-ui/react";
+
 import WithSubnavigation from "../../Features/NavBar";
 
 const NotfoundPage = ({user}) => {
@@ -22,7 +23,10 @@ const NotfoundPage = ({user}) => {
     "https://images.unsplash.com/photo-1548957175-84f0f9af659e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZnJpZW5kcyUyMHRyYXZlbHxlbnwwfHwwfHw%3D&w=1000&q=80";
   return (
     <div>
+
+
       <WithSubnavigation user={user} />
+
       <Box
         pos={"absolute"}
         overflow="hidden"
@@ -35,7 +39,7 @@ const NotfoundPage = ({user}) => {
         <Box
           width={"100%"}
           h="100%"
-          backgroundColor={"#fff"}
+          backgroundColor={useColorModeValue("#b2b2b2", "#000")}
           opacity="0.4"
         ></Box>
         <Image

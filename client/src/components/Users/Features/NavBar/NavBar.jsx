@@ -164,6 +164,7 @@ import { useSelector } from "react-redux";
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
                 href={"/cart"}
+
               >
                 <Cart  quantity={cartCount}/>
               </Link> */}
@@ -190,3 +191,4 @@ import { useSelector } from "react-redux";
   }
   
   export default NavBar;
+
