@@ -2,7 +2,7 @@ const { CartModel } = require("../../models/");
 
 const getUserCart = async (req, res) => {
   try {
-    const cart = await CartModel.findOne({ userId: req.params.userId });
+    const cart = await CartModel.find({ userId: req.params.userId });
     res.status(200).send({ message: "Cart retrieved successfully", cart });
   } catch (err) {
     console.log(err);

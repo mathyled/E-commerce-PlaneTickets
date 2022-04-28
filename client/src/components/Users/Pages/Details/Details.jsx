@@ -19,8 +19,10 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  addCartToDb,
   // addToCart,
   getOfferDetails,
+  getUserCart,
   resetStates,
 } from "../../../../redux/actions/actions";
 
@@ -32,23 +34,24 @@ export default function Details({user,cCart}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const addCart = useSelector((state) => state.cart);
-  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  let [ cartStorage ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  const cartDb = useSelector(state => state.cart);
+  const currentUser = useSelector(state => state.user);
   let cityDetails = useSelector((state) => state.city_details);
   let cityDetailsUsage = cityDetails[0];
-  console.log(id);
+  console.log("USERC", currentUser);
 
   useEffect(() => {
     dispatch(getOfferDetails(id));
+    dispatch(getUserCart(currentUser._id));
     return () => dispatch(resetStates());
-  }, [id, dispatch]);
+  }, [id, dispatch, currentUser]);
 
   function addToCart(cityDetailsUsage, cart, id) {
     let inCart = false;
     if (cart.length > 0) {
       inCart = cart.some(item => item.id === cityDetailsUsage._id);
     };
-    console.log(cityDetailsUsage)
     return (
       inCart ?
         cart.map(item => item.id === id ? { ...item } : item)
@@ -57,9 +60,28 @@ export default function Details({user,cCart}) {
     );
   };
 
+  function db() {
+    if(cartDb.length > 0) {
+      if(cartDb.find(item => item._id === id)) {
+        toast({
+          description: "Already added to cart",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }else {
+        dispatch(addCartToDb({ userId: currentUser._id, products: cityDetailsUsage }));
+        dispatch(getUserCart(currentUser._id));
+      };
+    }else {
+      dispatch(addCartToDb({ userId: currentUser._id, products: cityDetailsUsage }));
+      dispatch(getUserCart(currentUser._id));
+    };
+  };
+
   console.log("Details 1", cityDetails);
   console.log("Details 2", cityDetailsUsage);
-  console.log("CART", cart);
+  console.log("CART", cartDb);
   return (
     <div>
       {Object.keys(cityDetails).length > 0 ? (
@@ -188,14 +210,18 @@ export default function Details({user,cCart}) {
                     boxShadow: "lg",
                   }}
                   onClick={() => {
-                    cart.find((item) => item._id === id)
-                      ? toast({
+                    currentUser?.email ?
+                      db()
+                    :
+                      cartStorage.find((item) => item._id === id) ?
+                        toast({
                           description: "Already added to cart",
                           status: "error",
                           duration: 9000,
                           isClosable: true,
                         })
-                      : window.localStorage.setItem("Cart", JSON.stringify(cart = addToCart(cityDetailsUsage, cart, id)));
+                      :
+                        window.localStorage.setItem("Cart", JSON.stringify(cartStorage = addToCart(cityDetailsUsage, cartStorage, id)));
                   }}
                 >
                   Add to cart

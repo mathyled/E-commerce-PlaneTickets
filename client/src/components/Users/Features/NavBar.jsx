@@ -34,16 +34,17 @@ import Cart from './Cart';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { getBackUpState, logOut } from "../../../redux/actions/actions";
 import Navlink from './UserModal/components/Navlink';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 export default function WithSubnavigation({ user,cCart }) {
     const { isOpen, onToggle } = useDisclosure();
     // const cart = useSelector(state => state.cart)
-    const currentUser = useSelector(state => state.user)
+    const currentUser = useSelector(state => state.user);
+    const cartDb = useSelector(state => state.cart);
     const { toggleColorMode } = useColorMode()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+    // let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
 
     async function handlerLogOut(e) {
         e.preventDefault();
@@ -106,10 +107,10 @@ export default function WithSubnavigation({ user,cCart }) {
                             sendToPanelAdmin={() => navigate("/admin")}
                         />
                     )}
-                    <NavLink to="/cart">
-                        <Cart quantity={cCart?.length} />
-                    </NavLink>
 
+                    <NavLink to="/cart">
+                        <Cart quantity={currentUser?.email ? cartDb.length : cCart?.length} />
+                    </NavLink>
 
                     <IconButton
                         variant="outline"

@@ -4,12 +4,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Paged from "./Paged/Paged";
 
 import {
   SimpleGrid,
-  Text,
+  // Text,
   Center,
   AlertIcon,
   Alert,
@@ -22,7 +22,8 @@ import CallToAction from "./CallToAction/CallToAction";
 import {
   dispatchUser,
   getCities,
-  signInGoogle,
+  getUserCart,
+  // signInGoogle,
 } from "../../../redux/actions/actions";
 import LoadingPage from "./Loading/LoadingPage";
 import LoadingSection from "./Loading/LoadingSection";
@@ -46,8 +47,8 @@ export default function Home({ user ,cCart}) {
     indexOfFirstCharacter,
     indexOfLastCharacter
   );
-  const [buttons, setButtons] = React.useState([]);
-  const [subArray, setSubArray] = React.useState([]);
+  // const [buttons, setButtons] = React.useState([]);
+  // const [subArray, setSubArray] = React.useState([]);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -66,9 +67,14 @@ export default function Home({ user ,cCart}) {
   }, [search]);
   const currentUser = useSelector((state) => state.user);
 
+  // useEffect(() => {
+  //   dispatch(getUserCart(user._id));
+  // });
+
   useEffect(() => {
     dispatch(dispatchUser(user));
     // dispatch(signInGoogle())
+    dispatch(getUserCart(user._id));
   }, []);
 
   useEffect(() => {

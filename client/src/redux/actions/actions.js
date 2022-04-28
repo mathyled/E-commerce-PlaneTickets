@@ -166,20 +166,33 @@ export const getBackUpState = () => {
 
 /////////////////ACTIONS CART ////////////////////////////////////
 
-// export const addToCart = (id) => {
-//   return {
-//     type: TYPES.ADD_TO_CART,
-//     payload: id,
-//   };
-// };
+export const getUserCart = (id) => {
+  return async dispatch => {
+    const res = await axios.get(`${baseUrl}api/cart/${id}`);
+    return dispatch({
+      type: TYPES.GET_USER_CART,
+      payload: res.data.cart[0],
+    });
+  };
+};
 
-// export const removeFromCart = (id) => {
-//   // console.log("action id",id)
-//   return {
-//     type: TYPES.REMOVE_FROM_CART,
-//     payload: id,
-//   };
-// };
+export const addCartToDb = (payload) => {
+  return async () => {
+    const res = await axios.post(`${baseUrl}api/cart`, payload);
+    return res;
+  };
+};
+
+export const removeFromCart = (id, payload) => {
+  return async dispatch => {
+    console.log("action", id, payload);
+    await axios.post(`${baseUrl}api/cart/delete/${id}`, payload);
+    return dispatch({
+      type: TYPES.REMOVE_FROM_CART,
+      payload: payload,
+    });
+  };
+};
 
 // export const clearCart = () => {
 //   return {
@@ -188,13 +201,15 @@ export const getBackUpState = () => {
 //   };
 // };
 
-// export const updateQuantity = (id, quantity) => {
-//   // console.log("ACTION", id, quantity)
-//   return {
-//     type: TYPES.UPDATE_QUANTITY,
-//     payload: { id, quantity },
-//   };
-// };
+export const updateQuantity = (id, payload) => {
+  return async dispatch => {
+    await axios.post(`${baseUrl}api/cart/update/${id}`, payload);
+    return dispatch({
+      type: TYPES.UPDATE_QUANTITY,
+      payload: payload,
+    });
+  };
+};
 
 // export const calculateTotal = () => {
 //   return {

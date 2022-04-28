@@ -20,6 +20,7 @@ import {
   import Cart from "../Cart";
   import { useEffect, useState } from "react";
   import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
   
 //   import { useNavigate } from "react-router-dom";
 //   import { logOut } from "../../../../redux/actions/actions";
@@ -28,7 +29,9 @@ import {
     // const[cartCount,setCartCount] = useState(0)
   
     // const cart = useSelector((state) => state.cart);
-    const [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+    const [ cartStorage ] = useState(JSON.parse(localStorage.getItem("Cart")));
+    const cartDb = useSelector(state => state.cart);
+    const currentUser = useSelector(state => state.user);
     const [actualUser, setActualUser] = useState({});
     // const currentUser = useSelector((state) => state.user);
     // const { toggleColorMode } = useColorMode();
@@ -164,9 +167,9 @@ import {
               >
                 <Cart  quantity={cartCount}/>
               </Link> */}
-  
+
               <Link to="/cart">
-                <Cart quantity={cart.length} />
+                <Cart quantity={currentUser?.email ? cartDb.length : cartStorage.length} />
               </Link>
   
                {/* <Link to="/cart">

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuth } from '../../../../context/AuthContext';
 // import { calculateTotal } from "../../../../redux/actions/actions";
@@ -22,7 +22,7 @@ const STRIPE_KEY =
 
   // let cart = JSON.parse(localStorage.getItem("Cart"));
 
-export const CartOrderSummary = () => {
+export const CartOrderSummary = ({calculateTotal, tot}) => {
   const toast = useToast();
   // const calculatedTotal = useSelector((state) => state.calculatedTotal);
   const dispatch = useDispatch();
@@ -33,14 +33,23 @@ export const CartOrderSummary = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  let [ cartStorage ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  let cartDb = useSelector(state => state.cart);
+
+  // useMemo(() => {
+  //   console.log("MEMO", tot);
+  // }, [tot]);
+
+  useEffect(() => {
+    calculateTotal(cartDb);
+  }, [cartDb]);
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
         const response = axios.post("http://localhost:3001/api/payments", {
           tokenId: stripeToken.id,
-          amount: (calculateTotal(cart)) * 100,
+          amount: tot,
         });
         navigate("/success");
       } catch (error) {
@@ -50,14 +59,6 @@ export const CartOrderSummary = () => {
     stripeToken && makeRequest();
     // dispatch(calculateTotal());
   }, [stripeToken, navigate, dispatch]);
-
-  function calculateTotal(cart) {
-    let total = 0;
-    if (cart.length > 0) {
-      total = cart.reduce((prev, next) => prev + next.total, 0);
-    };
-    return total;
-  };
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
@@ -70,7 +71,7 @@ export const CartOrderSummary = () => {
           </Text>
 
           <Text fontSize="xl" fontWeight="extrabold">
-            {calculateTotal(cart)}
+            {tot}
           </Text>
         </Flex>
       </Stack>
@@ -93,8 +94,8 @@ export const CartOrderSummary = () => {
                 image="https://img.freepik.com/vector-gratis/billetes-avion-blanco_98292-4202.jpg?w=2000"
                 billingAddress
                 shippingAddress
-                description={`Your total is $ ${calculateTotal(cart)}`}
-                amount={(calculateTotal(cart)) * 100}
+                description={`Your total is $ ${tot}`}
+                amount={(tot) * 100}
                 token={onToken}
                 stripeKey={STRIPE_KEY}
               >
