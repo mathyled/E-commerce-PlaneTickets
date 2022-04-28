@@ -62,8 +62,8 @@ function SearchBar() {
     var relation = search.filter(
       (city) =>
         city.nameCity.toLowerCase() === arr[0].toLowerCase() &&
-        city.nameCountry
-          ?.toLowerCase() === arr[1]?.replace(" ", "").toLowerCase()
+        city.nameCountry?.toLowerCase() ===
+          arr[1]?.replace(" ", "").toLowerCase()
     );
     // console.log("CONSOLE",relation[0]["airports"][0]["codeIataAirport"])
     if (relation.length > 0) {
@@ -91,7 +91,8 @@ function SearchBar() {
             width={"100%"}
             bg="white"
             type="text"
-            value={tempInput.airline}
+            //value={tempInput.airline}
+
             _placeholder={{
               color: useColorModeValue("grey.200", "Black"),
             }}
@@ -108,7 +109,7 @@ function SearchBar() {
           />
           <datalist id="cities">
             {search.map((e) => (
-              <option key={ Date() + Math.random(e.nameCity.length) }>
+              <option key={Date() + Math.random(e.nameCity.length)}>
                 {e.nameCity}, {e.nameCountry}
               </option>
             ))}
@@ -121,7 +122,8 @@ function SearchBar() {
           }}
           textAlign="center"
           color="black"
-          value={tempInput.date}
+          // value={tempInput.date}
+
           width={200}
           bg="white"
           name="date"

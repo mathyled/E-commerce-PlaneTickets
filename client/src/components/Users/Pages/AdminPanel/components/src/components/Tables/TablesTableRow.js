@@ -60,7 +60,6 @@ function TablesTableRow(props) {
     });
   }
 
-  console.log(admin);
   return (
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">

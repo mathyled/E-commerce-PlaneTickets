@@ -161,9 +161,11 @@ import {
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
                 href={"/cart"}
+
               >
                 <Cart  quantity={cartCount}/>
               </Link> */}
+
   
               <Link to="/cart">
                 <Cart quantity={cart.length} />
@@ -187,3 +189,4 @@ import {
   }
   
   export default NavBar;
+
