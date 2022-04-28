@@ -12,7 +12,7 @@ const initialState = {
   errorMessage: [],
   ///CART ///////////
   products: [], // { id, origin, destination, price, image, departureTime }
-  // cart: [], // { id, origin, destination, price, image, departureTime, quantity }
+  cart: [], // { id, origin, destination, price, image, departureTime, quantity }
   currentItem: null,
   // qtySelect: 0,
   // calculatedTotal: 0,
@@ -273,35 +273,23 @@ function rootReducer(state = initialState, action) {
 
     //// CART ////////////
 
-    // case TYPES.ADD_TO_CART:
-    //   var newItem = state.city_details.find(
-    //     (prod) => prod.id === action.payload.id
-    //   );
-    //   console.log("ADD_TO_CART", newItem);
-    //   // Check if item is in the cart already
-    //   var inCart = false;
-    //   if (state.cart.length > 0) {
-    //     inCart = state.cart.some((item) => {
-    //       return item._id === newItem._id;
-    //     });
-    //   }
-    //   console.log("INCART", inCart);
-    //   return {
-    //     ...state,
-    //     cart: inCart
-    //       ? state.cart.map((item) =>
-    //           item.id === action.payload.id
-    //             ? { ...item, quantity: item.quantity + 1 }
-    //             : item
-    //         )
-    //       : [...state.cart, { ...newItem, quantity: 1, total: newItem.price }], // [{manzana:3},{perro:1}]
-    //   };
+    case TYPES.GET_USER_CART:
+      return {
+        ...state,
+        cart: action.payload.products,
+      };
 
-    // case TYPES.REMOVE_FROM_CART:
-    //   return {
-    //     ...state,
-    //     cart: state.cart.filter((item) => item._id !== action.payload),
-    //   };
+    case TYPES.ADD_TO_CART:
+      return {
+        ...state,
+      };
+
+    case TYPES.REMOVE_FROM_CART:
+      console.log("reducer", action.payload);
+      return {
+        ...state,
+        cart: state.cart.filter(item => item._id !== action.payload),
+      };
 
     // case TYPES.CLEAR_CART:
     //   return {
@@ -309,17 +297,17 @@ function rootReducer(state = initialState, action) {
     //     cart: action.payload,
     //   };
 
-    // case TYPES.UPDATE_QUANTITY:
-    //   const cartCopy = state.cart;
-    //   let pos = cartCopy.map((e) => e._id).indexOf(action.payload.id);
-    //   let itemchange = cartCopy[pos];
-    //   itemchange.quantity = action.payload.quantity;
-    //   itemchange.total = itemchange.price * action.payload.quantity;
-    //   cartCopy[pos] = itemchange;
-    //   return {
-    //     ...state,
-    //     cart: cartCopy,
-    //   };
+    case TYPES.UPDATE_QUANTITY:
+        const cartCopy = action.payload.cart;
+        let pos = cartCopy.map(e => e._id).indexOf(action.payload.id);
+        let itemchange = cartCopy[pos];
+        itemchange.quantity = action.payload.quantity;
+        itemchange.total = itemchange.price * action.payload.quantity;
+        cartCopy[pos] = itemchange;
+      return {
+        ...state,
+        cart: cartCopy,
+      };
 
     // case TYPES.CALCULATE_TOTAL:
     //   let total = 0;

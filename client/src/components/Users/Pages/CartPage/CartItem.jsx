@@ -3,11 +3,10 @@ import { CloseButton, Flex, Select, useColorModeValue } from '@chakra-ui/react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 import { useEffect, useState } from 'react'
-// import { calculateTotal, removeFromCart } from "../../../../redux/actions/actions"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeFromCart } from '../../../../redux/actions/actions'
 
 const QuantitySelect = (props) => {
-  // console.log("CartItem", props);
   return (
     <Select
       maxW="64px"
@@ -25,8 +24,6 @@ const QuantitySelect = (props) => {
   )
 };
 
-// let cart = JSON.parse(localStorage.getItem("Cart"));
-
 export const CartItem = (props) => {
   const dispatch = useDispatch();
   const {
@@ -34,20 +31,34 @@ export const CartItem = (props) => {
     price,
     arrival,
     departure,
-    quantity
+    quantity,
+    calculateTotal,
+    tot,
   } = props;
   let [qtySelect, setQtySelect] = useState(quantity);
-  let [ cart ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  let [ cartStorage ] = useState(JSON.parse(localStorage.getItem("Cart")));
+  const cartDb = useSelector(state => state.cart);
+  const currentUser = useSelector(state => state.user);
 
   useEffect(() => {
     setQtySelect(quantity);
   }, [dispatch, quantity]);
+  useEffect(() => {
+    calculateTotal(cartDb)
+  }, []);
+
+  useEffect(() => {
+  }, [tot]);
 
   function onChangeQuantity(e) {
     setQtySelect(e.target.value);
   };
+  
+  function removeToCartDb(id, cart) {
+    dispatch(removeFromCart(currentUser._id, { id, cart }));
+  };
 
-  function removeToCart(cart, id) {
+  function removeToCartStorage(cart, id) {
     return cart.filter(item => item._id !== id);
   };
 
@@ -81,19 +92,23 @@ export const CartItem = (props) => {
           id={_id}
           value={qtySelect}
           name={arrival.nameCity}
-          onChange={onChangeQuantity}
+          onChange={(e) => {onChangeQuantity(e); calculateTotal(cartDb)}}
         />
 
         <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
-        <CloseButton onClick={() => {
-          cart = removeToCart(cart, _id);
-          if(cart.length === 0) {
-            window.localStorage.setItem("Cart", JSON.stringify([]));
-          }else {
-            window.localStorage.setItem("Cart", JSON.stringify(cart));
-          };
-        }} />
+        { currentUser?.email ?
+          <CloseButton onClick={() => {removeToCartDb(_id, cartDb)}} />
+        :
+          <CloseButton onClick={() => {
+            cartStorage = removeToCartStorage(cartStorage, _id);
+            if(cartStorage.length === 0) {
+              window.localStorage.setItem("Cart", JSON.stringify([]));
+            }else {
+              window.localStorage.setItem("Cart", JSON.stringify(cartStorage));
+            };
+          }} />
+        }
 
       </Flex>
 
@@ -118,14 +133,18 @@ export const CartItem = (props) => {
 
         <PriceTag price={new Intl.NumberFormat().format(price * qtySelect)} />
 
-        <CloseButton onClick={() => {
-          cart = removeToCart(cart, _id);
-          if(cart.length === 0) {
-            window.localStorage.setItem("Cart", JSON.stringify([]));
-          }else {
-            window.localStorage.setItem("Cart", JSON.stringify(cart));
-          };
-        }} />
+        { currentUser?.email ?
+          <CloseButton onClick={() => {removeToCartDb()}} />
+        :
+          <CloseButton onClick={() => {
+            cartStorage = removeToCartStorage(cartStorage, _id);
+            if(cartStorage.length === 0) {
+              window.localStorage.setItem("Cart", JSON.stringify([]));
+            }else {
+              window.localStorage.setItem("Cart", JSON.stringify(cartStorage));
+            };
+          }} />
+        }
 
       </Flex>
 
